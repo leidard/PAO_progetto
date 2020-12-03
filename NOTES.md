@@ -10,6 +10,9 @@
 - [ ] utilizzo del contenitore C per uno dei tipi della gerarchia incapsulati dentro il puntatore smart
 - [ ] input/output
 
+### Notes before we start
+É da notare come questa struttura permette di definire qualsiasi gioco che richiede una mappa a griglia, due team, e un numero qualsiasi di pedine, potrebbe essere ridefinito per giocare a forza quattro, a dama (checkers), addirittura Go.
+
 ## Partita
 
 Tutto parte dall'avvio di una partita, viene quindi definita la tavola "board" e quindi i 32 pezzi ciascuno nella sua posizione iniziale. Viene definita anche la storia delle mosse per potere analizzare la partita.
@@ -27,22 +30,26 @@ Tutto parte dall'avvio di una partita, viene quindi definita la tavola "board" e
     - nel caso di mossa non valida non viene effettuato nulla.
     - nel caso di cattura di una pedina, la pedina viene spostata nella "prigione" del proprio colore.
 
-## Board
+## Map -> Chess Board
 
 Viene inizializzata creando le 32 pedine divise tra i due colori e diversi ruoli, ognuna verrá assegnato il suo posto all'interno della griglia.
 La Board fará da tramite tra la partita e i pezzi.
 Griglia di 64 caselle. Le caselle possono essere vuote se non occupate da un pezzo, oppure occupate se é presente un pezzo.
 La Board alla creazione e dopo ogni mossa chiede a ciascun pezzo di generare la lista di mosse possibili identificate da la tupla (casella partenza, casella destinazione). Con particolare attenzione al Re, che quando in scacco deve essere liberato: saranno quindi solamente ammissibili mosse atte per liberarlo
 
-## Prigione
+## deposito -> Prigione Pedine
 
 Spazio Dove vengono depositate le pedine catturate, una per le pedine bianche, una per le nere. In questo modo da uno stato ad un altro della scacchiera vengono spostati riferimenti e non vengono mai eliminati nemmeno quando catturati.
 
-## Pezzo
+## Team -> White/Black
+
+Racchiude tutte le pedine del proprio colore, attualmente attive
+
+## Pedina -> Pezzo
 
 Pezzo é una classe astratta che viene poi estesa in tutti i vari tipi di pezzi della scacchiera (pedone, torre, cavallo, alfiere, re, regina). Il Pezzo ricevendo come input lo stato attuale della tavola e in base al suo tipo di mosse restituisce le sue possibili.
 
-## Mosse
+## Mosse -> Chess Move
 
 Viene distinta in Mossa, e derivata in MossaInAvanti.
 La MossaAvanti una volta scelta come mossa dall'utente diventa una Mossa base utile per lo storico delle mosse.
