@@ -48,6 +48,12 @@ curva per muoversi nella posizione media dei boid
 ![Alignment](https://www.red3d.com/cwr/boids/images/alignment.gif)\
 steer towards the average heading of local flockmates
 
+## Azioni utente
+utente puó scegliere quali e quanti pesci.
+vista analitica dietro le quinte di cosa pensa cosa fa un pesce
+cambiare parametri del campo visivo del pesce, o altre robe.
+Puó nutrire manualmente oppure in automatico.
+
 <hr/>
 #### Sources
  - ![https://www.red3d.com/cwr/boids/](https://www.red3d.com/cwr/boids/)
