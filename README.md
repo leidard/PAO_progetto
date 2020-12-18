@@ -1,0 +1,4 @@
+# Aquarius
+
+![Logo](./logo.svg)
+
