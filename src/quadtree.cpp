@@ -1,89 +1,72 @@
-#include <../include/range.h>
-#include <../include/rectangle.h>
-#include <../include/vect.h>
+#include <include/cella.h>
+#include <include/fov.h>
+#include <include/quadtree.h>
+#include <include/vect.h>
 
 #include <cmath>
 #include <vector>
 
-class Quadtree {
-   private:
-    const static int DEPTH_LIMIT = 5;  // log4(n)
-    /*
-    256   <= 4
-    1024  <= 5
-    4096  <= 6
-    16384 <= 7
-    65536 <= 8
-    */
-    const static int CAPACITY = 4;
-    Rectangle boundary;
-    Quadtree* nw;  //northwest
-    Quadtree* ne;  //northeast
-    Quadtree* sw;  //southwest
-    Quadtree* se;  //southeast
-    std::vector<Vect> points;
+const static int Quadtree::CAPACITY = 4;
 
-    void _queryRange(const Range& range, std::vector<Vect>* pointsInRange) const {
-        if (!boundary.intersects(range))
-            return;
+void Quadtree::_queryRange(const FoV& range, std::vector<Vect>* pointsInRange) const {
+    if (!range.accept(boundary))
+        return;
 
-        for (auto& i : points) {
-            if (range.contains(i)) pointsInRange->push_back(i);
-        }
-
-        if (nw == nullptr)
-            return;
-
-        nw->_queryRange(range, pointsInRange);
-        ne->_queryRange(range, pointsInRange);
-        sw->_queryRange(range, pointsInRange);
-        se->_queryRange(range, pointsInRange);
+    for (auto& i : points) {
+        if (range.contains(i)) pointsInRange->push_back(i);
     }
 
-   public:
-    Quadtree();
-    ~Quadtree() {
-        delete nw;
-        delete ne;
-        delete sw;
-        delete se;
-    }
-    Quadtree(const Rectangle& boundary) : boundary(boundary) {}
-    Quadtree(const Rectangle& boundary) : boundary(boundary), points(std::vector<Vect>()){};
+    if (nw == nullptr)
+        return;
 
-    void subdivide() {
-        nw = new Quadtree(boundary.nw());
-        ne = new Quadtree(boundary.ne());
-        sw = new Quadtree(boundary.sw());
-        se = new Quadtree(boundary.se());
-    }
+    nw->_queryRange(range, pointsInRange);
+    ne->_queryRange(range, pointsInRange);
+    sw->_queryRange(range, pointsInRange);
+    se->_queryRange(range, pointsInRange);
+}
 
-    bool insert(Vect x) {
-        if (!boundary.contains(x))
-            return false;
+Quadtree::Quadtree() {}
+Quadtree::~Quadtree() {
+    delete nw;
+    delete ne;
+    delete sw;
+    delete se;
+}
+Quadtree::Quadtree(const Cella& boundary) : boundary(boundary) {}
+Quadtree::Quadtree(const Cella& boundary) : boundary(boundary), points(std::vector<Vect>()){};
 
-        if (points.size() < CAPACITY) {
-            points.push_back(x);
-            return true;
-        }
+void Quadtree::subdivide() {
+    nw = new Quadtree(boundary.nw());
+    ne = new Quadtree(boundary.ne());
+    sw = new Quadtree(boundary.sw());
+    se = new Quadtree(boundary.se());
+}
 
-        if (nw == nullptr)
-            subdivide();
+bool Quadtree::insert(Vect x) {
+    if (!boundary.contains(x))
+        return false;
 
-        return nw->insert(x) || ne->insert(x) || sw->insert(x) || se->insert(x);
-    }
-
-    void reset() {
-        points.clear();
-        delete nw;
-        delete ne;
-        delete sw;
-        delete se;
+    if (points.size() < CAPACITY) {
+        points.push_back(x);
+        return true;
     }
 
-    std::vector<Vect> queryRange(const Range& range) const {
-        std::vector<Vect> pointsInRange;
-        _queryRange(range, &pointsInRange);
-        return pointsInRange;
-    }
-};
+    if (nw == nullptr)
+        subdivide();
+
+    return nw->insert(x) || ne->insert(x) || sw->insert(x) || se->insert(x);
+}
+
+void Quadtree::reset() {
+    points.clear();
+    delete nw;
+    delete ne;
+    delete sw;
+    delete se;
+}
+
+std::vector<Vect> Quadtree::queryRange(const FoV& range) const {
+    std::vector<Vect> pointsInRange;
+    _queryRange(range, &pointsInRange);
+    return pointsInRange;
+}

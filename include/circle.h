@@ -1,13 +1,20 @@
-#include <range.h>
 #include <vect.h>
+#include <visitor.h>
 
-class Circle : public Range {
-   private:
-    Vect radius;
+#ifndef CIRCLE_H
+#define CIRCLE_H
+
+class Circle : public FoV {
+   protected:
+    Vect center;
+    double radius;
 
    public:
-    Circle(const Vect& center_point, double r) : Range(center_point), radius(r, r) {}
+    Vect getCenter() const;
     Vect getRadius() const;
-    bool contains(const Vect& v) const override;
-    bool intersects(const Range& dr) const override;
+
+    bool contains(const Vect& point) const;
+    bool accept(const Visitor& visitor) const;
 };
+
+#endif

@@ -6,6 +6,9 @@
 #include <../include/vect.h>
 
 class Vect {
+    friend Vect operator*(double, const Vect&);
+    friend Vect operator/(double, const Vect&);
+
    private:
     double x, y;
 
@@ -13,6 +16,9 @@ class Vect {
     Vect();
     Vect(double coord_x, double coord_y);
     Vect(const Vect& v);
+
+    // getters
+
     double getX() const;
     double getY() const;
     Vect getXVect() const;
@@ -20,12 +26,13 @@ class Vect {
 
     // non-const edit functions with chain return
 
+    Vect& set(double, double);
     Vect& add(const Vect&);
-    Vect& sub(const Vect&);
+    Vect& rem(const Vect&);
     Vect& mult(double);
     Vect& div(double);
-    Vect& min(const Vect&);
-    Vect& max(const Vect&);
+    Vect& min(Vect&);
+    Vect& max(Vect&);
     Vect& normalize();
     Vect& setMagnitude(double);
     Vect& limit(const Vect&);
@@ -33,8 +40,9 @@ class Vect {
 
     // const edit functions with chain return
 
+    Vect set(double, double) const;
     Vect add(const Vect&) const;
-    Vect sub(const Vect&) const;
+    Vect rem(const Vect&) const;
     Vect mult(double) const;
     Vect div(double) const;
     Vect min(const Vect&) const;
@@ -51,8 +59,9 @@ class Vect {
 
     //static
 
+    static Vect set(const Vect&, double, double);
     static Vect sum(const Vect&, const Vect&);
-    static Vect sub(const Vect&, const Vect&);
+    static Vect rem(const Vect&, const Vect&);
     static Vect mult(const Vect&, double);
     static Vect div(const Vect&, double);
     static Vect min(const Vect&, const Vect&);
@@ -60,32 +69,33 @@ class Vect {
     static Vect normalize(const Vect&);
     static Vect setMagnitude(const Vect&, double);
     static Vect limit(const Vect&, const Vect&);
-    static Vect limit(const Vect&, double s);
+    static Vect limit(const Vect&, double);
     static double mag(const Vect&);
     static double dot(const Vect&, const Vect&);
     static double distance(const Vect&, const Vect&);
     static double angleBetween(const Vect&, const Vect&);
     static Vect scalarProjection(const Vect&, const Vect&);
 
-    Vect min(const Vect& v) const;
-    Vect max(const Vect& v) const;
+    // operators
 
-    Vect operator+(const Vect& v) const { return this->sum(v); };  // call sum
-    Vect operator-(const Vect& v) const;                           // call sub
-    Vect operator*(double n) const;                                // call mult
-    Vect operator/(double n) const;                                // call div
+    Vect operator+(const Vect&) const;  // call sum
+    Vect operator-(const Vect&) const;  // call sub
+    Vect operator*(double) const;       // call mult
+    Vect operator/(double) const;       // call div
 
-    Vect& operator+=(const Vect& v);  // call sum
-    Vect& operator-=(const Vect& v);  // call sum
-    Vect& operator*=(double n);       // call sum
-    Vect& operator/=(double n);
+    Vect& operator+=(const Vect&);  // call sum
+    Vect& operator-=(const Vect&);  // call div
+    Vect& operator*=(double);       // call mult
+    Vect& operator/=(double);       // call div
 
-    bool operator>(const Vect& v2) const;
-    bool operator>=(const Vect& v2) const;
-    bool operator<(const Vect& v2) const;
-    bool operator<=(const Vect& v2) const;
-    virtual bool operator==(const Vect& v2) const;
-    virtual bool operator!=(const Vect& v2) const;  // controllo riferimento
+    // comparison operators
+
+    bool operator>(const Vect&) const;
+    bool operator>=(const Vect&) const;
+    bool operator<(const Vect&) const;
+    bool operator<=(const Vect&) const;
+    virtual bool operator==(const Vect&) const;
+    virtual bool operator!=(const Vect&) const;  // controllo riferimento
 };
 
 #endif

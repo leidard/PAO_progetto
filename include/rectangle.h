@@ -1,53 +1,27 @@
+#include <cmath>
 
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-class Rectangle : public Range {
+class Rectangle : public FoV {
    private:
-    Vect halfw;  // w / 2
-    Vect halfh;  // h / 2
+    double halfw;  // w / 2
+    double halfh;  // h / 2
 
    public:
-    Rectangle(const Vect& center_point, int width, int height) : Range(center_point), halfw(width / 2, 0), halfh(0, height / 2) {}
-    Rectangle(const Vect& center_point, const Vect& width, const Vect& height) : Range(center_point), halfw(width.getX() / 2, 0), halfh(0, height.getY() / 2) {}
-    Rectangle(const Rectangle& r) : Range(r.center), halfw(r.halfw), halfh(r.halfh) {}
-    Vect getHalfW() const { return halfw; }
-    Vect getHalfH() const { return halfh; }
-    Rectangle nw() const {
-        return Rectangle(center - halfw - halfh, halfw, halfh);
-    }
-    Rectangle ne() const {
-        return Rectangle(center + halfw - halfh, halfw, halfh);
-    }
-    Rectangle sw() const {
-        return Rectangle(center - halfw + halfh, halfw, halfh);
-    }
-    Rectangle se() const {
-        return Rectangle(center + halfw + halfh, halfw, halfh);
-    }
-    bool contains(const Vect& v) const override {
-        auto halfsize = halfw + halfh;
-        auto bottomleft = center - halfsize;
-        auto topright = center + halfsize;
-        return v >= bottomleft && v <= topright;
-    }
-    bool intersects(const Circle& circ) const {
-        double Xn = std::max(center.getX() + halfw.getX(), std::min(circ.center.getX(), center.getX() + halfw.getX()));
-        double Yn = std::max(center.getY() + halfh.getY(), std::min(circ.center.getY(), center.getY() + halfh.getY()));
+    Rectangle() : FoV(), halfw(), halfh(){};
+    Rectangle(const Vect& center_point, int width, int height) : FoV(center_point), halfw(width / 2), halfh(height / 2) {}
+    Rectangle(const Rectangle& r) : FoV(r.center), halfw(r.halfw), halfh(r.halfh) {}
 
-        return Vect(Xn, Yn).distance(center) <= circ.getRadius().getX();
-    }
-    bool interescts(const Rectangle& rect) {
-        auto min1 = center - halfw - halfh;
-        auto max1 = center + halfw + halfh;
-        auto min2 = rect.center - rect.halfw - rect.halfh;
-        auto max2 = rect.center + rect.halfw + rect.halfh;
+    double getHalfW() const;
+    double getHalfH() const;
 
-        // the smaller coord of this has to be lteq the maximum coord of the other
-        // the maximum coord of this has to be gt   the minimum coord of the other
-        return min1 <= max2 &&
-               max1 > min2;
-    }
+    Rectangle nw() const;
+    Rectangle ne() const;
+    Rectangle sw() const;
+    Rectangle se() const;
+    bool contains(const Vect& v) const override;
+    bool accept(const Visitor& dispatcher) const override;
 };
 
 #endif

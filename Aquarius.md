@@ -54,6 +54,34 @@ vista analitica dietro le quinte di cosa pensa cosa fa un pesce
 cambiare parametri del campo visivo del pesce, o altre robe.
 Puó nutrire manualmente oppure in automatico.
 
+### Behaviours
+
+```
+/**
+    @returns tirevalue, value from 0 to 1 that tells how much is it tired
+*/
+double isTired();
+
+```
+
+- (FOOD) flee from bigger ones
+- (FOOD) seek for smaller ones
+- (FISH) MIMETIZATION check if I can see the other fish by checking if random number is lower than or equal the mimetizzazione/visibility value
+
+#### tipo1
+
+- (FISH) alone behaviour
+- (FISH) long awaketime and sleeptime
+- (FISH) aumento del sonno dopo ogni pasto in base alla dimensione del cibo mangiato
+
+#### tipo2
+
+- (FISH) flock behaviour
+- (FISH) short awaketime and sleeptime
+- (FISH) letargo dopo X cycles of sleep/awake
+
 <hr/>
-#### Sources
+
+## Sources
+
  - ![https://www.red3d.com/cwr/boids/](https://www.red3d.com/cwr/boids/)
