@@ -1,8 +1,8 @@
-#include <include/food.h>
-#include <include/quadtree.h>
-#include <include/vehicle.h>
-
 #include <vector>
+
+#include "food.h"
+#include "quadtree.h"
+#include "vehicle.h"
 #ifndef AQUARIUS_H
 #define AQUARIUS_H
 

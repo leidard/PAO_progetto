@@ -1,10 +1,11 @@
-#include <circle.h>
-#include <rectangle.h>
-#include <slice.h>
-#include <vect.h>
+#include "vect2d.h"
 
 #ifndef VISITOR_H
 #define VISITOR_H
+
+class Circle;
+class Slice;
+class Rectangle;
 
 class Visitor {
    public:

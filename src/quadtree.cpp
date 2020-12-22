@@ -1,14 +1,15 @@
-#include <include/cella.h>
-#include <include/fov.h>
-#include <include/quadtree.h>
-#include <include/vect.h>
+#include "quadtree.h"
 
 #include <cmath>
 #include <vector>
 
-const static int Quadtree::CAPACITY = 4;
+#include "cella.h"
+#include "fov.h"
+#include "vect2d.h"
 
-void Quadtree::_queryRange(const FoV& range, std::vector<Vect>* pointsInRange) const {
+const int Quadtree::CAPACITY = 4;
+
+void Quadtree::_queryRange(const FoV& range, std::vector<Vect2D>* pointsInRange) const {
     if (!range.accept(boundary))
         return;
 
@@ -33,7 +34,7 @@ Quadtree::~Quadtree() {
     delete se;
 }
 Quadtree::Quadtree(const Cella& boundary) : boundary(boundary) {}
-Quadtree::Quadtree(const Cella& boundary) : boundary(boundary), points(std::vector<Vect>()){};
+Quadtree::Quadtree(const Cella& boundary) : boundary(boundary), points(std::vector<Vect2D>()){};
 
 void Quadtree::subdivide() {
     nw = new Quadtree(boundary.nw());
@@ -42,7 +43,7 @@ void Quadtree::subdivide() {
     se = new Quadtree(boundary.se());
 }
 
-bool Quadtree::insert(Vect x) {
+bool Quadtree::insert(Vect2D x) {
     if (!boundary.contains(x))
         return false;
 
@@ -65,8 +66,8 @@ void Quadtree::reset() {
     delete se;
 }
 
-std::vector<Vect> Quadtree::queryRange(const FoV& range) const {
-    std::vector<Vect> pointsInRange;
+std::vector<Vect2D> Quadtree::queryRange(const FoV& range) const {
+    std::vector<Vect2D> pointsInRange;
     _queryRange(range, &pointsInRange);
     return pointsInRange;
 }

@@ -1,4 +1,4 @@
-#include <include/daycycle.h>
+#include "daycycle.h"
 
 DayCycle::DayCycle(int day, int night) : dayTime(day), nightTime(nightTime) {}
 

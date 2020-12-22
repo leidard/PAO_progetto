@@ -1,5 +1,8 @@
 #include <cmath>
 
+#include "vect2d.h"
+#include "visitor.h"
+
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
@@ -10,7 +13,7 @@ class Rectangle : public FoV {
 
    public:
     Rectangle() : FoV(), halfw(), halfh(){};
-    Rectangle(const Vect& center_point, int width, int height) : FoV(center_point), halfw(width / 2), halfh(height / 2) {}
+    Rectangle(const Vect2D& center_point, int width, int height) : FoV(center_point), halfw(width / 2), halfh(height / 2) {}
     Rectangle(const Rectangle& r) : FoV(r.center), halfw(r.halfw), halfh(r.halfh) {}
 
     double getHalfW() const;
@@ -20,7 +23,7 @@ class Rectangle : public FoV {
     Rectangle ne() const;
     Rectangle sw() const;
     Rectangle se() const;
-    bool contains(const Vect& v) const override;
+    bool contains(const Vect2D& v) const override;
     bool accept(const Visitor& dispatcher) const override;
 };
 

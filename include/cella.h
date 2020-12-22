@@ -1,6 +1,6 @@
-#include <rectangle.h>
-#include <vect.h>
-#include <visitor.h>
+#include "rectangle.h"
+#include "vect2d.h"
+#include "visitor.h"
 
 #ifndef CELLA_H
 #define CELLA_H

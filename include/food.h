@@ -1,14 +1,14 @@
-#include <vect.h>
+#include "vect2d.h"
 
 #ifndef FOOD_H
 #define FOOD_H
 
 class Food {
    private:
-    Vect* position;
+    Vect2D* position;
 
    public:
-    Food(Vect position);
+    Food(Vect2D position);
     virtual ~Food() = default;
     virtual int getValoreNutrizonale() const = 0;
 
