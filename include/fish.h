@@ -1,23 +1,24 @@
+#include "cartesianobject2d.h"
 #include "food.h"
 #include "vect2d.h"
+#include "vector.h"
 #include "vehicle.h"
 
 #ifndef FISH_H
 #define FISH_H
 
 class Fish : public Vehicle, public Food {
-   private:
-    Vect2D position;
    public:
-    Fish();
+    //Fish(const Vect2D& p);
+    Fish(const Fish& f);
+
     virtual int getValoreNutrizonale() const = 0;
-    virtual Vect2D behaviour() const override;
+    virtual Vect2D behaviour(const Vector<DeepPtr<Vehicle>>& vehicles, const Vector<DeepPtr<Food>>& food, Vect2D acc = Vect2D(0, 0)) const override;
     virtual bool isHungry() const = 0;
     virtual bool isTired() const = 0;
-    virtual int getVisibility() const = 0;
+    virtual double getVisibility() const = 0;  // again virtual
+    virtual bool isInRange(const Vect2D&) const = 0;
+    virtual Vect2D flocking() const = 0;
 };
 
 #endif
-
-Fish::Fish() : Vehicle(), Food() {
-}

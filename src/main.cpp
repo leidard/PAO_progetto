@@ -1,5 +1,5 @@
 #include "aquarius.h"
 
-void main() {
+int main() {
     Aquarius a;
 }

@@ -12,8 +12,9 @@
  * false in every other case
  */
 bool Slice::contains(const Vect2D& point) const {
-    Vect2D diff = point - getCenter();
-    return (diff.mag() <= direction.mag() && Vect2D::angleBetween(point, direction) <= range);
+    Vect2D diff = point - center;
+    double angle = Vect2D::angleBetween(point, Vect(1, 0));
+    return (diff.mag() <= distance && <= range);
 };
 
 bool Slice::accept(const Visitor& v) const {

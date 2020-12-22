@@ -1,6 +1,7 @@
-#include <algorithm>
-
 #include "vect2d.h"
+
+#include <algorithm>
+#include <cmath>
 
 Vect2D::Vect2D() : x(0), y(0){};
 Vect2D::Vect2D(double coord_x, double coord_y) : x(coord_x), y(coord_y) {}
@@ -54,6 +55,12 @@ Vect2D& Vect2D::limit(double s) {
     y = std::min(y, s);
     return *this;
 }
+Vect2D& Vect2D::rotate(double deg) {  // anti-clockwise
+    auto x2 = x * std::cos(deg) - y * std::sin(deg);
+    y = x * std::sin(deg) + y * std::cos(deg);
+    x = x2;
+    return *this;
+}
 
 // const edit functions with chain return
 
@@ -68,6 +75,7 @@ Vect2D Vect2D::normalize() const { return Vect2D(*this).normalize(); }
 Vect2D Vect2D::setMagnitude(double s) const { return Vect2D(*this).setMagnitude(s); }
 Vect2D Vect2D::limit(const Vect2D& v) const { return Vect2D(*this).limit(v); }
 Vect2D Vect2D::limit(double s) const { return Vect2D(*this).limit(s); }
+Vect2D Vect2D::rotate(double deg) const { return Vect2D(*this).rotate(deg); }
 double Vect2D::mag() const { return std::sqrt(x * x + y * y); }
 double Vect2D::dot(const Vect2D& v) const { return x * v.x + y * v.y; }
 double Vect2D::distance(const Vect2D& v) const { return this->rem(v).mag(); }
@@ -87,6 +95,7 @@ Vect2D Vect2D::normalize(const Vect2D& v1) { return v1.normalize(); }
 Vect2D Vect2D::setMagnitude(const Vect2D& v1, double s) { return v1.setMagnitude(s); }
 Vect2D Vect2D::limit(const Vect2D& v1, const Vect2D& v2) { return v1.limit(v2); }
 Vect2D Vect2D::limit(const Vect2D& v1, double s) { return v1.limit(s); }
+Vect2D Vect2D::rotate(const Vect2D& v1, double deg) { return v1.rotate(deg); }
 double Vect2D::mag(const Vect2D& v1) { return v1.mag(); }
 double Vect2D::dot(const Vect2D& v1, const Vect2D& v2) { return v1.dot(v2); }
 double Vect2D::distance(const Vect2D& v1, const Vect2D& v2) { return v1.distance(v2); }

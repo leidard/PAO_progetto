@@ -9,8 +9,7 @@ class Vector {
     unsigned int _capacity;
 
    public:
-    Vector();
-    Vector(unsigned int);
+    Vector(unsigned int = 0);
     Vector(const Vector&);
     ~Vector();
     Vector& operator=(const Vector&);

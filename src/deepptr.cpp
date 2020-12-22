@@ -39,7 +39,7 @@ template <class T>
 DeepPtr<T>::operator bool() const { return ptr != nullptr; }
 
 template <class T>
-T& DeepPtr<T>::operator*() const { return *prt; }
+T& DeepPtr<T>::operator*() const { return *ptr; }
 
 template <class T>
 T* DeepPtr<T>::operator->() const { return ptr; }

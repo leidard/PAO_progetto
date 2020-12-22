@@ -1,8 +1,8 @@
-#include <vector>
-
 #include "cella.h"
+#include "deepptr.h"
 #include "fov.h"
 #include "vect2d.h"
+#include "vector.h"
 
 #ifndef QUADTREE_H
 #define QUADTREE_H
@@ -23,9 +23,9 @@ class Quadtree {
     Quadtree* ne;  //northeast
     Quadtree* sw;  //southwest
     Quadtree* se;  //southeast
-    std::vector<Vect2D> points;
+    Vector<DeepPtr<Vect2D>> points;
 
-    void _queryRange(const FoV& range, std::vector<Vect2D>* pointsInRange) const;
+    void _queryRange(const FoV& range, Vector<DeepPtr<Vect2D>>* pointsInRange) const;
 
    public:
     Quadtree();
@@ -35,7 +35,7 @@ class Quadtree {
     void subdivide();
     bool insert(Vect2D);
     void reset();
-    std::vector<Vect2D> queryRange(const FoV&) const;
+    Vector<DeepPtr<Vect2D>> queryRange(const FoV&) const;
 };
 
 #endif

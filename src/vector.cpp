@@ -1,11 +1,8 @@
 #include "vector.h"
 
 template <class T>
-Vector<T>::Vector() : _buffer(nullptr), _size(0), _capacity(0) {}
-
-template <class T>
 Vector<T>::Vector(unsigned int size) : _buffer(nullptr), _size(0), _capacity(0) {
-    reserve(size);
+    if (size != 0) reserve(size);
 }
 
 template <class T>
@@ -18,8 +15,8 @@ Vector<T>::~Vector() { delete[] _buffer; }
 
 template <class T>
 Vector<T>& Vector<T>::operator=(const Vector<T>& v) {
-    if (this != &b) {
-        delete _buffer;
+    if (this != &v) {
+        delete[] _buffer;
 
         _buffer = new T[v._capacity];
         _size = v._size;

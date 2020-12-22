@@ -1,8 +1,10 @@
-#include <vector>
-
-#include "fov.h"
-#include "quadtree.h"
+#include "cartesianobject2d.h"
+#include "food.h"
+// #include "fov.h"
+// #include "quadtree.h"
+#include "deepptr.h"
 #include "vect2d.h"
+#include "vector.h"
 
 #ifndef VEHICLE_H
 #define VEHICLE_H
@@ -13,52 +15,53 @@
 }*/
 
 // return Math.max(Math.min(n, high), low);
-
-class Vehicle {
-   private:
-    Vect2D* position;
-    Vect2D velocity;
-    Vect2D acceleration;
-    Vect2D wander;
-    FoV* perception;
+/**
+ * position: (x,y) position in space
+ * _velocity: variation of position
+ * acceleration: variation of velocity
+ */
+class Vehicle : virtual public CartesianObject2D {
+   protected:
+    Vect2D _velocity;
+    Vect2D _wander;
     double maxSpeed;  // tipo 4
-    double maxForce;  // between 0 and 1 ??
-   public:
-    Vehicle();
-    Vehicle(const Vehicle&);
-    virtual ~Vehicle();
-    void setPosition(Vect2D*);
+    double maxForce;  // 0 <= x <= 1 ??
 
-    Vect2D getPosition() const;
-    Vect2D getVelocity() const;
-    Vect2D getAcceleration() const;
-    Vect2D getWander() const;
+    double PURSUIT_forwardSteps = 5;
 
-    void setPosition(const Vect2D&);
-    void setVelocity(const Vect2D&);
-    void setAcceleration(const Vect2D&);
-
-    Vect2D seek(const Vect2D&) const;
-    Vect2D arrive(const Vect2D&) const;
-    Vect2D flee(const Vect2D&) const;
-    Vect2D avoid(const Vect2D&) const;  // This steering behavior anticipates the vehicle's future path as indicated by the white box. The length of the box is a constant time multiplied by the current velocity of the vehicle. To avoid an obstacle, a lateral steering force is applied opposite to the obstacle's center. In addition, a braking (deceleration) force is applied.
-
-    Vehicle& setPosition(const Vect2D&) const;
-    Vehicle& setVelocity(const Vect2D&) const;
-    Vehicle& setAcceleration(const Vect2D&) const;
-
-    Vect2D desired_separation(const std::vector<Vehicle>&) const;
-    Vect2D desired_alignment(const std::vector<Vehicle>&) const;
-    Vect2D desired_cohesion(const std::vector<Vehicle>&) const;
-
+    double WANDER_MAX_STRENGTH = 4;
+    double WANDER_MAX_RATE = 45;
+    double WANDER_forwardSteps = 5;
+    double wander_strength = 1;  // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_STRENGTH)
+    double wander_rate = .6;     // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_RATE)
     /** 
      * Calculates the behaviour of the vehicle
      * @param acc acceleration from previous step, default = Vect2D(0,0)
      * @return Vect2D the acceleration
     */
-    virtual Vect2D behaviour(const std::vector<Vehicle>& vehicles, const std::vector<Food>& food, Vect2D acc = Vect2D(0, 0)) const = 0;
+    virtual Vect2D behaviour(const Vector<DeepPtr<Vehicle>>&, const Vector<DeepPtr<Food>>&, Vect2D acc = Vect2D(0, 0)) const = 0;
 
-    virtual Vect2D update() const final;
+   public:
+    Vehicle(const Vehicle&);
+    Vehicle(const Vect2D& position, double maxSpeed, double maxForce);
+    virtual ~Vehicle();
+
+    Vehicle& operator=(const Vehicle& v);
+    Vect2D getPosition() const;
+    Vect2D getVelocity() const;
+
+    void setPosition(const Vect2D&);
+    void setVelocity(const Vect2D&);
+
+    Vect2D seek(const Vect2D&) const;
+    Vect2D arrive(const Vect2D&) const;
+    Vect2D flee(const Vect2D&) const;
+    Vect2D pursuit(const Vehicle&) const;
+    Vect2D wander();
+
+    virtual bool isInRange(const Vect2D& v) const = 0;
+
+    virtual void update(const Vector<DeepPtr<Vehicle>>&, const Vector<DeepPtr<Food>>&) final;
 };
 
 #endif

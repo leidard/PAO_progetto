@@ -6,11 +6,12 @@
 
 class Slice : public FoV {
    private:
-    Vect2D direction;
-    double range;
+    double distance;
+    double start_angle;
+    double end_angle;
 
    public:
-    bool contains(const Vect2D&) const override;
+    bool contains(const Vect2D&, const Vect2D&) const override;
     bool accept(const Visitor&) const override;
 };
 

@@ -1,11 +1,4 @@
 
-
-class Base {
-   public:
-    virtual ~Base() = default;
-    virtual Base* clone() const = 0;
-};
-
 #ifndef DEEPPTR_H
 #define DEEPPTR_H
 template <class T>
@@ -28,7 +21,3 @@ class DeepPtr {
     T* operator->() const;
 };
 #endif
-
-
-
-

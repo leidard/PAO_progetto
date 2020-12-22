@@ -1,10 +1,12 @@
 #include <cmath>
 
+#include "fov.h"
 #include "vect2d.h"
-#include "visitor.h"
 
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
+
+class Visitor;
 
 class Rectangle : public FoV {
    private:
@@ -12,9 +14,8 @@ class Rectangle : public FoV {
     double halfh;  // h / 2
 
    public:
-    Rectangle() : FoV(), halfw(), halfh(){};
-    Rectangle(const Vect2D& center_point, int width, int height) : FoV(center_point), halfw(width / 2), halfh(height / 2) {}
-    Rectangle(const Rectangle& r) : FoV(r.center), halfw(r.halfw), halfh(r.halfh) {}
+    Rectangle(const Vect2D& center_point, int width, int height);
+    Rectangle(const Rectangle& r);
 
     double getHalfW() const;
     double getHalfH() const;
@@ -23,7 +24,7 @@ class Rectangle : public FoV {
     Rectangle ne() const;
     Rectangle sw() const;
     Rectangle se() const;
-    bool contains(const Vect2D& v) const override;
+    bool contains(const Vehicle&, const Vect2D&) const override;
     bool accept(const Visitor& dispatcher) const override;
 };
 
