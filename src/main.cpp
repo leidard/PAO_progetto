@@ -1,6 +1,6 @@
 #include <iostream>
+#include <vector>
 
-#include "aquarius.h"
 #include "daycycle.h"
 #include "deepptr.h"
 #include "vector.h"
@@ -22,10 +22,11 @@ int main() {
     for (auto i : v)
         std::cout << i.getDayTime() << std::endl;
 
-    v.erase(v.end() -1);
+    v.erase(v.end() - 1);
     std::cout << "size" << v.size() << std::endl;
     std::cout << "capacity" << v.capacity() << std::endl;
     for (auto i : v)
         std::cout << i.getDayTime() << std::endl;
+
     return 0;
 }

@@ -4,8 +4,8 @@
 
 class DayCycle {
    private:
-    int dayTime;
-    int nightTime;
+    int awakeTime;
+    int asleepTime;
     int progress;
 
    public:
@@ -21,7 +21,7 @@ class DayCycle {
 
     DayCycle& operator++();
     DayCycle operator++(int);
-    void operator+=(int);
+    DayCycle& operator+=(int);
 };
 
 #endif

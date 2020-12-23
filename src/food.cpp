@@ -1,20 +1,20 @@
 #include "food.h"
 
 bool Food::operator>(const Food& f) const {
-    return this->getValoreNutrizonale() > f.getValoreNutrizonale();
+    return this->getValoreNutrizionale() > f.getValoreNutrizionale();
 }
 bool Food::operator<(const Food& f) const {
-    return this->getValoreNutrizonale() < f.getValoreNutrizonale();
+    return this->getValoreNutrizionale() < f.getValoreNutrizionale();
 }
 bool Food::operator>=(const Food& f) const {
-    return this->getValoreNutrizonale() >= f.getValoreNutrizonale();
+    return this->getValoreNutrizionale() >= f.getValoreNutrizionale();
 }
 bool Food::operator<=(const Food& f) const {
-    return this->getValoreNutrizonale() <= f.getValoreNutrizonale();
+    return this->getValoreNutrizionale() <= f.getValoreNutrizionale();
 }
 bool Food::operator==(const Food& f) const {
-    return this->getValoreNutrizonale() == f.getValoreNutrizonale();
+    return this->getValoreNutrizionale() == f.getValoreNutrizionale();
 }
 bool Food::operator!=(const Food& f) const {
-    return this->getValoreNutrizonale() != f.getValoreNutrizonale();
+    return this->getValoreNutrizionale() != f.getValoreNutrizionale();
 }

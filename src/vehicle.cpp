@@ -2,13 +2,10 @@
 
 #include <cstdlib>
 
+#include "aquarius.h"
 #include "deepptr.h"
 #include "vect2d.h"
 
-Vehicle::Vehicle(const Vehicle&) {}
-Vehicle::~Vehicle() = default;
-
-Vect2D Vehicle::getPosition() const { return position; }
 Vect2D Vehicle::getVelocity() const { return _velocity; }
 
 void Vehicle::setPosition(const Vect2D& v) { position = v; }
@@ -47,9 +44,9 @@ Vect2D Vehicle::arrive(const Vect2D& target) const {
     }
 }
 
-void Vehicle::update(const Vector<DeepPtr<Vehicle>>& vehicles, const Vector<DeepPtr<Food>>& food) {
-    Vect2D acc = behaviour(vehicles, food);
+void Vehicle::update(Aquarius* a) {
+    Vect2D acc = behaviour(a);
 
-    position += _velocity;
     _velocity += acc;
+    position += _velocity;
 }

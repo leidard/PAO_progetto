@@ -1,8 +1,4 @@
 #include "cartesianobject2d.h"
-#include "food.h"
-// #include "fov.h"
-// #include "quadtree.h"
-#include "deepptr.h"
 #include "vect2d.h"
 #include "vector.h"
 
@@ -20,6 +16,9 @@
  * _velocity: variation of position
  * acceleration: variation of velocity
  */
+
+class Aquarius;
+
 class Vehicle : virtual public CartesianObject2D {
    protected:
     Vect2D _velocity;
@@ -34,20 +33,18 @@ class Vehicle : virtual public CartesianObject2D {
     double WANDER_forwardSteps = 5;
     double wander_strength = 1;  // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_STRENGTH)
     double wander_rate = .6;     // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_RATE)
+
     /** 
      * Calculates the behaviour of the vehicle
      * @param acc acceleration from previous step, default = Vect2D(0,0)
      * @return Vect2D the acceleration
     */
-    virtual Vect2D behaviour(const Vector<DeepPtr<Vehicle>>&, const Vector<DeepPtr<Food>>&, Vect2D acc = Vect2D(0, 0)) const = 0;
+    virtual Vect2D behaviour(Aquarius* a, Vect2D acc = Vect2D(0, 0)) const = 0;
 
    public:
-    Vehicle(const Vehicle&);
-    Vehicle(const Vect2D& position, double maxSpeed, double maxForce);
+    Vehicle(double maxSpeed, double maxForce);
     virtual ~Vehicle();
 
-    Vehicle& operator=(const Vehicle& v);
-    Vect2D getPosition() const;
     Vect2D getVelocity() const;
 
     void setPosition(const Vect2D&);
@@ -63,7 +60,7 @@ class Vehicle : virtual public CartesianObject2D {
 
     virtual bool isInRange(const Vect2D& v) const = 0;
 
-    virtual void update(const Vector<DeepPtr<Vehicle>>&, const Vector<DeepPtr<Food>>&) final;
+    virtual void update(Aquarius* a) final;
 };
 
 #endif

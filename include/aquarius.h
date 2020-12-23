@@ -1,23 +1,26 @@
 #include "deepptr.h"
 #include "food.h"
 // #include "quadtree.h"
+#include "fish.h"
 #include "vector.h"
-#include "vehicle.h"
 
 #ifndef AQUARIUS_H
 #define AQUARIUS_H
 
 class Aquarius {
    private:
-    Vector<DeepPtr<Vehicle>> vehicles;
+    Vector<DeepPtr<Fish>> fishes;
     Vector<DeepPtr<Food>> food;
 
    public:
     Aquarius();
     Aquarius(const Aquarius&);
 
-    void addVehicle(Vehicle*);
+    void addFish(Fish*);
     void addFood(Food*);
+
+    const Vector<DeepPtr<Fish>>& getFishes(); // TODO const version
+    const Vector<DeepPtr<Food>>& getFood();
 
     void update();
 };

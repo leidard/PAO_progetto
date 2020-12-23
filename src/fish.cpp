@@ -1,17 +1,14 @@
 #include "fish.h"
 
+#include "aquarius.h"
 #include "deepptr.h"
 #include "food.h"
 #include "vector.h"
-#include "vehicle.h"
-//Fish::Fish(const Vect2D& p) : CartesianObject2D(p), Vehicle(), Food() {}
 
-Fish::Fish(const Fish& f) : CartesianObject2D(f.position), Vehicle(f), Food(f) {}
-
-Vect2D Fish::behaviour(const Vector<DeepPtr<Vehicle>>& vehicles, const Vector<DeepPtr<Food>>& food, Vect2D acc) const {
+Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) const {
     if (isHungry()) {
-        for (auto f : food) {
-            if (f->getValoreNutrizonale() < getValoreNutrizonale() && isInRange(f->getPosition())) {
+        for (auto f : a->getFishes()) {
+            if (f->getValoreNutrizionale() < getValoreNutrizionale() && isInRange(f->getPosition())) {
             }
         }
     } else if (isTired()) {

@@ -7,7 +7,7 @@
 class Food : virtual public CartesianObject2D {
    public:
     virtual ~Food() = default;
-    virtual int getValoreNutrizonale() const = 0;
+    virtual int getValoreNutrizionale() const = 0;
     virtual double getVisibility() const = 0;
 
     virtual Food* clone() const = 0;
