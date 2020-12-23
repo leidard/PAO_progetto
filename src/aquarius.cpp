@@ -3,7 +3,6 @@
 #include "deepptr.h"
 #include "food.h"
 #include "vector.h"
-#include "vehicle.h"
 
 Aquarius::Aquarius() : fishes(), food() {}
 Aquarius::Aquarius(const Aquarius&) {}

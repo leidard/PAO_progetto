@@ -12,7 +12,6 @@ class Aquarius;
 class Fish : public Vehicle, public Food {
    public:
     //Fish(const Vect2D& p);
-    Fish(const Fish& f);
 
     virtual Fish* clone() const = 0;
 
