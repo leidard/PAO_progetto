@@ -12,6 +12,8 @@ class Fish : public Vehicle, public Food {
     //Fish(const Vect2D& p);
     Fish(const Fish& f);
 
+    virtual Fish* clone() const = 0;
+
     virtual int getValoreNutrizonale() const = 0;
     virtual Vect2D behaviour(const Vector<DeepPtr<Vehicle>>& vehicles, const Vector<DeepPtr<Food>>& food, Vect2D acc = Vect2D(0, 0)) const override;
     virtual bool isHungry() const = 0;

@@ -36,12 +36,135 @@ class Vector {
 
     void push_back(const T&);
     void pop_back();
-    void erase(unsigned int);
+    T* erase(T*);
     void clear();
     void reserve(unsigned int);
 
+    void insert(const T&, unsigned int);
+
     // assign();  // assign vector content with many overloads if I remember correctly
-    // insert();
+    // insert(const T& value);
 };
+
+template <class T>
+Vector<T>::Vector(unsigned int size) : _buffer(nullptr), _size(0), _capacity(0) {
+    if (size != 0) reserve(size);
+}
+
+template <class T>
+Vector<T>::Vector(const Vector& v) : _buffer(new T[v._capacity]), _size(v._size), _capacity(v._capacity) {
+    for (unsigned int i = 0; i < v._size; i++) _buffer[i] = v._buffer[i];
+}
+
+template <class T>
+Vector<T>::~Vector() { delete[] _buffer; }
+
+template <class T>
+Vector<T>& Vector<T>::operator=(const Vector<T>& v) {
+    if (this != &v) {
+        delete[] _buffer;
+
+        _buffer = new T[v._capacity];
+        _size = v._size;
+        _capacity = v._capacity;
+
+        for (unsigned int i = 0; i < v._size; i++) _buffer[i] = v._buffer[i];
+    }
+    return *this;
+}
+
+template <class T>
+T* Vector<T>::begin() { return _buffer; };
+
+template <class T>
+const T* Vector<T>::begin() const { return _buffer; };
+
+template <class T>
+T* Vector<T>::end() { return _buffer + _size; }
+
+template <class T>
+const T* Vector<T>::end() const { return _buffer + _size; };
+
+template <class T>
+unsigned int Vector<T>::size() { return _size; };
+
+template <class T>
+unsigned int Vector<T>::capacity() { return _capacity; };
+
+template <class T>
+bool Vector<T>::is_empty() { return _size == 0; };
+
+template <class T>
+T& Vector<T>::at(unsigned int index) { return _buffer[index]; }
+template <class T>
+const T& Vector<T>::at(unsigned int index) const { return _buffer[index]; }
+
+template <class T>
+T& Vector<T>::operator[](unsigned int index) { return _buffer[index]; }
+template <class T>
+const T& Vector<T>::operator[](unsigned int index) const { return _buffer[index]; }
+
+template <class T>
+T& Vector<T>::front() { return _buffer[0]; }  // access element at the front
+template <class T>
+const T& Vector<T>::front() const { return _buffer[0]; }
+
+template <class T>
+T& Vector<T>::back() { return _buffer[_size - 1]; }  // access element at the back
+template <class T>
+const T& Vector<T>::back() const { return _buffer[_size - 1]; }
+
+template <class T>
+void Vector<T>::push_back(const T& v) {
+    if (_size >= _capacity)
+        reserve(_capacity == 0 ? 1 : _capacity * 2);
+    _buffer[_size++] = v;
+}
+
+template <class T>
+void Vector<T>::pop_back() { erase(_buffer + --_size); }
+
+template <class T>
+T* Vector<T>::erase(T* pos) {  // TODO CHECK THIS
+    T* ret = pos;
+    delete pos;
+    while (pos < end()) {
+        pos[0] = pos[1];
+        pos++;
+    }
+    --_size;
+    return ret;
+}
+
+template <class T>
+void Vector<T>::clear() {
+    delete[] _buffer;
+    _size = 0;
+    _capacity = 0;
+    _buffer = nullptr;
+}
+
+template <class T>
+void Vector<T>::reserve(unsigned int n) {
+    if (n > _capacity) {
+        T* newbuff = new T[n];
+        for (unsigned int i = 0; i < _size; i++)
+            newbuff[i] = _buffer[i];
+
+        _capacity = n;
+        delete[] _buffer;
+        _buffer = newbuff;
+    }
+}
+
+template <class T>
+void Vector<T>::insert(const T& v, unsigned int index) {
+    reserve(_capacity + 1);
+
+    for (unsigned int j = _size++; j > index; j++)
+        _buffer[j] = _buffer[j - 1];
+
+    _buffer[index] = v;
+}
 
 #endif

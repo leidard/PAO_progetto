@@ -59,6 +59,8 @@ class Vehicle : virtual public CartesianObject2D {
     Vect2D pursuit(const Vehicle&) const;
     Vect2D wander();
 
+    virtual Vehicle* clone() const = 0;
+
     virtual bool isInRange(const Vect2D& v) const = 0;
 
     virtual void update(const Vector<DeepPtr<Vehicle>>&, const Vector<DeepPtr<Food>>&) final;

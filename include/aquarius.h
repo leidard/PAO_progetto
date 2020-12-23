@@ -22,13 +22,4 @@ class Aquarius {
     void update();
 };
 
-void Aquarius::addVehicle(Vehicle* v) {
-    vehicles.push_back(DeepPtr<Vehicle>(v));
-}
-void Aquarius::update() {
-    for (auto& v : vehicles) {
-        v->update(vehicles, food);
-    }
-}
-
 #endif
