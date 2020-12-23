@@ -86,7 +86,7 @@ Vect2D Vect2D::scalarProjection(const Vect2D& v) const { return v.normalize().mu
 
 Vect2D Vect2D::set(const Vect2D& v, double x, double y) { return v.set(x, y); }
 Vect2D Vect2D::sum(const Vect2D& v1, const Vect2D& v2) { return v1.add(v2); }
-Vect2D Vect2D::rem(const Vect2D& v1, const Vect2D& v2) { return v1.rem(v2); }
+Vect2D Vect2D::sub(const Vect2D& v1, const Vect2D& v2) { return v1.rem(v2); }
 Vect2D Vect2D::mult(const Vect2D& v1, double s) { return v1.mult(s); }
 Vect2D Vect2D::div(const Vect2D& v1, double s) { return v1.div(s); }
 Vect2D Vect2D::min(const Vect2D& v1, const Vect2D& v2) { return v1.min(v2); }

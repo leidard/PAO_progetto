@@ -14,20 +14,15 @@ int main() {
     v.push_back(g);
     std::cout << "size" << v.size() << std::endl;
     std::cout << "capacity" << v.capacity() << std::endl;
-    for (auto i : v)
+    for (auto& i : v)
         std::cout << i.getDayTime() << std::endl;
-    auto a = v.begin();
-    std::cout << v.begin() << std::endl;
-    std::cout << (v.begin() + 1) << std::endl;
-    std::cout << (v.begin() + 2) << std::endl;
-    std::cout << v.end() << std::endl;
-    std::cout << v.erase(a) << std::endl;
-    std::cout << v.end();
+
     std::cout << "size" << v.size() << std::endl;
     std::cout << "capacity" << v.capacity() << std::endl;
     for (auto i : v)
         std::cout << i.getDayTime() << std::endl;
-    v.erase(v.end());
+
+    v.erase(v.end() -1);
     std::cout << "size" << v.size() << std::endl;
     std::cout << "capacity" << v.capacity() << std::endl;
     for (auto i : v)

@@ -47,8 +47,7 @@ class Vector {
 };
 
 template <class T>
-Vector<T>::Vector(unsigned int size) : _buffer(nullptr), _size(0), _capacity(0) {
-    if (size != 0) reserve(size);
+Vector<T>::Vector(unsigned int capacity = 1) : _buffer(new T[capacity == 0 ? 1 : capacity]), _size(0), _capacity(capacity) {
 }
 
 template <class T>
@@ -117,31 +116,30 @@ const T& Vector<T>::back() const { return _buffer[_size - 1]; }
 template <class T>
 void Vector<T>::push_back(const T& v) {
     if (_size >= _capacity)
-        reserve(_capacity == 0 ? 1 : _capacity * 2);
+        reserve(_capacity * 2);
     _buffer[_size++] = v;
 }
 
 template <class T>
-void Vector<T>::pop_back() { erase(_buffer + --_size); }
+void Vector<T>::pop_back() { --_size; }
 
 template <class T>
 T* Vector<T>::erase(T* pos) {  // TODO CHECK THIS
-    T* ret = pos;
-    delete pos;
-    while (pos < end()) {
+    T* aux = pos;
+    while (pos < (_buffer + _size - 1)) {
         pos[0] = pos[1];
         pos++;
     }
     --_size;
-    return ret;
+    return aux;
 }
 
 template <class T>
 void Vector<T>::clear() {
     delete[] _buffer;
     _size = 0;
-    _capacity = 0;
-    _buffer = nullptr;
+    _capacity = 1;
+    _buffer = new T[1];
 }
 
 template <class T>
@@ -159,9 +157,9 @@ void Vector<T>::reserve(unsigned int n) {
 
 template <class T>
 void Vector<T>::insert(const T& v, unsigned int index) {
-    reserve(_capacity + 1);
+    reserve(++_size);
 
-    for (unsigned int j = _size++; j > index; j++)
+    for (unsigned int j = _size - 1; j > index; j++)
         _buffer[j] = _buffer[j - 1];
 
     _buffer[index] = v;

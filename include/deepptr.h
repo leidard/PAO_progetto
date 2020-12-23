@@ -1,6 +1,7 @@
 
 #ifndef DEEPPTR_H
 #define DEEPPTR_H
+
 template <class T>
 class DeepPtr {
    private:
@@ -11,27 +12,34 @@ class DeepPtr {
     DeepPtr(const DeepPtr<T>& d);
     DeepPtr& operator=(const DeepPtr<T>& d);
     ~DeepPtr();
+
     T* get() const;
 
     T* release();
+
     void swap(DeepPtr<T>&);
 
     operator bool() const;
+
     T& operator*() const;
+
     T* operator->() const;
 };
 
 template <class T>
-DeepPtr<T>::DeepPtr(T* p) : ptr(p->clone()) {}
+DeepPtr<T>::DeepPtr(T* p) : ptr(p ? p->clone() : nullptr) {}
 
 template <class T>
-DeepPtr<T>::DeepPtr(const DeepPtr<T>& d) : ptr(d.ptr->clone()) {}
+DeepPtr<T>::DeepPtr(const DeepPtr<T>& d) : ptr(d ? d.ptr->clone() : nullptr) {}
 
 template <class T>
 DeepPtr<T>& DeepPtr<T>::operator=(const DeepPtr<T>& d) {
     if (this != &d) {
         delete ptr;
-        ptr = d.ptr->clone();
+        if (d)
+            ptr = d.ptr->clone();
+        else
+            ptr = nullptr;
     }
     return *this;
 }

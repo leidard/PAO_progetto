@@ -61,7 +61,7 @@ class Vect2D {
 
     static Vect2D set(const Vect2D&, double, double);
     static Vect2D sum(const Vect2D&, const Vect2D&);
-    static Vect2D rem(const Vect2D&, const Vect2D&);
+    static Vect2D sub(const Vect2D&, const Vect2D&);
     static Vect2D mult(const Vect2D&, double);
     static Vect2D div(const Vect2D&, double);
     static Vect2D min(const Vect2D&, const Vect2D&);
@@ -95,8 +95,8 @@ class Vect2D {
     bool operator>=(const Vect2D&) const;
     bool operator<(const Vect2D&) const;
     bool operator<=(const Vect2D&) const;
-    virtual bool operator==(const Vect2D&) const;
-    virtual bool operator!=(const Vect2D&) const;  // controllo riferimento
+    bool operator==(const Vect2D&) const;
+    bool operator!=(const Vect2D&) const;  // controllo riferimento
 };
 
 #endif
