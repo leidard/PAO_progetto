@@ -12,21 +12,10 @@ int main() {
     v.push_back(e);
     v.push_back(f);
     v.push_back(g);
-    std::cout << "size" << v.size() << std::endl;
-    std::cout << "capacity" << v.capacity() << std::endl;
-    for (auto& i : v)
-        std::cout << i.getDayTime() << std::endl;
 
-    std::cout << "size" << v.size() << std::endl;
-    std::cout << "capacity" << v.capacity() << std::endl;
-    for (auto i : v)
-        std::cout << i.getDayTime() << std::endl;
-
-    v.erase(v.end() - 1);
-    std::cout << "size" << v.size() << std::endl;
-    std::cout << "capacity" << v.capacity() << std::endl;
-    for (auto i : v)
-        std::cout << i.getDayTime() << std::endl;
+    v.begin();
+    const Vector<DayCycle> a = v;
+    v.begin() < a.begin();
 
     return 0;
 }

@@ -5,18 +5,6 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
-/*void map(double n, double start1, double stop1, double start2, double stop2) {
-    auto newval = (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
-    return newval;
-}*/
-
-// return Math.max(Math.min(n, high), low);
-/**
- * position: (x,y) position in space
- * _velocity: variation of position
- * acceleration: variation of velocity
- */
-
 class Aquarius;
 
 class Vehicle : virtual public CartesianObject2D {
@@ -42,8 +30,8 @@ class Vehicle : virtual public CartesianObject2D {
     virtual Vect2D behaviour(Aquarius* a, Vect2D acc = Vect2D(0, 0)) const = 0;
 
    public:
-    Vehicle(double maxSpeed, double maxForce);
-    virtual ~Vehicle();
+    //Vehicle(double maxSpeed, double maxForce);
+    virtual ~Vehicle() = default;
 
     Vect2D getVelocity() const;
 

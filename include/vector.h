@@ -27,33 +27,36 @@ class Vector {
         T& operator*() const { return *_current; }
         T* operator->() const { return _current; }
         T& operator[](int n) const { return _current[n]; }
+
+        iterator operator++(int) { return iterator(_current++); }
+        iterator operator--(int) { return iterator(_current--); }
+        iterator operator+(int n) const { return iterator(_current + n); }
+        iterator operator-(int n) const { return iterator(_current - n); }
         iterator& operator++() {
             ++_current;
             return *this;
         }
-        iterator operator++(int) { return iterator(_current++); }
         iterator& operator--() {
             --_current;
             return *this;
         }
-        iterator operator--(int) { return iterator(_current--); }
         iterator& operator+=(int n) {
             return _current += n;
             return *this;
         }
-        iterator operator+(int n) const { return iterator(_current + n); }
         iterator& operator-=(int n) {
             return _current -= n;
             return *this;
         }
-        iterator operator-(int n) const { return iterator(_current - n); }
-        const T* base() const { return _current; }
+        T* base() const { return _current; }
+        operator const_iterator() { return const_iterator(_current); }
         bool operator==(const iterator& i) const { return _current == i.base(); }
         bool operator!=(const iterator& i) const { return _current != i.base(); }
         bool operator<(const iterator& i) const { return _current < i.base(); }
         bool operator>(const iterator& i) const { return _current > i.base(); }
         bool operator<=(const iterator& i) const { return _current <= i.base(); }
         bool operator>=(const iterator& i) const { return _current >= i.base(); }
+
     };
 
     class const_iterator {
@@ -66,27 +69,29 @@ class Vector {
         const T& operator*() const { return *_current; }
         const T* operator->() const { return _current; }
         const T& operator[](int n) const { return _current[n]; }
+
+        const_iterator operator++(int) { return const_iterator(_current++); }
+        const_iterator operator--(int) { return const_iterator(_current--); }
+        const_iterator operator+(int n) const { return const_iterator(_current + n); }
+        const_iterator operator-(int n) const { return const_iterator(_current - n); }
         const_iterator& operator++() {
             ++_current;
             return *this;
         }
-        const_iterator operator++(int) { return const_iterator(_current++); }
         const_iterator& operator--() {
             --_current;
             return *this;
         }
-        const_iterator operator--(int) { return const_iterator(_current--); }
         const_iterator& operator+=(int n) {
             return _current += n;
             return *this;
         }
-        const_iterator operator+(int n) const { return const_iterator(_current + n); }
         const_iterator& operator-=(int n) {
             return _current -= n;
             return *this;
         }
-        const_iterator operator-(int n) const { return const_iterator(_current - n); }
-        const T* base() const { return _current; }
+        T* base() const { return _current; }
+        operator iterator() { return iterator(_current); }
         bool operator==(const const_iterator& i) const { return _current == i.base(); }
         bool operator!=(const const_iterator& i) const { return _current != i.base(); }
         bool operator<(const const_iterator& i) const { return _current < i.base(); }
@@ -132,7 +137,7 @@ class Vector {
 };
 
 template <class T>
-Vector<T>::Vector(unsigned int capacity) : _buffer(new T[capacity == 0 ? 1 : capacity]), _size(0), _capacity(capacity) {
+Vector<T>::Vector(unsigned int capacity) : _buffer(new T[capacity == 0 ? 1 : capacity]), _size(0), _capacity(capacity == 0 ? 1 : capacity) {
 }
 
 template <class T>
@@ -225,6 +230,9 @@ void Vector<T>::reserve(unsigned int n) {
         _capacity = n;
         delete[] _buffer;
         _buffer = newbuff;
+    } else if (_capacity == 0) {  // n <= _capacity && _capacity == 0 =>  n == 0
+        _buffer = new T[1];
+        _capacity = 1;
     }
 }
 

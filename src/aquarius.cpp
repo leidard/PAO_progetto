@@ -5,7 +5,6 @@
 #include "vector.h"
 
 Aquarius::Aquarius() : fishes(), food() {}
-Aquarius::Aquarius(const Aquarius&) {}
 
 void Aquarius::addFish(Fish* v) {
     fishes.push_back(v);
