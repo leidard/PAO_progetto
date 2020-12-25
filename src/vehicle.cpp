@@ -1,10 +1,10 @@
-#include "vehicle.h"
+#include "vehicle.hpp"
 
 #include <cstdlib>
 
-#include "aquarius.h"
-#include "deepptr.h"
-#include "vect2d.h"
+#include "aquarius.hpp"
+#include "deepptr.hpp"
+#include "vect2d.hpp"
 
 Vect2D Vehicle::getVelocity() const { return _velocity; }
 

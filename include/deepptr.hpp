@@ -33,6 +33,9 @@ template <class T>
 DeepPtr<T>::DeepPtr(const DeepPtr<T>& d) : ptr(d ? d.ptr->clone() : nullptr) {}
 
 template <class T>
+DeepPtr<T>::~DeepPtr() { delete ptr; }
+
+template <class T>
 DeepPtr<T>& DeepPtr<T>::operator=(const DeepPtr<T>& d) {
     if (this != &d) {
         delete ptr;
@@ -43,9 +46,6 @@ DeepPtr<T>& DeepPtr<T>::operator=(const DeepPtr<T>& d) {
     }
     return *this;
 }
-
-template <class T>
-DeepPtr<T>::~DeepPtr() { delete ptr; }
 
 template <class T>
 T* DeepPtr<T>::get() const { return ptr; }

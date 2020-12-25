@@ -1,44 +1,46 @@
-#include "vect2d.h"
+#include "vect2d.hpp"
 
 #include <algorithm>
 #include <cmath>
 
-Vect2D::Vect2D() : x(0), y(0){};
-Vect2D::Vect2D(double coord_x, double coord_y) : x(coord_x), y(coord_y) {}
-Vect2D::Vect2D(const Vect2D& v) : x(v.x), y(v.y) {}
+Vect2D::Vect2D() : _x(0), _y(0){};
+Vect2D::Vect2D(double x, double y) : _x(x), _y(y) {}
+Vect2D::Vect2D(const Vect2D& v) : _x(v._x), _y(v._y) {}
 
 // getters
 
-double Vect2D::getX() const { return x; }
-double Vect2D::getY() const { return y; }
-Vect2D Vect2D::getXVect() const { return Vect2D(x, 0); }
-Vect2D Vect2D::getYVect() const { return Vect2D(0, y); }
+double Vect2D::x() const { return _x; }
+double Vect2D::y() const { return _y; }
+double& Vect2D::rx() { return _x; }
+double& Vect2D::ry() { return _y; }
+Vect2D Vect2D::getXVect() const { return Vect2D(_x, 0); }
+Vect2D Vect2D::getYVect() const { return Vect2D(0, _y); }
 
 // non-const edit functions with chain return
 
-Vect2D& Vect2D::set(double coord_x, double coord_y) {
-    x = coord_x;
-    y = coord_y;
+Vect2D& Vect2D::set(double x, double y) {
+    _x = x;
+    _y = y;
     return *this;
 }
 Vect2D& Vect2D::add(const Vect2D& v) {
-    x += v.x;
-    y += v.y;
+    _x += v._x;
+    _y += v._y;
     return *this;
 }
 Vect2D& Vect2D::rem(const Vect2D& v) {
-    x -= v.x;
-    y -= v.y;
+    _x -= v._x;
+    _y -= v._y;
     return *this;
 }
 Vect2D& Vect2D::mult(double s) {
-    x *= s;
-    y *= s;
+    _x *= s;
+    _y *= s;
     return *this;
 }
 Vect2D& Vect2D::div(double s) {
-    x /= s;
-    y /= s;
+    _x /= s;
+    _y /= s;
     return *this;
 }
 Vect2D& Vect2D::min(Vect2D& v) { return (*this < v) ? *this : v; }
@@ -46,19 +48,19 @@ Vect2D& Vect2D::max(Vect2D& v) { return (*this > v) ? *this : v; }
 Vect2D& Vect2D::normalize() { return this->div(mag()); }
 Vect2D& Vect2D::setMagnitude(double m) { return this->normalize().mult(m); }
 Vect2D& Vect2D::limit(const Vect2D& v) {
-    x = std::min(x, v.x);
-    y = std::min(y, v.y);
+    _x = std::min(_x, v._x);
+    _y = std::min(_y, v._y);
     return *this;
 }
 Vect2D& Vect2D::limit(double s) {
-    x = std::min(x, s);
-    y = std::min(y, s);
+    _x = std::min(_x, s);
+    _y = std::min(_y, s);
     return *this;
 }
 Vect2D& Vect2D::rotate(double deg) {  // anti-clockwise
-    auto x2 = x * std::cos(deg) - y * std::sin(deg);
-    y = x * std::sin(deg) + y * std::cos(deg);
-    x = x2;
+    auto x2 = _x * std::cos(deg) - _y * std::sin(deg);
+    _y = _x * std::sin(deg) + _y * std::cos(deg);
+    _x = x2;
     return *this;
 }
 
@@ -76,8 +78,8 @@ Vect2D Vect2D::setMagnitude(double s) const { return Vect2D(*this).setMagnitude(
 Vect2D Vect2D::limit(const Vect2D& v) const { return Vect2D(*this).limit(v); }
 Vect2D Vect2D::limit(double s) const { return Vect2D(*this).limit(s); }
 Vect2D Vect2D::rotate(double deg) const { return Vect2D(*this).rotate(deg); }
-double Vect2D::mag() const { return std::sqrt(x * x + y * y); }
-double Vect2D::dot(const Vect2D& v) const { return x * v.x + y * v.y; }
+double Vect2D::mag() const { return std::sqrt(_x * _x + _y * _y); }
+double Vect2D::dot(const Vect2D& v) const { return _x * v._x + _y * v._y; }
 double Vect2D::distance(const Vect2D& v) const { return this->rem(v).mag(); }
 double Vect2D::angleBetween(const Vect2D& v) const { return std::acos(this->dot(v) / (this->mag() * v.mag())); }
 Vect2D Vect2D::scalarProjection(const Vect2D& v) const { return v.normalize().mult(this->dot(v)); }
@@ -117,23 +119,25 @@ Vect2D& Vect2D::operator/=(double s) { return this->div(s); }         // call di
 // comparison operators
 
 bool Vect2D::operator>(const Vect2D& v2) const {
-    return x > v2.x && y > v2.y;
+    return _x > v2._x && _y > v2._y;
 }
 bool Vect2D::operator>=(const Vect2D& v2) const {
-    return x >= v2.x && y >= v2.y;
+    return _x >= v2._x && _y >= v2._y;
 }
 bool Vect2D::operator<(const Vect2D& v2) const {
-    return x < v2.x && y < v2.y;
+    return _x < v2._x && _y < v2._y;
 }
 bool Vect2D::operator<=(const Vect2D& v2) const {
-    return x <= v2.x && y <= v2.y;
+    return _x <= v2._x && _y <= v2._y;
 }
 bool Vect2D::operator==(const Vect2D& v2) const {
-    return this == &v2 || (x == v2.x && y == v2.y);
+    return this == &v2 || (_x == v2._x && _y == v2._y);
 }
 bool Vect2D::operator!=(const Vect2D& v2) const {
-    return this != &v2 && (x != v2.x || y != v2.y);  // applying de morgan laws to the negated operator==
+    return this != &v2 && (_x != v2._x || _y != v2._y);  // applying de morgan laws to the negated operator==
 }
+
+Vect2D::operator QPoint() { return QPoint(_x, _y); }
 
 // external operators (friends)
 

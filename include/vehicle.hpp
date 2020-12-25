@@ -1,6 +1,6 @@
-#include "cartesianobject2d.h"
-#include "vect2d.h"
-#include "vector.h"
+#include "cartesianobject2d.hpp"
+#include "vect2d.hpp"
+#include "vector.hpp"
 
 #ifndef VEHICLE_H
 #define VEHICLE_H

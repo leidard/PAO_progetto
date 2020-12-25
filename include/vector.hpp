@@ -41,22 +41,20 @@ class Vector {
             return *this;
         }
         iterator& operator+=(int n) {
-            return _current += n;
+            _current += n;
             return *this;
         }
         iterator& operator-=(int n) {
-            return _current -= n;
+            _current -= n;
             return *this;
         }
-        T* base() const { return _current; }
         operator const_iterator() { return const_iterator(_current); }
-        bool operator==(const iterator& i) const { return _current == i.base(); }
-        bool operator!=(const iterator& i) const { return _current != i.base(); }
-        bool operator<(const iterator& i) const { return _current < i.base(); }
-        bool operator>(const iterator& i) const { return _current > i.base(); }
-        bool operator<=(const iterator& i) const { return _current <= i.base(); }
-        bool operator>=(const iterator& i) const { return _current >= i.base(); }
-
+        bool operator==(const iterator& i) const { return _current == i._current; }
+        bool operator!=(const iterator& i) const { return _current != i._current; }
+        bool operator<(const iterator& i) const { return _current < i._current; }
+        bool operator>(const iterator& i) const { return _current > i._current; }
+        bool operator<=(const iterator& i) const { return _current <= i._current; }
+        bool operator>=(const iterator& i) const { return _current >= i._current; }
     };
 
     class const_iterator {
@@ -83,37 +81,35 @@ class Vector {
             return *this;
         }
         const_iterator& operator+=(int n) {
-            return _current += n;
+            _current += n;
             return *this;
         }
         const_iterator& operator-=(int n) {
-            return _current -= n;
+            _current -= n;
             return *this;
         }
-        T* base() const { return _current; }
         operator iterator() { return iterator(_current); }
-        bool operator==(const const_iterator& i) const { return _current == i.base(); }
-        bool operator!=(const const_iterator& i) const { return _current != i.base(); }
-        bool operator<(const const_iterator& i) const { return _current < i.base(); }
-        bool operator>(const const_iterator& i) const { return _current > i.base(); }
-        bool operator<=(const const_iterator& i) const { return _current <= i.base(); }
-        bool operator>=(const const_iterator& i) const { return _current >= i.base(); }
+        bool operator==(const const_iterator& i) const { return _current == i._current; }
+        bool operator!=(const const_iterator& i) const { return _current != i._current; }
+        bool operator<(const const_iterator& i) const { return _current < i._current; }
+        bool operator>(const const_iterator& i) const { return _current > i._current; }
+        bool operator<=(const const_iterator& i) const { return _current <= i._current; }
+        bool operator>=(const const_iterator& i) const { return _current >= i._current; }
     };
 
-    unsigned int
-    size();
+    unsigned int size();
     unsigned int capacity();
     bool is_empty();
 
-    iterator begin() { return Vector<T>::iterator(_buffer); };
-    iterator end() { return Vector<T>::iterator(_buffer + _size); };
+    iterator begin();
+    iterator end();
     T& at(unsigned int);
     T& operator[](unsigned int);
     T& front();
     T& back();
 
-    const_iterator begin() const { return Vector<T>::const_iterator(_buffer); }
-    const_iterator end() const { return Vector<T>::const_iterator(_buffer + _size); };
+    const_iterator begin() const;
+    const_iterator end() const;
     const T& at(unsigned int) const;
     const T& operator[](unsigned int) const;
     const T& front() const;
@@ -170,6 +166,16 @@ unsigned int Vector<T>::capacity() { return _capacity; };
 
 template <class T>
 bool Vector<T>::is_empty() { return _size == 0; };
+
+template <class T>
+typename Vector<T>::iterator Vector<T>::begin() { return Vector<T>::iterator(_buffer); };
+template <class T>
+typename Vector<T>::const_iterator Vector<T>::begin() const { return Vector<T>::const_iterator(_buffer); };
+
+template <class T>
+typename Vector<T>::iterator Vector<T>::end() { return Vector<T>::iterator(_buffer + _size); };
+template <class T>
+typename Vector<T>::const_iterator Vector<T>::end() const { return Vector<T>::const_iterator(_buffer + _size); };
 
 template <class T>
 T& Vector<T>::at(unsigned int index) { return _buffer[index]; }

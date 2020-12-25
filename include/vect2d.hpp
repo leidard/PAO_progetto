@@ -1,3 +1,4 @@
+#include <QPoint>
 #include <cmath>
 
 #ifndef VECT_H
@@ -8,7 +9,7 @@ class Vect2D {
     friend Vect2D operator/(double, const Vect2D&);
 
    private:
-    double x, y;
+    double _x, _y;
 
    public:
     Vect2D();
@@ -17,8 +18,10 @@ class Vect2D {
 
     // getters
 
-    double getX() const;
-    double getY() const;
+    double x() const;
+    double y() const;
+    double& rx();
+    double& ry();
     Vect2D getXVect() const;
     Vect2D getYVect() const;
 
@@ -97,6 +100,10 @@ class Vect2D {
     bool operator<=(const Vect2D&) const;
     bool operator==(const Vect2D&) const;
     bool operator!=(const Vect2D&) const;  // controllo riferimento
+
+    // converters
+
+    operator QPoint();
 };
 
 #endif

@@ -1,4 +1,4 @@
-#include "cartesianobject2d.h"
+#include "cartesianobject2d.hpp"
 
 CartesianObject2D::CartesianObject2D(const Vect2D& p) : position(p) {}
 

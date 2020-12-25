@@ -1,4 +1,4 @@
-#include "daycycle.h"
+#include "daycycle.hpp"
 
 DayCycle::DayCycle(int day, int night) : awakeTime(day), asleepTime(asleepTime) {}
 

@@ -1,8 +1,8 @@
-#include "cartesianobject2d.h"
-#include "food.h"
-#include "vect2d.h"
-#include "vector.h"
-#include "vehicle.h"
+#include "cartesianobject2d.hpp"
+#include "food.hpp"
+#include "vect2d.hpp"
+#include "vector.hpp"
+#include "vehicle.hpp"
 
 #ifndef FISH_H
 #define FISH_H
@@ -24,6 +24,7 @@ class Fish : public Vehicle, public Food {
     virtual double getVisibility() const = 0;  // again virtual
     virtual bool isInRange(const Vect2D&) const = 0;
     virtual Vect2D flocking() const = 0;
+    virtual void reset(); // or eaten
 };
 
 #endif

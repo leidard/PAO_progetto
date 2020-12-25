@@ -1,9 +1,9 @@
-#include "fish.h"
+#include "fish.hpp"
 
-#include "aquarius.h"
-#include "deepptr.h"
-#include "food.h"
-#include "vector.h"
+#include "aquarius.hpp"
+#include "deepptr.hpp"
+#include "food.hpp"
+#include "vector.hpp"
 
 Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) const {
     if (isHungry()) {

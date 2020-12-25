@@ -1,5 +1,5 @@
-#include "cartesianobject2d.h"
-#include "vect2d.h"
+#include "cartesianobject2d.hpp"
+#include "vect2d.hpp"
 
 #ifndef FOOD_H
 #define FOOD_H

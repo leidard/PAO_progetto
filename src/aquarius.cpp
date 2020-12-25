@@ -1,8 +1,8 @@
-#include "aquarius.h"
+#include "aquarius.hpp"
 
-#include "deepptr.h"
-#include "food.h"
-#include "vector.h"
+#include "deepptr.hpp"
+#include "food.hpp"
+#include "vector.hpp"
 
 Aquarius::Aquarius() : fishes(), food() {}
 

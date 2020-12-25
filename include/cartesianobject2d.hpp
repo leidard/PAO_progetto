@@ -1,4 +1,4 @@
-#include "vect2d.h"
+#include "vect2d.hpp"
 
 #ifndef CARTESIAN_OBJECT_2D
 #define CARTESIAN_OBJECT_2D
