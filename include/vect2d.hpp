@@ -1,19 +1,21 @@
-#include <QPoint>
 #include <cmath>
-
+#include <iostream>
+#include <utility>
 #ifndef VECT_H
 #define VECT_H
 
 class Vect2D {
     friend Vect2D operator*(double, const Vect2D&);
     friend Vect2D operator/(double, const Vect2D&);
+    friend std::ostream& operator<<(std::ostream& os, const Vect2D&);
+    friend std::istream& operator>>(std::istream& is, const Vect2D&);
 
    private:
     double _x, _y;
 
    public:
     Vect2D();
-    Vect2D(double coord_x, double coord_y);
+    Vect2D(double x, double y);
     Vect2D(const Vect2D& v);
 
     // getters
@@ -24,6 +26,7 @@ class Vect2D {
     double& ry();
     Vect2D getXVect() const;
     Vect2D getYVect() const;
+    std::pair<double, double> getPair() const;
 
     // non-const edit functions with chain return by reference
 
@@ -101,9 +104,12 @@ class Vect2D {
     bool operator==(const Vect2D&) const;
     bool operator!=(const Vect2D&) const;  // controllo riferimento
 
-    // converters
+    // serialization / deserialization
 
-    operator QPoint();
+    const std::ostream& toJSON(std::ostream&) const;
+    const std::istream& fromJSON(std::istream&);
+
+    // converters
 };
 
 #endif

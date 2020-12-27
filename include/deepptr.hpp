@@ -20,6 +20,7 @@ class DeepPtr {
     void swap(DeepPtr<T>&);
 
     operator bool() const;
+    bool operator!() const;
 
     T& operator*() const;
 
@@ -66,6 +67,9 @@ void DeepPtr<T>::swap(DeepPtr<T>& d) {
 
 template <class T>
 DeepPtr<T>::operator bool() const { return ptr != nullptr; }
+
+template <class T>
+bool DeepPtr<T>::operator!() const { return ptr == nullptr; }
 
 template <class T>
 T& DeepPtr<T>::operator*() const { return *ptr; }

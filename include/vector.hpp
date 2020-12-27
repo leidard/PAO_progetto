@@ -231,10 +231,10 @@ void Vector<T>::reserve(unsigned int n) {
     if (n > _capacity) {
         T* newbuff = new T[n];
         for (unsigned int i = 0; i < _size; i++)
-            newbuff[i] = _buffer[i];
+            newbuff[i] = _buffer[i];  // if _capacity == 0 => _size == 0 never reached
 
         _capacity = n;
-        delete[] _buffer;
+        delete[] _buffer;  // if _buffer == nullptr => no delete
         _buffer = newbuff;
     } else if (_capacity == 0) {  // n <= _capacity && _capacity == 0 =>  n == 0
         _buffer = new T[1];
@@ -246,7 +246,7 @@ template <class T>
 void Vector<T>::insert(Vector<T>::iterator pos, const T& v) {
     reserve(++_size);
 
-    for (T* scorri = end() - 1; scorri > pos; pos--) scorri[0] = scorri[-1];
+    for (auto scorri = --end(); scorri > pos; pos--) scorri[0] = scorri[-1];
     *pos = v;
 }
 
@@ -256,8 +256,9 @@ void Vector<T>::insert(Vector<T>::iterator pos, unsigned int fill, const T& v) {
     _size += fill;
     reserve(_size);
 
-    for (T* scorri = end() - 1; scorri > pos; pos--) scorri[0] = scorri[-1];
-    *pos = v;
+    for (auto scorri = --end(); scorri > pos; pos--) scorri[0] = scorri[-1];
+
+    for (auto scorri = pos; scorri <= (pos + ((int)fill)); scorri++) *scorri = v;
 }
 
 template <class T>

@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <utility>
 
 Vect2D::Vect2D() : _x(0), _y(0){};
 Vect2D::Vect2D(double x, double y) : _x(x), _y(y) {}
@@ -15,6 +16,7 @@ double& Vect2D::rx() { return _x; }
 double& Vect2D::ry() { return _y; }
 Vect2D Vect2D::getXVect() const { return Vect2D(_x, 0); }
 Vect2D Vect2D::getYVect() const { return Vect2D(0, _y); }
+std::pair<double, double> Vect2D::getPair() const { return std::pair<double, double>(_x, _y); }
 
 // non-const edit functions with chain return
 
@@ -137,10 +139,30 @@ bool Vect2D::operator!=(const Vect2D& v2) const {
     return this != &v2 && (_x != v2._x || _y != v2._y);  // applying de morgan laws to the negated operator==
 }
 
-Vect2D::operator QPoint() { return QPoint(_x, _y); }
+// Vect2D::operator QPoint() { return QPoint(_x, _y); }
+
+// serialization / deserialization
+
+const std::ostream& Vect2D::toJSON(std::ostream& os) const {
+    os << "{\"typeid\":\"Vect2D\",\"x\":" << _x << ",\"y\":" << _y << "}";
+};
+
+const std::istream& Vect2D::fromJSON(std::istream& is) {
+    char c;
+    is >> c;
+    if (is.good() && c != '{') throw "Parse Error";  // specific parsing error
+    is >> c;
+    if (is.good() && c != "x") throw "Parse Error";
+}
 
 // external operators (friends)
 
 Vect2D operator*(double s, const Vect2D& v) { return v.mult(s); }
 
 Vect2D operator/(double s, const Vect2D& v) { return v.div(s); }
+
+std::ostream& operator<<(std::ostream& os, const Vect2D&) {
+}
+
+std::istream& operator>>(std::istream& is, const Vect2D&) {
+}

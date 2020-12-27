@@ -4,12 +4,12 @@
 
 class DayCycle {
    private:
-    int awakeTime;
-    int asleepTime;
-    int progress;
+    unsigned int awakeTime;
+    unsigned int asleepTime;
+    unsigned int progress;
 
    public:
-    DayCycle(int = 0, int = 0);
+    DayCycle(unsigned int = 0, unsigned int = 0, unsigned int = 0);
     int getDayTime() const;
     int getNightTime() const;
     int getProgress() const;

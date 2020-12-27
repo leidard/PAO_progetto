@@ -5,8 +5,6 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
-class Aquarius;
-
 class Vehicle : virtual public CartesianObject2D {
    protected:
     Vect2D _velocity;
@@ -27,7 +25,7 @@ class Vehicle : virtual public CartesianObject2D {
      * @param acc acceleration from previous step, default = Vect2D(0,0)
      * @return Vect2D the acceleration
     */
-    virtual Vect2D behaviour(Aquarius* a, Vect2D acc = Vect2D(0, 0)) const = 0;
+    virtual Vect2D behaviour(const Vect2D& acc = Vect2D(0, 0)) = 0;
 
    public:
     //Vehicle(double maxSpeed, double maxForce);
@@ -48,7 +46,7 @@ class Vehicle : virtual public CartesianObject2D {
 
     virtual bool isInRange(const Vect2D& v) const = 0;
 
-    virtual void update(Aquarius* a) final;
+    virtual void update() final;
 };
 
 #endif

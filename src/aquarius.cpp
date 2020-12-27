@@ -4,25 +4,59 @@
 #include "food.hpp"
 #include "vector.hpp"
 
-Aquarius::Aquarius() : fishes(), food() {}
+Aquarius* Aquarius::instance = nullptr;
+void Aquarius::init(unsigned int width, unsigned int height) {
+    delete instance;
+    instance = new Aquarius(width, height);
+};
+Aquarius* Aquarius::getInstance() { return instance; }
+
+Aquarius::Aquarius(unsigned int width , unsigned int height ) : _width(width), _height(height), fishes(), food() {}
+
+unsigned int Aquarius::getWidth() const { return _width; }
+unsigned int Aquarius::getHeight() const { return _height; }
+aq_size Aquarius::getSize() const { return aq_size(_width, _height); }
+
+void Aquarius::setWidth(unsigned int width) { _width = width; }
+void Aquarius::setHeight(unsigned int height) { _height = height; }
+void Aquarius::setSize(const aq_size& s) {
+    _width = s.first;
+    _height = s.second;
+}
 
 void Aquarius::addFish(Fish* v) {
     fishes.push_back(v);
+    food.push_back(v);
 }
+
 void Aquarius::addFood(Food* f) {
     food.push_back(f);
 }
 
-void Aquarius::update() {
-    for (auto& v : fishes) {
-        v->update(this);
+void Aquarius::remFish(Vector<DeepPtr<Fish>>::iterator i) {
+    fishes.erase(i);  // the pointer to that object will be invalidated
+    for (auto it = food.begin(); it < food.end(); it++) {
+        if (it->operator!()) food.erase(it);  // se deepptr punta a nullptr eliminare dal vector
     }
 }
 
-const Vector<DeepPtr<Fish>>& Aquarius::getFishes() {
+void Aquarius::remFood(Vector<DeepPtr<Food>>::iterator i) {
+    food.erase(i);  // the pointer to that object will be invalidated
+    for (auto it = fishes.begin(); it < fishes.end(); it++) {
+        if (it->operator!()) fishes.erase(it);  // se deepptr punta a nullptr eliminare dal vector
+    }
+}
+
+const Vector<DeepPtr<Fish>>& Aquarius::getFishes() const {
     return fishes;
 }
 
-const Vector<DeepPtr<Food>>& Aquarius::getFood() {
+const Vector<DeepPtr<Food>>& Aquarius::getFood() const {
     return food;
+}
+
+void Aquarius::update() {
+    for (auto& v : fishes) {
+        v->update();
+    }
 }
