@@ -1,7 +1,9 @@
 #include <string>
 
 #include "cartesianobject2d.hpp"
+#include "daycycle.hpp"
 #include "food.hpp"
+#include "stamina.hpp"
 #include "vect2d.hpp"
 #include "vector.hpp"
 #include "vehicle.hpp"
@@ -19,7 +21,6 @@ class Fish : public Vehicle, public Food {
    public:
     Fish();
     Fish(const std::string&, bool, const DayCycle&, const Stamina&);
-    virtual ~Fish();
     // defined at this level
 
     void setName(const std::string&);
@@ -28,7 +29,7 @@ class Fish : public Vehicle, public Food {
     void wakeup();
     bool isAwake() const;
     bool isAsleep() const;
-    DayCycle& getDayCycle();
+    DayCycle& getDayCycle(); // bad
     const DayCycle& getDayCycle() const;
     Stamina& getStamina();
     const Stamina& getStamina() const;

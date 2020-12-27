@@ -28,19 +28,15 @@ class SaverLoader {
     };
 
     static const std::string DEFAULT_FILENAME;
-    void load(const std::string& file = DEFAULT_FILENAME) const;
-    void save(const Aquarius*) const;
+    void load(const std::string& filename = DEFAULT_FILENAME) const;
+    void save(const std::string& filename = DEFAULT_FILENAME) const;
 
     static QJsonObject serialize(const Vegetale&);
     static QJsonObject serialize(const Predatore&);
     static QJsonObject serialize(const Preda&);
-    static QJsonObject serialize(const DayCycle&);
-    static QJsonObject serialize(const Stamina&);
     static QJsonObject serialize(const Vect2D&);
 
     static Vegetale* parseVegetale(const QJsonValue&);
-    static DayCycle parseDayCycle(const QJsonValue&);
-    static Stamina parseStamina(const QJsonValue&);
     static Vect2D parseVect2D(const QJsonValue&);
     static Fish* parseFish(const QJsonValue&);
 };

@@ -47,8 +47,8 @@ Vect2D& Vect2D::div(double s) {
 }
 Vect2D& Vect2D::min(Vect2D& v) { return (*this < v) ? *this : v; }
 Vect2D& Vect2D::max(Vect2D& v) { return (*this > v) ? *this : v; }
-Vect2D& Vect2D::normalize() { return this->div(mag()); }
-Vect2D& Vect2D::setMagnitude(double m) { return this->normalize().mult(m); }
+Vect2D& Vect2D::normalize() { return div(mag()); }
+Vect2D& Vect2D::setMagnitude(double m) { return normalize().mult(m); }
 Vect2D& Vect2D::limit(const Vect2D& v) {
     _x = std::min(_x, v._x);
     _y = std::min(_y, v._y);
@@ -82,9 +82,11 @@ Vect2D Vect2D::limit(double s) const { return Vect2D(*this).limit(s); }
 Vect2D Vect2D::rotate(double deg) const { return Vect2D(*this).rotate(deg); }
 double Vect2D::mag() const { return std::sqrt(_x * _x + _y * _y); }
 double Vect2D::dot(const Vect2D& v) const { return _x * v._x + _y * v._y; }
-double Vect2D::distance(const Vect2D& v) const { return this->rem(v).mag(); }
-double Vect2D::angleBetween(const Vect2D& v) const { return std::acos(this->dot(v) / (this->mag() * v.mag())); }
-Vect2D Vect2D::scalarProjection(const Vect2D& v) const { return v.normalize().mult(this->dot(v)); }
+double Vect2D::distance(const Vect2D& v) const { return (*this - v).mag(); }
+double Vect2D::angleRad() const { return std::atan2(_y, _x); }
+double Vect2D::angleDeg() const { return std::atan2(_y, _x) * 180 / M_PI; }
+double Vect2D::angleBetween(const Vect2D& v) const { return std::acos(dot(v) / (mag() * v.mag())); }
+Vect2D Vect2D::scalarProjection(const Vect2D& v) const { return v.normalize().mult(dot(v)); }
 
 //static
 
@@ -141,19 +143,7 @@ bool Vect2D::operator!=(const Vect2D& v2) const {
 
 // Vect2D::operator QPoint() { return QPoint(_x, _y); }
 
-// serialization / deserialization
-
-const std::ostream& Vect2D::toJSON(std::ostream& os) const {
-    os << "{\"typeid\":\"Vect2D\",\"x\":" << _x << ",\"y\":" << _y << "}";
-};
-
-const std::istream& Vect2D::fromJSON(std::istream& is) {
-    char c;
-    is >> c;
-    if (is.good() && c != '{') throw "Parse Error";  // specific parsing error
-    is >> c;
-    if (is.good() && c != "x") throw "Parse Error";
-}
+Vect2D::operator std::pair<double, double>() const { return std::pair<double, double>(_x, _y); };
 
 // external operators (friends)
 

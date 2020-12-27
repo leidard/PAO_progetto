@@ -43,7 +43,7 @@ Vect2D Vehicle::wander() {
     return seek(position + (_velocity * WANDER_forwardSteps) + _wander);
 }
 
-void Vehicle::update() {
+void Vehicle::advance() {
     Vect2D acc = behaviour();
 
     _velocity += acc;

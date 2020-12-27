@@ -4,14 +4,13 @@
 #include "fish.hpp"
 #include "food.hpp"
 #include "vector.hpp"
+#include "vegetale.hpp"
 
 #ifndef AQUARIUS_H
 #define AQUARIUS_H
 
 typedef std::pair<unsigned int, unsigned int> aq_size;
 
-// potrebbe servire model???
-// singleton
 class Aquarius {
    public:
     static void init(unsigned int = 0, unsigned int = 0);
@@ -26,8 +25,9 @@ class Aquarius {
 
     unsigned int _width, _height;
 
-    Vector<DeepPtr<Fish>> fishes;
+    Vector<DeepPtr<Fish>> fish;
     Vector<DeepPtr<Food>> food;
+    Vector<DeepPtr<Vegetale>> vegetali;
 
    public:
     unsigned int getWidth() const;
@@ -36,27 +36,31 @@ class Aquarius {
 
     void setWidth(unsigned int);
     void setHeight(unsigned int);
+    void setSize(unsigned int, unsigned int);
     void setSize(const aq_size&);
+    void setSize(const Vect2D&);
 
     Fish& getFish(unsigned int);
     Food& getFood(unsigned int);
-
-    void addFish(Fish*);
-    void addFood(Food*);
-
-    void remFish(Vector<DeepPtr<Fish>>::iterator);  // const is ok??? remember that throws index out of range
-    void remFood(Vector<DeepPtr<Food>>::iterator);  // const is ok??? remember that throws index out of range
+    Vegetale& getVegetale(unsigned int);
 
     const Fish& getFish(unsigned int) const;
     const Food& getFood(unsigned int) const;
+    const Vegetale& getVegetale(unsigned int) const;
 
-    const Vector<DeepPtr<Fish>>& getFishes() const;  // TODO: non const version???
-    const Vector<DeepPtr<Food>>& getFood() const;
+    void addFish(Fish*);
+    void addFood(Food*);
+    void addVegetale(Vegetale*);
 
-    void reset();
-    void load(/**/);
+    void remFish(Vector<DeepPtr<Fish>>::iterator);  // const is ok??? remember that throws index out of range ??
+    void remFood(Vector<DeepPtr<Food>>::iterator);  // const is ok??? remember that throws index out of range ??
+    void remVegetale(Vector<DeepPtr<Vegetale>>::iterator);
 
-    void update();
+    const Vector<DeepPtr<Fish>>& getAllFish() const;  // TODO: non const version???
+    const Vector<DeepPtr<Food>>& getAllFood() const;
+    const Vector<DeepPtr<Food>>& getAllVegetale() const;
+
+    void advance();
 };
 
 #endif

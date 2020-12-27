@@ -60,6 +60,8 @@ class Vect2D {
     double mag() const;
     double dot(const Vect2D&) const;
     double distance(const Vect2D&) const;
+    double angleRad() const;
+    double angleDeg() const;
     double angleBetween(const Vect2D&) const;
     Vect2D scalarProjection(const Vect2D&) const;
 
@@ -104,12 +106,8 @@ class Vect2D {
     bool operator==(const Vect2D&) const;
     bool operator!=(const Vect2D&) const;  // controllo riferimento
 
-    // serialization / deserialization
-
-    const std::ostream& toJSON(std::ostream&) const;
-    const std::istream& fromJSON(std::istream&);
-
     // converters
+    operator std::pair<double, double>() const; 
 };
 
 #endif

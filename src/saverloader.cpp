@@ -14,9 +14,9 @@
 #include "food.hpp"
 #include "preda.hpp"
 #include "predatore.hpp"
+#include "stamina.hpp"
 #include "vect2d.hpp"
 #include "vegetale.hpp"
-#include "vitalita.hpp"
 
 SaverLoader::ParseError::ParseError(std::string _msg) : msg(std::string("[JSON ParseError]: " + _msg).c_str()) {}
 
@@ -34,11 +34,12 @@ void SaverLoader::load(const std::string& filename) const {
     if (!d.isObject()) throw new ParseError("Root must be an Object");
     QJsonObject o = d.object();
 
-    if (!o.value("fishArr").isArray()) throw new ParseError("Can't find fishArr");
-    if (!o.value("vegArr").isArray()) throw new ParseError("Can't find vegArr");
-    // TODO WIDTH, HEIGHT
+    if (!o.value("fishArr").isArray()) throw new ParseError("Can't find property: fishArr");
+    if (!o.value("vegArr").isArray()) throw new ParseError("Can't find property: vegArr");
+    if (!o.value("width").isDouble()) throw new ParseError("Can't find property: width");
+    if (!o.value("height").isDouble()) throw new ParseError("Can't find property: height");
 
-    Aquarius::init();
+    Aquarius::init(o.value("width").toDouble(), o.value("height").toDouble());
     Aquarius* aq = Aquarius::getInstance();
 
     for (auto i : o.value("fishArr").toArray()) {
@@ -58,7 +59,39 @@ void SaverLoader::load(const std::string& filename) const {
     }
 }
 
-void SaverLoader::save(const Aquarius* a) const {
+void SaverLoader::save() const {
+    Aquarius* a = Aquarius::getInstance();
+
+    QJsonObject o;
+    o.insert("width", (int)a->getWidth());
+    o.insert("height", (int)a->getHeight());
+    QJsonArray fishArr;
+
+    for (auto f : a->getFishes()) {
+        Predatore* predatore = dynamic_cast<Predatore*>(&*f);
+        if (predatore != nullptr) {
+            fishArr.push_back(serialize(*predatore));
+            continue;
+        }
+        Preda* preda = dynamic_cast<Preda*>(&*f);
+        if (preda != nullptr) {
+            fishArr.push_back(serialize(*preda));
+            continue;
+        }
+    }
+
+    QJsonArray vegArr;
+
+    for (auto f : a->getFood()) {
+        Vegetale* vegetale = dynamic_cast<Vegetale*>(&*f);
+        if (vegetale != nullptr) {
+            vegArr.push_back(serialize(*vegetale));
+        }
+    }
+
+    o.insert("fishArr", fishArr);
+    o.insert("vegArr", vegArr);
+    // o.insert("valoreNutrizionale", f.getValoreNutrizionale());
 }
 
 QJsonObject SaverLoader::serialize(const Vegetale& f) {
@@ -69,8 +102,12 @@ QJsonObject SaverLoader::serialize(const Vegetale& f) {
     return o;
 }
 
+QJsonObject SaverLoader::serialize(Food* f) {
+    return serialize(*f);
+}
+
 QJsonObject SaverLoader::serialize(const Predatore& f) {
-    QJsonObject o = QJsonObject();
+    QJsonObject o;
     o.insert("type", "PREDATORE");
     o.insert("position", serialize(f.getPosition()));
     o.insert("velocity", serialize(f.getVelocity()));
@@ -81,7 +118,7 @@ QJsonObject SaverLoader::serialize(const Predatore& f) {
 }
 
 QJsonObject SaverLoader::serialize(const Preda& f) {
-    QJsonObject o = QJsonObject();
+    QJsonObject o;
     o.insert("type", "PREDA");
     o.insert("position", serialize(f.getPosition()));
     o.insert("velocity", serialize(f.getVelocity()));
@@ -92,7 +129,7 @@ QJsonObject SaverLoader::serialize(const Preda& f) {
 }
 
 QJsonObject SaverLoader::serialize(const DayCycle& d) {
-    QJsonObject o = QJsonObject();
+    QJsonObject o;
     o.insert("awakeTime", d.getDayTime());
     o.insert("asleepTime", d.getNightTime());
     o.insert("progress", d.getProgress());
@@ -100,14 +137,14 @@ QJsonObject SaverLoader::serialize(const DayCycle& d) {
 }
 
 QJsonObject SaverLoader::serialize(const Stamina& s) {
-    QJsonObject o = QJsonObject();
+    QJsonObject o;
     o.insert("val", s.getVal());
     o.insert("max", (int)s.getMax());
     return o;
 }
 
 QJsonObject SaverLoader::serialize(const Vect2D& v) {
-    QJsonObject o = QJsonObject();
+    QJsonObject o;
     o.insert("x", v.x());
     o.insert("y", v.y());
     return o;

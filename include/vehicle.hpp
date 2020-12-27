@@ -46,7 +46,7 @@ class Vehicle : virtual public CartesianObject2D {
 
     virtual bool isInRange(const Vect2D& v) const = 0;
 
-    virtual void update() final;
+    virtual void advance() final;
 };
 
 #endif

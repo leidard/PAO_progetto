@@ -92,6 +92,29 @@ double isTired();
 
 <hr/>
 
+### TODO
+
+graphicsview
+set anti aliasing QPainter::Antialiasing
+
+QGraphicsScene a uno slot chiamato advance()
+collegando un QTimer cosí
+conenct(timer, SIGNAL(timeout()), scene, SLOT(advance()));
+verrá chiamato l'advance nella scene che dirrá a tutti gli item di procedere nello step di animazione
+
+- craere un custom QGraphicsItem per ogni pesce e ogni cibo vegetale
+setflag items is movable (ItemIsMovable)
+ deve essere cliccabile
+ mousepress or even better mouse hover
+ mouserelease 
+ mouse leave
+ paint(QPainter* painter, QStyleObject )
+ boundingRect
+
+ per impostare la posizione setPos(mapToParent(0,-velocity));
+ per impostare la rotazione invece si usa il setRotation(angle) con angle in degrees NON radianti
+
+
 ## Sources
 
  - ![https://www.red3d.com/cwr/boids/](https://www.red3d.com/cwr/boids/)

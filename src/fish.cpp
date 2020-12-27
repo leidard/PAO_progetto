@@ -4,8 +4,8 @@
 #include "daycycle.hpp"
 #include "deepptr.hpp"
 #include "food.hpp"
+#include "stamina.hpp"
 #include "vector.hpp"
-#include "vitalita.hpp"
 
 Fish::Fish() : _name(), _awake(true), _daycycle(), _stamina() {}
 Fish::Fish(const std::string& name, bool awake, const DayCycle& daycycle, const Stamina& stamina) : Vehicle(), Food(), _name(name), _awake(awake), _daycycle(daycycle), _stamina(stamina) {}

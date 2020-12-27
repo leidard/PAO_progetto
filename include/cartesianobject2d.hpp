@@ -1,7 +1,7 @@
 #include "vect2d.hpp"
 
-#ifndef CARTESIAN_OBJECT_2D
-#define CARTESIAN_OBJECT_2D
+#ifndef CARTESIAN_OBJECT_2D_H
+#define CARTESIAN_OBJECT_2D_H
 
 class CartesianObject2D {
    protected:

@@ -11,7 +11,7 @@ void Aquarius::init(unsigned int width, unsigned int height) {
 };
 Aquarius* Aquarius::getInstance() { return instance; }
 
-Aquarius::Aquarius(unsigned int width , unsigned int height ) : _width(width), _height(height), fishes(), food() {}
+Aquarius::Aquarius(unsigned int width, unsigned int height) : _width(width), _height(height), fish(), food() {}
 
 unsigned int Aquarius::getWidth() const { return _width; }
 unsigned int Aquarius::getHeight() const { return _height; }
@@ -25,7 +25,7 @@ void Aquarius::setSize(const aq_size& s) {
 }
 
 void Aquarius::addFish(Fish* v) {
-    fishes.push_back(v);
+    fish.push_back(v);
     food.push_back(v);
 }
 
@@ -33,8 +33,13 @@ void Aquarius::addFood(Food* f) {
     food.push_back(f);
 }
 
+void Aquarius::addVegetale(Vegetale* v) {
+    food.push_back(v);
+    vegetali.push_back(v);
+}
+
 void Aquarius::remFish(Vector<DeepPtr<Fish>>::iterator i) {
-    fishes.erase(i);  // the pointer to that object will be invalidated
+    fish.erase(i);  // the pointer to that object will be invalidated
     for (auto it = food.begin(); it < food.end(); it++) {
         if (it->operator!()) food.erase(it);  // se deepptr punta a nullptr eliminare dal vector
     }
@@ -42,21 +47,13 @@ void Aquarius::remFish(Vector<DeepPtr<Fish>>::iterator i) {
 
 void Aquarius::remFood(Vector<DeepPtr<Food>>::iterator i) {
     food.erase(i);  // the pointer to that object will be invalidated
-    for (auto it = fishes.begin(); it < fishes.end(); it++) {
-        if (it->operator!()) fishes.erase(it);  // se deepptr punta a nullptr eliminare dal vector
+    for (auto it = fish.begin(); it < fish.end(); it++) {
+        if (it->operator!()) fish.erase(it);  // se deepptr punta a nullptr eliminare dal vector
     }
 }
 
-const Vector<DeepPtr<Fish>>& Aquarius::getFishes() const {
-    return fishes;
-}
-
-const Vector<DeepPtr<Food>>& Aquarius::getFood() const {
-    return food;
-}
-
-void Aquarius::update() {
-    for (auto& v : fishes) {
-        v->update();
+void Aquarius::advance() {
+    for (auto i : fish) {
+        if (i) i->advance();
     }
 }
