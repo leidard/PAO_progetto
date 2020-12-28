@@ -57,8 +57,8 @@ Vect2D Fish::behaviour(Vect2D acc) {
     }
     // é sveglio, non puó dormire, non ha fame || non ha trovato cibo
     // quindi vaga a caso
-
-    return acc + wander();
+    auto w = wander();
+    return acc + w;
 }
 
 /*

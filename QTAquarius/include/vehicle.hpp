@@ -14,8 +14,8 @@ class Vehicle : virtual public CartesianObject2D {
 
     double PURSUIT_forwardSteps = 5;
 
-    double WANDER_MAX_STRENGTH = 4;
-    double WANDER_MAX_RATE = 45;
+    double WANDER_MAX_STRENGTH = 5;
+    double WANDER_MAX_RATE = 15;
     double WANDER_forwardSteps = 10;
     double wander_strength = 1;  // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_STRENGTH)
     double wander_rate = 1;     // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_RATE)
