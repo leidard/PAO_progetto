@@ -19,6 +19,8 @@ void AcquarioView::resizeEvent(QResizeEvent *event) {
     QSize s = event->size();
     controller->resize(s.width(), s.height());
 }
+
+
 #include <iostream>
 void AcquarioView::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
