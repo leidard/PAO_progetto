@@ -52,13 +52,12 @@ class Aquarius {
     void addFood(Food*);
     void addVegetale(Vegetale*);
 
-    void remFish(Vector<DeepPtr<Fish>>::iterator);  // const is ok??? remember that throws index out of range ??
-    void remFood(Vector<DeepPtr<Food>>::iterator);  // const is ok??? remember that throws index out of range ??
-    void remVegetale(Vector<DeepPtr<Vegetale>>::iterator);
+    void remFish(Vector<DeepPtr<Fish>>::iterator);
+    void remFood(Vector<DeepPtr<Food>>::iterator);
 
-    const Vector<DeepPtr<Fish>>& getAllFish() const;  // TODO: non const version???
-    const Vector<DeepPtr<Food>>& getAllFood() const;
-    const Vector<DeepPtr<Food>>& getAllVegetale() const;
+    Vector<DeepPtr<Fish>>& getAllFish();  // TODO: non const version???
+    Vector<DeepPtr<Food>>& getAllFood();
+    Vector<DeepPtr<Food>>& getAllVegetale();
 
     void advance();
 };

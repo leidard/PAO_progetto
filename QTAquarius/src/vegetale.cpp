@@ -3,7 +3,7 @@
 #include "cartesianobject2d.hpp"
 #include "vect2d.hpp"
 
-Vegetale::Vegetale(const Vect2D& pos, double visibility) : CartesianObject2D(pos), Food(), _visibility(visibility) {}
+Vegetale::Vegetale(const Vect2D& pos, double visibility) : CartesianObject2D(pos), _visibility(visibility) {}
 
 Vegetale::~Vegetale() = default;
 

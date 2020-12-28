@@ -59,7 +59,8 @@ void SaverLoader::load(const std::string& filename) const {
     }
 }
 
-void SaverLoader::save() const {
+void SaverLoader::save(const std::string& filename) const {
+    auto asda = filename;
     Aquarius* a = Aquarius::getInstance();
 
     QJsonObject o;
@@ -67,25 +68,25 @@ void SaverLoader::save() const {
     o.insert("height", (int)a->getHeight());
     QJsonArray fishArr;
 
-    for (auto f : a->getFishes()) {
+    for (auto f : a->getAllFish()) {
         Predatore* predatore = dynamic_cast<Predatore*>(&*f);
         if (predatore != nullptr) {
-            fishArr.push_back(serialize(*predatore));
+            // fishArr.push_back(SaverLoader::serialize(*predatore));
             continue;
         }
-        Preda* preda = dynamic_cast<Preda*>(&*f);
-        if (preda != nullptr) {
-            fishArr.push_back(serialize(*preda));
-            continue;
-        }
+        //Preda* preda = dynamic_cast<Preda*>(&*f);
+        //if (preda != nullptr) {
+            // fishArr.push_back(SaverLoader::serialize(*preda));
+           // continue;
+        //}
     }
 
     QJsonArray vegArr;
 
-    for (auto f : a->getFood()) {
+    for (auto f : a->getAllFood()) {
         Vegetale* vegetale = dynamic_cast<Vegetale*>(&*f);
         if (vegetale != nullptr) {
-            vegArr.push_back(serialize(*vegetale));
+            //vegArr.push_back(SaverLoader::serialize(*vegetale));
         }
     }
 
@@ -96,22 +97,17 @@ void SaverLoader::save() const {
 
 QJsonObject SaverLoader::serialize(const Vegetale& f) {
     QJsonObject o = QJsonObject();
-    o.insert("position", serialize(f.getPosition()));
+    o.insert("position", SaverLoader::serialize(f.getPosition()));
     o.insert("visibility", f.getVisibility());
     // o.insert("valoreNutrizionale", f.getValoreNutrizionale());
     return o;
 }
 
-QJsonObject SaverLoader::serialize(Food* f) {
-    return serialize(*f);
-}
-
 QJsonObject SaverLoader::serialize(const Predatore& f) {
     QJsonObject o;
     o.insert("type", "PREDATORE");
-    o.insert("position", serialize(f.getPosition()));
-    o.insert("velocity", serialize(f.getVelocity()));
-    o.insert("daynight", serialize(f.getDayCycle()));
+    o.insert("position", SaverLoader::serialize(f.getPosition()));
+    o.insert("velocity", SaverLoader::serialize(f.getVelocity()));
     o.insert("visibility", f.getVisibility());
     // o.insert("valoreNutrizionale", f.getValoreNutrizionale());
     return o;
@@ -120,26 +116,10 @@ QJsonObject SaverLoader::serialize(const Predatore& f) {
 QJsonObject SaverLoader::serialize(const Preda& f) {
     QJsonObject o;
     o.insert("type", "PREDA");
-    o.insert("position", serialize(f.getPosition()));
-    o.insert("velocity", serialize(f.getVelocity()));
-    o.insert("daynight", serialize(f.getDayCycle()));
+    o.insert("position", SaverLoader::serialize(f.getPosition()));
+    o.insert("velocity", SaverLoader::serialize(f.getVelocity()));
     o.insert("visibility", f.getVisibility());
     // o.insert("valoreNutrizionale", f.getValoreNutrizionale());
-    return o;
-}
-
-QJsonObject SaverLoader::serialize(const DayCycle& d) {
-    QJsonObject o;
-    o.insert("awakeTime", d.getDayTime());
-    o.insert("asleepTime", d.getNightTime());
-    o.insert("progress", d.getProgress());
-    return o;
-}
-
-QJsonObject SaverLoader::serialize(const Stamina& s) {
-    QJsonObject o;
-    o.insert("val", s.getVal());
-    o.insert("max", (int)s.getMax());
     return o;
 }
 
@@ -158,32 +138,6 @@ Vegetale* SaverLoader::parseVegetale(const QJsonValue& v) {
     if (!visibility.isDouble()) throw new ParseError("parseVegetale: can't read property \"visibility\"");
 
     return new Vegetale(parseVect2D(o.value("position").toString()), visibility.toDouble());
-}
-
-DayCycle SaverLoader::parseDayCycle(const QJsonValue& v) {
-    if (!v.isObject()) throw new ParseError("parseDayCycle: not a JSON Object");
-    QJsonObject o = v.toObject();
-
-    QJsonValue awakeTime = o.value("awakeTime");
-    if (awakeTime.isDouble()) throw new ParseError("parseStamina: can't read property \"awakeTime\"");
-    QJsonValue asleepTime = o.value("asleepTime");
-    if (asleepTime.isDouble()) throw new ParseError("parseStamina: can't read property \"asleepTime\"");
-    QJsonValue progress = o.value("progress");
-    if (progress.isDouble()) throw new ParseError("parseStamina: can't read property \"progress\"");
-
-    return DayCycle(awakeTime.toDouble(), asleepTime.toDouble(), progress.toDouble());
-}
-
-Stamina SaverLoader::parseStamina(const QJsonValue& v) {
-    if (!v.isObject()) throw new ParseError("parseStamina: not a JSON Object");
-    QJsonObject o = v.toObject();
-
-    QJsonValue val = o.value("val");
-    if (val.isDouble()) throw new ParseError("parseStamina: can't read property \"val\"");
-    QJsonValue max = o.value("max");
-    if (max.isDouble()) throw new ParseError("parseStamina: can't read property \"max\"");
-
-    return Stamina(val.toDouble(), max.toDouble());
 }
 
 Vect2D SaverLoader::parseVect2D(const QJsonValue& v) {
@@ -208,17 +162,16 @@ Fish* SaverLoader::parseFish(const QJsonValue& v) {
     if (t == "PREDATORE") {
         QJsonValue name = o.value("name");
         if (!name.isString()) throw new ParseError("parsePredatore: can't read property \"name\"");
-        QJsonValue awake = o.value("awake");
-        if (!awake.isBool()) throw new ParseError("parsePredatore: can't read property \"name\"");
+        QJsonValue imagepath = o.value("imagepath");
+        if (!imagepath.isString()) throw new ParseError("parsePredatore: can't read property \"name\"");
 
-        return new Predatore(parseVect2D(o.value("position")), parseVect2D(o.value("velocity")), name.toString().toStdString(), awake.toBool(), parseDayCycle(o.value("daynight")), parseStamina(o.value("stamina")));
+        return new Predatore(parseVect2D(o.value("position")), name.toString().toStdString());
     } else if (t == "PREDA") {
         QJsonValue name = o.value("name");
         if (!name.isString()) throw new ParseError("parsePredatore: can't read property \"name\"");
-        QJsonValue awake = o.value("awake");
-        if (!awake.isBool()) throw new ParseError("parsePredatore: can't read property \"name\"");
 
-        return new Preda(parseVect2D(o.value("position")), parseVect2D(o.value("velocity")), name.toString().toStdString(), awake.toBool(), parseDayCycle(o.value("daynight")), parseStamina(o.value("stamina")));
+        //return new Preda(parseVect2D(o.value("position")), name.toString().toStdString());
+        return nullptr;
     } else
         throw new ParseError("parsePredatore: ");
 }

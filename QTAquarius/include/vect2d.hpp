@@ -17,6 +17,7 @@ class Vect2D {
     Vect2D();
     Vect2D(double x, double y);
     Vect2D(const Vect2D& v);
+    Vect2D& operator=(const Vect2D&);
 
     // getters
 

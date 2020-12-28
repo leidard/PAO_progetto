@@ -8,6 +8,15 @@ Vect2D::Vect2D() : _x(0), _y(0){};
 Vect2D::Vect2D(double x, double y) : _x(x), _y(y) {}
 Vect2D::Vect2D(const Vect2D& v) : _x(v._x), _y(v._y) {}
 
+Vect2D &Vect2D::operator=(const Vect2D & v)
+{
+    if (this != &v) {
+        _x = v._x;
+        _y = v._y;
+    }
+    return *this;
+}
+
 // getters
 
 double Vect2D::x() const { return _x; }

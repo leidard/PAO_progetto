@@ -11,18 +11,17 @@ class Stamina;
 
 class Preda : public Fish {
    public:
-    Preda(const Vect2D&, const Vect2D&, const std::string&, bool, const DayCycle&, const Stamina&);
+    Preda(const Vect2D&, const std::string&);
 
     // overrides
     virtual ~Preda();
-    virtual Vect2D behaviour(const Vect2D& acc = Vect2D(0, 0)) override;
+    virtual Vect2D behaviour(Vect2D acc = Vect2D(0, 0)) override;
 
     // new pure virtual
-    virtual std::string getImagePath() const override;
     virtual bool isHungry() const override;
     virtual bool canSleep() const override;
     virtual bool canWakeup() const override;
-    virtual void reset() const override;  // or eaten
+    virtual void eat(Vector<DeepPtr<Food>>::iterator) override;  // or eaten
 
     // repeated pure virtual
     virtual Preda* clone() const override;                 // from CartesianObject2D

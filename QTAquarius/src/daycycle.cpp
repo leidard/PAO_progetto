@@ -1,6 +1,6 @@
 #include "daycycle.hpp"
 
-DayCycle::DayCycle(unsigned int day,unsigned int night, unsigned int prog) : awakeTime(day), asleepTime(asleepTime), progress(prog) {}
+DayCycle::DayCycle(unsigned int day, unsigned int night, unsigned int prog) : awakeTime(day), asleepTime(night), progress(prog) {}
 
 int DayCycle::getDayTime() const { return awakeTime; }
 int DayCycle::getNightTime() const { return asleepTime; }
@@ -18,6 +18,9 @@ DayCycle& DayCycle::operator++() {
 DayCycle DayCycle::operator++(int) {
     DayCycle tmp(*this);
     progress++;
-    tmp;
+    return tmp;
 }
-DayCycle& DayCycle::operator+=(int increment) { progress += increment; }
+DayCycle& DayCycle::operator+=(int increment) {
+    progress += increment;
+    return *this;
+}

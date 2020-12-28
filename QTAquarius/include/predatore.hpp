@@ -5,20 +5,22 @@
 #define PREDATORE_H
 
 class Predatore : public Fish {
+   private:
+    DayCycle _daycycle;
+    Stamina _stamina;
+
    public:
-    Predatore();
-    Predatore(const Vect2D&, const Vect2D&, const std::string&, bool, const DayCycle&, const Stamina&);
+    Predatore(const Vect2D&, const std::string& = "no name");
 
     // overrides
-    virtual ~Predatore();
-    virtual Vect2D behaviour(const Vect2D& acc = Vect2D(0, 0)) override;
+    virtual ~Predatore();  // TODO can delete this??
+    virtual Vect2D behaviour(Vect2D acc = Vect2D(0, 0)) override;
 
-    // new pure virtual
-    virtual std::string getImagePath() const override;
+    // defined of pure virtual
     virtual bool isHungry() const override;
     virtual bool canSleep() const override;
     virtual bool canWakeup() const override;
-    virtual void reset() const override;  // or eaten
+    virtual void eat(Vector<DeepPtr<Food>>::iterator) override;
 
     // repeated pure virtual
     virtual Predatore* clone() const override;             // from CartesianObject2D

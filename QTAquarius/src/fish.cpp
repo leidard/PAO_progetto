@@ -7,8 +7,7 @@
 #include "stamina.hpp"
 #include "vector.hpp"
 
-Fish::Fish() : _name(), _awake(true), _daycycle(), _stamina() {}
-Fish::Fish(const std::string& name, bool awake, const DayCycle& daycycle, const Stamina& stamina) : Vehicle(), Food(), _name(name), _awake(awake), _daycycle(daycycle), _stamina(stamina) {}
+Fish::Fish(const std::string& name) : _name(name), _awake(true) {}
 Fish::~Fish() = default;
 
 void Fish::setName(const std::string& name) { _name = name; }
@@ -18,12 +17,8 @@ void Fish::sleep() { _awake = false; }
 void Fish::wakeup() { _awake = true; }
 bool Fish::isAwake() const { return _awake; }
 bool Fish::isAsleep() const { return !_awake; }
-DayCycle& Fish::getDayCycle() { return _daycycle; }
-const DayCycle& Fish::getDayCycle() const { return _daycycle; }
-Stamina& Fish::getStamina() { return _stamina; }
-const Stamina& Fish::getStamina() const { return _stamina; }
 
-Vect2D Fish::behaviour(const Vect2D& acc) {
+Vect2D Fish::behaviour(Vect2D acc) {
     if (isAsleep()) {     // sta dormendo
         if (canWakeup())  // puó svegliarsi?
             wakeup();     // then si sveglia else continua a dormire
@@ -36,13 +31,33 @@ Vect2D Fish::behaviour(const Vect2D& acc) {
     }
     // é sveglio e non puó dormire
     if (isHungry()) {  // ha fame? then cerca cibo, mira verso il cibo con nuova accelerazione != acc parametro
-        for (auto f : Aquarius::getInstance()->getFishes()) {
-            if (f->getValoreNutrizionale() < getValoreNutrizionale() && isInRange(f->getPosition())) {
+        Aquarius* a = Aquarius::getInstance();
+        Vector<DeepPtr<Food>>& food = a->getAllFood();
+        Vector<DeepPtr<Food>>::iterator candidatoit;
+        Food* candidato = nullptr;
+        double mindist = 0;
+        auto it = food.begin();
+        while (it != food.end()) {
+            DeepPtr<Food> f = *it;
+            if (f && f.get() != this && f->getValoreNutrizionale() < getValoreNutrizionale() && isInRange(f->getPosition())) {
+                if (!candidato || Vect2D::distance(position, f->getPosition()) < mindist) {
+                    mindist = Vect2D::distance(position, f->getPosition());
+                    candidatoit = it;
+                    candidato = &*f;
+                }
             }
+            it++;
+        }
+        if (candidato) {
+            auto acc2 = seek(candidato->getPosition());
+            if (mindist < maxForce)
+                eat(candidatoit);  // TODO remove found flag???
+            return acc2;
         }
     }
     // é sveglio, non puó dormire, non ha fame || non ha trovato cibo
     // quindi vaga a caso
+
     return acc + wander();
 }
 
