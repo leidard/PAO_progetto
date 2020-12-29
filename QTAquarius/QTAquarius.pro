@@ -11,8 +11,8 @@ CONFIG += c++11
 INCLUDEPATH = include/
 
 SOURCES += \
-    include/acquarioview.cpp \
     main.cpp \
+    src/acquarioview.cpp \
     src/aquarius.cpp \
     src/cartesianobject2d.cpp \
     src/controller.cpp \
@@ -27,7 +27,7 @@ SOURCES += \
     src/vehicle.cpp
 
 HEADERS += \
-    include/acquarioview.h \
+    include/acquarioview.hpp \
     include/aquarius.hpp \
     include/cartesianobject2d.hpp \
     include/controller.hpp \

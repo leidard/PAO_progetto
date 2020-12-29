@@ -7,15 +7,17 @@
 
 class Vehicle : virtual public CartesianObject2D {
    protected:
+    Vect2D _computedvelocity;
+    Vect2D _computedposition;
     Vect2D _velocity;
     Vect2D _wander;
     double maxSpeed = 4;  // tipo 4
-    double maxForce = 1;  // 0 <= x <= 1 ??
+    double maxForce = .6;  // 0 <= x <= 1
 
     double PURSUIT_forwardSteps = 5;
 
     double WANDER_MAX_STRENGTH = 5;
-    double WANDER_MAX_RATE = 15;
+    double WANDER_MAX_RATE = 45;
     double WANDER_forwardSteps = 10;
     double wander_strength = 1;  // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_STRENGTH)
     double wander_rate = 1;     // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_RATE)
@@ -41,13 +43,14 @@ class Vehicle : virtual public CartesianObject2D {
     Vect2D arrive(const Vect2D&) const;
     Vect2D flee(const Vect2D&) const;
     Vect2D pursuit(const Vehicle&) const;
+    Vect2D avoid(const Vehicle&) const;
     Vect2D wander();
 
     virtual Vehicle* clone() const = 0;
 
     virtual bool isInRange(const Vect2D& v) const = 0;
 
-    virtual void advance() final;
+    virtual void advance(int phase) final;
 };
 
 #endif

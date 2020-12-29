@@ -16,7 +16,7 @@
 #include "predatore.hpp"
 #include "vect2d.hpp"
 #include "vector.hpp"
-#include "acquarioview.h"
+#include "acquarioview.hpp"
 // controller
 
 Controller::Controller(QObject* parent) : QObject(parent), _timer(new QTimer()), _model(nullptr), _view(nullptr) {

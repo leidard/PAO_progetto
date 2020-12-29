@@ -42,6 +42,7 @@ class Vect2D {
     Vect2D& setMagnitude(double);
     Vect2D& limit(const Vect2D&);
     Vect2D& limit(double);
+    Vect2D& bounds(const Vect2D&);
     Vect2D& rotate(double);
 
     // const edit functions with chain return by value
@@ -57,13 +58,15 @@ class Vect2D {
     Vect2D setMagnitude(double) const;
     Vect2D limit(const Vect2D&) const;
     Vect2D limit(double) const;
+    Vect2D bounds(const Vect2D&) const;
     Vect2D rotate(double) const;
     double mag() const;
     double dot(const Vect2D&) const;
     double distance(const Vect2D&) const;
     double angleRad() const;
     double angleDeg() const;
-    double angleBetween(const Vect2D&) const;
+    double angleBetweenRad(const Vect2D&) const;
+    double angleBetweenDeg(const Vect2D&) const;
     Vect2D scalarProjection(const Vect2D&) const;
 
     //static
@@ -83,7 +86,8 @@ class Vect2D {
     static double mag(const Vect2D&);
     static double dot(const Vect2D&, const Vect2D&);
     static double distance(const Vect2D&, const Vect2D&);
-    static double angleBetween(const Vect2D&, const Vect2D&);
+    static double angleBetweenRad(const Vect2D&, const Vect2D&);
+    static double angleBetweenDeg(const Vect2D&, const Vect2D&);
     static Vect2D scalarProjection(const Vect2D&, const Vect2D&);
 
     // operators

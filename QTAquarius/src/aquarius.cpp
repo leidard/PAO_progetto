@@ -70,6 +70,9 @@ Vector<DeepPtr<Food> > &Aquarius::getAllFood()
 
 void Aquarius::advance() {
     for (auto& i : fish) {
-        if (i) i->advance();
+        if (i) i->advance(0);
+    }
+    for (auto& i : fish) {
+        if (i) i->advance(1);
     }
 }

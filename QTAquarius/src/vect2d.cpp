@@ -68,6 +68,13 @@ Vect2D& Vect2D::limit(double s) {
     _y = std::min(_y, s);
     return *this;
 }
+Vect2D& Vect2D::bounds(const Vect2D& b) {
+    if (_x > b._x) _x = 0;
+    else if (_x < 0) _x = b._x;
+    if (_y > b._y) _y = 0;
+    else if (_y < 0) _y = b._y;
+    return *this;
+}
 Vect2D& Vect2D::rotate(double deg) {  // anti-clockwise
     auto x2 = _x * std::cos(deg) - _y * std::sin(deg);
     _y = _x * std::sin(deg) + _y * std::cos(deg);
@@ -88,13 +95,15 @@ Vect2D Vect2D::normalize() const { return Vect2D(*this).normalize(); }
 Vect2D Vect2D::setMagnitude(double s) const { return Vect2D(*this).setMagnitude(s); }
 Vect2D Vect2D::limit(const Vect2D& v) const { return Vect2D(*this).limit(v); }
 Vect2D Vect2D::limit(double s) const { return Vect2D(*this).limit(s); }
+Vect2D Vect2D::bounds(const Vect2D& b) const { return Vect2D(*this).bounds(b); }
 Vect2D Vect2D::rotate(double deg) const { return Vect2D(*this).rotate(deg); }
 double Vect2D::mag() const { return std::sqrt(_x * _x + _y * _y); }
 double Vect2D::dot(const Vect2D& v) const { return _x * v._x + _y * v._y; }
 double Vect2D::distance(const Vect2D& v) const { return (*this - v).mag(); }
 double Vect2D::angleRad() const { return std::atan2(_y, _x); }
 double Vect2D::angleDeg() const { return std::atan2(_y, _x) * 180 / M_PI; }
-double Vect2D::angleBetween(const Vect2D& v) const { return std::acos(dot(v) / (mag() * v.mag())); }
+double Vect2D::angleBetweenRad(const Vect2D& v) const { return std::acos(dot(v) / (mag() * v.mag())); }
+double Vect2D::angleBetweenDeg(const Vect2D& v) const { return angleBetweenRad(v) * 180 / M_PI; }
 Vect2D Vect2D::scalarProjection(const Vect2D& v) const { return v.normalize().mult(dot(v)); }
 
 //static
@@ -114,7 +123,8 @@ Vect2D Vect2D::rotate(const Vect2D& v1, double deg) { return v1.rotate(deg); }
 double Vect2D::mag(const Vect2D& v1) { return v1.mag(); }
 double Vect2D::dot(const Vect2D& v1, const Vect2D& v2) { return v1.dot(v2); }
 double Vect2D::distance(const Vect2D& v1, const Vect2D& v2) { return v1.distance(v2); }
-double Vect2D::angleBetween(const Vect2D& v1, const Vect2D& v2) { return v1.angleBetween(v2); }
+double Vect2D::angleBetweenRad(const Vect2D& v1, const Vect2D& v2) { return v1.angleBetweenRad(v2); }
+double Vect2D::angleBetweenDeg(const Vect2D& v1, const Vect2D& v2) { return v1.angleBetweenDeg(v2); }
 Vect2D Vect2D::scalarProjection(const Vect2D& v1, const Vect2D& v2) { return v1.scalarProjection(v2); }
 
 // operators
