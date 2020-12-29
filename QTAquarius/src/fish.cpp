@@ -18,8 +18,7 @@ void Fish::wakeup() { _awake = true; }
 bool Fish::isAwake() const { return _awake; }
 bool Fish::isAsleep() const { return !_awake; }
 
-Vect2D Fish::behaviour(Vect2D acc) {
-
+Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
     if (isAsleep()) {     // sta dormendo
         if (canWakeup())  // puó svegliarsi?
             wakeup();     // then si sveglia else continua a dormire
@@ -32,7 +31,6 @@ Vect2D Fish::behaviour(Vect2D acc) {
     }
     // é sveglio e non puó dormire
     if (isHungry()) {  // ha fame? then cerca cibo, mira verso il cibo con nuova accelerazione != acc parametro
-        Aquarius* a = Aquarius::getInstance();
         Vector<DeepPtr<Food>>& food = a->getAllFood();
         Vector<DeepPtr<Food>>::iterator candidatoit;
         Food* candidato = nullptr;
@@ -51,14 +49,17 @@ Vect2D Fish::behaviour(Vect2D acc) {
         }
         if (candidato) {
             auto acc2 = seek(candidato->getPosition());
-            if (mindist < maxForce)
-                eat(candidatoit);  // TODO remove found flag???
+            if (mindist < maxForce) {
+                eat(candidatoit);
+                a->remFood(it);
+            }
+
             return acc2;
         }
     }
     // é sveglio, non puó dormire, non ha fame || non ha trovato cibo
     // quindi vaga a caso
-    return acc + wander()*.05;
+    return acc + wander() * .05;
 }
 
 /*

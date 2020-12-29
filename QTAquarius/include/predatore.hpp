@@ -1,8 +1,11 @@
 #include "fish.hpp"
 #include "vect2d.hpp"
+#include "daycycle.hpp"
+#include "stamina.hpp"
 
 #ifndef PREDATORE_H
 #define PREDATORE_H
+class Aquarius;
 
 class Predatore : public Fish {
    private:
@@ -14,7 +17,7 @@ class Predatore : public Fish {
 
     // overrides
     virtual ~Predatore();  // TODO can delete this??
-    virtual Vect2D behaviour(Vect2D acc = Vect2D(0, 0)) override;
+    virtual Vect2D behaviour(Aquarius* a, Vect2D acc = Vect2D(0, 0)) override;
 
     // defined of pure virtual
     virtual bool isHungry() const override;

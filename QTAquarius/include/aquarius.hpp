@@ -12,17 +12,7 @@
 typedef std::pair<unsigned int, unsigned int> aq_size;
 
 class Aquarius {
-   public:
-    static void init(unsigned int = 0, unsigned int = 0);
-    static Aquarius* getInstance();
-
    private:
-    static Aquarius* instance;
-    Aquarius(unsigned int = 0, unsigned int = 0);
-
-    Aquarius(Aquarius const&) = delete;
-    void operator=(Aquarius const&) = delete;
-
     unsigned int _width, _height;
 
     Vector<DeepPtr<Fish>> fish;
@@ -30,6 +20,8 @@ class Aquarius {
     Vector<DeepPtr<Vegetale>> vegetali;
 
    public:
+    Aquarius(unsigned int = 0, unsigned int = 0);
+
     unsigned int getWidth() const;
     unsigned int getHeight() const;
     aq_size getSize() const;

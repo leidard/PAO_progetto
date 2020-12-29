@@ -1,7 +1,7 @@
 #include "predatore.hpp"
 
-#include <string>
 #include <iostream>
+#include <string>
 
 #include "aquarius.hpp"
 #include "daycycle.hpp"
@@ -15,15 +15,14 @@ Predatore::Predatore(const Vect2D& position, const std::string& name) : Cartesia
 // overrides
 Predatore::~Predatore() = default;
 
-Vect2D Predatore::behaviour(Vect2D acc) {
-    Aquarius* a = Aquarius::getInstance();
+Vect2D Predatore::behaviour(Aquarius* a, Vect2D acc) {
     auto fish = a->getAllFish();
 
     Vect2D alignement;
     Vect2D separation;
     Vect2D cohesion;
     int count = 0;
-    for (auto& f: fish) {
+    for (auto& f : fish) {
         if (f && f.get() != this && isInRange(f->getPosition())) {
             // alignment step
             alignement += f->getVelocity();
@@ -32,7 +31,7 @@ Vect2D Predatore::behaviour(Vect2D acc) {
             Vect2D diff = position - f->getPosition();
             double d = diff.mag();
             if (d != 0)
-                diff.div(d*d);
+                diff.div(d * d);
             separation += diff;
 
             // cohesion step
@@ -62,14 +61,13 @@ Vect2D Predatore::behaviour(Vect2D acc) {
         cohesion.rem(_velocity);
         cohesion.limit(.8);
 
-        acc += alignement ;
-        acc += separation * .3 ;
-        acc += cohesion * .3 ;
+        acc += alignement;
+        acc += separation * .3;
+        acc += cohesion * .3;
         acc.limit(maxSpeed);
     }
 
-
-    return Fish::behaviour(acc);
+    return Fish::behaviour(a, acc);
 }
 
 /*
@@ -97,8 +95,6 @@ bool Predatore::canWakeup() const { return true; }
 void Predatore::eat(Vector<DeepPtr<Food>>::iterator it) {
     _daycycle += 20;
     _stamina += (*it)->getValoreNutrizionale();
-
-    Aquarius::getInstance()->remFood(it);
 }
 
 // repeated pure virtual
@@ -108,5 +104,5 @@ double Predatore::getVisibility() const {
     return .2;
 }  // from food
 bool Predatore::isInRange(const Vect2D& p) const {
-    return position.distance(p) < 100;//&& _velocity.angleBetweenRad(p) < M_PI;
+    return position.distance(p) < 100;  //&& _velocity.angleBetweenRad(p) < M_PI;
 }  // from vehicle

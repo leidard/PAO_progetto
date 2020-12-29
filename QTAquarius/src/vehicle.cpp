@@ -6,7 +6,7 @@
 #include "deepptr.hpp"
 #include "vect2d.hpp"
 
-Vehicle::Vehicle(): _wander(1,1), _velocity(1,1){}
+Vehicle::Vehicle(): _velocity(1,1), _wander(1,1) {}
 
 Vect2D Vehicle::getVelocity() const { return _velocity; }
 
@@ -57,13 +57,13 @@ Vect2D Vehicle::wander() {
 }
 
 #include <iostream>
-void Vehicle::advance(int phase) { //divide the method with 2 phase triggere within the aquarius
+void Vehicle::advance(Aquarius* a, int phase) { //divide the method with 2 phase triggere within the aquarius
     if (!phase) {
-        Vect2D acc = behaviour().limit(maxSpeed);
+        Vect2D acc = behaviour(a).limit(maxSpeed);
         _computedvelocity = _velocity + acc;
         _computedposition = position + _computedvelocity;
-        auto w = Aquarius::getInstance()->getWidth();
-        auto h = Aquarius::getInstance()->getHeight();
+        auto w = a->getWidth();
+        auto h = a->getHeight();
         _computedposition.bounds(Vect2D(w+20,h+20));
     } else {
         _velocity = _computedvelocity;

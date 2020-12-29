@@ -4,13 +4,6 @@
 #include "food.hpp"
 #include "vector.hpp"
 
-Aquarius* Aquarius::instance = nullptr;
-void Aquarius::init(unsigned int width, unsigned int height) {
-    delete instance;
-    instance = new Aquarius(width, height);
-};
-Aquarius* Aquarius::getInstance() { return instance; }
-
 Aquarius::Aquarius(unsigned int width, unsigned int height) : _width(width), _height(height), fish(), food() {}
 
 unsigned int Aquarius::getWidth() const { return _width; }
@@ -55,24 +48,23 @@ void Aquarius::remFood(Vector<DeepPtr<Food>>::iterator i) {
 }
 
 void Aquarius::setSize(unsigned int width, unsigned int height) {
-       _width = width;
-       _height = height;
+    _width = width;
+    _height = height;
 }
 
-Vector<DeepPtr<Fish> > &Aquarius::getAllFish()
-{
+Vector<DeepPtr<Fish>>& Aquarius::getAllFish() {
     return fish;
 }
-Vector<DeepPtr<Food> > &Aquarius::getAllFood()
-{
+Vector<DeepPtr<Food>>& Aquarius::getAllFood() {
     return food;
 }
 
 void Aquarius::advance() {
     for (auto& i : fish) {
-        if (i) i->advance(0);
+        if (i) i->advance(this, 0);  // calcolate
     }
+
     for (auto& i : fish) {
-        if (i) i->advance(1);
+        if (i) i->advance(this, 1);  // apply calculated changes
     }
 }

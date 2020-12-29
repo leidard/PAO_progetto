@@ -8,6 +8,7 @@
 
 class DayCycle;
 class Stamina;
+class Stamina;
 
 class Preda : public Fish {
    public:
@@ -15,7 +16,7 @@ class Preda : public Fish {
 
     // overrides
     virtual ~Preda();
-    virtual Vect2D behaviour(Vect2D acc = Vect2D(0, 0)) override;
+    virtual Vect2D behaviour(Aquarius*, Vect2D acc = Vect2D(0, 0)) override;
 
     // new pure virtual
     virtual bool isHungry() const override;
