@@ -44,6 +44,7 @@ class Vect2D {
     Vect2D& limit(double);
     Vect2D& bounds(const Vect2D&);
     Vect2D& rotate(double);
+    Vect2D& rotateDeg(double);
 
     // const edit functions with chain return by value
 
@@ -60,6 +61,7 @@ class Vect2D {
     Vect2D limit(double) const;
     Vect2D bounds(const Vect2D&) const;
     Vect2D rotate(double) const;
+    Vect2D rotateDeg(double) const;
     double mag() const;
     double dot(const Vect2D&) const;
     double distance(const Vect2D&) const;
@@ -83,6 +85,7 @@ class Vect2D {
     static Vect2D limit(const Vect2D&, const Vect2D&);
     static Vect2D limit(const Vect2D&, double);
     static Vect2D rotate(const Vect2D&, double);
+    static Vect2D rotateDeg(const Vect2D&, double);
     static double mag(const Vect2D&);
     static double dot(const Vect2D&, const Vect2D&);
     static double distance(const Vect2D&, const Vect2D&);
@@ -112,7 +115,7 @@ class Vect2D {
     bool operator!=(const Vect2D&) const;  // controllo riferimento
 
     // converters
-    operator std::pair<double, double>() const; 
+    operator std::pair<double, double>() const;
 };
 
 #endif

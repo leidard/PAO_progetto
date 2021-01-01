@@ -22,9 +22,9 @@ SaverLoader::ParseError::ParseError(std::string _msg) : msg(std::string("[JSON P
 
 const char* SaverLoader::ParseError::what() const throw() { return msg; }
 
-const std::string SaverLoader::DEFAULT_FILENAME = "aquarius.save.json";
+const std::string SaverLoader::DEFAULT_FILENAME = "aquarius.json";
 
-void SaverLoader::load(const std::string& filename) const {
+void SaverLoader::load(Aquarius* a, const std::string& filename) const {
     QFile file;
     file.setFileName(filename.c_str());
     file.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -40,7 +40,7 @@ void SaverLoader::load(const std::string& filename) const {
     if (!o.value("height").isDouble()) throw new ParseError("Can't find property: height");
 
     //Aquarius::init(o.value("width").toDouble(), o.value("height").toDouble());
-    Aquarius* aq = nullptr; //Aquarius::getInstance();
+    Aquarius* aq = nullptr;  //Aquarius::getInstance();
 
     for (auto i : o.value("fishArr").toArray()) {
         try {
@@ -59,9 +59,8 @@ void SaverLoader::load(const std::string& filename) const {
     }
 }
 
-void SaverLoader::save(const std::string& filename) const {
+void SaverLoader::save(Aquarius* a, const std::string& filename) const {
     auto asda = filename;
-    Aquarius* a = nullptr; //Aquarius::getInstance();
 
     QJsonObject o;
     o.insert("width", (int)a->getWidth());
@@ -76,8 +75,8 @@ void SaverLoader::save(const std::string& filename) const {
         }
         //Preda* preda = dynamic_cast<Preda*>(&*f);
         //if (preda != nullptr) {
-            // fishArr.push_back(SaverLoader::serialize(*preda));
-           // continue;
+        // fishArr.push_back(SaverLoader::serialize(*preda));
+        // continue;
         //}
     }
 
@@ -98,7 +97,6 @@ void SaverLoader::save(const std::string& filename) const {
 QJsonObject SaverLoader::serialize(const Vegetale& f) {
     QJsonObject o = QJsonObject();
     o.insert("position", SaverLoader::serialize(f.getPosition()));
-    o.insert("visibility", f.getVisibility());
     // o.insert("valoreNutrizionale", f.getValoreNutrizionale());
     return o;
 }
@@ -107,9 +105,8 @@ QJsonObject SaverLoader::serialize(const Predatore& f) {
     QJsonObject o;
     o.insert("type", "PREDATORE");
     o.insert("position", SaverLoader::serialize(f.getPosition()));
-    o.insert("velocity", SaverLoader::serialize(f.getVelocity()));
-    o.insert("visibility", f.getVisibility());
-    // o.insert("valoreNutrizionale", f.getValoreNutrizionale());
+    // o.insert("name", f.getName());
+
     return o;
 }
 
@@ -117,9 +114,8 @@ QJsonObject SaverLoader::serialize(const Preda& f) {
     QJsonObject o;
     o.insert("type", "PREDA");
     o.insert("position", SaverLoader::serialize(f.getPosition()));
-    o.insert("velocity", SaverLoader::serialize(f.getVelocity()));
-    o.insert("visibility", f.getVisibility());
-    // o.insert("valoreNutrizionale", f.getValoreNutrizionale());
+    // o.insert("name", f.getName());
+
     return o;
 }
 
@@ -162,8 +158,6 @@ Fish* SaverLoader::parseFish(const QJsonValue& v) {
     if (t == "PREDATORE") {
         QJsonValue name = o.value("name");
         if (!name.isString()) throw new ParseError("parsePredatore: can't read property \"name\"");
-        QJsonValue imagepath = o.value("imagepath");
-        if (!imagepath.isString()) throw new ParseError("parsePredatore: can't read property \"name\"");
 
         return new Predatore(parseVect2D(o.value("position")), name.toString().toStdString());
     } else if (t == "PREDA") {

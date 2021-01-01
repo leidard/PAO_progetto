@@ -32,8 +32,8 @@ void AcquarioView::paintEvent(QPaintEvent *event) {
     for (auto &f : fish) {
         Vect2D pos = f->getPosition();
         Vect2D vel = f->getVelocity().setMagnitude(15);
-        Vect2D left = Vect2D::rotate(vel, -2.5).setMagnitude(20);
-        Vect2D right = Vect2D::rotate(vel, 2.5).setMagnitude(20);
+        Vect2D left = Vect2D::rotateDeg(vel, -2.5).setMagnitude(20);
+        Vect2D right = Vect2D::rotateDeg(vel, 2.5).setMagnitude(20);
         Vect2D fut = pos + vel;
         Vect2D futl = pos + left;
         Vect2D futr = pos + right;

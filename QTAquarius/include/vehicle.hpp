@@ -45,8 +45,8 @@ class Vehicle : virtual public CartesianObject2D {
     Vect2D arrive(const Vect2D&) const;
     Vect2D flee(const Vect2D&) const;
     Vect2D pursuit(const Vehicle&) const;
-    Vect2D avoid(const Vehicle&) const;
     Vect2D wander();
+    Vect2D stop() const;
 
     virtual Vehicle* clone() const = 0;
 

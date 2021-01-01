@@ -13,6 +13,7 @@ typedef std::pair<unsigned int, unsigned int> aq_size;
 
 class Aquarius {
    private:
+    // name???
     unsigned int _width, _height;
 
     Vector<DeepPtr<Fish>> fish;

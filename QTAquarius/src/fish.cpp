@@ -22,12 +22,13 @@ Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
     if (isAsleep()) {     // sta dormendo
         if (canWakeup())  // puó svegliarsi?
             wakeup();     // then si sveglia else continua a dormire
-        return Vect2D();  // turno finito
+        return stop();    // turno finito
     }
     // é sveglio
-    if (canSleep()) {     // puó dormire?
-        sleep();          // dorme
-        return Vect2D();  // turno finito
+    if (canSleep()) {  // puó dormire?
+        sleep();       // dorme
+        // return Vect2D();
+        return stop();  // turno finito
     }
     // é sveglio e non puó dormire
     if (isHungry()) {  // ha fame? then cerca cibo, mira verso il cibo con nuova accelerazione != acc parametro
@@ -59,6 +60,7 @@ Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
     }
     // é sveglio, non puó dormire, non ha fame || non ha trovato cibo
     // quindi vaga a caso
+    if (this == a->getAllFish()[0].get()) return stop();
     return acc + wander() * .05;
 }
 

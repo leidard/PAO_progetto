@@ -3,6 +3,8 @@
 #include "deepptr.hpp"
 #include "food.hpp"
 #include "vector.hpp"
+#include <thread>
+#include <future>
 
 Aquarius::Aquarius(unsigned int width, unsigned int height) : _width(width), _height(height), fish(), food() {}
 
@@ -55,16 +57,24 @@ void Aquarius::setSize(unsigned int width, unsigned int height) {
 Vector<DeepPtr<Fish>>& Aquarius::getAllFish() {
     return fish;
 }
+
 Vector<DeepPtr<Food>>& Aquarius::getAllFood() {
     return food;
 }
 
+#include <vector>
 void Aquarius::advance() {
-    for (auto& i : fish) {
-        if (i) i->advance(this, 0);  // calcolate
+    //std::vector<std::future<void>> futures;
+
+    // calc changes
+    for (DeepPtr<Fish>& i : fish) {
+        //futures.push_back(std::async(std::launch::async, [&i, this]()->void{if (i) i->advance(this, 0);}));
+        if (i) i->advance(this, 0);
     }
 
+    //for (std::future<void>& f: futures) f.get();
+
     for (auto& i : fish) {
-        if (i) i->advance(this, 1);  // apply calculated changes
+        if (i) i->advance(this, 1);  // apply changes
     }
 }

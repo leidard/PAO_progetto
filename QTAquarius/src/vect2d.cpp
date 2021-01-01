@@ -8,8 +8,7 @@ Vect2D::Vect2D() : _x(0), _y(0){};
 Vect2D::Vect2D(double x, double y) : _x(x), _y(y) {}
 Vect2D::Vect2D(const Vect2D& v) : _x(v._x), _y(v._y) {}
 
-Vect2D &Vect2D::operator=(const Vect2D & v)
-{
+Vect2D& Vect2D::operator=(const Vect2D& v) {
     if (this != &v) {
         _x = v._x;
         _y = v._y;
@@ -57,7 +56,7 @@ Vect2D& Vect2D::div(double s) {
 Vect2D& Vect2D::min(Vect2D& v) { return (*this < v) ? *this : v; }
 Vect2D& Vect2D::max(Vect2D& v) { return (*this > v) ? *this : v; }
 Vect2D& Vect2D::normalize() { return div(mag()); }
-Vect2D& Vect2D::setMagnitude(double m) { return normalize().mult(m); }
+Vect2D& Vect2D::setMagnitude(double m) { return mag() == 0 ? set(0, 0) : normalize().mult(m); }
 Vect2D& Vect2D::limit(const Vect2D& v) {
     _x = std::min(_x, v._x);
     _y = std::min(_y, v._y);
@@ -69,15 +68,27 @@ Vect2D& Vect2D::limit(double s) {
     return *this;
 }
 Vect2D& Vect2D::bounds(const Vect2D& b) {
-    if (_x > b._x) _x = 0;
-    else if (_x < 0) _x = b._x;
-    if (_y > b._y) _y = 0;
-    else if (_y < 0) _y = b._y;
+    if (_x > b._x)
+        _x = 0;
+    else if (_x < 0)
+        _x = b._x;
+    if (_y > b._y)
+        _y = 0;
+    else if (_y < 0)
+        _y = b._y;
     return *this;
 }
-Vect2D& Vect2D::rotate(double deg) {  // anti-clockwise
-    auto x2 = _x * std::cos(deg) - _y * std::sin(deg);
-    _y = _x * std::sin(deg) + _y * std::cos(deg);
+// this is rad
+Vect2D& Vect2D::rotate(double rad) {  // anti-clockwise
+    double x2 = _x * std::cos(rad) - _y * std::sin(rad);
+    _y = _x * std::sin(rad) + _y * std::cos(rad);
+    _x = x2;
+    return *this;
+}
+Vect2D& Vect2D::rotateDeg(double deg) {  // anti-clockwise
+    double rad = deg * M_PI / 180;
+    double x2 = _x * std::cos(rad) - _y * std::sin(rad);
+    _y = _x * std::sin(rad) + _y * std::cos(rad);
     _x = x2;
     return *this;
 }
@@ -96,7 +107,8 @@ Vect2D Vect2D::setMagnitude(double s) const { return Vect2D(*this).setMagnitude(
 Vect2D Vect2D::limit(const Vect2D& v) const { return Vect2D(*this).limit(v); }
 Vect2D Vect2D::limit(double s) const { return Vect2D(*this).limit(s); }
 Vect2D Vect2D::bounds(const Vect2D& b) const { return Vect2D(*this).bounds(b); }
-Vect2D Vect2D::rotate(double deg) const { return Vect2D(*this).rotate(deg); }
+Vect2D Vect2D::rotate(double rad) const { return Vect2D(*this).rotate(rad); }
+Vect2D Vect2D::rotateDeg(double deg) const { return Vect2D(*this).rotateDeg(deg); }
 double Vect2D::mag() const { return std::sqrt(_x * _x + _y * _y); }
 double Vect2D::dot(const Vect2D& v) const { return _x * v._x + _y * v._y; }
 double Vect2D::distance(const Vect2D& v) const { return (*this - v).mag(); }
@@ -119,7 +131,8 @@ Vect2D Vect2D::normalize(const Vect2D& v1) { return v1.normalize(); }
 Vect2D Vect2D::setMagnitude(const Vect2D& v1, double s) { return v1.setMagnitude(s); }
 Vect2D Vect2D::limit(const Vect2D& v1, const Vect2D& v2) { return v1.limit(v2); }
 Vect2D Vect2D::limit(const Vect2D& v1, double s) { return v1.limit(s); }
-Vect2D Vect2D::rotate(const Vect2D& v1, double deg) { return v1.rotate(deg); }
+Vect2D Vect2D::rotate(const Vect2D& v1, double rad) { return v1.rotate(rad); }
+Vect2D Vect2D::rotateDeg(const Vect2D& v1, double deg) { return v1.rotateDeg(deg); }
 double Vect2D::mag(const Vect2D& v1) { return v1.mag(); }
 double Vect2D::dot(const Vect2D& v1, const Vect2D& v2) { return v1.dot(v2); }
 double Vect2D::distance(const Vect2D& v1, const Vect2D& v2) { return v1.distance(v2); }
