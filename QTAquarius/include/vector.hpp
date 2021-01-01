@@ -97,9 +97,9 @@ class Vector {
         bool operator>=(const const_iterator& i) const { return _current >= i._current; }
     };
 
-    unsigned int size();
-    unsigned int capacity();
-    bool is_empty();
+    unsigned int size() const;
+    unsigned int capacity() const;
+    bool is_empty() const;
 
     iterator begin();
     iterator end();
@@ -159,13 +159,13 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& v) {
 }
 
 template <class T>
-unsigned int Vector<T>::size() { return _size; };
+unsigned int Vector<T>::size() const { return _size; };
 
 template <class T>
-unsigned int Vector<T>::capacity() { return _capacity; };
+unsigned int Vector<T>::capacity() const { return _capacity; };
 
 template <class T>
-bool Vector<T>::is_empty() { return _size == 0; };
+bool Vector<T>::is_empty() const { return _size == 0; };
 
 template <class T>
 typename Vector<T>::iterator Vector<T>::begin() { return Vector<T>::iterator(_buffer); };

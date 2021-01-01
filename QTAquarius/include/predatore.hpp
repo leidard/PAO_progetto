@@ -8,10 +8,6 @@
 class Aquarius;
 
 class Predatore : public Fish {
-   private:
-    DayCycle _daycycle;
-    Stamina _stamina;
-
    public:
     Predatore(const Vect2D&, const std::string& = "no name");
 
@@ -21,15 +17,14 @@ class Predatore : public Fish {
 
     // defined of pure virtual
     virtual bool isHungry() const override;
-    virtual bool canSleep() const override;
-    virtual bool canWakeup() const override;
     virtual void eat(Vector<DeepPtr<Food>>::iterator) override;
 
     // repeated pure virtual
     virtual Predatore* clone() const override;             // from CartesianObject2D
-    virtual int getValoreNutrizionale() const override;    // from food
-    virtual double getVisibility() const override;         // from food
-    virtual bool isInRange(const Vect2D&) const override;  // from vehicle
+    virtual int getValoreNutrizionale() const override;    // from Food
+    virtual double getVisibility() const override;         // from Food
+    virtual bool isInRange(const Vect2D&) const override;  // from Vehicle
+    virtual std::string getType() const override;         // from Fish
 };
 
 #endif

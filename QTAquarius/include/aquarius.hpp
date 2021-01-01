@@ -13,7 +13,6 @@ typedef std::pair<unsigned int, unsigned int> aq_size;
 
 class Aquarius {
    private:
-    // name???
     unsigned int _width, _height;
 
     Vector<DeepPtr<Fish>> fish;
@@ -50,7 +49,7 @@ class Aquarius {
 
     Vector<DeepPtr<Fish>>& getAllFish();  // TODO: non const version???
     Vector<DeepPtr<Food>>& getAllFood();
-    Vector<DeepPtr<Food>>& getAllVegetale();
+    Vector<DeepPtr<Vegetale>>& getAllVegetale();
 
     void advance();
 };

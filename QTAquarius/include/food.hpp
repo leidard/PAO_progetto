@@ -5,14 +5,19 @@
 #define FOOD_H
 
 class Food : virtual public CartesianObject2D {
+   private:
+    bool gone;
+
    public:
-    Food() = default;
+    Food();
     virtual ~Food() = default;
     virtual int getValoreNutrizionale() const = 0;
     virtual double getVisibility() const = 0;
 
-
     virtual Food* clone() const = 0;
+
+    bool getIsGone() const;
+    void setIsGone();
 
     bool operator>(const Food&) const;
     bool operator>=(const Food&) const;

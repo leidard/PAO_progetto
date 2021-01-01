@@ -2,3 +2,4 @@ doxygen/
 \.vscode/
 output
 \build-QTAquarius-Desktop*/
+QTAquarius/out/

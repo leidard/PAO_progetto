@@ -6,11 +6,8 @@
 #ifndef PREDA_H
 #define PREDA_H
 
-class DayCycle;
-class Stamina;
-class Stamina;
 
-class Preda : public Fish {
+class Preda : public Fish{
    public:
     Preda(const Vect2D&, const std::string&);
 
@@ -26,9 +23,10 @@ class Preda : public Fish {
 
     // repeated pure virtual
     virtual Preda* clone() const override;                 // from CartesianObject2D
-    virtual int getValoreNutrizionale() const override;    // from food
-    virtual double getVisibility() const override;         // from food
-    virtual bool isInRange(const Vect2D&) const override;  // from vehicle
+    virtual int getValoreNutrizionale() const override;    // from Food
+    virtual double getVisibility() const override;         // from Food
+    virtual bool isInRange(const Vect2D&) const override;  // from Vehicle
+    virtual std::string getType() const override;         // from Fish
 };
 
 #endif

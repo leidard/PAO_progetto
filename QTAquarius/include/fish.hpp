@@ -1,8 +1,10 @@
 #include <string>
 
-#include "cartesianobject2d.hpp"
+// #include "cartesianobject2d.hpp"
+#include "daycycle.hpp"
 #include "deepptr.hpp"
 #include "food.hpp"
+#include "stamina.hpp"
 #include "vect2d.hpp"
 #include "vector.hpp"
 #include "vehicle.hpp"
@@ -17,8 +19,12 @@ class Fish : public Vehicle, public Food {
     std::string _name;
     bool _awake;
 
+   protected:
+    DayCycle _daycycle;
+    Stamina _stamina;
+
    public:
-    Fish(const std::string&);
+    Fish(const std::string&, unsigned int, unsigned int, double);
     // defined at this level
 
     void setName(const std::string&);
@@ -34,9 +40,10 @@ class Fish : public Vehicle, public Food {
 
     // new pure virtual
     virtual bool isHungry() const = 0;
-    virtual bool canSleep() const = 0;
-    virtual bool canWakeup() const = 0;
+    virtual bool canSleep() const;
+    virtual bool canWakeup() const;
     virtual void eat(Vector<DeepPtr<Food>>::iterator) = 0;
+    virtual std::string getType() const = 0;
 
     // repeated pure virtual
     virtual Fish* clone() const override = 0;                // from CartesianObject2D

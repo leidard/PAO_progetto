@@ -7,7 +7,7 @@
 #include "stamina.hpp"
 #include "vector.hpp"
 
-Fish::Fish(const std::string& name) : _name(name), _awake(true) {}
+Fish::Fish(const std::string& name, unsigned int a, unsigned int s, double stam) : _name(name), _awake(true), _daycycle(a, s), _stamina(stam) {}
 Fish::~Fish() = default;
 
 void Fish::setName(const std::string& name) { _name = name; }
@@ -18,16 +18,30 @@ void Fish::wakeup() { _awake = true; }
 bool Fish::isAwake() const { return _awake; }
 bool Fish::isAsleep() const { return !_awake; }
 
+bool Fish::canSleep() const {
+    return _daycycle.getProgress() >= _daycycle.getDayTime();
+}
+
+bool Fish::canWakeup() const {
+    return _daycycle.getProgress() >= _daycycle.getNightTime();
+}
+
 Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
-    if (isAsleep()) {     // sta dormendo
-        if (canWakeup())  // puó svegliarsi?
-            wakeup();     // then si sveglia else continua a dormire
-        return stop();    // turno finito
+    _daycycle++;  //increase progress
+    std::cout << _daycycle.getProgress() << std::endl;
+    if (isAsleep()) {
+        if (canWakeup())
+            wakeup();
+        return stop();
     }
     // é sveglio
-    if (canSleep()) {  // puó dormire?
-        sleep();       // dorme
-        // return Vect2D();
+    _stamina -= 1 / 50.0;
+    if (_stamina <= 0) {
+        setIsGone();
+        return stop();
+    }                   //starved to death
+    if (canSleep()) {   // puó dormire?
+        sleep();        // dorme
         return stop();  // turno finito
     }
     // é sveglio e non puó dormire
@@ -60,7 +74,6 @@ Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
     }
     // é sveglio, non puó dormire, non ha fame || non ha trovato cibo
     // quindi vaga a caso
-    if (this == a->getAllFish()[0].get()) return stop();
     return acc + wander() * .05;
 }
 

@@ -4,22 +4,24 @@
 
 class Stamina {
    private:
-    unsigned int _maxval;
-    int _val;
+    double _maxval;
+    double _val;
 
    public:
-    explicit Stamina(unsigned int);
+    explicit Stamina(double);
 
-    unsigned int getMax() const;
-    int getVal() const;
+    double getMax() const;
+    double getVal() const;
 
     double getPercentage() const;
 
-    Stamina& add(int);
-    Stamina& rem(int);
+    void setValToMax();
 
-    Stamina& operator+=(int);
-    Stamina& operator-=(int);
+    Stamina& add(double);
+    Stamina& rem(double);
+
+    Stamina& operator+=(double);
+    Stamina& operator-=(double);
 
     bool operator<(double val) const;
     bool operator>(double val) const;

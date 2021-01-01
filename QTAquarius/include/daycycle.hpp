@@ -9,15 +9,13 @@ class DayCycle {
     unsigned int progress;
 
    public:
-    DayCycle(unsigned int = 0, unsigned int = 0, unsigned int = 0);
+    DayCycle(unsigned int = 0, unsigned int = 0);
     int getDayTime() const;
     int getNightTime() const;
     int getProgress() const;
-    int getCycles() const;
 
-    void setDayTime(int);
-    void setNightTime(int);
-    void setProgress(int);
+    bool isDay() const;
+    bool isNight() const;
 
     DayCycle& operator++();
     DayCycle operator++(int);

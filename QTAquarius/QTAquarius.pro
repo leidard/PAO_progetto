@@ -24,7 +24,10 @@ SOURCES += \
     src/stamina.cpp \
     src/vect2d.cpp \
     src/vegetale.cpp \
-    src/vehicle.cpp
+    src/vehicle.cpp \
+    src/preda.cpp \
+    src/fishview.cpp \
+    src/fishinfoview.cpp
 
 HEADERS += \
     include/acquarioview.hpp \
@@ -44,9 +47,14 @@ HEADERS += \
     include/vect2d.hpp \
     include/vector.hpp \
     include/vegetale.hpp \
-    include/vehicle.hpp
+    include/vehicle.hpp \
+    include/fishview.hpp \
+    include/fishinfoview.hpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    img.qrc

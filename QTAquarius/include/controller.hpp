@@ -11,6 +11,7 @@
 
 class Vegetale;
 class Fish;
+class Food;
 class Aquarius;
 class AcquarioView;
 
@@ -30,6 +31,7 @@ class Controller : public QObject {
     void setView(AcquarioView*);
 
     const Vector<DeepPtr<Fish>>& getAllFish();
+    const Vector<DeepPtr<Vegetale>>& getAllVegetale();
 
     /*
         io farei un setTool 
@@ -54,6 +56,7 @@ class Controller : public QObject {
 
     void addPredatore(const Vect2D&);  // click
     void addPreda();      // click
+    void addVegetale(const Vect2D&);   // click
     void remFish();       // click
     void remVegetale();   // click
 

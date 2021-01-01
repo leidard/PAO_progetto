@@ -9,8 +9,7 @@
 #include "stamina.hpp"
 #include "vect2d.hpp"
 
-Predatore::Predatore(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name), _daycycle(25 * 30, 25 * 5), _stamina(10) {
-}
+Predatore::Predatore(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 1 * 30, 50 * 1, 10){}
 
 // overrides
 Predatore::~Predatore() = default;
@@ -86,23 +85,30 @@ Vect2D Vehicle::desired_cohesion(const std::vector<Vehicle>& boids) const {
 
 // defined of pure virtual
 bool Predatore::isHungry() const {
-    // TODO aggiungere robe strane
-    return false;
-    //return _stamina < 0.4;
+    return _stamina < 0.4;
 }
-bool Predatore::canSleep() const { return false; }
-bool Predatore::canWakeup() const { return true; }
+
 void Predatore::eat(Vector<DeepPtr<Food>>::iterator it) {
     _daycycle += 20;
-    _stamina += (*it)->getValoreNutrizionale();
+    if(_stamina.getVal() + (*it)->getValoreNutrizionale() > _stamina.getMax()) //stamina cant exceed its maximum
+        _stamina.setValToMax();
+    else
+        _stamina += (*it)->getValoreNutrizionale();
 }
 
 // repeated pure virtual
 Predatore* Predatore::clone() const { return new Predatore(*this); }  // from CartesianObject2D
+
 int Predatore::getValoreNutrizionale() const { return 3; }            // from food
+
 double Predatore::getVisibility() const {
     return .2;
 }  // from food
+
 bool Predatore::isInRange(const Vect2D& p) const {
     return position.distance(p) < 100;  //&& _velocity.angleBetweenRad(p) < M_PI;
 }  // from vehicle
+
+std::string Predatore::getType() const{
+    return "predatore";
+} // from fish

@@ -6,10 +6,9 @@
 
 class Vegetale : public Food {
    private:
-    double _visibility;
 
    public:
-    Vegetale(const Vect2D&, double);
+    Vegetale(const Vect2D&);
     virtual ~Vegetale();
     virtual Vegetale* clone() const override;
 

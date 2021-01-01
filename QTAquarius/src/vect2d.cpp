@@ -55,8 +55,11 @@ Vect2D& Vect2D::div(double s) {
 }
 Vect2D& Vect2D::min(Vect2D& v) { return (*this < v) ? *this : v; }
 Vect2D& Vect2D::max(Vect2D& v) { return (*this > v) ? *this : v; }
-Vect2D& Vect2D::normalize() { return div(mag()); }
-Vect2D& Vect2D::setMagnitude(double m) { return mag() == 0 ? set(0, 0) : normalize().mult(m); }
+Vect2D& Vect2D::normalize() {
+    double m = mag();
+    return m == 0 ? set(0, 0) : div(m);
+}
+Vect2D& Vect2D::setMagnitude(double m) { return normalize().mult(m); }
 Vect2D& Vect2D::limit(const Vect2D& v) {
     _x = std::min(_x, v._x);
     _y = std::min(_y, v._y);
