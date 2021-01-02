@@ -45,7 +45,6 @@ class AcquarioView : public QWidget {
 
    protected:
     void paintEvent(QPaintEvent* event) override;
-    void timerEvent(QTimerEvent* event);
 
    private slots:
     void openInfo();

@@ -34,7 +34,7 @@ class Vehicle : virtual public CartesianObject2D {
    public:
     Vehicle();
     //Vehicle(double maxSpeed, double maxForce);
-    virtual ~Vehicle() = default;
+    virtual ~Vehicle();
 
     Vect2D getVelocity() const;
 

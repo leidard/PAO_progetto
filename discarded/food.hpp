@@ -10,13 +10,13 @@ class Food : virtual public CartesianObject2D {
 
    public:
     Food();
-    virtual ~Food() = default;
+    virtual ~Food();
     virtual int getValoreNutrizionale() const = 0;
     virtual double getVisibility() const = 0;
 
     virtual Food* clone() const = 0;
 
-    virtual bool getIsGone() const final;
+    bool getIsGone() const;
     void setIsGone();
 
     bool operator>(const Food&) const;

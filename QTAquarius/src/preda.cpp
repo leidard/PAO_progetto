@@ -1,65 +1,45 @@
-//#include "preda.hpp"
+#include "preda.hpp"
 
+#include "cartesianobject2d.hpp"
+#include "deepptr.hpp"
+#include "fish.hpp"
+#include "vector.hpp"
 
-//Preda::Preda(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name), _daycycle(25*30, 25*5), _stamina(8){}
+Preda::Preda(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 25 * 30, 25 * 5, 8) {}
 
-////Vect2D Preda::behaviour(Aquarius *a, Vect2D acc){
-////    _daycycle++; //increase progress
-////    std::cout<<_daycycle.getProgress()<<std::endl;
-////    if(isAwake()){ //se è sveglio
-////        _stamina-=1/50.0; //consumo energia
+Preda::~Preda() {}
 
-////        if(_stamina <= 0) {setIsGone();} //starved to death
-////        std::cout<<_stamina.getVal()<<std::endl;
+Vect2D Preda::behaviour(Aquarius* a, Vect2D acc) {
+    return Fish::behaviour(a, acc);
+}
 
-////        if(canSleep()){ //ha finito la sua giornata
-////            std::cout<<"DORMI"<<std::endl;
-////            _daycycle.setProgress(0);
-////            sleep(); //vai a dormire
-////            return Vect2D();  // turno finito
-////        }
+bool Preda::isHungry() const {
+    return _stamina < 2;
+}
 
-////        }else if(canWakeup()){ //Sta dormendo e ha dormito abbastanza
-////            _daycycle.setProgress(0);
-////            wakeup(); //svegliati
-////        }else if(!canWakeup()) return Vect2D(); //dorme ed è notte
+bool Preda::canSleep() const { return _daycycle.getProgress() >= _daycycle.getDayTime(); }
 
-////        //è giorno ed è sveglio
+bool Preda::canWakeup() const { return _daycycle.getProgress() >= _daycycle.getNightTime(); }
 
-////        auto fish = a->getAllFish();
+void Preda::eat(const Fish&) {
+}
 
-//////        Vect2D alignement;
-//////        Vect2D separation;
-//////        Vect2D cohesion;
-////        int count = 0;
-////        for (auto& f : fish) {
-////            //Deve scappare? Se no facciamo che è un pesce stupido e se ne frega, quindi va direttamente a Fish::behaviour per mangiare
-////        }
+Preda *Preda::clone() const {
+    return new Preda(*this);
+}
 
-////        return Fish::behaviour(a, acc);
-////}
+int Preda::getValoreNutrizionale() const {
+    return 2;
+}
 
-//bool Preda::isHungry() const{
-//    return _stamina < 2;
-//}
+double Preda::getVisibility() const {
+    return 0;  //TO DO
+}
 
-//bool Preda::canSleep() const{ return _daycycle.getProgress() >= _daycycle.getDayTime();  }
+bool Preda::isInRange(const Vect2D& p) const {
+    return position.distance(p) < 80;  //?
+}
 
-//bool Preda::canWakeup() const{ return _daycycle.getProgress() >= _daycycle.getNightTime(); }
-
-//int Preda::getValoreNutrizionale() const{
-//    return 2;
-//}
-
-//double Preda::getVisibility() const{
-//    return 0; //TO DO
-//}
-
-//bool Preda::isInRange(const Vect2D &p) const{
-//    return position.distance(p) < 80; //?
-//}
-
-//std::string Preda::getType() const{
-//    return "preda";
-//}
-
+std::string Preda::getType() const {
+    return "preda";
+}

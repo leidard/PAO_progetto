@@ -3,13 +3,15 @@
 #include "aquarius.hpp"
 #include "daycycle.hpp"
 #include "deepptr.hpp"
-#include "food.hpp"
 #include "stamina.hpp"
 #include "vector.hpp"
 
-Fish::Fish(const std::string& name, unsigned int a, unsigned int s, double stam) : _name(name), _awake(true), _daycycle(a, s), _stamina(stam) {}
-Fish::~Fish() = default;
+Fish::Fish(const std::string& name, unsigned int a, unsigned int s, double stam) : _name(name), _awake(true), gone(false), _daycycle(a, s), _stamina(stam) {}
 
+Fish::~Fish() {}
+
+bool Fish::getIsGone() const { return gone; }
+void Fish::setIsGone() { gone = true; }
 void Fish::setName(const std::string& name) { _name = name; }
 const std::string& Fish::getName() const { return _name; }
 const Stamina& Fish::getStamina() const { return _stamina; }
@@ -46,30 +48,20 @@ Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
     }
     // é sveglio e non puó dormire
     if (isHungry()) {  // ha fame? then cerca cibo, mira verso il cibo con nuova accelerazione != acc parametro
-        Vector<DeepPtr<Food>>& food = a->getAllFood();
-        Vector<DeepPtr<Food>>::iterator candidatoit;
-        Food* candidato = nullptr;
+        Vector<DeepPtr<Fish>>& fish = a->getAllFish();
+        Fish* candidato;
         double mindist = 0;
-        auto it = food.begin();
-        while (it != food.end()) {
-            DeepPtr<Food> f = *it;
-            if (f && f.get() != this && f->getValoreNutrizionale() < getValoreNutrizionale() && isInRange(f->getPosition())) {
+        for (auto& f : a->getAllFish()) {
+            if (f.get() != this && f->getValoreNutrizionale() < getValoreNutrizionale() && isInRange(f->getPosition())) {
                 if (!candidato || Vect2D::distance(position, f->getPosition()) < mindist) {
                     mindist = Vect2D::distance(position, f->getPosition());
-                    candidatoit = it;
                     candidato = &*f;
                 }
             }
-            it++;
         }
-        if (candidato) {
-            auto acc2 = seek(candidato->getPosition());
-            if (mindist < maxForce) {
-                eat(candidatoit);
-                a->remFood(it);
-            }
-
-            return acc2;
+        if (candidato != nullptr) {
+            if (mindist < maxForce) eat(*candidato);
+            return pursuit(*candidato);
         }
     }
     // é sveglio, non puó dormire, non ha fame || non ha trovato cibo

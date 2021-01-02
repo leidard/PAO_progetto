@@ -5,7 +5,7 @@
 
 Vegetale::Vegetale(const Vect2D& pos) : CartesianObject2D(pos) {}
 
-Vegetale::~Vegetale() = default;
+Vegetale::~Vegetale(){};
 
 Vegetale* Vegetale::clone() const {
     return new Vegetale(*this);

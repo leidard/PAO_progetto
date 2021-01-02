@@ -224,9 +224,9 @@ template <class T>
 void Vector<T>::pop_back() { --_size; }
 
 template <class T>
-typename Vector<T>::iterator Vector<T>::erase(Vector<T>::iterator pos) {  // TODO CHECK THIS
+typename Vector<T>::iterator Vector<T>::erase(Vector<T>::iterator pos) {
     Vector<T>::iterator aux = pos;
-    while (pos < (_buffer + _size - 1)) {
+    while (pos < end()) {
         pos[0] = std::move(pos[1]);
         pos++;
     }

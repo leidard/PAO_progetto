@@ -30,19 +30,15 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent) {
     //  connect(aggiungiPreda, SIGNAL(triggered()), this, SLOT());
     QAction* aggiungiPredatore = new QAction("Aggiungi predatore", this);
     aggiungiPredatore->setCheckable(true);
-    QAction* aggiungiVegetale = new QAction("Aggiungi vegetale", this);
-    aggiungiVegetale->setCheckable(true);
 
     strumentiOptions->addAction(aggiungiPreda);
     strumentiOptions->addAction(aggiungiPredatore);
-    strumentiOptions->addAction(aggiungiVegetale);
 
     QAction* infoPesci = new QAction("Info pesci", this);
     connect(infoPesci, SIGNAL(triggered()), this, SLOT(openInfo()));
 
     strumenti->addAction(aggiungiPreda);
     strumenti->addAction(aggiungiPredatore);
-    strumenti->addAction(aggiungiVegetale);
     strumenti->addAction(infoPesci);
 
     menuBar->addMenu(file);
@@ -67,7 +63,7 @@ void AcquarioView::openInfo() {
 
     QGridLayout* grid = new QGridLayout(dialog);
 
-    auto fishes = controller->getAllFish();
+    auto& fishes = controller->getAllFish();
     //ICON
     if (fishes[i]->getType() == "predatore") {  //draw icon for Predatore
         QLabel* img = new QLabel(dialog);
@@ -134,7 +130,7 @@ void AcquarioView::openInfo() {
 
 void AcquarioView::saveInfo() {
     std::cout << "SAVE";
-    auto fishes = controller->getAllFish();
+    auto& fishes = controller->getAllFish();
     fishes[0]->setName(nameLine->text().toStdString());
     std::cout << nameLine->text().toStdString();
 }
@@ -164,7 +160,7 @@ void AcquarioView::paintEvent(QPaintEvent* event) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     int i = 0;
-    auto fish = controller->getAllFish();
+    auto& fish = controller->getAllFish();
     for (auto& f : fish) {
         Vect2D pos = f->getPosition();
         Vect2D vel = f->getVelocity().setMagnitude(15);
@@ -201,11 +197,11 @@ void AcquarioView::paintEvent(QPaintEvent* event) {
     //        painter.drawPolygon(points, 3);
 }
 
-void AcquarioView::timerEvent(QTimerEvent* event) {
-    auto fishes = controller->getAllFish();
-    double val = fishes[0]->getStamina().getVal();
-    bar->setValue(val);
-}
+//void AcquarioView::timerEvent(QTimerEvent* event) {
+//    auto fishes = controller->getAllFish();
+//    double val = fishes[0]->getStamina().getVal();
+//    bar->setValue(val);
+//}
 
 //controller->getFish();
 //controller->getVegetali();

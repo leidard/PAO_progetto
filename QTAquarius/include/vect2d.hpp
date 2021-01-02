@@ -53,8 +53,8 @@ class Vect2D {
     Vect2D rem(const Vect2D&) const;
     Vect2D mult(double) const;
     Vect2D div(double) const;
-    Vect2D min(const Vect2D&) const;
-    Vect2D max(const Vect2D&) const;
+    Vect2D min( Vect2D&) const;
+    Vect2D max( Vect2D&) const;
     Vect2D normalize() const;
     Vect2D setMagnitude(double) const;
     Vect2D limit(const Vect2D&) const;
@@ -78,8 +78,8 @@ class Vect2D {
     static Vect2D sub(const Vect2D&, const Vect2D&);
     static Vect2D mult(const Vect2D&, double);
     static Vect2D div(const Vect2D&, double);
-    static Vect2D min(const Vect2D&, const Vect2D&);
-    static Vect2D max(const Vect2D&, const Vect2D&);
+    static Vect2D min(Vect2D&, Vect2D&);
+    static Vect2D max(Vect2D&, Vect2D&);
     static Vect2D normalize(const Vect2D&);
     static Vect2D setMagnitude(const Vect2D&, double);
     static Vect2D limit(const Vect2D&, const Vect2D&);

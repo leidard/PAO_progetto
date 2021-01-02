@@ -1,6 +1,7 @@
 
 #ifndef DEEPPTR_H
 #define DEEPPTR_H
+#include <iostream>
 
 template <class T>
 class DeepPtr {
@@ -9,9 +10,9 @@ class DeepPtr {
 
    public:
     DeepPtr(T* = nullptr);
-    DeepPtr(const DeepPtr<T>& d);
+    DeepPtr(const DeepPtr<T>& d);  // delete this
     DeepPtr(DeepPtr<T>&& d);
-    DeepPtr& operator=(const DeepPtr<T>& d);
+    DeepPtr& operator=(const DeepPtr<T>& d);  // delete this
     DeepPtr& operator=(DeepPtr<T>&& d);
     ~DeepPtr();
 
@@ -33,10 +34,10 @@ template <class T>
 DeepPtr<T>::DeepPtr(T* p) : ptr(p) {}
 
 template <class T>
-DeepPtr<T>::DeepPtr(const DeepPtr<T>& d) : ptr(d ? d.ptr->clone() : nullptr) {}
+DeepPtr<T>::DeepPtr(const DeepPtr<T>& d) : ptr(d ? d.ptr->clone() : nullptr) { std::cout << "clonato!" << std::endl; }
 
 template <class T>
-DeepPtr<T>::DeepPtr(DeepPtr<T>&& other) : ptr(other.ptr) { other.ptr = nullptr; }
+DeepPtr<T>::DeepPtr(DeepPtr<T>&& d) : ptr(d.ptr) { d.ptr = nullptr; }
 
 template <class T>
 DeepPtr<T>::~DeepPtr() { delete ptr; }
@@ -54,11 +55,11 @@ DeepPtr<T>& DeepPtr<T>::operator=(const DeepPtr<T>& d) {
 }
 
 template <class T>
-DeepPtr<T>& DeepPtr<T>::operator=(DeepPtr<T>&& other) {
-    if (this != &other) {
+DeepPtr<T>& DeepPtr<T>::operator=(DeepPtr<T>&& d) {
+    if (this != &d) {
         delete ptr;
-        ptr = other.ptr;
-        other.ptr = nullptr;
+        ptr = d.ptr;
+        d.ptr = nullptr;
     }
     return *this;
 }

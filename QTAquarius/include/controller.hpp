@@ -1,17 +1,15 @@
 #include <QObject>
-#include <QTimer>
 #include <QPointF>
+#include <QTimer>
 
 #include "deepptr.hpp"
-#include "vector.hpp"
 #include "vect2d.hpp"
+#include "vector.hpp"
 
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-class Vegetale;
 class Fish;
-class Food;
 class Aquarius;
 class AcquarioView;
 
@@ -31,7 +29,6 @@ class Controller : public QObject {
     void setView(AcquarioView*);
 
     const Vector<DeepPtr<Fish>>& getAllFish();
-    const Vector<DeepPtr<Vegetale>>& getAllVegetale();
 
     /*
         io farei un setTool 
@@ -55,18 +52,14 @@ class Controller : public QObject {
     void resize(int width, int height);
 
     void addPredatore(const Vect2D&);  // click
-    void addPreda();      // click
-    void addVegetale(const Vect2D&);   // click
-    void remFish();       // click
-    void remVegetale();   // click
+    void addPreda(const Vect2D&);      // click
+    void remFish();                    // click
 
    public slots:
     void advance();
     void start();
     void stop();
-    
-    
-    
+
     // void clickView(QPointF);
 };
 

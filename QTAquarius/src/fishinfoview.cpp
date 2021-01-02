@@ -9,7 +9,7 @@ FishInfoView::FishInfoView(QWidget *parent) : QDialog(parent) {
 
     grid = new QGridLayout(dialog);
 
-    auto fishes = controller->getAllFish();
+    auto& fishes = controller->getAllFish();
     //ICON
     if (fishes[i]->getType() == "predatore"){ //draw icon for Predatore
         img = new QLabel(dialog);
@@ -78,7 +78,7 @@ FishInfoView::FishInfoView(QWidget *parent) : QDialog(parent) {
 
 void FishInfoView::saveInfo(QString* n){
     std::cout<<"SAVE";
-    auto fishes = controller->getAllFish();
+    auto& fishes = controller->getAllFish();
     fishes[0]->setName(n->toStdString());
 }
 
@@ -91,7 +91,7 @@ void FishInfoView::close(){
 }
 
 void FishInfoView::timerEvent(QTimerEvent *event){
-    auto fishes = controller->getAllFish();
+    auto& fishes= controller->getAllFish();
     double val = fishes[0]->getStamina().getVal();
     bar->setValue(val);
 }

@@ -103,8 +103,8 @@ Vect2D Vect2D::add(const Vect2D& v) const { return Vect2D(*this).add(v); }
 Vect2D Vect2D::rem(const Vect2D& v) const { return Vect2D(*this).rem(v); }
 Vect2D Vect2D::mult(double s) const { return Vect2D(*this).mult(s); }
 Vect2D Vect2D::div(double s) const { return Vect2D(*this).div(s); }
-Vect2D Vect2D::min(const Vect2D& v) const { return Vect2D(*this).min(v); }
-Vect2D Vect2D::max(const Vect2D& v) const { return Vect2D(*this).max(v); }
+Vect2D Vect2D::min( Vect2D& v) const { return Vect2D(*this).min(v); }
+Vect2D Vect2D::max( Vect2D& v) const { return Vect2D(*this).max(v); }
 Vect2D Vect2D::normalize() const { return Vect2D(*this).normalize(); }
 Vect2D Vect2D::setMagnitude(double s) const { return Vect2D(*this).setMagnitude(s); }
 Vect2D Vect2D::limit(const Vect2D& v) const { return Vect2D(*this).limit(v); }
@@ -128,8 +128,8 @@ Vect2D Vect2D::sum(const Vect2D& v1, const Vect2D& v2) { return v1.add(v2); }
 Vect2D Vect2D::sub(const Vect2D& v1, const Vect2D& v2) { return v1.rem(v2); }
 Vect2D Vect2D::mult(const Vect2D& v1, double s) { return v1.mult(s); }
 Vect2D Vect2D::div(const Vect2D& v1, double s) { return v1.div(s); }
-Vect2D Vect2D::min(const Vect2D& v1, const Vect2D& v2) { return v1.min(v2); }
-Vect2D Vect2D::max(const Vect2D& v1, const Vect2D& v2) { return v1.max(v2); }
+Vect2D Vect2D::min( Vect2D& v1,  Vect2D& v2) { return v1.min(v2); }
+Vect2D Vect2D::max( Vect2D& v1,  Vect2D& v2) { return v1.max(v2); }
 Vect2D Vect2D::normalize(const Vect2D& v1) { return v1.normalize(); }
 Vect2D Vect2D::setMagnitude(const Vect2D& v1, double s) { return v1.setMagnitude(s); }
 Vect2D Vect2D::limit(const Vect2D& v1, const Vect2D& v2) { return v1.limit(v2); }
@@ -185,9 +185,3 @@ Vect2D::operator std::pair<double, double>() const { return std::pair<double, do
 Vect2D operator*(double s, const Vect2D& v) { return v.mult(s); }
 
 Vect2D operator/(double s, const Vect2D& v) { return v.div(s); }
-
-std::ostream& operator<<(std::ostream& os, const Vect2D&) {
-}
-
-std::istream& operator>>(std::istream& is, const Vect2D&) {
-}

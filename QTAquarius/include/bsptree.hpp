@@ -128,22 +128,3 @@ class BSPTree {
         se->queryRange(r);
     }
 };
-
-/*	Locals		
-		a	@0x7fffffffe1b0	QApplication
-		argc	1	int
-		argv	<1 items>	char **
-		c	@0x7fffffffe1e0	Controller
-		i	<optimized out>	
-		model	@0x7fffffffe1e0	Aquarius
-		p	@0x55555590f158	Predatore
-			[Fish]	@0x55555590f158	Fish
-			_daycycle	@0x55555590f20c	DayCycle
-			_stamina	@0x55555590f218	Stamina
-		t	@0x7fffffffe1e0	BSPTree<Food>
-		view	@0x7fffffffe1e0	AcquarioView
-	Inspector		
-	Expressions		
-	Return Value		
-	Tooltip		
-*/

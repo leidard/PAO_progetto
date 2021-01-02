@@ -8,6 +8,8 @@
 
 Vehicle::Vehicle() : _velocity(1, 1), _wander(1, 1) {}
 
+Vehicle::~Vehicle() {}
+
 Vect2D Vehicle::getVelocity() const { return _velocity; }
 
 void Vehicle::setPosition(const Vect2D& v) { position = v; }
@@ -62,7 +64,7 @@ Vect2D Vehicle::stop() const {
     return arrive(position + (_velocity * 10));
 }
 
-#include <iostream>
+// #include <iostream>
 void Vehicle::advance(Aquarius* a, int phase) {  //divide the method with 2 phase triggere within the aquarius
     if (!phase) {
         Vect2D acc = behaviour(a).limit(maxSpeed);

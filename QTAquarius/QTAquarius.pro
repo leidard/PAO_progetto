@@ -2,7 +2,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++20
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -18,12 +18,10 @@ SOURCES += \
     src/controller.cpp \
     src/daycycle.cpp \
     src/fish.cpp \
-    src/food.cpp \
     src/predatore.cpp \
     src/saverloader.cpp \
     src/stamina.cpp \
     src/vect2d.cpp \
-    src/vegetale.cpp \
     src/vehicle.cpp \
     src/preda.cpp \
     src/fishview.cpp \
@@ -37,14 +35,12 @@ HEADERS += \
     include/daycycle.hpp \
     include/deepptr.hpp \
     include/fish.hpp \
-    include/food.hpp \
     include/middlewares/saverloader.hpp \
     include/preda.hpp \
     include/predatore.hpp \
     include/stamina.hpp \
     include/vect2d.hpp \
     include/vector.hpp \
-    include/vegetale.hpp \
     include/vehicle.hpp \
     include/fishview.hpp \
     include/fishinfoview.hpp

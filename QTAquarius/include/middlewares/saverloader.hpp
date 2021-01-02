@@ -13,7 +13,6 @@ class Aquarius;
 class Vect2D;
 class Predatore;
 class Preda;
-class Vegetale;
 class Fish;
 
 class SaverLoader {
@@ -23,6 +22,7 @@ class SaverLoader {
 
        public:
         ParseError(std::string _msg = "General Parse Error");
+        ~ParseError() { delete msg; }
         const char* what() const throw();
     };
 
@@ -31,12 +31,10 @@ class SaverLoader {
     void load(Aquarius* a, const std::string& filename = DEFAULT_FILENAME) const;
     void save(Aquarius* a, const std::string& filename = DEFAULT_FILENAME) const;
 
-    static QJsonObject serialize(const Vegetale&);
     static QJsonObject serialize(const Predatore&);
     static QJsonObject serialize(const Preda&);
     static QJsonObject serialize(const Vect2D&);
 
-    static Vegetale* parseVegetale(const QJsonValue&);
     static Vect2D parseVect2D(const QJsonValue&);
     static Fish* parseFish(const QJsonValue&);
 };

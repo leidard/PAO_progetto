@@ -11,12 +11,10 @@
 #include "aquarius.hpp"
 #include "daycycle.hpp"
 #include "fish.hpp"
-#include "food.hpp"
 #include "preda.hpp"
 #include "predatore.hpp"
 #include "stamina.hpp"
 #include "vect2d.hpp"
-#include "vegetale.hpp"
 
 SaverLoader::ParseError::ParseError(std::string _msg) : msg(std::string("[JSON ParseError]: " + _msg).c_str()) {}
 
@@ -34,25 +32,13 @@ void SaverLoader::load(Aquarius* a, const std::string& filename) const {
     if (!d.isObject()) throw new ParseError("Root must be an Object");
     QJsonObject o = d.object();
 
-    if (!o.value("fishArr").isArray()) throw new ParseError("Can't find property: fishArr");
-    if (!o.value("vegArr").isArray()) throw new ParseError("Can't find property: vegArr");
+    if (!o.value("fish").isArray()) throw new ParseError("Can't find property: fish");
     if (!o.value("width").isDouble()) throw new ParseError("Can't find property: width");
     if (!o.value("height").isDouble()) throw new ParseError("Can't find property: height");
 
-    //Aquarius::init(o.value("width").toDouble(), o.value("height").toDouble());
-    Aquarius* aq = nullptr;  //Aquarius::getInstance();
-
-    for (auto i : o.value("fishArr").toArray()) {
+    for (auto i : o.value("fish").toArray()) {
         try {
-            aq->addFish(parseFish(i));
-        } catch (ParseError& err) {
-            std::cerr << err.what();  // show but keep going
-        }
-    }
-
-    for (auto i : o.value("fishArr").toArray()) {
-        try {
-            aq->addFood(parseVegetale(i));
+            a->addFish(parseFish(i));
         } catch (ParseError& err) {
             std::cerr << err.what();  // show but keep going
         }
@@ -65,47 +51,30 @@ void SaverLoader::save(Aquarius* a, const std::string& filename) const {
     QJsonObject o;
     o.insert("width", (int)a->getWidth());
     o.insert("height", (int)a->getHeight());
-    QJsonArray fishArr;
+    QJsonArray fish;
 
     for (auto f : a->getAllFish()) {
         Predatore* predatore = dynamic_cast<Predatore*>(&*f);
         if (predatore != nullptr) {
-            // fishArr.push_back(SaverLoader::serialize(*predatore));
+            fish.push_back(SaverLoader::serialize(*predatore));
             continue;
         }
-        //Preda* preda = dynamic_cast<Preda*>(&*f);
-        //if (preda != nullptr) {
-        // fishArr.push_back(SaverLoader::serialize(*preda));
-        // continue;
-        //}
-    }
-
-    QJsonArray vegArr;
-
-    for (auto f : a->getAllFood()) {
-        Vegetale* vegetale = dynamic_cast<Vegetale*>(&*f);
-        if (vegetale != nullptr) {
-            //vegArr.push_back(SaverLoader::serialize(*vegetale));
+        Preda* preda = dynamic_cast<Preda*>(&*f);
+        if (preda != nullptr) {
+            fish.push_back(SaverLoader::serialize(*preda));
+            continue;
         }
     }
 
-    o.insert("fishArr", fishArr);
-    o.insert("vegArr", vegArr);
+    o.insert("fish", fish);
     // o.insert("valoreNutrizionale", f.getValoreNutrizionale());
-}
-
-QJsonObject SaverLoader::serialize(const Vegetale& f) {
-    QJsonObject o = QJsonObject();
-    o.insert("position", SaverLoader::serialize(f.getPosition()));
-    // o.insert("valoreNutrizionale", f.getValoreNutrizionale());
-    return o;
 }
 
 QJsonObject SaverLoader::serialize(const Predatore& f) {
     QJsonObject o;
     o.insert("type", "PREDATORE");
     o.insert("position", SaverLoader::serialize(f.getPosition()));
-    // o.insert("name", f.getName());
+    o.insert("name", f.getName().c_str());
 
     return o;
 }
@@ -114,7 +83,7 @@ QJsonObject SaverLoader::serialize(const Preda& f) {
     QJsonObject o;
     o.insert("type", "PREDA");
     o.insert("position", SaverLoader::serialize(f.getPosition()));
-    // o.insert("name", f.getName());
+    o.insert("name", f.getName().c_str());
 
     return o;
 }
@@ -124,13 +93,6 @@ QJsonObject SaverLoader::serialize(const Vect2D& v) {
     o.insert("x", v.x());
     o.insert("y", v.y());
     return o;
-}
-
-Vegetale* SaverLoader::parseVegetale(const QJsonValue& v) {
-    if (!v.isObject()) throw new ParseError("parseVegetale: not a JSON Object");
-    QJsonObject o = v.toObject();
-
-    return new Vegetale(parseVect2D(o.value("position").toString()));
 }
 
 Vect2D SaverLoader::parseVect2D(const QJsonValue& v) {
@@ -161,7 +123,7 @@ Fish* SaverLoader::parseFish(const QJsonValue& v) {
         QJsonValue name = o.value("name");
         if (!name.isString()) throw new ParseError("parsePredatore: can't read property \"name\"");
 
-        //return new Preda(parseVect2D(o.value("position")), name.toString().toStdString());
+        return new Preda(parseVect2D(o.value("position")), name.toString().toStdString());
         return nullptr;
     } else
         throw new ParseError("parsePredatore: ");
