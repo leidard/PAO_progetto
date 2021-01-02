@@ -9,7 +9,7 @@
 #include "stamina.hpp"
 #include "vect2d.hpp"
 
-Predatore::Predatore(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 1 * 100, 50 * 1, 10) {}
+Predatore::Predatore(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 200, 100, 100) {}
 
 // overrides
 Predatore::~Predatore(){};
@@ -82,7 +82,7 @@ bool Predatore::isHungry() const {
 void Predatore::eat(Fish& f) {
     _daycycle += 20;
     f.setIsGone();
-   /* if (_stamina.getVal() + f.getValoreNutrizionale() > _stamina.getMax())  //stamina cant exceed its maximum
+    /* if (_stamina.getVal() + f.getValoreNutrizionale() > _stamina.getMax())  //stamina cant exceed its maximum
         _stamina.setValToMax();
     else
         _stamina += f.getValoreNutrizionale();*/

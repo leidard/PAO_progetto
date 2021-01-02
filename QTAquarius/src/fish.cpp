@@ -21,11 +21,11 @@ bool Fish::isAwake() const { return _awake; }
 bool Fish::isAsleep() const { return !_awake; }
 
 bool Fish::canSleep() const {
-    return _daycycle.getProgress() >= _daycycle.getDayTime();
+    return _daycycle.isNight();
 }
 
 bool Fish::canWakeup() const {
-    return _daycycle.getProgress() >= _daycycle.getNightTime();
+    return _daycycle.isDay();
 }
 
 Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {

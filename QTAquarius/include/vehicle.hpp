@@ -14,7 +14,7 @@ class Vehicle : virtual public CartesianObject2D {
     Vect2D _velocity;
     Vect2D _wander;
     double maxSpeed = 4;   // tipo 4
-    double maxForce = .6;  // 0 <= x <= 1
+    double maxForce = .4;  // 0 <= x <= 1
 
     double PURSUIT_forwardSteps = 5;
 
@@ -45,6 +45,7 @@ class Vehicle : virtual public CartesianObject2D {
     Vect2D arrive(const Vect2D&) const;
     Vect2D flee(const Vect2D&) const;
     Vect2D pursuit(const Vehicle&) const;
+    Vect2D escape(const Vehicle&) const;
     Vect2D wander();
     Vect2D stop() const;
 

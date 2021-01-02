@@ -33,7 +33,7 @@ Vect2D Vehicle::arrive(const Vect2D& target) const {
         desired.setMagnitude(distance / 100 * maxSpeed);
     } else
         desired.setMagnitude(maxSpeed);
-    return (desired - _velocity).limit(maxForce);  // TODO FIX THIS
+    return (desired - _velocity).limit(maxForce);
 }
 
 Vect2D Vehicle::flee(const Vect2D& target) const {
@@ -51,6 +51,9 @@ Vect2D Vehicle::flee(const Vect2D& target) const {
 Vect2D Vehicle::pursuit(const Vehicle& v) const {
     return seek(v.position + (v._velocity * PURSUIT_forwardSteps));
 }
+Vect2D Vehicle::escape(const Vehicle& v) const {
+    return flee(v.position + (v._velocity * PURSUIT_forwardSteps));
+}
 Vect2D Vehicle::wander() {
     int sign = (std::rand() % 2) ? 1 : -1;  // test this
     // if (_wander.mag())
@@ -61,7 +64,7 @@ Vect2D Vehicle::wander() {
 }
 
 Vect2D Vehicle::stop() const {
-    return arrive(position + (_velocity * 30));
+    return arrive(position + _velocity.setMagnitude(2));
 }
 
 // #include <iostream>

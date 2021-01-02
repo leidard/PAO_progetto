@@ -5,7 +5,7 @@
 #include "fish.hpp"
 #include "vector.hpp"
 
-Preda::Preda(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 25 * 30, 25 * 5, 8) {}
+Preda::Preda(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 25 * 30, 25 * 5, 80) {}
 
 Preda::~Preda() {}
 
@@ -25,10 +25,6 @@ bool Preda::operator!=(const Fish& f) const {
 bool Preda::isHungry() const {
     return _stamina < 2;
 }
-
-bool Preda::canSleep() const { return _daycycle.getProgress() >= _daycycle.getDayTime(); }
-
-bool Preda::canWakeup() const { return _daycycle.getProgress() >= _daycycle.getNightTime(); }
 
 void Preda::eat(Fish&) {
 }

@@ -16,8 +16,6 @@ class Preda : public Fish {
 
     // new pure virtual
     virtual bool isHungry() const override;
-    virtual bool canSleep() const override;
-    virtual bool canWakeup() const override;
     virtual void eat(Fish&) override;  // or eaten
 
     // repeated pure virtual

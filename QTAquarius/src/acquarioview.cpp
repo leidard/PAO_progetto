@@ -178,7 +178,8 @@ void AcquarioView::paintEvent(QPaintEvent* event) {
         points[0] = QPointF(futl.x(), futl.y());
         points[1] = QPointF(futr.x(), futr.y());
         points[2] = QPointF(fut.x(), fut.y());
-        painter.setBrush(QBrush(QColor("red")));
+
+        painter.setBrush(QBrush(QColor(f->getType() == "predatore" ? "red" : "green")));
         //        QPixmap pix = QPixmap(":/images/punto.png");
         //        painter.drawPixmap(points, pix);
         painter.drawPolygon(points, 3);
