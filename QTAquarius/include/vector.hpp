@@ -1,3 +1,5 @@
+#include <utility>
+
 #ifndef VECTOR_H
 #define VECTOR_H
 
@@ -24,6 +26,12 @@ class Vector {
        public:
         iterator(T* i = nullptr) : _current(i) {}
         iterator(const iterator& i) : _current(i._current) {}
+        iterator& operator=(const iterator& i) {
+            if (this != &i) {
+                _current = i._current;
+            }
+            return *this;
+        }
         T& operator*() const { return *_current; }
         T* operator->() const { return _current; }
         T& operator[](int n) const { return _current[n]; }
@@ -116,6 +124,7 @@ class Vector {
     const T& back() const;
 
     void push_back(const T&);
+    void push_back(T&&);
     void pop_back();
     iterator erase(iterator);
     void clear();
@@ -138,7 +147,7 @@ Vector<T>::Vector(unsigned int capacity) : _buffer(new T[capacity == 0 ? 1 : cap
 
 template <class T>
 Vector<T>::Vector(const Vector& v) : _buffer(new T[v._capacity]), _size(v._size), _capacity(v._capacity) {
-    for (unsigned int i = 0; i < v._size; i++) _buffer[i] = v._buffer[i];
+    for (unsigned int i = 0; i < v._size; i++) _buffer[i] = std::move(v._buffer[i]);
 }
 
 template <class T>
@@ -153,7 +162,7 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& v) {
         _size = v._size;
         _capacity = v._capacity;
 
-        for (unsigned int i = 0; i < v._size; i++) _buffer[i] = v._buffer[i];
+        for (unsigned int i = 0; i < v._size; i++) _buffer[i] = std::move(v._buffer[i]);
     }
     return *this;
 }
@@ -205,13 +214,20 @@ void Vector<T>::push_back(const T& v) {
 }
 
 template <class T>
+void Vector<T>::push_back(T&& v) {
+    if (_size >= _capacity)
+        reserve(_capacity * 2);
+    _buffer[_size++] = std::move(v);
+}
+
+template <class T>
 void Vector<T>::pop_back() { --_size; }
 
 template <class T>
 typename Vector<T>::iterator Vector<T>::erase(Vector<T>::iterator pos) {  // TODO CHECK THIS
     Vector<T>::iterator aux = pos;
     while (pos < (_buffer + _size - 1)) {
-        pos[0] = pos[1];
+        pos[0] = std::move(pos[1]);
         pos++;
     }
     --_size;
@@ -231,7 +247,7 @@ void Vector<T>::reserve(unsigned int n) {
     if (n > _capacity) {
         T* newbuff = new T[n];
         for (unsigned int i = 0; i < _size; i++)
-            newbuff[i] = _buffer[i];  // if _capacity == 0 => _size == 0 never reached
+            newbuff[i] = std::move(_buffer[i]);  // if _capacity == 0 => _size == 0 never reached
 
         _capacity = n;
         delete[] _buffer;  // if _buffer == nullptr => no delete
@@ -246,7 +262,7 @@ template <class T>
 void Vector<T>::insert(Vector<T>::iterator pos, const T& v) {
     reserve(++_size);
 
-    for (auto scorri = --end(); scorri > pos; pos--) scorri[0] = scorri[-1];
+    for (auto scorri = --end(); scorri > pos; pos--) scorri[0] = std::move(scorri[-1]);
     *pos = v;
 }
 
@@ -256,7 +272,7 @@ void Vector<T>::insert(Vector<T>::iterator pos, unsigned int fill, const T& v) {
     _size += fill;
     reserve(_size);
 
-    for (auto scorri = --end(); scorri > pos; pos--) scorri[0] = scorri[-1];
+    for (auto scorri = --end(); scorri > pos; pos--) scorri[0] = std::move(scorri[-1]);
 
     for (auto scorri = pos; scorri <= (pos + ((int)fill)); scorri++) *scorri = v;
 }
@@ -272,7 +288,7 @@ template <class T>
 void Vector<T>::resize(unsigned int newsize, const T& v) {
     if (newsize > _capacity) {
         reserve(newsize);
-        for (unsigned int i = _size; i < newsize; i++) _buffer[i] = v;
+        for (unsigned int i = _size; i < newsize; i++) _buffer[i] = std::move(v);
     }
     _size = newsize;
 }
@@ -286,7 +302,7 @@ void Vector<T>::shrink_to_fit() {
         return;
     }
     T* newbuff = new T[_size];
-    for (unsigned int i = 0; i < _size; i++) newbuff[i] = _buffer[i];
+    for (unsigned int i = 0; i < _size; i++) newbuff[i] = std::move(_buffer[i]);
 
     _buffer = newbuff;
     _capacity = _size;

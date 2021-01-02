@@ -12,7 +12,7 @@ Fish::~Fish() = default;
 
 void Fish::setName(const std::string& name) { _name = name; }
 const std::string& Fish::getName() const { return _name; }
-
+const Stamina& Fish::getStamina() const { return _stamina; }
 void Fish::sleep() { _awake = false; }
 void Fish::wakeup() { _awake = true; }
 bool Fish::isAwake() const { return _awake; }
@@ -28,7 +28,7 @@ bool Fish::canWakeup() const {
 
 Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
     _daycycle++;  //increase progress
-    std::cout << _daycycle.getProgress() << std::endl;
+    std::cout << "progress: " << _daycycle.getProgress() << ", gone:" << getIsGone() << std::endl;
     if (isAsleep()) {
         if (canWakeup())
             wakeup();

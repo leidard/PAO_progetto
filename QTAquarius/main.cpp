@@ -5,7 +5,6 @@
 #include "fishinfoview.hpp"
 #include "aquarius.hpp"
 #include "controller.hpp"
-#include "middlewares/fishcreator.hpp"
 #include "vect2d.hpp"
 
 int main(int argc, char* argv[]) {

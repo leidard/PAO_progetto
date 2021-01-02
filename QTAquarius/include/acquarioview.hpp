@@ -4,31 +4,29 @@
 #ifndef ACQUARIOVIEW_H
 #define ACQUARIOVIEW_H
 
-#include <iostream>
-#include <QWidget>
+#include <QCloseEvent>
 #include <QDialog>
-#include <QPointer>
+#include <QGridLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QMenuBar>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QPixmap>
+#include <QPointer>
+#include <QProgressBar>
+#include <QPushButton>
 #include <QResizeEvent>
+#include <QString>
+#include <QTimerEvent>
 #include <QToolBar>
 #include <QVBoxLayout>
-#include <QMenuBar>
-#include <QString>
-#include <QLabel>
-#include <QPixmap>
-#include <QProgressBar>
-#include <QGridLayout>
-#include <QLineEdit>
-#include <QPushButton>
-#include <QCloseEvent>
-#include <QTimerEvent>
+#include <QWidget>
+#include <iostream>
 
-
-class AcquarioView : public QWidget
-{
+class AcquarioView : public QWidget {
     Q_OBJECT
-private:
+   private:
     Controller* controller;
     FishInfoView* infoView;
     QDialog* dialog;
@@ -36,24 +34,24 @@ private:
     QProgressBar* bar;
     QLabel* status;
     int timerID;
-//    QPointer<QAction> fileSalva;
-//    QPointer<QAction> fileCarica;
+    //    QPointer<QAction> fileSalva;
+    //    QPointer<QAction> fileCarica;
 
-public:
-    explicit AcquarioView(QWidget *parent = nullptr);
-   // void buildMenu
+   public:
+    explicit AcquarioView(QWidget* parent = nullptr);
+    // void buildMenu
     void setController(Controller* c);
-    void resizeEvent(QResizeEvent *event) override;
+    void resizeEvent(QResizeEvent* event) override;
 
-protected:
+   protected:
     void paintEvent(QPaintEvent* event) override;
-    void timerEvent(QTimerEvent *event);
+    void timerEvent(QTimerEvent* event);
 
-private slots:
+   private slots:
     void openInfo();
     void close();
     void saveInfo();
     void dead();
 };
 
-#endif // ACQUARIOVIEW_H
+#endif  // ACQUARIOVIEW_H

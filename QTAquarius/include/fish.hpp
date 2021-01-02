@@ -33,6 +33,7 @@ class Fish : public Vehicle, public Food {
     void wakeup();
     bool isAwake() const;
     bool isAsleep() const;
+    const Stamina& getStamina() const;  // ritorna una percentuale
 
     // overrides
     virtual ~Fish();

@@ -16,7 +16,7 @@ class Food : virtual public CartesianObject2D {
 
     virtual Food* clone() const = 0;
 
-    bool getIsGone() const;
+    virtual bool getIsGone() const final;
     void setIsGone();
 
     bool operator>(const Food&) const;

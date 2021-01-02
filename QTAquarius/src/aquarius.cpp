@@ -6,6 +6,8 @@
 // #include <thread>
 // #include <future>
 #include <iostream>
+#include <utility>
+
 Aquarius::Aquarius(unsigned int width, unsigned int height) : _width(width), _height(height), fish(), food() {}
 
 unsigned int Aquarius::getWidth() const { return _width; }
@@ -20,8 +22,8 @@ void Aquarius::setSize(const aq_size& s) {
 }
 
 void Aquarius::addFish(Fish* v) {
-    fish.push_back(v);
-    food.push_back(v);
+    fish.push_back(std::move(DeepPtr<Fish>(v)));
+    food.push_back(std::move(DeepPtr<Food>(v)));
 }
 
 void Aquarius::addFood(Food* f) {
@@ -43,8 +45,9 @@ void Aquarius::remFish(Vector<DeepPtr<Fish>>::iterator i) {
 void Aquarius::remFood(Vector<DeepPtr<Food>>::iterator i) {
     food.erase(i);  // the pointer to that object will be invalidated
 
-    auto it = fish.begin();
-    while (it < fish.end()) it = (!*it) ? fish.erase(it) : it + 1;
+    Vector<DeepPtr<Fish>>::iterator it = fish.begin();
+    while (it < fish.end())
+        it = (!*it) ? fish.erase(it) : it + 1;
 
     // TODO VEGETALE
 }
@@ -76,14 +79,24 @@ void Aquarius::advance() {
     //     futures.push_back(std::async(std::launch::async, [&i, this]()->void{if (i) i->advance(this, 0);}));
     // }
 
-    for (DeepPtr<Fish>& i : fish) {
-        if (i) i->advance(this, 1);
-        // apply calculated changes
+    for (auto it = fish.begin(); it < fish.end(); it++) {
+        DeepPtr<Fish>& i = *it;
+        if (i) {
+            if (i->getIsGone())
+                remFish(it);
+            else
+                i->advance(this, 1);
+        }
+        std::cout << "a" << i->getIsGone() << std::endl;
     }
+    fish[0]->setIsGone();
 
     for (auto it = food.begin(); it < food.end(); it++) {
+        std::cout << "b" << (*it)->getIsGone() << std::endl;
+        auto b = dynamic_cast<Fish*>(it->get());
+        if (b) std::cout << "c" << b->getIsGone() << std::endl;
         if ((*it)->getIsGone())
             remFood(it);
-          // remove food
+        // remove food
     }
 }

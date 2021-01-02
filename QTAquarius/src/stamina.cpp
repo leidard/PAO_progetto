@@ -5,7 +5,7 @@ Stamina::Stamina(double maxval) : _maxval(maxval), _val(maxval) {}
 double Stamina::getMax() const { return _maxval; }
 double Stamina::getVal() const { return _val; }
 
-void Stamina::setValToMax() { _val=_maxval; }
+void Stamina::setValToMax() { _val = _maxval; }
 
 double Stamina::getPercentage() const { return _val / _maxval; }
 

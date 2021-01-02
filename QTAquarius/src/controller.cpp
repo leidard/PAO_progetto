@@ -10,8 +10,8 @@
 #include "aquarius.hpp"
 #include "deepptr.hpp"
 #include "fish.hpp"
-#include "middlewares/fishcreator.hpp"
-#include "middlewares/foodcreator.hpp"
+//#include "middlewares/fishcreator.hpp"
+//#include "middlewares/foodcreator.hpp"
 #include "preda.hpp"
 #include "predatore.hpp"
 #include "vect2d.hpp"
@@ -49,7 +49,7 @@ const Vector<DeepPtr<Vegetale>> &Controller::getAllVegetale(){
 }
 
 void Controller::addPredatore(const Vect2D& position) {
-    Predatore* p = new Predatore(position);
+    Predatore* p = new Predatore(position, "paolo");
     _model->addFish(p);
 }
 

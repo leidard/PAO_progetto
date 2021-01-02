@@ -38,8 +38,6 @@ HEADERS += \
     include/deepptr.hpp \
     include/fish.hpp \
     include/food.hpp \
-    include/middlewares/fishcreator.hpp \
-    include/middlewares/foodcreator.hpp \
     include/middlewares/saverloader.hpp \
     include/preda.hpp \
     include/predatore.hpp \

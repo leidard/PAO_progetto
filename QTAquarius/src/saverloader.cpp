@@ -130,10 +130,7 @@ Vegetale* SaverLoader::parseVegetale(const QJsonValue& v) {
     if (!v.isObject()) throw new ParseError("parseVegetale: not a JSON Object");
     QJsonObject o = v.toObject();
 
-    QJsonValue visibility = o.value("visibility");
-    if (!visibility.isDouble()) throw new ParseError("parseVegetale: can't read property \"visibility\"");
-
-    return new Vegetale(parseVect2D(o.value("position").toString()), visibility.toDouble());
+    return new Vegetale(parseVect2D(o.value("position").toString()));
 }
 
 Vect2D SaverLoader::parseVect2D(const QJsonValue& v) {
