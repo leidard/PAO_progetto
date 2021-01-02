@@ -48,11 +48,10 @@ Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
     }
     // é sveglio e non puó dormire
     if (isHungry()) {  // ha fame? then cerca cibo, mira verso il cibo con nuova accelerazione != acc parametro
-        Vector<DeepPtr<Fish>>& fish = a->getAllFish();
-        Fish* candidato;
+        Fish* candidato = nullptr;
         double mindist = 0;
         for (auto& f : a->getAllFish()) {
-            if (f.get() != this && f->getValoreNutrizionale() < getValoreNutrizionale() && isInRange(f->getPosition())) {
+            if (*this != *f && f->getValoreNutrizionale() < getValoreNutrizionale() && isInRange(f->getPosition())) {
                 if (!candidato || Vect2D::distance(position, f->getPosition()) < mindist) {
                     mindist = Vect2D::distance(position, f->getPosition());
                     candidato = &*f;

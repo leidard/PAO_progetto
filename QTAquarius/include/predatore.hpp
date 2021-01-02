@@ -17,7 +17,7 @@ class Predatore : public Fish {
 
     // definition of pure virtual
     virtual bool isHungry() const override;
-    virtual void eat(const Fish&) override;
+    virtual void eat(Fish&) override;
 
     // repeated pure virtual
     virtual Predatore* clone() const override;             // from CartesianObject2D
@@ -25,6 +25,8 @@ class Predatore : public Fish {
     virtual double getVisibility() const override;         // from Fish
     virtual bool isInRange(const Vect2D&) const override;  // from Vehicle
     virtual std::string getType() const override;          // from Fish
+    virtual bool operator==(const Fish&) const override;
+    virtual bool operator!=(const Fish&) const override;
 };
 
 #endif

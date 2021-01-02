@@ -12,6 +12,15 @@ Preda::~Preda() {}
 Vect2D Preda::behaviour(Aquarius* a, Vect2D acc) {
     return Fish::behaviour(a, acc);
 }
+bool Preda::operator==(const Fish& f) const {
+    auto d = dynamic_cast<const Preda*>(&f);
+    return d != nullptr && d == this;
+}
+
+bool Preda::operator!=(const Fish& f) const {
+    auto d = dynamic_cast<const Preda*>(&f);
+    return d == nullptr || d != this;
+}
 
 bool Preda::isHungry() const {
     return _stamina < 2;
@@ -21,10 +30,10 @@ bool Preda::canSleep() const { return _daycycle.getProgress() >= _daycycle.getDa
 
 bool Preda::canWakeup() const { return _daycycle.getProgress() >= _daycycle.getNightTime(); }
 
-void Preda::eat(const Fish&) {
+void Preda::eat(Fish&) {
 }
 
-Preda *Preda::clone() const {
+Preda* Preda::clone() const {
     return new Preda(*this);
 }
 

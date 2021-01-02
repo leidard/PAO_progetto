@@ -64,31 +64,28 @@ Vect2D Predatore::behaviour(Aquarius* a, Vect2D acc) {
     return Fish::behaviour(a, acc);
 }
 
-/*
-Vect2D Vehicle::desired_cohesion(const std::vector<Vehicle>& boids) const {
-    Vect2D desired;
-    int count = 0;
-    for (auto& b : boids)
-        if (*this != b && distance(b) <= perception) {
-            desired.add(b);
-            count++;
-        }
+bool Predatore::operator==(const Fish& f) const {
+    auto d = dynamic_cast<const Predatore*>(&f);
+    return d != nullptr && d == this;
+}
 
-    if (count > 0) desired.div(count).sub(*this).setMagnitude(maxSpeed);
-    return desired;
-}*/
+bool Predatore::operator!=(const Fish& f) const {
+    auto d = dynamic_cast<const Predatore*>(&f);
+    return d == nullptr || d != this;
+}
 
 // defined of pure virtual
 bool Predatore::isHungry() const {
     return _stamina < 0.4;
 }
 
-void Predatore::eat(const Fish& f) {
+void Predatore::eat(Fish& f) {
     _daycycle += 20;
-    if (_stamina.getVal() + f.getValoreNutrizionale() > _stamina.getMax())  //stamina cant exceed its maximum
+    f.setIsGone();
+   /* if (_stamina.getVal() + f.getValoreNutrizionale() > _stamina.getMax())  //stamina cant exceed its maximum
         _stamina.setValToMax();
     else
-        _stamina += f.getValoreNutrizionale();
+        _stamina += f.getValoreNutrizionale();*/
 }
 
 // repeated pure virtual

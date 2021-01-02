@@ -30,8 +30,6 @@ class Aquarius {
 
     void addFish(Fish*);
 
-    void remFish(Vector<DeepPtr<Fish>>::iterator);
-
     Vector<DeepPtr<Fish>>& getAllFish();  // TODO: non const version???
 
     void advance();

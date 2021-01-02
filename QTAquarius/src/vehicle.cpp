@@ -61,7 +61,7 @@ Vect2D Vehicle::wander() {
 }
 
 Vect2D Vehicle::stop() const {
-    return arrive(position + (_velocity * 10));
+    return arrive(position + (_velocity * 30));
 }
 
 // #include <iostream>

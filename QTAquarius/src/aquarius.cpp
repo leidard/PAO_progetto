@@ -24,10 +24,6 @@ void Aquarius::addFish(Fish* v) {
     fish.push_back(std::move(DeepPtr<Fish>(v)));
 }
 
-void Aquarius::remFish(Vector<DeepPtr<Fish>>::iterator i) {
-    fish.erase(i);  // the pointer to that object will be invalidated
-}
-
 void Aquarius::setSize(unsigned int width, unsigned int height) {
     _width = width;
     _height = height;
@@ -43,11 +39,11 @@ void Aquarius::advance() {
     }
 
     for (auto it = fish.begin(); it < fish.end();) {
-        DeepPtr<Fish>& i = *it;
-        if (i->getIsGone())
+        if ((*it)->getIsGone()) {
             it = fish.erase(it);
-        else {
-            i->advance(this, 1);
+            std::cout << "eliminato" <<std::endl;
+        } else {
+            (*it)->advance(this, 1);
             it++;
         }
     }
