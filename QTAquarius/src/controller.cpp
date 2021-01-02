@@ -36,7 +36,7 @@ void Controller::setModel(Aquarius* model) {
 
 void Controller::setView(AcquarioView* view) {
     _view = view;
-    connect(_timer, SIGNAL(timeout()), _view, SLOT(update()));
+    // connect(_timer, SIGNAL(timeout()), _view, SLOT(update()));
 }
 
 const Vector<DeepPtr<Fish>> &Controller::getAllFish()
@@ -44,18 +44,16 @@ const Vector<DeepPtr<Fish>> &Controller::getAllFish()
     return _model->getAllFish();
 }
 
-const Vector<DeepPtr<Vegetale>> &Controller::getAllVegetale(){
+const Vector<DeepPtr<Vegetale>>& Controller::getAllVegetale(){
     return _model->getAllVegetale();
 }
 
 void Controller::addPredatore(const Vect2D& position) {
-    Predatore* p = new Predatore(position, "paolo");
-    _model->addFish(p);
+    _model->addFish(new Predatore(position, "paolo"));
 }
 
 void Controller::addVegetale(const Vect2D & position){
-    Vegetale* v = new Vegetale(position);
-    _model->addVegetale(v);
+    _model->addVegetale(new Vegetale(position));
 }
 
 void Controller::resize(int width, int height) {

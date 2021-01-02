@@ -27,12 +27,12 @@ void Aquarius::addFish(Fish* v) {
 }
 
 void Aquarius::addFood(Food* f) {
-    food.push_back(f);
+    food.push_back(std::move(DeepPtr<Food>(f)));
 }
 
 void Aquarius::addVegetale(Vegetale* v) {
-    food.push_back(v);
-    vegetali.push_back(v);
+    food.push_back(std::move(DeepPtr<Food>(v)));
+    vegetali.push_back(std::move(DeepPtr<Vegetale>(v)));
 }
 
 void Aquarius::remFish(Vector<DeepPtr<Fish>>::iterator i) {
@@ -89,7 +89,6 @@ void Aquarius::advance() {
         }
         std::cout << "a" << i->getIsGone() << std::endl;
     }
-    fish[0]->setIsGone();
 
     for (auto it = food.begin(); it < food.end(); it++) {
         std::cout << "b" << (*it)->getIsGone() << std::endl;
