@@ -19,6 +19,7 @@
 #include <QResizeEvent>
 #include <QString>
 #include <QWidget>
+#include <QMouseEvent>
 #include <iostream>
 
 class AcquarioView : public QWidget {
@@ -26,6 +27,20 @@ class AcquarioView : public QWidget {
    private:
     Controller* controller;
     FishInfoView* infoView;
+    QVBoxLayout* layout;
+    QMenuBar* menuBar;
+    QMenu* file;
+    QMenu* strumenti;
+    QAction* pausariprendi;
+    QActionGroup* strumentiOptions;
+    QAction* aggiungiPreda;
+    QAction* aggiungiPredatore;
+    QAction* infoPesci;
+    QAction* fileSalva;
+    QAction* fileCarica;
+    bool drawingPreda;
+    bool drawingPredatore;
+    bool pausa;
 
    public:
     explicit AcquarioView(QWidget* parent = nullptr);
@@ -33,10 +48,15 @@ class AcquarioView : public QWidget {
     void resizeEvent(QResizeEvent* event) override;
 
    protected:
+    void mouseReleaseEvent(QMouseEvent* event) override;
     void paintEvent(QPaintEvent* event) override;
 
    private slots:
     void openInfo();
+    void drawPreda();
+    void drawPredatore();
+    void stopGo();
+
 };
 
 #endif  // ACQUARIOVIEW_H
