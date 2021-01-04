@@ -18,6 +18,8 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QSlider>
+#include <QSignalMapper>
 #include <iostream>
 
 #include "controller.hpp"
@@ -26,31 +28,42 @@
 #include "preda.hpp"
 #include "predatore.hpp"
 #include "vect2d.hpp"
+#include "vector.hpp"
 
 class FishInfoView : public QDialog {
-    Q_OBJECT
+Q_OBJECT
    public:
-    FishInfoView(QWidget* parent = nullptr);
-    void timerEvent(QTimerEvent* event);
+    FishInfoView(Controller* c, QWidget* parent = nullptr);
+    void displayInfo();
+    void updateInfo(const unsigned int);
+    void timerEvent(const QTimerEvent* event);
+
 
    private:
-    // addClass(QWidget *parent = 0);
-    void setController(Controller* c);
-
     QDialog* dialog;
     Controller* controller;
     int timerID;
-    QGridLayout* grid;    //Layout
+    QGridLayout* layout;    //Layout
     QLabel* img;          //Icon
+    QPixmap pix;
     QLineEdit* nameLine;  //Fish's name
-    QLabel* status;
+    QLabel* tipologia;
+    QLabel* nutVal;
     QProgressBar* bar;  //Stamina
+    QLabel* status;
+    QLabel* currentmax;
+    //QSlider* slider;
+    QPushButton* previous;
+    QPushButton* next;
     QPushButton* saveButton;
     QPushButton* quitButton;
 
    private slots:
     void close();
-    void saveInfo(QString*);
+    void saveName(const QString&, const unsigned int = 0);
+    void previousFish(const unsigned int = 0);
+    void nextFish(const unsigned int = 0);
+//    void onSliderMoved(int);
     void dead();
 };
 

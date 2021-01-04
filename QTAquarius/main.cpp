@@ -16,8 +16,8 @@ int main(int argc, char* argv[]) {
     Aquarius model;
     Controller c;
     c.setModel(&model);
-    for (int i = 0; i < 20; i++) c.addPredatore(Vect2D(100 + std::rand() % 300, 100 + std::rand() % 200));
-    for (int i = 0; i < 50; i++) c.addPreda(Vect2D(100 + std::rand() % 300, 100 + std::rand() % 200));
+    for (int i = 0; i < 2; i++) c.addPredatore(Vect2D(100 + std::rand() % 300, 100 + std::rand() % 200));
+    for (int i = 0; i < 3; i++) c.addPreda(Vect2D(100 + std::rand() % 300, 100 + std::rand() % 200));
 
     c.setView(&view);
     view.setController(&c);

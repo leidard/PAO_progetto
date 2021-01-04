@@ -3,10 +3,12 @@
 
 #ifndef ACQUARIOVIEW_H
 #define ACQUARIOVIEW_H
+#include <QBrush>
+#include <QColor>
+#include <QPointF>
 
 #include <QCloseEvent>
 #include <QDialog>
-#include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QMenuBar>
@@ -14,13 +16,9 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QPointer>
-#include <QProgressBar>
 #include <QPushButton>
 #include <QResizeEvent>
 #include <QString>
-#include <QTimerEvent>
-#include <QToolBar>
-#include <QVBoxLayout>
 #include <QWidget>
 #include <iostream>
 
@@ -29,11 +27,7 @@ class AcquarioView : public QWidget {
    private:
     Controller* controller;
     FishInfoView* infoView;
-    QDialog* dialog;
-    QLineEdit* nameLine;
-    QProgressBar* bar;
-    QLabel* status;
-    int timerID;
+
     //    QPointer<QAction> fileSalva;
     //    QPointer<QAction> fileCarica;
 
@@ -48,9 +42,7 @@ class AcquarioView : public QWidget {
 
    private slots:
     void openInfo();
-    void close();
-    void saveInfo();
-    void dead();
+
 };
 
 #endif  // ACQUARIOVIEW_H
