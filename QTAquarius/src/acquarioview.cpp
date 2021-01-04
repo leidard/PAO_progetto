@@ -7,35 +7,49 @@
 #include "predatore.hpp"
 #include "vect2d.hpp"
 
-AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent) {
-    QVBoxLayout* main = new QVBoxLayout(this);
-    QMenuBar* menuBar = new QMenuBar(this);
-    QString styleBar = "QMenu::item:selected { color: black;}";
-    menuBar->setStyleSheet(styleBar);
+AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawingPreda(false), drawingPredatore(false) {
+    layout = new QVBoxLayout(this);
+    menuBar = new QMenuBar(this);
+// TO DO: Creare un .qss per lo stylesheet!
+    setStyleSheet("background-color: #70dbe9;");
+    menuBar->setStyleSheet(QString("background-color: white; QMenu::item:selected { color: black}, QMenu::item::hover { color: black}"));
 
-    QMenu* file = new QMenu("File", menuBar);
-    QMenu* strumenti = new QMenu("Strumenti", menuBar);
+    file = new QMenu("File", menuBar);
+    strumenti = new QMenu("Strumenti", menuBar);
 
     //FILE
-    QAction* fileSalva = new QAction("Salva", this);
-    QAction* fileCarica = new QAction("Carica", this);
+    fileSalva = new QAction("Salva", this);
+    fileCarica = new QAction("Carica", this);
 
     file->addAction(fileSalva);
     file->addAction(fileCarica);
 
     //STRUMENTI
-    QActionGroup* strumentiOptions = new QActionGroup(this);
-    QAction* aggiungiPreda = new QAction("Aggiungi preda", this);
+    strumentiOptions = new QActionGroup(this);
+    aggiungiPreda = new QAction("Aggiungi preda", this);
     aggiungiPreda->setCheckable(true);
-    //  connect(aggiungiPreda, SIGNAL(triggered()), this, SLOT());
-    QAction* aggiungiPredatore = new QAction("Aggiungi predatore", this);
+    connect(aggiungiPreda, &QAction::triggered, this, &AcquarioView::drawPreda);
+    aggiungiPredatore = new QAction("Aggiungi predatore", this);
     aggiungiPredatore->setCheckable(true);
+    connect(aggiungiPredatore, &QAction::triggered, this, &AcquarioView::drawPredatore);
+
 
     strumentiOptions->addAction(aggiungiPreda);
     strumentiOptions->addAction(aggiungiPredatore);
 
-    QAction* infoPesci = new QAction("Info pesci", this);
-    connect(infoPesci, SIGNAL(triggered()), this, SLOT(openInfo()));
+    connect(strumentiOptions, &QActionGroup::triggered, [](QAction* action) {
+        static QAction* lastAction = nullptr;
+        if (action == lastAction)
+        {
+          action->setChecked(false);
+          lastAction = nullptr;
+        }
+        else
+          lastAction = action;
+      });
+
+    infoPesci = new QAction("Info pesci", this);
+    connect(infoPesci, &QAction::triggered, this, &AcquarioView::openInfo);
 
     strumenti->addAction(aggiungiPreda);
     strumenti->addAction(aggiungiPredatore);
@@ -43,14 +57,23 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent) {
 
     menuBar->addMenu(file);
     menuBar->addMenu(strumenti);
-    //menuBar->setStyleSheet("background-color: white");
-    main->setMenuBar(menuBar);
+    layout->setMenuBar(menuBar);
 
     resize(QSize(1024, 720));  //starting window size
 }
 
 void AcquarioView::openInfo() {
     infoView = new FishInfoView(controller, this);
+}
+
+void AcquarioView::drawPreda(){
+    drawingPreda = drawingPreda ? false : true;
+    drawingPredatore = false;
+}
+
+void AcquarioView::drawPredatore(){
+    drawingPredatore = drawingPredatore ? false : true;
+    drawingPreda = false;
 }
 
 void AcquarioView::setController(Controller* c) {
@@ -60,6 +83,14 @@ void AcquarioView::setController(Controller* c) {
 void AcquarioView::resizeEvent(QResizeEvent* event) {
     QSize s = event->size();
     controller->resize(s.width(), s.height());
+}
+
+void AcquarioView::mouseReleaseEvent(QMouseEvent *event){
+    if (event->button() == Qt::LeftButton && drawingPredatore) {
+        controller->addPredatore(Vect2D(event->x(), event->y()));
+    }else if(event->button() == Qt::LeftButton && drawingPreda) {
+        controller->addPreda(Vect2D(event->x(), event->y()));
+    }
 }
 
 

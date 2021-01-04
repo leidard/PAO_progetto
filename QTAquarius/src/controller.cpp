@@ -16,7 +16,7 @@
 #include "vector.hpp"
 
 Controller::Controller(QObject* parent) : QObject(parent), _timer(new QTimer()), _model(nullptr), _view(nullptr) {
-    connect(_timer, SIGNAL(timeout()), this, SLOT(advance()));
+    connect(_timer, &QTimer::timeout, this, &Controller::advance);
 }
 
 Controller::~Controller() {
