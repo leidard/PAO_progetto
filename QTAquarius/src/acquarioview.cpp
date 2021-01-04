@@ -46,22 +46,24 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent) {
     //menuBar->setStyleSheet("background-color: white");
     main->setMenuBar(menuBar);
 
+    infoView = new FishInfoView(this);
+
     resize(QSize(1024, 720));  //starting window size
 }
 
 void AcquarioView::openInfo() {
-    infoView = new FishInfoView(controller, this);
+    infoView->show();
 }
 
 void AcquarioView::setController(Controller* c) {
     controller = c;
+    infoView->setController(controller);
 }
 
 void AcquarioView::resizeEvent(QResizeEvent* event) {
     QSize s = event->size();
     controller->resize(s.width(), s.height());
 }
-
 
 void AcquarioView::paintEvent(QPaintEvent* event) {
     QPainter painter(this);

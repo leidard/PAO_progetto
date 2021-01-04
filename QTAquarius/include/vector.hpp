@@ -96,7 +96,6 @@ class Vector {
             _current -= n;
             return *this;
         }
-        operator iterator() { return iterator(_current); }
         bool operator==(const const_iterator& i) const { return _current == i._current; }
         bool operator!=(const const_iterator& i) const { return _current != i._current; }
         bool operator<(const const_iterator& i) const { return _current < i._current; }

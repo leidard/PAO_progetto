@@ -13,13 +13,13 @@
 #include <QProgressBar>
 #include <QPushButton>
 #include <QResizeEvent>
+#include <QSignalMapper>
+#include <QSlider>
 #include <QString>
 #include <QTimerEvent>
 #include <QToolBar>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <QSlider>
-#include <QSignalMapper>
 #include <iostream>
 
 #include "controller.hpp"
@@ -31,40 +31,31 @@
 #include "vector.hpp"
 
 class FishInfoView : public QDialog {
-Q_OBJECT
+    Q_OBJECT
    public:
-    FishInfoView(Controller* c, QWidget* parent = nullptr);
-    void displayInfo();
-    void updateInfo(const unsigned int);
+    FishInfoView(QWidget* parent = nullptr);
     void timerEvent(const QTimerEvent* event);
-
+    void show();
+    void setController(Controller* c);
 
    private:
-    QDialog* dialog;
     Controller* controller;
+    Vector<DeepPtr<Fish>>::iterator pos;
+
+    void update();
+
     int timerID;
-    QGridLayout* layout;    //Layout
+    QGridLayout* layout;  //Layout
     QLabel* img;          //Icon
-    QPixmap pix;
     QLineEdit* nameLine;  //Fish's name
     QLabel* tipologia;
     QLabel* nutVal;
     QProgressBar* bar;  //Stamina
-    QLabel* status;
     QLabel* currentmax;
-    //QSlider* slider;
     QPushButton* previous;
     QPushButton* next;
     QPushButton* saveButton;
     QPushButton* quitButton;
-
-   private slots:
-    void close();
-    void saveName(const QString&, const unsigned int = 0);
-    void previousFish(const unsigned int = 0);
-    void nextFish(const unsigned int = 0);
-//    void onSliderMoved(int);
-    void dead();
 };
 
 #endif  // FISHINFO_HPP

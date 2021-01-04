@@ -4,10 +4,8 @@
 #ifndef ACQUARIOVIEW_H
 #define ACQUARIOVIEW_H
 #include <QBrush>
-#include <QColor>
-#include <QPointF>
-
 #include <QCloseEvent>
+#include <QColor>
 #include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
@@ -15,6 +13,7 @@
 #include <QPaintEvent>
 #include <QPainter>
 #include <QPixmap>
+#include <QPointF>
 #include <QPointer>
 #include <QPushButton>
 #include <QResizeEvent>
@@ -28,12 +27,8 @@ class AcquarioView : public QWidget {
     Controller* controller;
     FishInfoView* infoView;
 
-    //    QPointer<QAction> fileSalva;
-    //    QPointer<QAction> fileCarica;
-
    public:
     explicit AcquarioView(QWidget* parent = nullptr);
-    // void buildMenu
     void setController(Controller* c);
     void resizeEvent(QResizeEvent* event) override;
 
@@ -42,7 +37,6 @@ class AcquarioView : public QWidget {
 
    private slots:
     void openInfo();
-
 };
 
 #endif  // ACQUARIOVIEW_H

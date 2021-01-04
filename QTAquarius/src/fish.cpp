@@ -30,7 +30,6 @@ bool Fish::canWakeup() const {
 
 Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
     _daycycle++;  //increase progress
-    std::cout << "progress: " << _daycycle.getProgress() << ", gone:" << getIsGone() << std::endl;
     if (isAsleep()) {
         if (canWakeup())
             wakeup();
