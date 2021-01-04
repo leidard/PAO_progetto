@@ -53,9 +53,8 @@ void Controller::resize(int width, int height) {
 void Controller::remFish() {
     
 }
-// #include <iostream>
+
 void Controller::advance() {
-    // std::cout << "advance"<< std::endl;
     _model->advance();
 }
 

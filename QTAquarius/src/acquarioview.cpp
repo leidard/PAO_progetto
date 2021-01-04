@@ -7,7 +7,7 @@
 #include "predatore.hpp"
 #include "vect2d.hpp"
 
-AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawingPreda(false), drawingPredatore(false) {
+AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawingPreda(false), drawingPredatore(false), pausa(false) {
     layout = new QVBoxLayout(this);
     menuBar = new QMenuBar(this);
 // TO DO: Creare un .qss per lo stylesheet!
@@ -55,8 +55,14 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawingPreda(fals
     strumenti->addAction(aggiungiPredatore);
     strumenti->addAction(infoPesci);
 
+    //PAUSA E RIPRENDI
+    pausariprendi = new QAction("Pausa", menuBar);
+    connect(pausariprendi, &QAction::triggered, this, &AcquarioView::stopGo);
+
     menuBar->addMenu(file);
     menuBar->addMenu(strumenti);
+    menuBar->addAction(pausariprendi);
+//    menuBar->addAction("Riprendi");
     layout->setMenuBar(menuBar);
 
     resize(QSize(1024, 720));  //starting window size
@@ -74,6 +80,18 @@ void AcquarioView::drawPreda(){
 void AcquarioView::drawPredatore(){
     drawingPredatore = drawingPredatore ? false : true;
     drawingPreda = false;
+}
+
+void AcquarioView::stopGo(){
+    if(!pausa){
+        controller->stop();
+        pausariprendi->setText("Pausa");
+        pausa=true;
+    }else{
+        controller->start();
+        pausariprendi->setText("Riprendi");
+        pausa=false;
+    }
 }
 
 void AcquarioView::setController(Controller* c) {

@@ -32,6 +32,7 @@ class AcquarioView : public QWidget {
     QMenuBar* menuBar;
     QMenu* file;
     QMenu* strumenti;
+    QAction* pausariprendi;
     QActionGroup* strumentiOptions;
     QAction* aggiungiPreda;
     QAction* aggiungiPredatore;
@@ -40,7 +41,7 @@ class AcquarioView : public QWidget {
     QAction* fileCarica;
     bool drawingPreda;
     bool drawingPredatore;
-
+    bool pausa;
 
     //    QPointer<QAction> fileSalva;
     //    QPointer<QAction> fileCarica;
@@ -59,6 +60,7 @@ class AcquarioView : public QWidget {
     void openInfo();
     void drawPreda();
     void drawPredatore();
+    void stopGo();
 
 };
 
