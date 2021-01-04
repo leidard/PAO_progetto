@@ -60,14 +60,11 @@ Vect2D& Vect2D::normalize() {
     return m == 0 ? set(0, 0) : div(m);
 }
 Vect2D& Vect2D::setMagnitude(double m) { return normalize().mult(m); }
-Vect2D& Vect2D::limit(const Vect2D& v) {
-    _x = std::min(_x, v._x);
-    _y = std::min(_y, v._y);
-    return *this;
-}
+
 Vect2D& Vect2D::limit(double s) {
-    _x = std::min(_x, s);
-    _y = std::min(_y, s);
+    if (mag() > s) {
+        setMagnitude(s);
+    }
     return *this;
 }
 Vect2D& Vect2D::bounds(const Vect2D& b) {
@@ -107,7 +104,6 @@ Vect2D Vect2D::min(Vect2D& v) const { return Vect2D(*this).min(v); }
 Vect2D Vect2D::max(Vect2D& v) const { return Vect2D(*this).max(v); }
 Vect2D Vect2D::normalize() const { return Vect2D(*this).normalize(); }
 Vect2D Vect2D::setMagnitude(double s) const { return Vect2D(*this).setMagnitude(s); }
-Vect2D Vect2D::limit(const Vect2D& v) const { return Vect2D(*this).limit(v); }
 Vect2D Vect2D::limit(double s) const { return Vect2D(*this).limit(s); }
 Vect2D Vect2D::bounds(const Vect2D& b) const { return Vect2D(*this).bounds(b); }
 Vect2D Vect2D::rotate(double rad) const { return Vect2D(*this).rotate(rad); }
@@ -119,7 +115,10 @@ double Vect2D::angleRad() const { return std::atan2(_y, _x); }
 double Vect2D::angleDeg() const { return std::atan2(_y, _x) * 180 / M_PI; }
 double Vect2D::angleBetweenRad(const Vect2D& v) const { return std::acos(dot(v) / (mag() * v.mag())); }
 double Vect2D::angleBetweenDeg(const Vect2D& v) const { return angleBetweenRad(v) * 180 / M_PI; }
-Vect2D Vect2D::scalarProjection(const Vect2D& v) const { return v.normalize().mult(dot(v)); }
+Vect2D Vect2D::scalarProjection(const Vect2D& v) const {
+    auto norm = v.normalize();
+    return dot(*this, norm) * norm;
+}
 
 //static
 
@@ -132,7 +131,6 @@ Vect2D Vect2D::min(Vect2D& v1, Vect2D& v2) { return v1.min(v2); }
 Vect2D Vect2D::max(Vect2D& v1, Vect2D& v2) { return v1.max(v2); }
 Vect2D Vect2D::normalize(const Vect2D& v1) { return v1.normalize(); }
 Vect2D Vect2D::setMagnitude(const Vect2D& v1, double s) { return v1.setMagnitude(s); }
-Vect2D Vect2D::limit(const Vect2D& v1, const Vect2D& v2) { return v1.limit(v2); }
 Vect2D Vect2D::limit(const Vect2D& v1, double s) { return v1.limit(s); }
 Vect2D Vect2D::rotate(const Vect2D& v1, double rad) { return v1.rotate(rad); }
 Vect2D Vect2D::rotateDeg(const Vect2D& v1, double deg) { return v1.rotateDeg(deg); }

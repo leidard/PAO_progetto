@@ -6,7 +6,10 @@
 #include "deepptr.hpp"
 #include "vect2d.hpp"
 
-Vehicle::Vehicle() : _velocity(1, 1), _wander(1, 1) {}
+Vehicle::Vehicle() : _velocity(1, 1), _wander(1, 1) {
+    _velocity.setMagnitude(maxSpeed);
+    _velocity.rotateDeg(std::rand() % 180);
+}
 
 Vehicle::~Vehicle() {}
 
@@ -68,6 +71,48 @@ Vect2D Vehicle::stop() const {
     // std::cout << "(" << a.x() << "," << a.y() << ")" << std::endl;
     Vect2D brakeforce = _velocity.mult(-maxForce);  // forza opposta all'accelerazione
     return brakeforce;
+}
+
+Vect2D Vehicle::stayWithinBorders(const Vect2D& size, const unsigned int distance) const {
+    Vect2D avoid;
+
+    const Vect2D dtop = Vect2D(position.x(), 0);
+    const Vect2D dleft = Vect2D(0, position.y());
+    const Vect2D dr = Vect2D(size.x(), position.y());
+    const Vect2D db = Vect2D(position.x(), size.y());
+
+    Vect2D diff = position - dtop;
+    double d = diff.mag();
+    if (d < distance && d > 0) {
+        diff.div(d * d);
+        avoid += diff;
+    }
+
+    diff = position - dleft;
+    d = diff.mag();
+    if (d < distance && d > 0) {
+        diff.div(d * d);
+        avoid += diff;
+    }
+
+    diff = position - dr;
+    d = diff.mag();
+    if (d < distance && d > 0) {
+        diff.div(d * d);
+        avoid += diff;
+    }
+
+    diff = position - db;
+    d = diff.mag();
+    if (d < distance && d > 0) {
+        diff.div(d * d);
+        avoid += diff;
+    }
+
+    if (avoid != Vect2D(0, 0))
+        return avoid.div(4).setMagnitude(maxSpeed).rem(_velocity);
+    else
+        return avoid;
 }
 
 // #include <iostream>

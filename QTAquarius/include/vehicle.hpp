@@ -13,8 +13,8 @@ class Vehicle : virtual public CartesianObject2D {
     Vect2D _computedposition;
     Vect2D _velocity;
     Vect2D _wander;
-    double maxSpeed = 4;     // tipo 4
-    double maxForce = .025;  // 0 <= x <= 1
+    double maxSpeed = 4;   // tipo 4
+    double maxForce = .1;  // 0 <= x <= 1
 
     double PURSUIT_forwardSteps = 5;
 
@@ -48,6 +48,7 @@ class Vehicle : virtual public CartesianObject2D {
     Vect2D escape(const Vehicle&) const;
     Vect2D wander();
     Vect2D stop() const;
+    Vect2D stayWithinBorders(const Vect2D&, const unsigned int distance) const;
 
     virtual Vehicle* clone() const = 0;
 

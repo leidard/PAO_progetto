@@ -57,7 +57,6 @@ class Vect2D {
     Vect2D max(Vect2D&) const;
     Vect2D normalize() const;
     Vect2D setMagnitude(double) const;
-    Vect2D limit(const Vect2D&) const;
     Vect2D limit(double) const;
     Vect2D bounds(const Vect2D&) const;
     Vect2D rotate(double) const;
@@ -69,6 +68,9 @@ class Vect2D {
     double angleDeg() const;
     double angleBetweenRad(const Vect2D&) const;
     double angleBetweenDeg(const Vect2D&) const;
+    /** 
+     * Projects this vector on the vector passed as parameter
+    */
     Vect2D scalarProjection(const Vect2D&) const;
 
     //static
@@ -82,7 +84,6 @@ class Vect2D {
     static Vect2D max(Vect2D&, Vect2D&);
     static Vect2D normalize(const Vect2D&);
     static Vect2D setMagnitude(const Vect2D&, double);
-    static Vect2D limit(const Vect2D&, const Vect2D&);
     static Vect2D limit(const Vect2D&, double);
     static Vect2D rotate(const Vect2D&, double);
     static Vect2D rotateDeg(const Vect2D&, double);
