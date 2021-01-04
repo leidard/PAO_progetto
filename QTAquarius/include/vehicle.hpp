@@ -13,8 +13,8 @@ class Vehicle : virtual public CartesianObject2D {
     Vect2D _computedposition;
     Vect2D _velocity;
     Vect2D _wander;
-    double maxSpeed = 4;   // tipo 4
-    double maxForce = .4;  // 0 <= x <= 1
+    double maxSpeed = 4;     // tipo 4
+    double maxForce = .025;  // 0 <= x <= 1
 
     double PURSUIT_forwardSteps = 5;
 

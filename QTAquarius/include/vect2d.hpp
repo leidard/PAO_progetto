@@ -53,8 +53,8 @@ class Vect2D {
     Vect2D rem(const Vect2D&) const;
     Vect2D mult(double) const;
     Vect2D div(double) const;
-    Vect2D min( Vect2D&) const;
-    Vect2D max( Vect2D&) const;
+    Vect2D min(Vect2D&) const;
+    Vect2D max(Vect2D&) const;
     Vect2D normalize() const;
     Vect2D setMagnitude(double) const;
     Vect2D limit(const Vect2D&) const;
@@ -99,6 +99,7 @@ class Vect2D {
     Vect2D operator-(const Vect2D&) const;  // call sub
     Vect2D operator*(double) const;         // call mult
     Vect2D operator/(double) const;         // call div
+    Vect2D operator-() const;
 
     Vect2D& operator+=(const Vect2D&);  // call sum
     Vect2D& operator-=(const Vect2D&);  // call div

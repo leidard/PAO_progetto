@@ -9,7 +9,7 @@
 #include "stamina.hpp"
 #include "vect2d.hpp"
 
-Predatore::Predatore(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 200, 100, 100) {}
+Predatore::Predatore(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 50 * 10, 150, 100) {}
 
 // overrides
 Predatore::~Predatore(){};
@@ -58,7 +58,7 @@ Vect2D Predatore::behaviour(Aquarius* a, Vect2D acc) {
         acc += alignement;
         acc += separation * .3;
         acc += cohesion * .3;
-        acc.limit(maxSpeed);
+        acc.setMagnitude(maxSpeed);
     }
 
     return Fish::behaviour(a, acc);

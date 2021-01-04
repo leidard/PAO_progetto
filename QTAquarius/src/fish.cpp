@@ -59,13 +59,13 @@ Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
             }
         }
         if (candidato != nullptr) {
-            if (mindist < maxForce) eat(*candidato);
+            if (mindist < _velocity.mag()) eat(*candidato);
             return pursuit(*candidato);
         }
     }
     // é sveglio, non puó dormire, non ha fame || non ha trovato cibo
     // quindi vaga a caso
-    return acc + wander() * .05;
+    return acc;  //+ wander() * .05;
 }
 
 /*

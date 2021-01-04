@@ -51,9 +51,9 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent) {
 
 void AcquarioView::openInfo() {
     std::cout << "BELLAAAAA";
-    //    infoView = new FishInfoView(this);
-    //    infoView->show();
-
+    infoView = new FishInfoView(this);
+    infoView->show();
+    return;
     timerID = startTimer(100);
     int i = 0;  //i è da passare come param ed è il numero del pesce nell'array pesci
     dialog = new QDialog();
