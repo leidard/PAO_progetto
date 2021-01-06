@@ -34,15 +34,15 @@ class FishInfoView : public QDialog {
     Q_OBJECT
    public:
     FishInfoView(QWidget* parent = nullptr);
-    void timerEvent(const QTimerEvent* event);
     void show();
     void setController(Controller* c);
 
    private:
     Controller* controller;
     Vector<DeepPtr<Fish>>::iterator pos;
-
-    void update();
+    void timerEvent(QTimerEvent* event);
+    void updateInfo();
+    void closeEvent(QCloseEvent* event);
 
     int timerID;
     QGridLayout* layout;  //Layout

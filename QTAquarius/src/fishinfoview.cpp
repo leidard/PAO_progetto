@@ -3,7 +3,6 @@
 #include <sstream>
 
 FishInfoView::FishInfoView(QWidget* parent) : QDialog(parent) {
-    startTimer(100);
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);  //disable "?" button
     setMinimumSize(QSize(350, 250));
     setMaximumSize(QSize(350, 250));
@@ -44,20 +43,24 @@ FishInfoView::FishInfoView(QWidget* parent) : QDialog(parent) {
     previous = new QPushButton("Precedente", this);
     currentmax = new QLabel("0 di 0", this);
     next = new QPushButton("Successivo", this);
-    connect(previous, &QPushButton::released, this, [this]() { controller->prev(); update(); });
-    connect(next, &QPushButton::released, this, [this]() { controller->next(); update(); });
+    connect(previous, &QPushButton::released, this, [this]() { controller->prev(); updateInfo(); });
+    connect(next, &QPushButton::released, this, [this]() { controller->next(); updateInfo(); });
     layout->addWidget(previous, 5, 0, 1, 1);
     layout->addWidget(currentmax, 5, 1, 1, 1);
     layout->addWidget(next, 5, 2, 1, 1);
 
     quitButton = new QPushButton("Chiudi", this);
-    connect(quitButton, &QPushButton::released, this, &QDialog::close);
+    connect(quitButton, &QPushButton::released, this, [this]() {killTimer(timerID); QDialog::close(); });
     layout->addWidget(quitButton, 6, 2, 1, 1);
 
     setLayout(layout);
 }
 
-void FishInfoView::update() {
+void FishInfoView::closeEvent(QCloseEvent* event) {
+    killTimer(timerID);
+}
+
+void FishInfoView::updateInfo() {
     const Fish* f = controller->getCurrent();
     if (f == nullptr) return;  // TODO call set default or something to reset all the values shown
 
@@ -84,7 +87,8 @@ void FishInfoView::update() {
 }
 
 void FishInfoView::show() {  //aggiungere i parent ovunque
-    update();
+    updateInfo();
+    timerID = startTimer(100);
     QDialog::show();
 }
 
@@ -92,6 +96,7 @@ void FishInfoView::setController(Controller* c) {
     controller = c;
 }
 
-void FishInfoView::timerEvent(const QTimerEvent* event) {  //aggiorna la progress bar con la stamina
-    update();
+void FishInfoView::timerEvent(QTimerEvent* event) {  //aggiorna la progress bar con la stamina
+    std::cout << "updateInfo" << std::endl;
+    updateInfo();
 }
