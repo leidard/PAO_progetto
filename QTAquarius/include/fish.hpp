@@ -22,6 +22,7 @@ class Fish : public Vehicle {
    protected:
     DayCycle _daycycle;
     Stamina _stamina;
+    virtual void behaviour(Aquarius*) override;
 
    public:
     Fish(const std::string&, unsigned int, unsigned int, double);
@@ -39,13 +40,12 @@ class Fish : public Vehicle {
 
     // overrides
     virtual ~Fish();
-    virtual Vect2D behaviour(Aquarius* a, Vect2D acc = Vect2D(0, 0)) override;
 
     // new pure virtual
     virtual bool isHungry() const = 0;
     virtual bool canSleep() const;
     virtual bool canWakeup() const;
-    virtual void eat( Fish&) = 0;
+    virtual void eat(Fish&) = 0;
     virtual std::string getType() const = 0;
     virtual int getValoreNutrizionale() const = 0;
     virtual double getVisibility() const = 0;

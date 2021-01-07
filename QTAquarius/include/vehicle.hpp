@@ -8,52 +8,65 @@
 class Aquarius;
 
 class Vehicle : virtual public CartesianObject2D {
-   protected:
+   private:
+    Vect2D _acc;
     Vect2D _computedvelocity;
     Vect2D _computedposition;
     Vect2D _velocity;
     Vect2D _wander;
-    double maxSpeed = 4;   // tipo 4
-    double maxForce = .1;  // 0 <= x <= 1
 
-    double PURSUIT_forwardSteps = 5;
+    static const double PURSUIT_forwardSteps;
 
-    double WANDER_MAX_STRENGTH = 5;
-    double WANDER_MAX_RATE = 45;
-    double WANDER_forwardSteps = 10;
-    double wander_strength = 1;  // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_STRENGTH)
-    double wander_rate = 1;      // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_RATE)
+    static const double WANDER_MAX_STRENGTH;
+    static const double WANDER_MAX_RATE;
+    static const double WANDER_forwardSteps;
+    static const double wander_strength;  // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_STRENGTH)
+    static const double wander_rate;      // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_RATE)
 
+   protected:
     /** 
      * Calculates the behaviour of the vehicle
-     * @param acc acceleration from previous step, default = Vect2D(0,0)
+     * @param Aquarius* aquarius pointer
      * @return Vect2D the acceleration
     */
-    virtual Vect2D behaviour(Aquarius*, Vect2D acc = Vect2D()) = 0;
+    virtual void behaviour(Aquarius*) = 0;
 
    public:
+    static const double maxSpeed;  // tipo 4
+    static const double maxForce;  // 0 <= x <= 1
+
     Vehicle();
-    //Vehicle(double maxSpeed, double maxForce);
     virtual ~Vehicle();
+
+    /**
+     * Set the force of acceleration
+     * @param acc
+    */
+    void setForce(const Vect2D&);
+    /**
+     * Add the force of acceleration, to the already calculated one 
+     * @param acc
+     * @param weight
+    */
+    void applyForce(const Vect2D&, const double& = 1);
 
     Vect2D getVelocity() const;
 
-    void setPosition(const Vect2D&);
-    void setVelocity(const Vect2D&);
-
-    Vect2D seek(const Vect2D&) const;
-    Vect2D arrive(const Vect2D&) const;
-    Vect2D flee(const Vect2D&) const;
-    Vect2D pursuit(const Vehicle&) const;
-    Vect2D escape(const Vehicle&) const;
-    Vect2D wander();
-    Vect2D stop() const;
+    // utility functions to move around
+    Vect2D seek(const Vect2D&) const;      // seek for that point
+    Vect2D arrive(const Vect2D&) const;    // arrive at that point
+    Vect2D flee(const Vect2D&) const;      // run from that point
+    Vect2D pursuit(const Vehicle&) const;  // follow a vehicle
+    Vect2D escape(const Vehicle&) const;   // run from a vehicle
+    Vect2D wander();                       // wander around
+    Vect2D stop() const;                   // stop the vehicle
     Vect2D stayWithinBorders(const Vect2D&, const unsigned int distance) const;
 
+    // pure virtual
     virtual Vehicle* clone() const = 0;
-
     virtual bool isInRange(const Vect2D& v) const = 0;
 
+    //
     virtual void advance(Aquarius* a, int phase) final;
 };
 

@@ -14,13 +14,63 @@ Predatore::Predatore(const Vect2D& position, const std::string& name) : Cartesia
 // overrides
 Predatore::~Predatore(){};
 
-Vect2D Predatore::behaviour(Aquarius* a, Vect2D acc) {
+// Vect2D Predatore::behaviour(Aquarius* a, Vect2D acc) {
+//     Vect2D alignement;
+//     Vect2D separation;
+//     Vect2D cohesion;
+//     int count = 0;
+//     for (auto& f : a->getAllFish()) {
+//         if (f && &(*f) != this && isInRange(f->getPosition())) {
+//             // alignment step
+//             alignement += f->getVelocity();
+
+//             // separation step
+//             Vect2D diff = position - f->getPosition();
+//             double d = diff.mag();
+//             if (d != 0)
+//                 diff.div(d * d);
+//             separation += diff;
+
+//             // cohesion step
+//             cohesion += f->getPosition();
+
+//             count++;
+//         }
+//     }
+//     if (count != 0) {
+//         alignement /= count;
+//         separation /= count;
+//         cohesion /= count;
+
+//         alignement.setMagnitude(Vehicle::maxSpeed);
+//         alignement.rem(getVelocity());
+//         alignement.limit(.8);
+
+//         separation.setMagnitude(Vehicle::maxSpeed);
+//         separation.rem(getVelocity());
+//         separation.limit(.8);
+
+//         cohesion.rem(position);
+//         cohesion.setMagnitude(Vehicle::maxSpeed);
+//         cohesion.rem(getVelocity());
+//         cohesion.limit(.8);
+
+//         acc += alignement;
+//         acc += separation * .3;
+//         acc += cohesion * .3;
+//         acc.setMagnitude(maxSpeed);
+//     }
+
+//     return Fish::behaviour(a, acc);
+// }
+
+void Predatore::behaviour(Aquarius* a) {
     Vect2D alignement;
     Vect2D separation;
     Vect2D cohesion;
     int count = 0;
     for (auto& f : a->getAllFish()) {
-        if (f && f.get() != this && isInRange(f->getPosition())) {
+        if (f && &(*f) != this && isInRange(f->getPosition())) {
             // alignment step
             alignement += f->getVelocity();
 
@@ -42,26 +92,24 @@ Vect2D Predatore::behaviour(Aquarius* a, Vect2D acc) {
         separation /= count;
         cohesion /= count;
 
-        alignement.setMagnitude(maxSpeed);
-        alignement.rem(_velocity);
+        alignement.setMagnitude(Vehicle::maxSpeed);
+        alignement.rem(getVelocity());
         alignement.limit(.8);
 
-        separation.setMagnitude(maxSpeed);
-        separation.rem(_velocity);
+        separation.setMagnitude(Vehicle::maxSpeed);
+        separation.rem(getVelocity());
         separation.limit(.8);
 
         cohesion.rem(position);
-        cohesion.setMagnitude(maxSpeed);
-        cohesion.rem(_velocity);
+        cohesion.setMagnitude(Vehicle::maxSpeed);
+        cohesion.rem(getVelocity());
         cohesion.limit(.8);
 
-        acc += alignement;
-        acc += separation * .3;
-        acc += cohesion * .3;
-        acc.setMagnitude(maxSpeed);
+        applyForce(alignement);
+        applyForce(separation, .3);
+        applyForce(cohesion, .3);
     }
-
-    return Fish::behaviour(a, acc);
+    Fish::behaviour(a);
 }
 
 bool Predatore::operator==(const Fish& f) const {
@@ -95,7 +143,7 @@ int Predatore::getValoreNutrizionale() const { return 3; }  // from Fish
 
 double Predatore::getVisibility() const {
     return .2;
-}  // from Fish
+}
 
 bool Predatore::isInRange(const Vect2D& p) const {
     return position.distance(p) < 100;  //&& _velocity.angleBetweenRad(p) < M_PI;

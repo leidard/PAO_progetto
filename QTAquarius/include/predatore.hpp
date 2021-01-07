@@ -8,12 +8,15 @@
 class Aquarius;
 
 class Predatore : public Fish {
+   protected:
+    virtual void behaviour(Aquarius*) override;
+
    public:
     Predatore(const Vect2D&, const std::string& = "no name");
 
     // overrides
     virtual ~Predatore();
-    virtual Vect2D behaviour(Aquarius* a, Vect2D acc = Vect2D(0, 0)) override;
+    //virtual Vect2D behaviour(Aquarius* a, Vect2D acc = Vect2D(0, 0)) override;
 
     // definition of pure virtual
     virtual bool isHungry() const override;

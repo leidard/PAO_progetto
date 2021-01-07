@@ -7,12 +7,14 @@
 #define PREDA_H
 
 class Preda : public Fish {
+   protected:
+    virtual void behaviour(Aquarius*) override;
+
    public:
     Preda(const Vect2D&, const std::string&);
 
     // overrides
     virtual ~Preda();
-    virtual Vect2D behaviour(Aquarius*, Vect2D acc = Vect2D(0, 0)) override;
 
     // new pure virtual
     virtual bool isHungry() const override;

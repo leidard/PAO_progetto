@@ -28,22 +28,65 @@ bool Fish::canWakeup() const {
     return _daycycle.isDay();
 }
 
-Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
+// Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
+//     _daycycle++;  //increase progress
+//     if (isAsleep()) {
+//         if (canWakeup())
+//             wakeup();
+//         setForce(stop());
+//         return stop();
+//     }
+//     // é sveglio
+//     _stamina -= 1 / 50.0;
+//     if (_stamina <= 0) {
+//         setIsGone();
+//         return stop();
+//     }                   //starved to death
+//     if (canSleep()) {   // puó dormire?
+//         sleep();        // dorme
+//         return stop();  // turno finito
+//     }
+//     // é sveglio e non puó dormire
+//     if (isHungry()) {  // ha fame? then cerca cibo, mira verso il cibo con nuova accelerazione != acc parametro
+//         Fish* candidato = nullptr;
+//         double mindist = 0;
+//         for (auto& f : a->getAllFish()) {
+//             if (*this != *f && f->getValoreNutrizionale() < getValoreNutrizionale() && isInRange(f->getPosition())) {
+//                 if (!candidato || Vect2D::distance(position, f->getPosition()) < mindist) {
+//                     mindist = Vect2D::distance(position, f->getPosition());
+//                     candidato = &*f;
+//                 }
+//             }
+//         }
+//         if (candidato != nullptr) {
+//             if (mindist < getVelocity().mag()) eat(*candidato);
+//             return pursuit(*candidato);
+//         }
+//     }
+//     // é sveglio, non puó dormire, non ha fame || non ha trovato cibo
+//     // quindi vaga a caso
+//     return acc + wander().mult(.2);
+// }
+
+void Fish::behaviour(Aquarius* a) {
     _daycycle++;  //increase progress
     if (isAsleep()) {
         if (canWakeup())
             wakeup();
-        return stop();
+        setForce(stop());
+        return;
     }
     // é sveglio
     _stamina -= 1 / 50.0;
     if (_stamina <= 0) {
         setIsGone();
-        return stop();
-    }                   //starved to death
-    if (canSleep()) {   // puó dormire?
-        sleep();        // dorme
-        return stop();  // turno finito
+        setForce(stop());
+        return;
+    }                  //starved to death
+    if (canSleep()) {  // puó dormire?
+        sleep();       // dorme
+        setForce(stop());
+        return;  // turno finito
     }
     // é sveglio e non puó dormire
     if (isHungry()) {  // ha fame? then cerca cibo, mira verso il cibo con nuova accelerazione != acc parametro
@@ -58,15 +101,15 @@ Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
             }
         }
         if (candidato != nullptr) {
-            if (mindist < _velocity.mag()) eat(*candidato);
-            return pursuit(*candidato);
+            if (mindist < getVelocity().mag()) eat(*candidato);
+            setForce(pursuit(*candidato));
+            return;
         }
     }
     // é sveglio, non puó dormire, non ha fame || non ha trovato cibo
     // quindi vaga a caso
-    return acc + wander().mult(.1);
+    applyForce(wander(), .2);
 }
-
 /*
 Vect2D Vehicle::desired_separation(const std::vector<Vehicle>& boids) const {
     Vect2D desired;

@@ -10,11 +10,30 @@ Preda::Preda(const Vect2D& position, const std::string& name) : CartesianObject2
 
 Preda::~Preda() {}
 
-Vect2D Preda::behaviour(Aquarius* a, Vect2D acc) {
+// Vect2D Preda::behaviour(Aquarius* a, Vect2D acc) {
+//     Vect2D avgloc;
+//     int count = 0;
+//     for (auto& f : a->getAllFish()) {
+//         if (f && &(*f) != this && isInRange(f->getPosition()) && f->getValoreNutrizionale() > getValoreNutrizionale()) {
+//             // alignment step
+
+//             avgloc += f->getPosition();
+
+//             count++;
+//         }
+//     }
+//     if (count != 0) {
+//         avgloc /= count;
+//         acc += flee(avgloc);
+//     }
+//     return Fish::behaviour(a, acc);
+// }
+
+void Preda::behaviour(Aquarius* a) {
     Vect2D avgloc;
     int count = 0;
     for (auto& f : a->getAllFish()) {
-        if (f && f.get() != this && isInRange(f->getPosition()) && f->getValoreNutrizionale() > getValoreNutrizionale()) {
+        if (f && &(*f) != this && isInRange(f->getPosition()) && f->getValoreNutrizionale() > getValoreNutrizionale()) {
             // alignment step
 
             avgloc += f->getPosition();
@@ -23,14 +42,13 @@ Vect2D Preda::behaviour(Aquarius* a, Vect2D acc) {
         }
     }
     if (count != 0) {
-        avgloc /= count;  // separation ora é la posizione media
-
-        Vect2D separation = flee(avgloc).limit(.8);
-
-        acc += separation;
+        avgloc /= count;
+        applyForce(flee(avgloc));
     }
-    return Fish::behaviour(a, acc);
+
+    Fish::behaviour(a);
 }
+
 bool Preda::operator==(const Fish& f) const {
     auto d = dynamic_cast<const Preda*>(&f);
     return d != nullptr && d == this;
