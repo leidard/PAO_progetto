@@ -6,7 +6,7 @@
 #include "deepptr.hpp"
 #include "vect2d.hpp"
 
-const double Vehicle::maxSpeed = 5;   // 4 pixel per frame
+const double Vehicle::maxSpeed = 5;    // 4 pixel per frame
 const double Vehicle::maxForce = .15;  // the lower the slower is to apply changes to the velocity
 
 const double Vehicle::PURSUIT_forwardSteps = 5;  // look forward for 5 steps
@@ -143,10 +143,11 @@ void Vehicle::advance(Aquarius* a, int phase) {  //divide the method with 2 phas
         _computedvelocity = _velocity + _acc;
         _computedvelocity.limit(Vehicle::maxSpeed);
         _computedposition = position + _computedvelocity;
-
         _computedposition.bounds(bounds);  // mal che vada non farli scomparire del tutto
+        
     } else {
         _velocity = _computedvelocity;
         position = _computedposition;
+        _acc = Vect2D();
     }
 }
