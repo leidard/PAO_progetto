@@ -10,17 +10,17 @@ class DeepPtr {
 
    public:
     DeepPtr(T* = nullptr);
-    DeepPtr(const DeepPtr<T>& d);  // delete this
-    DeepPtr(DeepPtr<T>&& d);
-    DeepPtr& operator=(const DeepPtr<T>& d);  // delete this
-    DeepPtr& operator=(DeepPtr<T>&& d);
+    DeepPtr(const DeepPtr& d);  // delete this
+    DeepPtr(DeepPtr&& d);
+    DeepPtr& operator=(const DeepPtr& d);  // delete this
+    DeepPtr& operator=(DeepPtr&& d);
     ~DeepPtr();
 
     T* get() const;
 
     T* release();
 
-    void swap(DeepPtr<T>&);
+    void swap(DeepPtr&);
 
     operator bool() const;
     bool operator!() const;

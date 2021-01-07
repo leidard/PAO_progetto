@@ -77,14 +77,14 @@ void Controller::prev() {
 }
 
 const Fish* Controller::getCurrent() {
-    if (infoviewpos >= 0 && infoviewpos < _model->getAllFish().size())
+    if (infoviewpos < _model->getAllFish().size())
         return _model->getAllFish()[infoviewpos].get();
     else
         return nullptr;
 }
 
 void Controller::updateName(const std::string& name) {
-    if (infoviewpos >= 0 && infoviewpos < _model->getAllFish().size())
+    if (infoviewpos < _model->getAllFish().size())
         _model->getAllFish()[infoviewpos]->setName(name);
 }
 

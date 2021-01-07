@@ -64,7 +64,7 @@ Vect2D Fish::behaviour(Aquarius* a, Vect2D acc) {
     }
     // é sveglio, non puó dormire, non ha fame || non ha trovato cibo
     // quindi vaga a caso
-    return acc + wander().mult(.1) + stayWithinBorders(Vect2D(a->getWidth(), a->getHeight()), 100);
+    return acc + wander().mult(.1);
 }
 
 /*

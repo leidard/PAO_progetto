@@ -8,7 +8,7 @@
 
 Vehicle::Vehicle() : _velocity(1, 1), _wander(1, 1) {
     _velocity.setMagnitude(maxSpeed);
-    _velocity.rotateDeg(std::rand() % 180);
+    _velocity.rotateDeg(std::rand() % 360 - 180);
 }
 
 Vehicle::~Vehicle() {}
@@ -67,10 +67,8 @@ Vect2D Vehicle::wander() {
 }
 
 Vect2D Vehicle::stop() const {
-    // auto a = arrive(position + _velocity.setMagnitude(10));
-    // std::cout << "(" << a.x() << "," << a.y() << ")" << std::endl;
-    Vect2D brakeforce = _velocity.mult(-maxForce);  // forza opposta all'accelerazione
-    return brakeforce;
+     return _velocity * (-maxForce);
+    //return _velocity.mult(-1);
 }
 
 Vect2D Vehicle::stayWithinBorders(const Vect2D& size, const unsigned int distance) const {
@@ -118,12 +116,14 @@ Vect2D Vehicle::stayWithinBorders(const Vect2D& size, const unsigned int distanc
 // #include <iostream>
 void Vehicle::advance(Aquarius* a, int phase) {  //divide the method with 2 phase triggere within the aquarius
     if (!phase) {
-        Vect2D acc = behaviour(a).limit(maxForce);
-        _computedvelocity = _velocity + acc;
-        _computedposition = position + _computedvelocity;
         auto w = a->getWidth();
         auto h = a->getHeight();
-        _computedposition.bounds(Vect2D(w + 20, h + 20));
+        Vect2D bounds = Vect2D(w, h);
+        Vect2D acc = (stayWithinBorders(bounds, 100) + behaviour(a)).limit(maxForce);
+        _computedvelocity = _velocity + acc;
+        _computedposition = position + _computedvelocity;
+
+        _computedposition.bounds(bounds); // mal che vada non farli scomparire del tutto
     } else {
         _velocity = _computedvelocity;
         position = _computedposition;

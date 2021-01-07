@@ -56,7 +56,7 @@ FishInfoView::FishInfoView(QWidget* parent) : QDialog(parent) {
     setLayout(layout);
 }
 
-void FishInfoView::closeEvent(QCloseEvent* event) {
+void FishInfoView::closeEvent(QCloseEvent* ) {
     killTimer(timerID);
 }
 
@@ -96,7 +96,7 @@ void FishInfoView::setController(Controller* c) {
     controller = c;
 }
 
-void FishInfoView::timerEvent(QTimerEvent* event) {  //aggiorna la progress bar con la stamina
+void FishInfoView::timerEvent(QTimerEvent* ) {  //aggiorna la progress bar con la stamina
     std::cout << "updateInfo" << std::endl;
     updateInfo();
 }

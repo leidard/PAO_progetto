@@ -115,7 +115,7 @@ void AcquarioView::mouseReleaseEvent(QMouseEvent *event){
 }
 
 
-void AcquarioView::paintEvent(QPaintEvent* event) {
+void AcquarioView::paintEvent(QPaintEvent*) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     int i = 0;
