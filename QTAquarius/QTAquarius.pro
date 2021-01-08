@@ -24,7 +24,6 @@ SOURCES += \
     src/vect2d.cpp \
     src/vehicle.cpp \
     src/preda.cpp \
-    src/fishview.cpp \
     src/fishinfoview.cpp
 
 HEADERS += \
@@ -35,7 +34,7 @@ HEADERS += \
     include/daycycle.hpp \
     include/deepptr.hpp \
     include/fish.hpp \
-    include/middlewares/saverloader.hpp \
+    include/saverloader.hpp \
     include/preda.hpp \
     include/predatore.hpp \
     include/stamina.hpp \

@@ -1,31 +1,10 @@
 #include "preda.hpp"
 
 #include "aquarius.hpp"
-#include "deepptr.hpp"
-#include "vector.hpp"
 
 Preda::Preda(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 50 * 10, 25 * 5, 80) {}
 
-Preda::~Preda() {}
-
-// Vect2D Preda::behaviour(Aquarius* a, Vect2D acc) {
-//     Vect2D avgloc;
-//     int count = 0;
-//     for (auto& f : a->getAllFish()) {
-//         if (f && &(*f) != this && isInRange(f->getPosition()) && f->getValoreNutrizionale() > getValoreNutrizionale()) {
-//             // alignment step
-
-//             avgloc += f->getPosition();
-
-//             count++;
-//         }
-//     }
-//     if (count != 0) {
-//         avgloc /= count;
-//         acc += flee(avgloc);
-//     }
-//     return Fish::behaviour(a, acc);
-// }
+Preda::~Preda() = default;
 
 void Preda::behaviour(Aquarius* a) {
     Vect2D avgloc;

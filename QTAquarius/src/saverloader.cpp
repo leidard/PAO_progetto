@@ -1,20 +1,16 @@
-#include "middlewares/saverloader.hpp"
+#include "saverloader.hpp"
 
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QString>
-#include <iostream>
+#include <QtGlobal>
 #include <string>
 
 #include "aquarius.hpp"
-#include "daycycle.hpp"
-#include "fish.hpp"
 #include "preda.hpp"
 #include "predatore.hpp"
-#include "stamina.hpp"
-#include "vect2d.hpp"
 
 SaverLoader::ParseError::ParseError(std::string _msg) : msg(std::string("[JSON ParseError]: " + _msg).c_str()) {}
 
@@ -36,8 +32,11 @@ void SaverLoader::load(Aquarius* a, const std::string& filename) const {
     if (!o.value("width").isDouble()) throw new ParseError("Can't find property: width");
     if (!o.value("height").isDouble()) throw new ParseError("Can't find property: height");
 
+    a->setSize(o.value("width").toDouble(), o.value("height").toDouble());
+
     auto arr = o.value("fish").toArray();
-    for (auto i : arr) {
+    for (auto it = arr.begin(); it < arr.end(); it++) {
+        auto i = *it;
         try {
             a->addFish(parseFish(i));
         } catch (ParseError& err) {
@@ -55,20 +54,14 @@ void SaverLoader::save(Aquarius* a, const std::string& filename) const {
     QJsonArray fish;
 
     for (auto& f : a->getAllFish()) {
-        Predatore* predatore = dynamic_cast<Predatore*>(&*f);
-        if (predatore != nullptr) {
+        if (Predatore* predatore = dynamic_cast<Predatore*>(&*f)) {
             fish.push_back(SaverLoader::serialize(*predatore));
-            continue;
-        }
-        Preda* preda = dynamic_cast<Preda*>(&*f);
-        if (preda != nullptr) {
+        } else if (Preda* preda = dynamic_cast<Preda*>(&*f)) {
             fish.push_back(SaverLoader::serialize(*preda));
-            continue;
         }
     }
 
     o.insert("fish", fish);
-    // o.insert("valoreNutrizionale", f.getValoreNutrizionale());
 }
 
 QJsonObject SaverLoader::serialize(const Predatore& f) {

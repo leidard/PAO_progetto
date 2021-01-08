@@ -1,12 +1,6 @@
 #include "predatore.hpp"
 
-#include <iostream>
-
 #include "aquarius.hpp"
-#include "daycycle.hpp"
-#include "deepptr.hpp"
-#include "stamina.hpp"
-#include "vect2d.hpp"
 
 Predatore::Predatore(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 50 * 10, 150, 100) {}
 

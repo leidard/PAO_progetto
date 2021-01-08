@@ -3,8 +3,6 @@
 #include <cstdlib>
 
 #include "aquarius.hpp"
-#include "deepptr.hpp"
-#include "vect2d.hpp"
 
 const double Vehicle::maxSpeed = 5;    // 4 pixel per frame
 const double Vehicle::maxForce = .15;  // the lower the slower is to apply changes to the velocity
@@ -126,9 +124,6 @@ Vect2D Vehicle::stayWithinBorders(const Vect2D& size, const unsigned int distanc
         return avoid;
 }
 
-#include <iostream>
-using std::cout;
-using std::endl;
 void Vehicle::advance(Aquarius* a, int phase) {  //divide the method with 2 phase triggere within the aquarius
     if (!phase) {
         auto w = a->getWidth();
@@ -136,7 +131,6 @@ void Vehicle::advance(Aquarius* a, int phase) {  //divide the method with 2 phas
         Vect2D bounds = Vect2D(w, h);
         this->behaviour(a);
         applyForce(stayWithinBorders(bounds, 100));
-        // cout << "mag:" << _velocity.mag() << " (" << _acc.x() << "," << _acc.y() << ")" << endl;
 
         _acc.limit(Vehicle::maxForce);
 
