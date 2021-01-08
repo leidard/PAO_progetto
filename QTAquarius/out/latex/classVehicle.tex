@@ -1,0 +1,349 @@
+\hypertarget{classVehicle}{}\section{Vehicle Class Reference}
+\label{classVehicle}\index{Vehicle@{Vehicle}}
+
+
+{\ttfamily \#include $<$vehicle.\+hpp$>$}
+
+
+
+Inheritance diagram for Vehicle\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classVehicle__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Vehicle\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classVehicle__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classVehicle_abaad8187d9f2ede4fb8ea18de0a6764c_abaad8187d9f2ede4fb8ea18de0a6764c}{Vehicle} ()
+\item 
+virtual \hyperlink{classVehicle_a61ab140c755b8e0e824d54117cf4546f_a61ab140c755b8e0e824d54117cf4546f}{$\sim$\+Vehicle} ()
+\item 
+void \hyperlink{classVehicle_a03e22c522e6f526f95428c81d0762833_a03e22c522e6f526f95428c81d0762833}{set\+Force} (const \hyperlink{classVect2D}{Vect2D} \&)
+\item 
+void \hyperlink{classVehicle_a82fbbd5aafc1ba89c3daa4da09989bbe_a82fbbd5aafc1ba89c3daa4da09989bbe}{apply\+Force} (const \hyperlink{classVect2D}{Vect2D} \&, const double \&=1)
+\item 
+const \hyperlink{classVect2D}{Vect2D} \& \hyperlink{classVehicle_a87b8266cb3495e8444233a0724e1bf07_a87b8266cb3495e8444233a0724e1bf07}{get\+Velocity} () const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a86c0b5ddcf64443bc090657cd29832bf_a86c0b5ddcf64443bc090657cd29832bf}{seek} (const \hyperlink{classVect2D}{Vect2D} \&) const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a55f8bb6cfbdd97219c2cea6cf3ad3826_a55f8bb6cfbdd97219c2cea6cf3ad3826}{arrive} (const \hyperlink{classVect2D}{Vect2D} \&) const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_ac7dbbb2942b8d642b2ab071def1c2fdb_ac7dbbb2942b8d642b2ab071def1c2fdb}{flee} (const \hyperlink{classVect2D}{Vect2D} \&) const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a9dd4f4a06b4abd3324d317c27bb867d2_a9dd4f4a06b4abd3324d317c27bb867d2}{pursuit} (const \hyperlink{classVehicle}{Vehicle} \&) const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_ae5fbf395cbebf51498cbe8b2baaddc16_ae5fbf395cbebf51498cbe8b2baaddc16}{escape} (const \hyperlink{classVehicle}{Vehicle} \&) const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_af9da94116706c94e5f26df42c258dc6e_af9da94116706c94e5f26df42c258dc6e}{wander} ()
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a9a1cb1e5dab4a474fbe0c1c49482d0ee_a9a1cb1e5dab4a474fbe0c1c49482d0ee}{stop} () const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a6149abf3e3f67df45d950562034d0fae_a6149abf3e3f67df45d950562034d0fae}{stay\+Within\+Borders} (const \hyperlink{classVect2D}{Vect2D} \&, const unsigned int distance) const
+\item 
+virtual \hyperlink{classVehicle}{Vehicle} $\ast$ \hyperlink{classVehicle_a6c8513134608499d188a2e994accdb7c_a6c8513134608499d188a2e994accdb7c}{clone} () const =0
+\item 
+virtual bool \hyperlink{classVehicle_a49a29a7ce993a33f78b96e7b368c60fd_a49a29a7ce993a33f78b96e7b368c60fd}{is\+In\+Range} (const \hyperlink{classVect2D}{Vect2D} \&v) const =0
+\item 
+virtual void \hyperlink{classVehicle_aa4ffd7e5fd11297950347de4e8b5ec93_aa4ffd7e5fd11297950347de4e8b5ec93}{advance} (\hyperlink{classAquarius}{Aquarius} $\ast$a, int phase) final
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classCartesianObject2D_aa3a6b63777852ab9eb9408ed2536abe2_aa3a6b63777852ab9eb9408ed2536abe2}{get\+Position} () const
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const double \hyperlink{classVehicle_aab47c62e89baa5b7e52c2292451fbcb6_aab47c62e89baa5b7e52c2292451fbcb6}{max\+Speed} = 5
+\item 
+static const double \hyperlink{classVehicle_a95c56790e3dc52ab0fa54c279920be54_a95c56790e3dc52ab0fa54c279920be54}{max\+Force} = .\+15
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classVehicle_a7b8b7578202a306a4dc08d587dc70f17_a7b8b7578202a306a4dc08d587dc70f17}{behaviour} (\hyperlink{classAquarius}{Aquarius} $\ast$)=0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classCartesianObject2D_ae02ec6ed11f9bfc0c748da033d6a32f9_ae02ec6ed11f9bfc0c748da033d6a32f9}{position}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a6fbb45a38a758844f9a476ca720ba3f1_a6fbb45a38a758844f9a476ca720ba3f1}{\+\_\+acc}
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a6225fb68a1f2529e3f3c2d7bc47ae9e6_a6225fb68a1f2529e3f3c2d7bc47ae9e6}{\+\_\+computedvelocity}
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a81aa6e8ba6d8d1b6c6efa2d7736a5df4_a81aa6e8ba6d8d1b6c6efa2d7736a5df4}{\+\_\+computedposition}
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_ac888ee5c6b81670f4cb376183b695b57_ac888ee5c6b81670f4cb376183b695b57}{\+\_\+velocity}
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_ade0caf971a0a07f5ca3c50e67af95053_ade0caf971a0a07f5ca3c50e67af95053}{\+\_\+wander}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const double \hyperlink{classVehicle_a1767dabf75009d56e4f4e19712e27041_a1767dabf75009d56e4f4e19712e27041}{P\+U\+R\+S\+U\+I\+T\+\_\+forward\+Steps} = 5
+\item 
+static const double \hyperlink{classVehicle_a88e3c18986136f7724381cbb432b4b9e_a88e3c18986136f7724381cbb432b4b9e}{W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+S\+T\+R\+E\+N\+G\+TH} = 5
+\item 
+static const double \hyperlink{classVehicle_a1b8a65b38d64423f3face242225e32ff_a1b8a65b38d64423f3face242225e32ff}{W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+A\+TE} = 20
+\item 
+static const double \hyperlink{classVehicle_af0cdca2c471fc2a8b1550901a87b6f33_af0cdca2c471fc2a8b1550901a87b6f33}{W\+A\+N\+D\+E\+R\+\_\+forward\+Steps} = 15
+\item 
+static const double \hyperlink{classVehicle_aa9821d59ca26c38cf6189695d92320a4_aa9821d59ca26c38cf6189695d92320a4}{wander\+\_\+strength} = 1
+\item 
+static const double \hyperlink{classVehicle_a2ac138ed3a9f59ccd31c04fa82cd3dfb_a2ac138ed3a9f59ccd31c04fa82cd3dfb}{wander\+\_\+rate} = 1
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classVehicle_abaad8187d9f2ede4fb8ea18de0a6764c_abaad8187d9f2ede4fb8ea18de0a6764c}\label{classVehicle_abaad8187d9f2ede4fb8ea18de0a6764c_abaad8187d9f2ede4fb8ea18de0a6764c}} 
+\index{Vehicle@{Vehicle}!Vehicle@{Vehicle}}
+\index{Vehicle@{Vehicle}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{Vehicle()}{Vehicle()}}
+{\footnotesize\ttfamily Vehicle\+::\+Vehicle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classVehicle_a61ab140c755b8e0e824d54117cf4546f_a61ab140c755b8e0e824d54117cf4546f}\label{classVehicle_a61ab140c755b8e0e824d54117cf4546f_a61ab140c755b8e0e824d54117cf4546f}} 
+\index{Vehicle@{Vehicle}!````~Vehicle@{$\sim$\+Vehicle}}
+\index{````~Vehicle@{$\sim$\+Vehicle}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{$\sim$\+Vehicle()}{~Vehicle()}}
+{\footnotesize\ttfamily Vehicle\+::$\sim$\+Vehicle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classVehicle_aa4ffd7e5fd11297950347de4e8b5ec93_aa4ffd7e5fd11297950347de4e8b5ec93}\label{classVehicle_aa4ffd7e5fd11297950347de4e8b5ec93_aa4ffd7e5fd11297950347de4e8b5ec93}} 
+\index{Vehicle@{Vehicle}!advance@{advance}}
+\index{advance@{advance}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{advance()}{advance()}}
+{\footnotesize\ttfamily void Vehicle\+::advance (\begin{DoxyParamCaption}\item[{\hyperlink{classAquarius}{Aquarius} $\ast$}]{a,  }\item[{int}]{phase }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classVehicle_a82fbbd5aafc1ba89c3daa4da09989bbe_a82fbbd5aafc1ba89c3daa4da09989bbe}\label{classVehicle_a82fbbd5aafc1ba89c3daa4da09989bbe_a82fbbd5aafc1ba89c3daa4da09989bbe}} 
+\index{Vehicle@{Vehicle}!apply\+Force@{apply\+Force}}
+\index{apply\+Force@{apply\+Force}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{apply\+Force()}{applyForce()}}
+{\footnotesize\ttfamily void Vehicle\+::apply\+Force (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{acc,  }\item[{const double \&}]{weight = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+Add the force of acceleration, to the already calculated one 
+\begin{DoxyParams}{Parameters}
+{\em acc} & \\
+\hline
+{\em weight} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classVehicle_a55f8bb6cfbdd97219c2cea6cf3ad3826_a55f8bb6cfbdd97219c2cea6cf3ad3826}\label{classVehicle_a55f8bb6cfbdd97219c2cea6cf3ad3826_a55f8bb6cfbdd97219c2cea6cf3ad3826}} 
+\index{Vehicle@{Vehicle}!arrive@{arrive}}
+\index{arrive@{arrive}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{arrive()}{arrive()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::arrive (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{target }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classVehicle_a7b8b7578202a306a4dc08d587dc70f17_a7b8b7578202a306a4dc08d587dc70f17}\label{classVehicle_a7b8b7578202a306a4dc08d587dc70f17_a7b8b7578202a306a4dc08d587dc70f17}} 
+\index{Vehicle@{Vehicle}!behaviour@{behaviour}}
+\index{behaviour@{behaviour}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{behaviour()}{behaviour()}}
+{\footnotesize\ttfamily virtual void Vehicle\+::behaviour (\begin{DoxyParamCaption}\item[{\hyperlink{classAquarius}{Aquarius} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+Calculates the behaviour of the vehicle 
+\begin{DoxyParams}{Parameters}
+{\em Aquarius$\ast$} & aquarius pointer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classVect2D}{Vect2D} the acceleration 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classFish_abffd423bc7a7730aafa80ec9c0cec9a0_abffd423bc7a7730aafa80ec9c0cec9a0}{Fish}, \hyperlink{classPredatore_adc1dc0f0cdd41923d87dc23b4fc550a7_adc1dc0f0cdd41923d87dc23b4fc550a7}{Predatore}, and \hyperlink{classPreda_a5c0724c3854a2fff92f3c2308514c89e_a5c0724c3854a2fff92f3c2308514c89e}{Preda}.
+
+\mbox{\Hypertarget{classVehicle_a6c8513134608499d188a2e994accdb7c_a6c8513134608499d188a2e994accdb7c}\label{classVehicle_a6c8513134608499d188a2e994accdb7c_a6c8513134608499d188a2e994accdb7c}} 
+\index{Vehicle@{Vehicle}!clone@{clone}}
+\index{clone@{clone}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{clone()}{clone()}}
+{\footnotesize\ttfamily virtual \hyperlink{classVehicle}{Vehicle}$\ast$ Vehicle\+::clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \hyperlink{classCartesianObject2D_afd883b92328b20defd9ed7af581206ab_afd883b92328b20defd9ed7af581206ab}{Cartesian\+Object2D}.
+
+
+
+Implemented in \hyperlink{classFish_a6732945f7373a28b1723e55de8a65e13_a6732945f7373a28b1723e55de8a65e13}{Fish}, \hyperlink{classPredatore_a493b41e7df1542c10cdd646559514917_a493b41e7df1542c10cdd646559514917}{Predatore}, and \hyperlink{classPreda_a12baf94e52873bf3b9a9a9da84c357c5_a12baf94e52873bf3b9a9a9da84c357c5}{Preda}.
+
+\mbox{\Hypertarget{classVehicle_ae5fbf395cbebf51498cbe8b2baaddc16_ae5fbf395cbebf51498cbe8b2baaddc16}\label{classVehicle_ae5fbf395cbebf51498cbe8b2baaddc16_ae5fbf395cbebf51498cbe8b2baaddc16}} 
+\index{Vehicle@{Vehicle}!escape@{escape}}
+\index{escape@{escape}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{escape()}{escape()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::escape (\begin{DoxyParamCaption}\item[{const \hyperlink{classVehicle}{Vehicle} \&}]{v }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classVehicle_ac7dbbb2942b8d642b2ab071def1c2fdb_ac7dbbb2942b8d642b2ab071def1c2fdb}\label{classVehicle_ac7dbbb2942b8d642b2ab071def1c2fdb_ac7dbbb2942b8d642b2ab071def1c2fdb}} 
+\index{Vehicle@{Vehicle}!flee@{flee}}
+\index{flee@{flee}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{flee()}{flee()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::flee (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{target }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCartesianObject2D_aa3a6b63777852ab9eb9408ed2536abe2_aa3a6b63777852ab9eb9408ed2536abe2}\label{classCartesianObject2D_aa3a6b63777852ab9eb9408ed2536abe2_aa3a6b63777852ab9eb9408ed2536abe2}} 
+\index{Vehicle@{Vehicle}!get\+Position@{get\+Position}}
+\index{get\+Position@{get\+Position}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{get\+Position()}{getPosition()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Cartesian\+Object2\+D\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classVehicle_a87b8266cb3495e8444233a0724e1bf07_a87b8266cb3495e8444233a0724e1bf07}\label{classVehicle_a87b8266cb3495e8444233a0724e1bf07_a87b8266cb3495e8444233a0724e1bf07}} 
+\index{Vehicle@{Vehicle}!get\+Velocity@{get\+Velocity}}
+\index{get\+Velocity@{get\+Velocity}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{get\+Velocity()}{getVelocity()}}
+{\footnotesize\ttfamily const \hyperlink{classVect2D}{Vect2D} \& Vehicle\+::get\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classVehicle_a49a29a7ce993a33f78b96e7b368c60fd_a49a29a7ce993a33f78b96e7b368c60fd}\label{classVehicle_a49a29a7ce993a33f78b96e7b368c60fd_a49a29a7ce993a33f78b96e7b368c60fd}} 
+\index{Vehicle@{Vehicle}!is\+In\+Range@{is\+In\+Range}}
+\index{is\+In\+Range@{is\+In\+Range}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{is\+In\+Range()}{isInRange()}}
+{\footnotesize\ttfamily virtual bool Vehicle\+::is\+In\+Range (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{v }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \hyperlink{classFish_a65e3b0bf5b211be6c4048aa5939331e1_a65e3b0bf5b211be6c4048aa5939331e1}{Fish}, \hyperlink{classPredatore_ab7cd03e843432d25ba88348a9733a186_ab7cd03e843432d25ba88348a9733a186}{Predatore}, and \hyperlink{classPreda_a4014c320e53abbfc7cbfb30f18791db2_a4014c320e53abbfc7cbfb30f18791db2}{Preda}.
+
+\mbox{\Hypertarget{classVehicle_a9dd4f4a06b4abd3324d317c27bb867d2_a9dd4f4a06b4abd3324d317c27bb867d2}\label{classVehicle_a9dd4f4a06b4abd3324d317c27bb867d2_a9dd4f4a06b4abd3324d317c27bb867d2}} 
+\index{Vehicle@{Vehicle}!pursuit@{pursuit}}
+\index{pursuit@{pursuit}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{pursuit()}{pursuit()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::pursuit (\begin{DoxyParamCaption}\item[{const \hyperlink{classVehicle}{Vehicle} \&}]{v }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classVehicle_a86c0b5ddcf64443bc090657cd29832bf_a86c0b5ddcf64443bc090657cd29832bf}\label{classVehicle_a86c0b5ddcf64443bc090657cd29832bf_a86c0b5ddcf64443bc090657cd29832bf}} 
+\index{Vehicle@{Vehicle}!seek@{seek}}
+\index{seek@{seek}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{seek()}{seek()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::seek (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{target }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classVehicle_a03e22c522e6f526f95428c81d0762833_a03e22c522e6f526f95428c81d0762833}\label{classVehicle_a03e22c522e6f526f95428c81d0762833_a03e22c522e6f526f95428c81d0762833}} 
+\index{Vehicle@{Vehicle}!set\+Force@{set\+Force}}
+\index{set\+Force@{set\+Force}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{set\+Force()}{setForce()}}
+{\footnotesize\ttfamily void Vehicle\+::set\+Force (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{acc }\end{DoxyParamCaption})}
+
+Set the force of acceleration 
+\begin{DoxyParams}{Parameters}
+{\em acc} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classVehicle_a6149abf3e3f67df45d950562034d0fae_a6149abf3e3f67df45d950562034d0fae}\label{classVehicle_a6149abf3e3f67df45d950562034d0fae_a6149abf3e3f67df45d950562034d0fae}} 
+\index{Vehicle@{Vehicle}!stay\+Within\+Borders@{stay\+Within\+Borders}}
+\index{stay\+Within\+Borders@{stay\+Within\+Borders}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{stay\+Within\+Borders()}{stayWithinBorders()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::stay\+Within\+Borders (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{size,  }\item[{const unsigned int}]{distance }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classVehicle_a9a1cb1e5dab4a474fbe0c1c49482d0ee_a9a1cb1e5dab4a474fbe0c1c49482d0ee}\label{classVehicle_a9a1cb1e5dab4a474fbe0c1c49482d0ee_a9a1cb1e5dab4a474fbe0c1c49482d0ee}} 
+\index{Vehicle@{Vehicle}!stop@{stop}}
+\index{stop@{stop}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classVehicle_af9da94116706c94e5f26df42c258dc6e_af9da94116706c94e5f26df42c258dc6e}\label{classVehicle_af9da94116706c94e5f26df42c258dc6e_af9da94116706c94e5f26df42c258dc6e}} 
+\index{Vehicle@{Vehicle}!wander@{wander}}
+\index{wander@{wander}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{wander()}{wander()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::wander (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classVehicle_a6fbb45a38a758844f9a476ca720ba3f1_a6fbb45a38a758844f9a476ca720ba3f1}\label{classVehicle_a6fbb45a38a758844f9a476ca720ba3f1_a6fbb45a38a758844f9a476ca720ba3f1}} 
+\index{Vehicle@{Vehicle}!\+\_\+acc@{\+\_\+acc}}
+\index{\+\_\+acc@{\+\_\+acc}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{\+\_\+acc}{\_acc}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::\+\_\+acc\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classVehicle_a81aa6e8ba6d8d1b6c6efa2d7736a5df4_a81aa6e8ba6d8d1b6c6efa2d7736a5df4}\label{classVehicle_a81aa6e8ba6d8d1b6c6efa2d7736a5df4_a81aa6e8ba6d8d1b6c6efa2d7736a5df4}} 
+\index{Vehicle@{Vehicle}!\+\_\+computedposition@{\+\_\+computedposition}}
+\index{\+\_\+computedposition@{\+\_\+computedposition}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{\+\_\+computedposition}{\_computedposition}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::\+\_\+computedposition\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classVehicle_a6225fb68a1f2529e3f3c2d7bc47ae9e6_a6225fb68a1f2529e3f3c2d7bc47ae9e6}\label{classVehicle_a6225fb68a1f2529e3f3c2d7bc47ae9e6_a6225fb68a1f2529e3f3c2d7bc47ae9e6}} 
+\index{Vehicle@{Vehicle}!\+\_\+computedvelocity@{\+\_\+computedvelocity}}
+\index{\+\_\+computedvelocity@{\+\_\+computedvelocity}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{\+\_\+computedvelocity}{\_computedvelocity}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::\+\_\+computedvelocity\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classVehicle_ac888ee5c6b81670f4cb376183b695b57_ac888ee5c6b81670f4cb376183b695b57}\label{classVehicle_ac888ee5c6b81670f4cb376183b695b57_ac888ee5c6b81670f4cb376183b695b57}} 
+\index{Vehicle@{Vehicle}!\+\_\+velocity@{\+\_\+velocity}}
+\index{\+\_\+velocity@{\+\_\+velocity}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{\+\_\+velocity}{\_velocity}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::\+\_\+velocity\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classVehicle_ade0caf971a0a07f5ca3c50e67af95053_ade0caf971a0a07f5ca3c50e67af95053}\label{classVehicle_ade0caf971a0a07f5ca3c50e67af95053_ade0caf971a0a07f5ca3c50e67af95053}} 
+\index{Vehicle@{Vehicle}!\+\_\+wander@{\+\_\+wander}}
+\index{\+\_\+wander@{\+\_\+wander}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{\+\_\+wander}{\_wander}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::\+\_\+wander\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classVehicle_a95c56790e3dc52ab0fa54c279920be54_a95c56790e3dc52ab0fa54c279920be54}\label{classVehicle_a95c56790e3dc52ab0fa54c279920be54_a95c56790e3dc52ab0fa54c279920be54}} 
+\index{Vehicle@{Vehicle}!max\+Force@{max\+Force}}
+\index{max\+Force@{max\+Force}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{max\+Force}{maxForce}}
+{\footnotesize\ttfamily const double Vehicle\+::max\+Force = .\+15\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classVehicle_aab47c62e89baa5b7e52c2292451fbcb6_aab47c62e89baa5b7e52c2292451fbcb6}\label{classVehicle_aab47c62e89baa5b7e52c2292451fbcb6_aab47c62e89baa5b7e52c2292451fbcb6}} 
+\index{Vehicle@{Vehicle}!max\+Speed@{max\+Speed}}
+\index{max\+Speed@{max\+Speed}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{max\+Speed}{maxSpeed}}
+{\footnotesize\ttfamily const double Vehicle\+::max\+Speed = 5\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classCartesianObject2D_ae02ec6ed11f9bfc0c748da033d6a32f9_ae02ec6ed11f9bfc0c748da033d6a32f9}\label{classCartesianObject2D_ae02ec6ed11f9bfc0c748da033d6a32f9_ae02ec6ed11f9bfc0c748da033d6a32f9}} 
+\index{Vehicle@{Vehicle}!position@{position}}
+\index{position@{position}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Cartesian\+Object2\+D\+::position\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classVehicle_a1767dabf75009d56e4f4e19712e27041_a1767dabf75009d56e4f4e19712e27041}\label{classVehicle_a1767dabf75009d56e4f4e19712e27041_a1767dabf75009d56e4f4e19712e27041}} 
+\index{Vehicle@{Vehicle}!P\+U\+R\+S\+U\+I\+T\+\_\+forward\+Steps@{P\+U\+R\+S\+U\+I\+T\+\_\+forward\+Steps}}
+\index{P\+U\+R\+S\+U\+I\+T\+\_\+forward\+Steps@{P\+U\+R\+S\+U\+I\+T\+\_\+forward\+Steps}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{P\+U\+R\+S\+U\+I\+T\+\_\+forward\+Steps}{PURSUIT\_forwardSteps}}
+{\footnotesize\ttfamily const double Vehicle\+::\+P\+U\+R\+S\+U\+I\+T\+\_\+forward\+Steps = 5\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classVehicle_af0cdca2c471fc2a8b1550901a87b6f33_af0cdca2c471fc2a8b1550901a87b6f33}\label{classVehicle_af0cdca2c471fc2a8b1550901a87b6f33_af0cdca2c471fc2a8b1550901a87b6f33}} 
+\index{Vehicle@{Vehicle}!W\+A\+N\+D\+E\+R\+\_\+forward\+Steps@{W\+A\+N\+D\+E\+R\+\_\+forward\+Steps}}
+\index{W\+A\+N\+D\+E\+R\+\_\+forward\+Steps@{W\+A\+N\+D\+E\+R\+\_\+forward\+Steps}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{W\+A\+N\+D\+E\+R\+\_\+forward\+Steps}{WANDER\_forwardSteps}}
+{\footnotesize\ttfamily const double Vehicle\+::\+W\+A\+N\+D\+E\+R\+\_\+forward\+Steps = 15\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classVehicle_a1b8a65b38d64423f3face242225e32ff_a1b8a65b38d64423f3face242225e32ff}\label{classVehicle_a1b8a65b38d64423f3face242225e32ff_a1b8a65b38d64423f3face242225e32ff}} 
+\index{Vehicle@{Vehicle}!W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+A\+TE@{W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+A\+TE}}
+\index{W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+A\+TE@{W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+A\+TE}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+A\+TE}{WANDER\_MAX\_RATE}}
+{\footnotesize\ttfamily const double Vehicle\+::\+W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+A\+TE = 20\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classVehicle_a88e3c18986136f7724381cbb432b4b9e_a88e3c18986136f7724381cbb432b4b9e}\label{classVehicle_a88e3c18986136f7724381cbb432b4b9e_a88e3c18986136f7724381cbb432b4b9e}} 
+\index{Vehicle@{Vehicle}!W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+S\+T\+R\+E\+N\+G\+TH@{W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+S\+T\+R\+E\+N\+G\+TH}}
+\index{W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+S\+T\+R\+E\+N\+G\+TH@{W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+S\+T\+R\+E\+N\+G\+TH}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+S\+T\+R\+E\+N\+G\+TH}{WANDER\_MAX\_STRENGTH}}
+{\footnotesize\ttfamily const double Vehicle\+::\+W\+A\+N\+D\+E\+R\+\_\+\+M\+A\+X\+\_\+\+S\+T\+R\+E\+N\+G\+TH = 5\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classVehicle_a2ac138ed3a9f59ccd31c04fa82cd3dfb_a2ac138ed3a9f59ccd31c04fa82cd3dfb}\label{classVehicle_a2ac138ed3a9f59ccd31c04fa82cd3dfb_a2ac138ed3a9f59ccd31c04fa82cd3dfb}} 
+\index{Vehicle@{Vehicle}!wander\+\_\+rate@{wander\+\_\+rate}}
+\index{wander\+\_\+rate@{wander\+\_\+rate}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{wander\+\_\+rate}{wander\_rate}}
+{\footnotesize\ttfamily const double Vehicle\+::wander\+\_\+rate = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classVehicle_aa9821d59ca26c38cf6189695d92320a4_aa9821d59ca26c38cf6189695d92320a4}\label{classVehicle_aa9821d59ca26c38cf6189695d92320a4_aa9821d59ca26c38cf6189695d92320a4}} 
+\index{Vehicle@{Vehicle}!wander\+\_\+strength@{wander\+\_\+strength}}
+\index{wander\+\_\+strength@{wander\+\_\+strength}!Vehicle@{Vehicle}}
+\subsubsection{\texorpdfstring{wander\+\_\+strength}{wander\_strength}}
+{\footnotesize\ttfamily const double Vehicle\+::wander\+\_\+strength = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{vehicle_8hpp}{vehicle.\+hpp}\item 
+src/\hyperlink{vehicle_8cpp}{vehicle.\+cpp}\end{DoxyCompactItemize}

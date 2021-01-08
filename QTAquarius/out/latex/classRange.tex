@@ -1,0 +1,150 @@
+\hypertarget{classRange}{}\section{Range Class Reference}
+\label{classRange}\index{Range@{Range}}
+
+
+{\ttfamily \#include $<$bsptree.\+hpp$>$}
+
+
+
+Collaboration diagram for Range\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classRange__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRange_aac818834ebf390ce2b1b8dea544f9123_aac818834ebf390ce2b1b8dea544f9123}{Range} (double w, double h)
+\item 
+\hyperlink{classRange_a3755a3d0c163bba29d5c7469e15765a0_a3755a3d0c163bba29d5c7469e15765a0}{Range} (double x, double y, double w, double h)
+\item 
+\hyperlink{classRange_a917b57d9db8d4176bd8963c8cc620d1b_a917b57d9db8d4176bd8963c8cc620d1b}{Range} (const \hyperlink{classRange}{Range} \&)=default
+\item 
+std\+::tuple$<$ \hyperlink{classRange}{Range}, \hyperlink{classRange}{Range}, \hyperlink{classRange}{Range}, \hyperlink{classRange}{Range} $>$ \hyperlink{classRange_a25a80b49faeb175b80a2028032abbed9_a25a80b49faeb175b80a2028032abbed9}{divide} () const
+\item 
+bool \hyperlink{classRange_a2d9877708da533077fc2eaeef29b89e4_a2d9877708da533077fc2eaeef29b89e4}{contains} (const \hyperlink{classVect2D}{Vect2D} \&point) const
+\item 
+bool \hyperlink{classRange_a75debf858d591b0b26ef6215616166a8_a75debf858d591b0b26ef6215616166a8}{intersects} (const \hyperlink{classRange}{Range} \&range) const
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classRange_ac854e35703f632d845ba8a1ba59f7a4d_ac854e35703f632d845ba8a1ba59f7a4d}{topleft} () const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classRange_a7b1e4a54c72aa3547b94163a4f74a9b7_a7b1e4a54c72aa3547b94163a4f74a9b7}{topright} () const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classRange_a60dee0a1d68dd669b2e760d29c7641e7_a60dee0a1d68dd669b2e760d29c7641e7}{bottomleft} () const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classRange_affd99ce93a18978d79d8c1b4ae8acef9_affd99ce93a18978d79d8c1b4ae8acef9}{bottomright} () const
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classRange_a63693ff85463b676ee7451693af5c2c1_a63693ff85463b676ee7451693af5c2c1}{\+\_\+x}
+\item 
+double \hyperlink{classRange_a5367235978a597b4ff99d50c2e06663c_a5367235978a597b4ff99d50c2e06663c}{\+\_\+y}
+\item 
+double \hyperlink{classRange_a17489275052a741da3c4f7f287a5bea5_a17489275052a741da3c4f7f287a5bea5}{\+\_\+w}
+\item 
+double \hyperlink{classRange_aa28af6a934404eae4bc9cb016b48fc60_aa28af6a934404eae4bc9cb016b48fc60}{\+\_\+h}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classRange_aac818834ebf390ce2b1b8dea544f9123_aac818834ebf390ce2b1b8dea544f9123}\label{classRange_aac818834ebf390ce2b1b8dea544f9123_aac818834ebf390ce2b1b8dea544f9123}} 
+\index{Range@{Range}!Range@{Range}}
+\index{Range@{Range}!Range@{Range}}
+\subsubsection{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Range\+::\+Range (\begin{DoxyParamCaption}\item[{double}]{w,  }\item[{double}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classRange_a3755a3d0c163bba29d5c7469e15765a0_a3755a3d0c163bba29d5c7469e15765a0}\label{classRange_a3755a3d0c163bba29d5c7469e15765a0_a3755a3d0c163bba29d5c7469e15765a0}} 
+\index{Range@{Range}!Range@{Range}}
+\index{Range@{Range}!Range@{Range}}
+\subsubsection{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Range\+::\+Range (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y,  }\item[{double}]{w,  }\item[{double}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classRange_a917b57d9db8d4176bd8963c8cc620d1b_a917b57d9db8d4176bd8963c8cc620d1b}\label{classRange_a917b57d9db8d4176bd8963c8cc620d1b_a917b57d9db8d4176bd8963c8cc620d1b}} 
+\index{Range@{Range}!Range@{Range}}
+\index{Range@{Range}!Range@{Range}}
+\subsubsection{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Range\+::\+Range (\begin{DoxyParamCaption}\item[{const \hyperlink{classRange}{Range} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classRange_a60dee0a1d68dd669b2e760d29c7641e7_a60dee0a1d68dd669b2e760d29c7641e7}\label{classRange_a60dee0a1d68dd669b2e760d29c7641e7_a60dee0a1d68dd669b2e760d29c7641e7}} 
+\index{Range@{Range}!bottomleft@{bottomleft}}
+\index{bottomleft@{bottomleft}!Range@{Range}}
+\subsubsection{\texorpdfstring{bottomleft()}{bottomleft()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Range\+::bottomleft (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classRange_affd99ce93a18978d79d8c1b4ae8acef9_affd99ce93a18978d79d8c1b4ae8acef9}\label{classRange_affd99ce93a18978d79d8c1b4ae8acef9_affd99ce93a18978d79d8c1b4ae8acef9}} 
+\index{Range@{Range}!bottomright@{bottomright}}
+\index{bottomright@{bottomright}!Range@{Range}}
+\subsubsection{\texorpdfstring{bottomright()}{bottomright()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Range\+::bottomright (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classRange_a2d9877708da533077fc2eaeef29b89e4_a2d9877708da533077fc2eaeef29b89e4}\label{classRange_a2d9877708da533077fc2eaeef29b89e4_a2d9877708da533077fc2eaeef29b89e4}} 
+\index{Range@{Range}!contains@{contains}}
+\index{contains@{contains}!Range@{Range}}
+\subsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily bool Range\+::contains (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{point }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classRange_a25a80b49faeb175b80a2028032abbed9_a25a80b49faeb175b80a2028032abbed9}\label{classRange_a25a80b49faeb175b80a2028032abbed9_a25a80b49faeb175b80a2028032abbed9}} 
+\index{Range@{Range}!divide@{divide}}
+\index{divide@{divide}!Range@{Range}}
+\subsubsection{\texorpdfstring{divide()}{divide()}}
+{\footnotesize\ttfamily std\+::tuple$<$\hyperlink{classRange}{Range}, \hyperlink{classRange}{Range}, \hyperlink{classRange}{Range}, \hyperlink{classRange}{Range}$>$ Range\+::divide (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classRange_a75debf858d591b0b26ef6215616166a8_a75debf858d591b0b26ef6215616166a8}\label{classRange_a75debf858d591b0b26ef6215616166a8_a75debf858d591b0b26ef6215616166a8}} 
+\index{Range@{Range}!intersects@{intersects}}
+\index{intersects@{intersects}!Range@{Range}}
+\subsubsection{\texorpdfstring{intersects()}{intersects()}}
+{\footnotesize\ttfamily bool Range\+::intersects (\begin{DoxyParamCaption}\item[{const \hyperlink{classRange}{Range} \&}]{range }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classRange_ac854e35703f632d845ba8a1ba59f7a4d_ac854e35703f632d845ba8a1ba59f7a4d}\label{classRange_ac854e35703f632d845ba8a1ba59f7a4d_ac854e35703f632d845ba8a1ba59f7a4d}} 
+\index{Range@{Range}!topleft@{topleft}}
+\index{topleft@{topleft}!Range@{Range}}
+\subsubsection{\texorpdfstring{topleft()}{topleft()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Range\+::topleft (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classRange_a7b1e4a54c72aa3547b94163a4f74a9b7_a7b1e4a54c72aa3547b94163a4f74a9b7}\label{classRange_a7b1e4a54c72aa3547b94163a4f74a9b7_a7b1e4a54c72aa3547b94163a4f74a9b7}} 
+\index{Range@{Range}!topright@{topright}}
+\index{topright@{topright}!Range@{Range}}
+\subsubsection{\texorpdfstring{topright()}{topright()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Range\+::topright (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classRange_aa28af6a934404eae4bc9cb016b48fc60_aa28af6a934404eae4bc9cb016b48fc60}\label{classRange_aa28af6a934404eae4bc9cb016b48fc60_aa28af6a934404eae4bc9cb016b48fc60}} 
+\index{Range@{Range}!\+\_\+h@{\+\_\+h}}
+\index{\+\_\+h@{\+\_\+h}!Range@{Range}}
+\subsubsection{\texorpdfstring{\+\_\+h}{\_h}}
+{\footnotesize\ttfamily double Range\+::\+\_\+h\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classRange_a17489275052a741da3c4f7f287a5bea5_a17489275052a741da3c4f7f287a5bea5}\label{classRange_a17489275052a741da3c4f7f287a5bea5_a17489275052a741da3c4f7f287a5bea5}} 
+\index{Range@{Range}!\+\_\+w@{\+\_\+w}}
+\index{\+\_\+w@{\+\_\+w}!Range@{Range}}
+\subsubsection{\texorpdfstring{\+\_\+w}{\_w}}
+{\footnotesize\ttfamily double Range\+::\+\_\+w\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classRange_a63693ff85463b676ee7451693af5c2c1_a63693ff85463b676ee7451693af5c2c1}\label{classRange_a63693ff85463b676ee7451693af5c2c1_a63693ff85463b676ee7451693af5c2c1}} 
+\index{Range@{Range}!\+\_\+x@{\+\_\+x}}
+\index{\+\_\+x@{\+\_\+x}!Range@{Range}}
+\subsubsection{\texorpdfstring{\+\_\+x}{\_x}}
+{\footnotesize\ttfamily double Range\+::\+\_\+x\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classRange_a5367235978a597b4ff99d50c2e06663c_a5367235978a597b4ff99d50c2e06663c}\label{classRange_a5367235978a597b4ff99d50c2e06663c_a5367235978a597b4ff99d50c2e06663c}} 
+\index{Range@{Range}!\+\_\+y@{\+\_\+y}}
+\index{\+\_\+y@{\+\_\+y}!Range@{Range}}
+\subsubsection{\texorpdfstring{\+\_\+y}{\_y}}
+{\footnotesize\ttfamily double Range\+::\+\_\+y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{bsptree_8hpp}{bsptree.\+hpp}\end{DoxyCompactItemize}

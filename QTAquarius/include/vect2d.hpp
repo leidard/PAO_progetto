@@ -1,6 +1,4 @@
-#include <cmath>
 #include <iostream>
-#include <utility>
 #ifndef VECT_H
 #define VECT_H
 

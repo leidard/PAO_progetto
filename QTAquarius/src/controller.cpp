@@ -1,19 +1,12 @@
 #include "controller.hpp"
 
-#include <QGraphicsScene>
-#include <QGraphicsView>
 #include <QObject>
-#include <QPointF>
 #include <QTimer>
 
 #include "acquarioview.hpp"
 #include "aquarius.hpp"
-#include "deepptr.hpp"
-#include "fish.hpp"
 #include "preda.hpp"
 #include "predatore.hpp"
-#include "vect2d.hpp"
-#include "vector.hpp"
 
 Controller::Controller(QObject* parent) : QObject(parent), _timer(new QTimer()), _model(nullptr), _view(nullptr), infoviewpos(0) {
     connect(_timer, SIGNAL(timeout()), this, SLOT(advance()));
@@ -74,6 +67,11 @@ void Controller::next() {
 void Controller::prev() {
     if (hasPrev())
         infoviewpos--;
+}
+
+void Controller::reset() {
+    unsigned int last = _model->getAllFish().size() -1;
+    if (infoviewpos > last) infoviewpos = last;
 }
 
 const Fish* Controller::getCurrent() {

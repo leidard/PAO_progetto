@@ -1,5 +1,10 @@
 #include "acquarioview.hpp"
 
+#include <QMenuBar>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QVBoxLayout>
+
 #include "deepptr.hpp"
 #include "fish.hpp"
 #include "fishinfoview.hpp"
@@ -10,7 +15,7 @@
 AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawingPreda(false), drawingPredatore(false), pausa(false) {
     layout = new QVBoxLayout(this);
     menuBar = new QMenuBar(this);
-// TO DO: Creare un .qss per lo stylesheet!
+    // TO DO: Creare un .qss per lo stylesheet!
     setStyleSheet("background-color: #70dbe9;");
     menuBar->setStyleSheet(QString("background-color: white; QMenu::item:selected { color: black}, QMenu::item::hover { color: black}"));
 
@@ -33,20 +38,18 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawingPreda(fals
     aggiungiPredatore->setCheckable(true);
     connect(aggiungiPredatore, &QAction::triggered, this, &AcquarioView::drawPredatore);
 
-
     strumentiOptions->addAction(aggiungiPreda);
     strumentiOptions->addAction(aggiungiPredatore);
 
     connect(strumentiOptions, &QActionGroup::triggered, [](QAction* action) {
         static QAction* lastAction = nullptr;
-        if (action == lastAction)
-        {
-          action->setChecked(false);
-          lastAction = nullptr;
-        }
-        else
-          lastAction = action;
-      });
+        if (action == lastAction) {  // entro qua se lastAction == nullptr == action ??
+            // se dovessi entrare qua sarebbe un Undefined Behaviour!!!!!
+            action->setChecked(false);
+            lastAction = nullptr;
+        } else
+            lastAction = action;
+    });
 
     infoPesci = new QAction("Info pesci", this);
     connect(infoPesci, &QAction::triggered, this, &AcquarioView::openInfo);
@@ -62,7 +65,7 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawingPreda(fals
     menuBar->addMenu(file);
     menuBar->addMenu(strumenti);
     menuBar->addAction(pausariprendi);
-//    menuBar->addAction("Riprendi");
+    //    menuBar->addAction("Riprendi");
     layout->setMenuBar(menuBar);
 
     infoView = new FishInfoView(this);
@@ -72,27 +75,28 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawingPreda(fals
 
 void AcquarioView::openInfo() {
     infoView->show();
+    // connect(this, &AcquarioView::update, infoView, &FishInfoView::updateInfo);
 }
 
-void AcquarioView::drawPreda(){
+void AcquarioView::drawPreda() {
     drawingPreda = drawingPreda ? false : true;
     drawingPredatore = false;
 }
 
-void AcquarioView::drawPredatore(){
+void AcquarioView::drawPredatore() {
     drawingPredatore = drawingPredatore ? false : true;
     drawingPreda = false;
 }
 
-void AcquarioView::stopGo(){
-    if(!pausa){
+void AcquarioView::stopGo() {
+    if (!pausa) {
         controller->stop();
         pausariprendi->setText("Pausa");
-        pausa=true;
-    }else{
+        pausa = true;
+    } else {
         controller->start();
         pausariprendi->setText("Riprendi");
-        pausa=false;
+        pausa = false;
     }
 }
 
@@ -106,25 +110,33 @@ void AcquarioView::resizeEvent(QResizeEvent* event) {
     controller->resize(s.width(), s.height());
 }
 
-void AcquarioView::mouseReleaseEvent(QMouseEvent *event){
+void AcquarioView::mouseReleaseEvent(QMouseEvent* event) {
     if (event->button() == Qt::LeftButton && drawingPredatore) {
         controller->addPredatore(Vect2D(event->x(), event->y()));
-    }else if(event->button() == Qt::LeftButton && drawingPreda) {
+    } else if (event->button() == Qt::LeftButton && drawingPreda) {
         controller->addPreda(Vect2D(event->x(), event->y()));
     }
 }
 
-
 void AcquarioView::paintEvent(QPaintEvent*) {
     QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setRenderHint(QPainter::RenderHint::Antialiasing);
     int i = 0;
     auto& fish = controller->getAllFish();
     for (auto& f : fish) {
         Vect2D pos = f->getPosition();
-        Vect2D vel = f->getVelocity().setMagnitude(15);
-        Vect2D left = Vect2D::rotate(vel, -2.5).setMagnitude(20);
-        Vect2D right = Vect2D::rotate(vel, 2.5).setMagnitude(20);
+        Vect2D vel = f->getVelocity();
+        Vect2D left = Vect2D::rotateDeg(vel, -145);
+        Vect2D right = Vect2D::rotateDeg(vel, 145);
+        if (f->getType() == "predatore") {
+            vel.setMagnitude(15);
+            left.setMagnitude(20);
+            right.setMagnitude(20);
+        } else {
+            vel.setMagnitude(10);
+            left.setMagnitude(15);
+            right.setMagnitude(15);
+        }
         Vect2D fut = pos + vel;
         Vect2D futl = pos + left;
         Vect2D futr = pos + right;
@@ -133,36 +145,14 @@ void AcquarioView::paintEvent(QPaintEvent*) {
         // painter.drawLine(futl.x(), futl.y(), pos.x(), pos.y());
         // painter.drawLine(futr.x(), futr.y(), pos.x(), pos.y());
         // painter.drawLine(futr.x(), futr.y(), fut.x(), fut.y());
-        QPointF* points = new QPointF[3];
-        points[0] = QPointF(futl.x(), futl.y());
-        points[1] = QPointF(futr.x(), futr.y());
-        points[2] = QPointF(fut.x(), fut.y());
-
+        QPointF points[3] = {
+            QPointF(futl.x(), futl.y()),
+            QPointF(futr.x(), futr.y()),
+            QPointF(fut.x(), fut.y())};
         painter.setBrush(QBrush(QColor(f->getType() == "predatore" ? "red" : "green")));
         //        QPixmap pix = QPixmap(":/images/punto.png");
         //        painter.drawPixmap(points, pix);
         painter.drawPolygon(points, 3);
-        //connect(pix, SIGNAL(triggered()), this, SLOT(openInfo(i)));
         i++;
     }
-
-    //    auto veggies = controller->getAllFish();
-    //    for (auto &f : veggies) {
-    //        Vect2D pos = f->getPosition();
-    //        QPointF* points = new QPointF[3];
-    //        points[0] = QPointF(100, 100);
-    //        points[1] = QPointF(110, 110);
-    //        points[2] = QPointF(90, 90);
-    //        painter.setBrush(QBrush(QColor("black")));
-    //        painter.drawPolygon(points, 3);
 }
-
-//void AcquarioView::timerEvent(QTimerEvent* event) {
-//    auto fishes = controller->getAllFish();
-//    double val = fishes[0]->getStamina().getVal();
-//    bar->setValue(val);
-//}
-
-//controller->getFish();
-//controller->getVegetali();
-//}

@@ -1,0 +1,5 @@
+<map id="Preda" name="Preda">
+<area shape="rect" id="node2" href="$classFish.html" title="{Fish\n|# _daycycle\l# _stamina\l&#45; _name\l&#45; _awake\l&#45; gone\l|+ Fish()\l+ getIsGone()\l+ setIsGone()\l+ setName()\l+ getName()\l+ sleep()\l+ wakeup()\l+ isAwake()\l+ isAsleep()\l+ getStamina()\land 12 more...\l# behaviour()\l}" alt="" coords="55,637,163,935"/>
+<area shape="rect" id="node3" href="$classVehicle.html" title="{Vehicle\n|+ maxSpeed\l+ maxForce\l&#45; _acc\l&#45; _computedvelocity\l&#45; _computedposition\l&#45; _velocity\l&#45; _wander\l&#45; PURSUIT_forwardSteps\l&#45; WANDER_MAX_STRENGTH\l&#45; WANDER_MAX_RATE\l&#45; WANDER_forwardSteps\l&#45; wander_strength\l&#45; wander_rate\l|+ Vehicle()\l+ ~Vehicle()\l+ setForce()\l+ applyForce()\l+ getVelocity()\l+ seek()\l+ arrive()\l+ flee()\l+ pursuit()\l+ escape()\land 6 more...\l# behaviour()\l}" alt="" coords="5,175,213,589"/>
+<area shape="rect" id="node4" href="$classCartesianObject2D.html" title="{CartesianObject2D\n|# position\l|+ CartesianObject2D()\l+ ~CartesianObject2D()\l+ clone()\l+ getPosition()\l}" alt="" coords="29,5,190,127"/>
+</map>

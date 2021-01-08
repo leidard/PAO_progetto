@@ -1,0 +1,152 @@
+\hypertarget{classBSPTree}{}\section{B\+S\+P\+Tree$<$ T $>$ Class Template Reference}
+\label{classBSPTree}\index{B\+S\+P\+Tree$<$ T $>$@{B\+S\+P\+Tree$<$ T $>$}}
+
+
+{\ttfamily \#include $<$bsptree.\+hpp$>$}
+
+
+
+Collaboration diagram for B\+S\+P\+Tree$<$ T $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{classBSPTree__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classBSPTree_ac0d5688da625398b735b724afa22891c_ac0d5688da625398b735b724afa22891c}{B\+S\+P\+Tree} (const \hyperlink{classRange}{Range} \&range)
+\item 
+bool \hyperlink{classBSPTree_ac4d6edf03e621e59e96b27b4943d304c_ac4d6edf03e621e59e96b27b4943d304c}{insert} (const \hyperlink{classVect2D}{Vect2D} \&position, T $\ast$data)
+\item 
+T $\ast$ \hyperlink{classBSPTree_a3f713d6aeb66e8b1c1f35f06d49edcf1_a3f713d6aeb66e8b1c1f35f06d49edcf1}{click} (double x, double y, double halfsize)
+\item 
+T $\ast$ \hyperlink{classBSPTree_a442f2b98cf404a7467daea83fda59d9e_a442f2b98cf404a7467daea83fda59d9e}{click} (const \hyperlink{classVect2D}{Vect2D} \&position, double halfsize)
+\item 
+T $\ast$ \hyperlink{classBSPTree_a5dca4c571d2ad30c13b90710ad479df3_a5dca4c571d2ad30c13b90710ad479df3}{click} (const \hyperlink{classRange}{Range} \&r)
+\item 
+void \hyperlink{classBSPTree_a05d3d440bd02e164f450ef26fd94a2d9_a05d3d440bd02e164f450ef26fd94a2d9}{query\+Range} (const \hyperlink{classRange}{Range} \&r, std\+::vector$<$ T $\ast$$>$ \&v)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRange}{Range} \hyperlink{classBSPTree_a9af2e4216eb728b7135b197b0e1c4dea_a9af2e4216eb728b7135b197b0e1c4dea}{\+\_\+range}
+\item 
+const unsigned int \hyperlink{classBSPTree_ac25b3f64ce4f4e49398978cab2382109_ac25b3f64ce4f4e49398978cab2382109}{C\+A\+P\+A\+C\+I\+TY} = 10
+\item 
+std\+::vector$<$ std\+::pair$<$ \hyperlink{classVect2D}{Vect2D}, T $\ast$ $>$ $>$ \hyperlink{classBSPTree_af60e625922e4eeb8647f5cd07d28dddd_af60e625922e4eeb8647f5cd07d28dddd}{\+\_\+data}
+\item 
+\hyperlink{classBSPTree}{B\+S\+P\+Tree} $\ast$ \hyperlink{classBSPTree_a1569e87d368a255fd0f9ba00ebae7949_a1569e87d368a255fd0f9ba00ebae7949}{nw}
+\item 
+\hyperlink{classBSPTree}{B\+S\+P\+Tree} $\ast$ \hyperlink{classBSPTree_aff1f52f86167389c6f35c03dcdda96b5_aff1f52f86167389c6f35c03dcdda96b5}{ne}
+\item 
+\hyperlink{classBSPTree}{B\+S\+P\+Tree} $\ast$ \hyperlink{classBSPTree_ae93464ee431a9bfdc211bb622b69342e_ae93464ee431a9bfdc211bb622b69342e}{sw}
+\item 
+\hyperlink{classBSPTree}{B\+S\+P\+Tree} $\ast$ \hyperlink{classBSPTree_a7f3b004aa986f92ab37af1069a7f1d0b_a7f3b004aa986f92ab37af1069a7f1d0b}{se}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBSPTree_ac0d5688da625398b735b724afa22891c_ac0d5688da625398b735b724afa22891c}\label{classBSPTree_ac0d5688da625398b735b724afa22891c_ac0d5688da625398b735b724afa22891c}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{B\+S\+P\+Tree()}{BSPTree()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::\hyperlink{classBSPTree}{B\+S\+P\+Tree} (\begin{DoxyParamCaption}\item[{const \hyperlink{classRange}{Range} \&}]{range }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classBSPTree_a3f713d6aeb66e8b1c1f35f06d49edcf1_a3f713d6aeb66e8b1c1f35f06d49edcf1}\label{classBSPTree_a3f713d6aeb66e8b1c1f35f06d49edcf1_a3f713d6aeb66e8b1c1f35f06d49edcf1}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!click@{click}}
+\index{click@{click}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{click()}{click()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ \hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::click (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y,  }\item[{double}]{halfsize }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classBSPTree_a442f2b98cf404a7467daea83fda59d9e_a442f2b98cf404a7467daea83fda59d9e}\label{classBSPTree_a442f2b98cf404a7467daea83fda59d9e_a442f2b98cf404a7467daea83fda59d9e}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!click@{click}}
+\index{click@{click}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{click()}{click()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ \hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::click (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{position,  }\item[{double}]{halfsize }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classBSPTree_a5dca4c571d2ad30c13b90710ad479df3_a5dca4c571d2ad30c13b90710ad479df3}\label{classBSPTree_a5dca4c571d2ad30c13b90710ad479df3_a5dca4c571d2ad30c13b90710ad479df3}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!click@{click}}
+\index{click@{click}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{click()}{click()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ \hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::click (\begin{DoxyParamCaption}\item[{const \hyperlink{classRange}{Range} \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classBSPTree_ac4d6edf03e621e59e96b27b4943d304c_ac4d6edf03e621e59e96b27b4943d304c}\label{classBSPTree_ac4d6edf03e621e59e96b27b4943d304c_ac4d6edf03e621e59e96b27b4943d304c}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!insert@{insert}}
+\index{insert@{insert}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::insert (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{position,  }\item[{T $\ast$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classBSPTree_a05d3d440bd02e164f450ef26fd94a2d9_a05d3d440bd02e164f450ef26fd94a2d9}\label{classBSPTree_a05d3d440bd02e164f450ef26fd94a2d9_a05d3d440bd02e164f450ef26fd94a2d9}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!query\+Range@{query\+Range}}
+\index{query\+Range@{query\+Range}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{query\+Range()}{queryRange()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::query\+Range (\begin{DoxyParamCaption}\item[{const \hyperlink{classRange}{Range} \&}]{r,  }\item[{std\+::vector$<$ T $\ast$$>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classBSPTree_af60e625922e4eeb8647f5cd07d28dddd_af60e625922e4eeb8647f5cd07d28dddd}\label{classBSPTree_af60e625922e4eeb8647f5cd07d28dddd_af60e625922e4eeb8647f5cd07d28dddd}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!\+\_\+data@{\+\_\+data}}
+\index{\+\_\+data@{\+\_\+data}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{\+\_\+data}{\_data}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::vector$<$std\+::pair$<$\hyperlink{classVect2D}{Vect2D}, T$\ast$$>$ $>$ \hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classBSPTree_a9af2e4216eb728b7135b197b0e1c4dea_a9af2e4216eb728b7135b197b0e1c4dea}\label{classBSPTree_a9af2e4216eb728b7135b197b0e1c4dea_a9af2e4216eb728b7135b197b0e1c4dea}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!\+\_\+range@{\+\_\+range}}
+\index{\+\_\+range@{\+\_\+range}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{\+\_\+range}{\_range}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\hyperlink{classRange}{Range} \hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::\+\_\+range\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classBSPTree_ac25b3f64ce4f4e49398978cab2382109_ac25b3f64ce4f4e49398978cab2382109}\label{classBSPTree_ac25b3f64ce4f4e49398978cab2382109_ac25b3f64ce4f4e49398978cab2382109}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!C\+A\+P\+A\+C\+I\+TY@{C\+A\+P\+A\+C\+I\+TY}}
+\index{C\+A\+P\+A\+C\+I\+TY@{C\+A\+P\+A\+C\+I\+TY}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{C\+A\+P\+A\+C\+I\+TY}{CAPACITY}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const unsigned int \hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::C\+A\+P\+A\+C\+I\+TY = 10\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classBSPTree_aff1f52f86167389c6f35c03dcdda96b5_aff1f52f86167389c6f35c03dcdda96b5}\label{classBSPTree_aff1f52f86167389c6f35c03dcdda96b5_aff1f52f86167389c6f35c03dcdda96b5}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!ne@{ne}}
+\index{ne@{ne}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{ne}{ne}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\hyperlink{classBSPTree}{B\+S\+P\+Tree}$\ast$ \hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::ne\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classBSPTree_a1569e87d368a255fd0f9ba00ebae7949_a1569e87d368a255fd0f9ba00ebae7949}\label{classBSPTree_a1569e87d368a255fd0f9ba00ebae7949_a1569e87d368a255fd0f9ba00ebae7949}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!nw@{nw}}
+\index{nw@{nw}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{nw}{nw}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\hyperlink{classBSPTree}{B\+S\+P\+Tree}$\ast$ \hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::nw\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classBSPTree_a7f3b004aa986f92ab37af1069a7f1d0b_a7f3b004aa986f92ab37af1069a7f1d0b}\label{classBSPTree_a7f3b004aa986f92ab37af1069a7f1d0b_a7f3b004aa986f92ab37af1069a7f1d0b}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!se@{se}}
+\index{se@{se}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{se}{se}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\hyperlink{classBSPTree}{B\+S\+P\+Tree}$\ast$ \hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::se\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classBSPTree_ae93464ee431a9bfdc211bb622b69342e_ae93464ee431a9bfdc211bb622b69342e}\label{classBSPTree_ae93464ee431a9bfdc211bb622b69342e_ae93464ee431a9bfdc211bb622b69342e}} 
+\index{B\+S\+P\+Tree@{B\+S\+P\+Tree}!sw@{sw}}
+\index{sw@{sw}!B\+S\+P\+Tree@{B\+S\+P\+Tree}}
+\subsubsection{\texorpdfstring{sw}{sw}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\hyperlink{classBSPTree}{B\+S\+P\+Tree}$\ast$ \hyperlink{classBSPTree}{B\+S\+P\+Tree}$<$ T $>$\+::sw\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{bsptree_8hpp}{bsptree.\+hpp}\end{DoxyCompactItemize}

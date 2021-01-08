@@ -1,0 +1,6 @@
+<map id="Vehicle" name="Vehicle">
+<area shape="rect" id="node3" href="$classFish.html" title="{Fish\n|# _daycycle\l# _stamina\l&#45; _name\l&#45; _awake\l&#45; gone\l|+ Fish()\l+ getIsGone()\l+ setIsGone()\l+ setName()\l+ getName()\l+ sleep()\l+ wakeup()\l+ isAwake()\l+ isAsleep()\l+ getStamina()\land 12 more...\l# behaviour()\l}" alt="" coords="129,637,237,935"/>
+<area shape="rect" id="node2" href="$classCartesianObject2D.html" title="{CartesianObject2D\n|# position\l|+ CartesianObject2D()\l+ ~CartesianObject2D()\l+ clone()\l+ getPosition()\l}" alt="" coords="103,5,264,127"/>
+<area shape="rect" id="node4" href="$classPreda.html" title="{Preda\n||+ Preda()\l+ ~Preda()\l+ isHungry()\l+ eat()\l+ clone()\l+ isInRange()\l+ getValoreNutrizionale()\l+ getVisibility()\l+ getType()\l+ operator==()\l+ operator!=()\l# behaviour()\l}" alt="" coords="5,983,172,1221"/>
+<area shape="rect" id="node5" href="$classPredatore.html" title="{Predatore\n||+ Predatore()\l+ ~Predatore()\l+ isHungry()\l+ eat()\l+ clone()\l+ getValoreNutrizionale()\l+ getVisibility()\l+ isInRange()\l+ getType()\l+ operator==()\l+ operator!=()\l# behaviour()\l}" alt="" coords="196,983,363,1221"/>
+</map>

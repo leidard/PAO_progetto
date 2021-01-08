@@ -1,0 +1,165 @@
+\hypertarget{classFood}{}\section{Food Class Reference}
+\label{classFood}\index{Food@{Food}}
+
+
+{\ttfamily \#include $<$food.\+hpp$>$}
+
+
+
+Inheritance diagram for Food\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classFood__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Food\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classFood__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFood_a1c3ad8fc9b17466a7c47a978c7ce79c5_a1c3ad8fc9b17466a7c47a978c7ce79c5}{Food} ()=default
+\item 
+virtual \hyperlink{classFood_ae2a4e53388ef5377a6eb366dcdde3dd7_ae2a4e53388ef5377a6eb366dcdde3dd7}{$\sim$\+Food} ()=default
+\item 
+virtual int \hyperlink{classFood_a9bafe4a8c954c8e99395f25c19cc3eed_a9bafe4a8c954c8e99395f25c19cc3eed}{get\+Valore\+Nutrizionale} () const =0
+\item 
+virtual double \hyperlink{classFood_a81af14eff9dc5ce73dae309f04b20ccd_a81af14eff9dc5ce73dae309f04b20ccd}{get\+Visibility} () const =0
+\item 
+virtual \hyperlink{classFood}{Food} $\ast$ \hyperlink{classFood_a81ef8f27be431b43bfa244fde21ec90d_a81ef8f27be431b43bfa244fde21ec90d}{clone} () const =0
+\item 
+bool \hyperlink{classFood_a63e0188fe0464bc533d800d8cdb17984_a63e0188fe0464bc533d800d8cdb17984}{operator$>$} (const \hyperlink{classFood}{Food} \&) const
+\item 
+bool \hyperlink{classFood_a8f2ac4d8b5434d35947b038390fab95d_a8f2ac4d8b5434d35947b038390fab95d}{operator$>$=} (const \hyperlink{classFood}{Food} \&) const
+\item 
+bool \hyperlink{classFood_ac0c1ef5c9608080ae7e0bbb6375f92ce_ac0c1ef5c9608080ae7e0bbb6375f92ce}{operator$<$} (const \hyperlink{classFood}{Food} \&) const
+\item 
+bool \hyperlink{classFood_a69f902e1e0268b3ad9d99f7a46ab3ae5_a69f902e1e0268b3ad9d99f7a46ab3ae5}{operator$<$=} (const \hyperlink{classFood}{Food} \&) const
+\item 
+bool \hyperlink{classFood_afaba8cd54420aecea26a207f0fd0251a_afaba8cd54420aecea26a207f0fd0251a}{operator==} (const \hyperlink{classFood}{Food} \&) const
+\item 
+bool \hyperlink{classFood_abf50e88ce6cc0db8c43dfb42d2978b01_abf50e88ce6cc0db8c43dfb42d2978b01}{operator!=} (const \hyperlink{classFood}{Food} \&) const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classCartesianObject2D_aa3a6b63777852ab9eb9408ed2536abe2_aa3a6b63777852ab9eb9408ed2536abe2}{get\+Position} () const
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classCartesianObject2D_ae02ec6ed11f9bfc0c748da033d6a32f9_ae02ec6ed11f9bfc0c748da033d6a32f9}{position}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classFood_a1c3ad8fc9b17466a7c47a978c7ce79c5_a1c3ad8fc9b17466a7c47a978c7ce79c5}\label{classFood_a1c3ad8fc9b17466a7c47a978c7ce79c5_a1c3ad8fc9b17466a7c47a978c7ce79c5}} 
+\index{Food@{Food}!Food@{Food}}
+\index{Food@{Food}!Food@{Food}}
+\subsubsection{\texorpdfstring{Food()}{Food()}}
+{\footnotesize\ttfamily Food\+::\+Food (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{classFood_ae2a4e53388ef5377a6eb366dcdde3dd7_ae2a4e53388ef5377a6eb366dcdde3dd7}\label{classFood_ae2a4e53388ef5377a6eb366dcdde3dd7_ae2a4e53388ef5377a6eb366dcdde3dd7}} 
+\index{Food@{Food}!````~Food@{$\sim$\+Food}}
+\index{````~Food@{$\sim$\+Food}!Food@{Food}}
+\subsubsection{\texorpdfstring{$\sim$\+Food()}{~Food()}}
+{\footnotesize\ttfamily virtual Food\+::$\sim$\+Food (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classFood_a81ef8f27be431b43bfa244fde21ec90d_a81ef8f27be431b43bfa244fde21ec90d}\label{classFood_a81ef8f27be431b43bfa244fde21ec90d_a81ef8f27be431b43bfa244fde21ec90d}} 
+\index{Food@{Food}!clone@{clone}}
+\index{clone@{clone}!Food@{Food}}
+\subsubsection{\texorpdfstring{clone()}{clone()}}
+{\footnotesize\ttfamily virtual \hyperlink{classFood}{Food}$\ast$ Food\+::clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \hyperlink{classCartesianObject2D_afd883b92328b20defd9ed7af581206ab_afd883b92328b20defd9ed7af581206ab}{Cartesian\+Object2D}.
+
+
+
+Implemented in \hyperlink{classFish_a6732945f7373a28b1723e55de8a65e13_a6732945f7373a28b1723e55de8a65e13}{Fish}, \hyperlink{classPredatore_a493b41e7df1542c10cdd646559514917_a493b41e7df1542c10cdd646559514917}{Predatore}, \hyperlink{classPreda_ab5db2883ca6f700012cbb14e63752290_ab5db2883ca6f700012cbb14e63752290}{Preda}, and \hyperlink{classVegetale_a969a0aae9c47a8dbb6acb3080fb98984_a969a0aae9c47a8dbb6acb3080fb98984}{Vegetale}.
+
+\mbox{\Hypertarget{classCartesianObject2D_aa3a6b63777852ab9eb9408ed2536abe2_aa3a6b63777852ab9eb9408ed2536abe2}\label{classCartesianObject2D_aa3a6b63777852ab9eb9408ed2536abe2_aa3a6b63777852ab9eb9408ed2536abe2}} 
+\index{Food@{Food}!get\+Position@{get\+Position}}
+\index{get\+Position@{get\+Position}!Food@{Food}}
+\subsubsection{\texorpdfstring{get\+Position()}{getPosition()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Cartesian\+Object2\+D\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classFood_a9bafe4a8c954c8e99395f25c19cc3eed_a9bafe4a8c954c8e99395f25c19cc3eed}\label{classFood_a9bafe4a8c954c8e99395f25c19cc3eed_a9bafe4a8c954c8e99395f25c19cc3eed}} 
+\index{Food@{Food}!get\+Valore\+Nutrizionale@{get\+Valore\+Nutrizionale}}
+\index{get\+Valore\+Nutrizionale@{get\+Valore\+Nutrizionale}!Food@{Food}}
+\subsubsection{\texorpdfstring{get\+Valore\+Nutrizionale()}{getValoreNutrizionale()}}
+{\footnotesize\ttfamily virtual int Food\+::get\+Valore\+Nutrizionale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \hyperlink{classFish_ac67e28c25b3d1d401531d428783c5a71_ac67e28c25b3d1d401531d428783c5a71}{Fish}, \hyperlink{classPredatore_a9317be30d28ab61d3f7472f2b1183ba3_a9317be30d28ab61d3f7472f2b1183ba3}{Predatore}, \hyperlink{classPreda_af2140afa941b41f11552b7ac23ecfca8_af2140afa941b41f11552b7ac23ecfca8}{Preda}, and \hyperlink{classVegetale_a6f174aa44bf87ea44f3737390f1e6490_a6f174aa44bf87ea44f3737390f1e6490}{Vegetale}.
+
+\mbox{\Hypertarget{classFood_a81af14eff9dc5ce73dae309f04b20ccd_a81af14eff9dc5ce73dae309f04b20ccd}\label{classFood_a81af14eff9dc5ce73dae309f04b20ccd_a81af14eff9dc5ce73dae309f04b20ccd}} 
+\index{Food@{Food}!get\+Visibility@{get\+Visibility}}
+\index{get\+Visibility@{get\+Visibility}!Food@{Food}}
+\subsubsection{\texorpdfstring{get\+Visibility()}{getVisibility()}}
+{\footnotesize\ttfamily virtual double Food\+::get\+Visibility (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \hyperlink{classFish_a6c20ea483d1f6237ebf01aee3f2b6e88_a6c20ea483d1f6237ebf01aee3f2b6e88}{Fish}, \hyperlink{classPredatore_a1df89e4272f6cae88ffb445d12112a09_a1df89e4272f6cae88ffb445d12112a09}{Predatore}, \hyperlink{classPreda_aa784b4d7c670d6ca48eac616b94d9753_aa784b4d7c670d6ca48eac616b94d9753}{Preda}, and \hyperlink{classVegetale_a4e4528535441df5619648d279ad81306_a4e4528535441df5619648d279ad81306}{Vegetale}.
+
+\mbox{\Hypertarget{classFood_abf50e88ce6cc0db8c43dfb42d2978b01_abf50e88ce6cc0db8c43dfb42d2978b01}\label{classFood_abf50e88ce6cc0db8c43dfb42d2978b01_abf50e88ce6cc0db8c43dfb42d2978b01}} 
+\index{Food@{Food}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Food@{Food}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool Food\+::operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{classFood}{Food} \&}]{f }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classFood_ac0c1ef5c9608080ae7e0bbb6375f92ce_ac0c1ef5c9608080ae7e0bbb6375f92ce}\label{classFood_ac0c1ef5c9608080ae7e0bbb6375f92ce_ac0c1ef5c9608080ae7e0bbb6375f92ce}} 
+\index{Food@{Food}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Food@{Food}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Food\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{classFood}{Food} \&}]{f }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classFood_a69f902e1e0268b3ad9d99f7a46ab3ae5_a69f902e1e0268b3ad9d99f7a46ab3ae5}\label{classFood_a69f902e1e0268b3ad9d99f7a46ab3ae5_a69f902e1e0268b3ad9d99f7a46ab3ae5}} 
+\index{Food@{Food}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!Food@{Food}}
+\subsubsection{\texorpdfstring{operator$<$=()}{operator<=()}}
+{\footnotesize\ttfamily bool Food\+::operator$<$= (\begin{DoxyParamCaption}\item[{const \hyperlink{classFood}{Food} \&}]{f }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classFood_afaba8cd54420aecea26a207f0fd0251a_afaba8cd54420aecea26a207f0fd0251a}\label{classFood_afaba8cd54420aecea26a207f0fd0251a_afaba8cd54420aecea26a207f0fd0251a}} 
+\index{Food@{Food}!operator==@{operator==}}
+\index{operator==@{operator==}!Food@{Food}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Food\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{classFood}{Food} \&}]{f }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classFood_a63e0188fe0464bc533d800d8cdb17984_a63e0188fe0464bc533d800d8cdb17984}\label{classFood_a63e0188fe0464bc533d800d8cdb17984_a63e0188fe0464bc533d800d8cdb17984}} 
+\index{Food@{Food}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Food@{Food}}
+\subsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool Food\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \hyperlink{classFood}{Food} \&}]{f }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classFood_a8f2ac4d8b5434d35947b038390fab95d_a8f2ac4d8b5434d35947b038390fab95d}\label{classFood_a8f2ac4d8b5434d35947b038390fab95d_a8f2ac4d8b5434d35947b038390fab95d}} 
+\index{Food@{Food}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!Food@{Food}}
+\subsubsection{\texorpdfstring{operator$>$=()}{operator>=()}}
+{\footnotesize\ttfamily bool Food\+::operator$>$= (\begin{DoxyParamCaption}\item[{const \hyperlink{classFood}{Food} \&}]{f }\end{DoxyParamCaption}) const}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classCartesianObject2D_ae02ec6ed11f9bfc0c748da033d6a32f9_ae02ec6ed11f9bfc0c748da033d6a32f9}\label{classCartesianObject2D_ae02ec6ed11f9bfc0c748da033d6a32f9_ae02ec6ed11f9bfc0c748da033d6a32f9}} 
+\index{Food@{Food}!position@{position}}
+\index{position@{position}!Food@{Food}}
+\subsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Cartesian\+Object2\+D\+::position\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{food_8hpp}{food.\+hpp}\item 
+src/\hyperlink{food_8cpp}{food.\+cpp}\end{DoxyCompactItemize}

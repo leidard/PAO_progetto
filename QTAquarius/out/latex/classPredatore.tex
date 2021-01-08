@@ -1,0 +1,439 @@
+\hypertarget{classPredatore}{}\section{Predatore Class Reference}
+\label{classPredatore}\index{Predatore@{Predatore}}
+
+
+{\ttfamily \#include $<$predatore.\+hpp$>$}
+
+
+
+Inheritance diagram for Predatore\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classPredatore__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Predatore\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classPredatore__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPredatore_a8aa157df9ce0145ebd9211e867d27258_a8aa157df9ce0145ebd9211e867d27258}{Predatore} (const \hyperlink{classVect2D}{Vect2D} \&, const std\+::string \&=\char`\"{}no name\char`\"{})
+\item 
+virtual \hyperlink{classPredatore_a72b2c3e53a30cd50693cfeb7c4e838ca_a72b2c3e53a30cd50693cfeb7c4e838ca}{$\sim$\+Predatore} ()
+\item 
+virtual bool \hyperlink{classPredatore_a5fee9e39cc20b5f9fe79aee870af852c_a5fee9e39cc20b5f9fe79aee870af852c}{is\+Hungry} () const override
+\item 
+virtual void \hyperlink{classPredatore_a67da3e1eb33a3e27014acc9195d72d08_a67da3e1eb33a3e27014acc9195d72d08}{eat} (\hyperlink{classFish}{Fish} \&) override
+\item 
+virtual \hyperlink{classPredatore}{Predatore} $\ast$ \hyperlink{classPredatore_a493b41e7df1542c10cdd646559514917_a493b41e7df1542c10cdd646559514917}{clone} () const override
+\item 
+virtual int \hyperlink{classPredatore_a9317be30d28ab61d3f7472f2b1183ba3_a9317be30d28ab61d3f7472f2b1183ba3}{get\+Valore\+Nutrizionale} () const override
+\item 
+virtual double \hyperlink{classPredatore_a1df89e4272f6cae88ffb445d12112a09_a1df89e4272f6cae88ffb445d12112a09}{get\+Visibility} () const override
+\item 
+virtual bool \hyperlink{classPredatore_ab7cd03e843432d25ba88348a9733a186_ab7cd03e843432d25ba88348a9733a186}{is\+In\+Range} (const \hyperlink{classVect2D}{Vect2D} \&) const override
+\item 
+virtual std\+::string \hyperlink{classPredatore_ae88add4104d54d5973b87d76f796a97c_ae88add4104d54d5973b87d76f796a97c}{get\+Type} () const override
+\item 
+virtual bool \hyperlink{classPredatore_a5633b0cdab96d56d7d0aca7f7b046ac6_a5633b0cdab96d56d7d0aca7f7b046ac6}{operator==} (const \hyperlink{classFish}{Fish} \&) const override
+\item 
+virtual bool \hyperlink{classPredatore_a26117f146fc2892877355788c5e5368e_a26117f146fc2892877355788c5e5368e}{operator!=} (const \hyperlink{classFish}{Fish} \&) const override
+\item 
+bool \hyperlink{classFish_a64e050916c0094ac377b8ec0d86a000b_a64e050916c0094ac377b8ec0d86a000b}{get\+Is\+Gone} () const
+\item 
+void \hyperlink{classFish_ad7d3a39831fa4a170a63dde98474b728_ad7d3a39831fa4a170a63dde98474b728}{set\+Is\+Gone} ()
+\item 
+void \hyperlink{classFish_a27a489adca6d1dc91b011ee97f36ae75_a27a489adca6d1dc91b011ee97f36ae75}{set\+Name} (const std\+::string \&)
+\item 
+const std\+::string \& \hyperlink{classFish_a96583314997aab0826f1c595f7d58938_a96583314997aab0826f1c595f7d58938}{get\+Name} () const
+\item 
+void \hyperlink{classFish_acac2f4f6c31adfb0c8f4eb78853445bb_acac2f4f6c31adfb0c8f4eb78853445bb}{sleep} ()
+\item 
+void \hyperlink{classFish_a8160593a43c6ce5263c6280e0cf0a7be_a8160593a43c6ce5263c6280e0cf0a7be}{wakeup} ()
+\item 
+bool \hyperlink{classFish_aea2a66c3cd46d3a672c82ca9e537b9ec_aea2a66c3cd46d3a672c82ca9e537b9ec}{is\+Awake} () const
+\item 
+bool \hyperlink{classFish_a4772391eb9a92dca61b810b40705709b_a4772391eb9a92dca61b810b40705709b}{is\+Asleep} () const
+\item 
+const \hyperlink{classStamina}{Stamina} \& \hyperlink{classFish_a8637a567ecb17376bed45783d5ddb53d_a8637a567ecb17376bed45783d5ddb53d}{get\+Stamina} () const
+\item 
+virtual bool \hyperlink{classFish_a9a94edb09498e8d0d2381c2cc3e2e9dc_a9a94edb09498e8d0d2381c2cc3e2e9dc}{can\+Sleep} () const
+\item 
+virtual bool \hyperlink{classFish_a033298bf0dc885b82dbd195fc4997643_a033298bf0dc885b82dbd195fc4997643}{can\+Wakeup} () const
+\item 
+void \hyperlink{classVehicle_a03e22c522e6f526f95428c81d0762833_a03e22c522e6f526f95428c81d0762833}{set\+Force} (const \hyperlink{classVect2D}{Vect2D} \&)
+\item 
+void \hyperlink{classVehicle_a82fbbd5aafc1ba89c3daa4da09989bbe_a82fbbd5aafc1ba89c3daa4da09989bbe}{apply\+Force} (const \hyperlink{classVect2D}{Vect2D} \&, const double \&=1)
+\item 
+const \hyperlink{classVect2D}{Vect2D} \& \hyperlink{classVehicle_a87b8266cb3495e8444233a0724e1bf07_a87b8266cb3495e8444233a0724e1bf07}{get\+Velocity} () const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a86c0b5ddcf64443bc090657cd29832bf_a86c0b5ddcf64443bc090657cd29832bf}{seek} (const \hyperlink{classVect2D}{Vect2D} \&) const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a55f8bb6cfbdd97219c2cea6cf3ad3826_a55f8bb6cfbdd97219c2cea6cf3ad3826}{arrive} (const \hyperlink{classVect2D}{Vect2D} \&) const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_ac7dbbb2942b8d642b2ab071def1c2fdb_ac7dbbb2942b8d642b2ab071def1c2fdb}{flee} (const \hyperlink{classVect2D}{Vect2D} \&) const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a9dd4f4a06b4abd3324d317c27bb867d2_a9dd4f4a06b4abd3324d317c27bb867d2}{pursuit} (const \hyperlink{classVehicle}{Vehicle} \&) const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_ae5fbf395cbebf51498cbe8b2baaddc16_ae5fbf395cbebf51498cbe8b2baaddc16}{escape} (const \hyperlink{classVehicle}{Vehicle} \&) const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_af9da94116706c94e5f26df42c258dc6e_af9da94116706c94e5f26df42c258dc6e}{wander} ()
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a9a1cb1e5dab4a474fbe0c1c49482d0ee_a9a1cb1e5dab4a474fbe0c1c49482d0ee}{stop} () const
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classVehicle_a6149abf3e3f67df45d950562034d0fae_a6149abf3e3f67df45d950562034d0fae}{stay\+Within\+Borders} (const \hyperlink{classVect2D}{Vect2D} \&, const unsigned int distance) const
+\item 
+virtual void \hyperlink{classVehicle_aa4ffd7e5fd11297950347de4e8b5ec93_aa4ffd7e5fd11297950347de4e8b5ec93}{advance} (\hyperlink{classAquarius}{Aquarius} $\ast$a, int phase) final
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classCartesianObject2D_aa3a6b63777852ab9eb9408ed2536abe2_aa3a6b63777852ab9eb9408ed2536abe2}{get\+Position} () const
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const double \hyperlink{classVehicle_aab47c62e89baa5b7e52c2292451fbcb6_aab47c62e89baa5b7e52c2292451fbcb6}{max\+Speed} = 5
+\item 
+static const double \hyperlink{classVehicle_a95c56790e3dc52ab0fa54c279920be54_a95c56790e3dc52ab0fa54c279920be54}{max\+Force} = .\+15
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classPredatore_adc1dc0f0cdd41923d87dc23b4fc550a7_adc1dc0f0cdd41923d87dc23b4fc550a7}{behaviour} (\hyperlink{classAquarius}{Aquarius} $\ast$) override
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDayCycle}{Day\+Cycle} \hyperlink{classFish_a4b8a32e2a5165ddd1f8af27f4346b3eb_a4b8a32e2a5165ddd1f8af27f4346b3eb}{\+\_\+daycycle}
+\item 
+\hyperlink{classStamina}{Stamina} \hyperlink{classFish_a4948331d0f556344bda8314828eec8dd_a4948331d0f556344bda8314828eec8dd}{\+\_\+stamina}
+\item 
+\hyperlink{classVect2D}{Vect2D} \hyperlink{classCartesianObject2D_ae02ec6ed11f9bfc0c748da033d6a32f9_ae02ec6ed11f9bfc0c748da033d6a32f9}{position}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPredatore_a8aa157df9ce0145ebd9211e867d27258_a8aa157df9ce0145ebd9211e867d27258}\label{classPredatore_a8aa157df9ce0145ebd9211e867d27258_a8aa157df9ce0145ebd9211e867d27258}} 
+\index{Predatore@{Predatore}!Predatore@{Predatore}}
+\index{Predatore@{Predatore}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{Predatore()}{Predatore()}}
+{\footnotesize\ttfamily Predatore\+::\+Predatore (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{position,  }\item[{const std\+::string \&}]{name = {\ttfamily \char`\"{}no~name\char`\"{}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPredatore_a72b2c3e53a30cd50693cfeb7c4e838ca_a72b2c3e53a30cd50693cfeb7c4e838ca}\label{classPredatore_a72b2c3e53a30cd50693cfeb7c4e838ca_a72b2c3e53a30cd50693cfeb7c4e838ca}} 
+\index{Predatore@{Predatore}!````~Predatore@{$\sim$\+Predatore}}
+\index{````~Predatore@{$\sim$\+Predatore}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{$\sim$\+Predatore()}{~Predatore()}}
+{\footnotesize\ttfamily Predatore\+::$\sim$\+Predatore (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classVehicle_aa4ffd7e5fd11297950347de4e8b5ec93_aa4ffd7e5fd11297950347de4e8b5ec93}\label{classVehicle_aa4ffd7e5fd11297950347de4e8b5ec93_aa4ffd7e5fd11297950347de4e8b5ec93}} 
+\index{Predatore@{Predatore}!advance@{advance}}
+\index{advance@{advance}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{advance()}{advance()}}
+{\footnotesize\ttfamily void Vehicle\+::advance (\begin{DoxyParamCaption}\item[{\hyperlink{classAquarius}{Aquarius} $\ast$}]{a,  }\item[{int}]{phase }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classVehicle_a82fbbd5aafc1ba89c3daa4da09989bbe_a82fbbd5aafc1ba89c3daa4da09989bbe}\label{classVehicle_a82fbbd5aafc1ba89c3daa4da09989bbe_a82fbbd5aafc1ba89c3daa4da09989bbe}} 
+\index{Predatore@{Predatore}!apply\+Force@{apply\+Force}}
+\index{apply\+Force@{apply\+Force}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{apply\+Force()}{applyForce()}}
+{\footnotesize\ttfamily void Vehicle\+::apply\+Force (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{acc,  }\item[{const double \&}]{weight = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+Add the force of acceleration, to the already calculated one 
+\begin{DoxyParams}{Parameters}
+{\em acc} & \\
+\hline
+{\em weight} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classVehicle_a55f8bb6cfbdd97219c2cea6cf3ad3826_a55f8bb6cfbdd97219c2cea6cf3ad3826}\label{classVehicle_a55f8bb6cfbdd97219c2cea6cf3ad3826_a55f8bb6cfbdd97219c2cea6cf3ad3826}} 
+\index{Predatore@{Predatore}!arrive@{arrive}}
+\index{arrive@{arrive}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{arrive()}{arrive()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::arrive (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{target }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classPredatore_adc1dc0f0cdd41923d87dc23b4fc550a7_adc1dc0f0cdd41923d87dc23b4fc550a7}\label{classPredatore_adc1dc0f0cdd41923d87dc23b4fc550a7_adc1dc0f0cdd41923d87dc23b4fc550a7}} 
+\index{Predatore@{Predatore}!behaviour@{behaviour}}
+\index{behaviour@{behaviour}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{behaviour()}{behaviour()}}
+{\footnotesize\ttfamily void Predatore\+::behaviour (\begin{DoxyParamCaption}\item[{\hyperlink{classAquarius}{Aquarius} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Calculates the behaviour of the vehicle 
+\begin{DoxyParams}{Parameters}
+{\em Aquarius$\ast$} & aquarius pointer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classVect2D}{Vect2D} the acceleration 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classFish_abffd423bc7a7730aafa80ec9c0cec9a0_abffd423bc7a7730aafa80ec9c0cec9a0}{Fish}.
+
+\mbox{\Hypertarget{classFish_a9a94edb09498e8d0d2381c2cc3e2e9dc_a9a94edb09498e8d0d2381c2cc3e2e9dc}\label{classFish_a9a94edb09498e8d0d2381c2cc3e2e9dc_a9a94edb09498e8d0d2381c2cc3e2e9dc}} 
+\index{Predatore@{Predatore}!can\+Sleep@{can\+Sleep}}
+\index{can\+Sleep@{can\+Sleep}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{can\+Sleep()}{canSleep()}}
+{\footnotesize\ttfamily bool Fish\+::can\+Sleep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classFish_a033298bf0dc885b82dbd195fc4997643_a033298bf0dc885b82dbd195fc4997643}\label{classFish_a033298bf0dc885b82dbd195fc4997643_a033298bf0dc885b82dbd195fc4997643}} 
+\index{Predatore@{Predatore}!can\+Wakeup@{can\+Wakeup}}
+\index{can\+Wakeup@{can\+Wakeup}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{can\+Wakeup()}{canWakeup()}}
+{\footnotesize\ttfamily bool Fish\+::can\+Wakeup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classPredatore_a493b41e7df1542c10cdd646559514917_a493b41e7df1542c10cdd646559514917}\label{classPredatore_a493b41e7df1542c10cdd646559514917_a493b41e7df1542c10cdd646559514917}} 
+\index{Predatore@{Predatore}!clone@{clone}}
+\index{clone@{clone}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{clone()}{clone()}}
+{\footnotesize\ttfamily \hyperlink{classPredatore}{Predatore} $\ast$ Predatore\+::clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{classFish_a6732945f7373a28b1723e55de8a65e13_a6732945f7373a28b1723e55de8a65e13}{Fish}.
+
+\mbox{\Hypertarget{classPredatore_a67da3e1eb33a3e27014acc9195d72d08_a67da3e1eb33a3e27014acc9195d72d08}\label{classPredatore_a67da3e1eb33a3e27014acc9195d72d08_a67da3e1eb33a3e27014acc9195d72d08}} 
+\index{Predatore@{Predatore}!eat@{eat}}
+\index{eat@{eat}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{eat()}{eat()}}
+{\footnotesize\ttfamily void Predatore\+::eat (\begin{DoxyParamCaption}\item[{\hyperlink{classFish}{Fish} \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{classFish_ae551e094ddda73e896de484dcb460412_ae551e094ddda73e896de484dcb460412}{Fish}.
+
+\mbox{\Hypertarget{classVehicle_ae5fbf395cbebf51498cbe8b2baaddc16_ae5fbf395cbebf51498cbe8b2baaddc16}\label{classVehicle_ae5fbf395cbebf51498cbe8b2baaddc16_ae5fbf395cbebf51498cbe8b2baaddc16}} 
+\index{Predatore@{Predatore}!escape@{escape}}
+\index{escape@{escape}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{escape()}{escape()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::escape (\begin{DoxyParamCaption}\item[{const \hyperlink{classVehicle}{Vehicle} \&}]{v }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classVehicle_ac7dbbb2942b8d642b2ab071def1c2fdb_ac7dbbb2942b8d642b2ab071def1c2fdb}\label{classVehicle_ac7dbbb2942b8d642b2ab071def1c2fdb_ac7dbbb2942b8d642b2ab071def1c2fdb}} 
+\index{Predatore@{Predatore}!flee@{flee}}
+\index{flee@{flee}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{flee()}{flee()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::flee (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{target }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classFish_a64e050916c0094ac377b8ec0d86a000b_a64e050916c0094ac377b8ec0d86a000b}\label{classFish_a64e050916c0094ac377b8ec0d86a000b_a64e050916c0094ac377b8ec0d86a000b}} 
+\index{Predatore@{Predatore}!get\+Is\+Gone@{get\+Is\+Gone}}
+\index{get\+Is\+Gone@{get\+Is\+Gone}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{get\+Is\+Gone()}{getIsGone()}}
+{\footnotesize\ttfamily bool Fish\+::get\+Is\+Gone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classFish_a96583314997aab0826f1c595f7d58938_a96583314997aab0826f1c595f7d58938}\label{classFish_a96583314997aab0826f1c595f7d58938_a96583314997aab0826f1c595f7d58938}} 
+\index{Predatore@{Predatore}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{get\+Name()}{getName()}}
+{\footnotesize\ttfamily const std\+::string \& Fish\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classCartesianObject2D_aa3a6b63777852ab9eb9408ed2536abe2_aa3a6b63777852ab9eb9408ed2536abe2}\label{classCartesianObject2D_aa3a6b63777852ab9eb9408ed2536abe2_aa3a6b63777852ab9eb9408ed2536abe2}} 
+\index{Predatore@{Predatore}!get\+Position@{get\+Position}}
+\index{get\+Position@{get\+Position}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{get\+Position()}{getPosition()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Cartesian\+Object2\+D\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classFish_a8637a567ecb17376bed45783d5ddb53d_a8637a567ecb17376bed45783d5ddb53d}\label{classFish_a8637a567ecb17376bed45783d5ddb53d_a8637a567ecb17376bed45783d5ddb53d}} 
+\index{Predatore@{Predatore}!get\+Stamina@{get\+Stamina}}
+\index{get\+Stamina@{get\+Stamina}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{get\+Stamina()}{getStamina()}}
+{\footnotesize\ttfamily const \hyperlink{classStamina}{Stamina} \& Fish\+::get\+Stamina (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classPredatore_ae88add4104d54d5973b87d76f796a97c_ae88add4104d54d5973b87d76f796a97c}\label{classPredatore_ae88add4104d54d5973b87d76f796a97c_ae88add4104d54d5973b87d76f796a97c}} 
+\index{Predatore@{Predatore}!get\+Type@{get\+Type}}
+\index{get\+Type@{get\+Type}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{get\+Type()}{getType()}}
+{\footnotesize\ttfamily std\+::string Predatore\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{classFish_adb00fb6bac2fad27660107c12d1a7fa2_adb00fb6bac2fad27660107c12d1a7fa2}{Fish}.
+
+\mbox{\Hypertarget{classPredatore_a9317be30d28ab61d3f7472f2b1183ba3_a9317be30d28ab61d3f7472f2b1183ba3}\label{classPredatore_a9317be30d28ab61d3f7472f2b1183ba3_a9317be30d28ab61d3f7472f2b1183ba3}} 
+\index{Predatore@{Predatore}!get\+Valore\+Nutrizionale@{get\+Valore\+Nutrizionale}}
+\index{get\+Valore\+Nutrizionale@{get\+Valore\+Nutrizionale}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{get\+Valore\+Nutrizionale()}{getValoreNutrizionale()}}
+{\footnotesize\ttfamily int Predatore\+::get\+Valore\+Nutrizionale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{classFish_a97dd71f31af1e36a630944c5c5b8ff33_a97dd71f31af1e36a630944c5c5b8ff33}{Fish}.
+
+\mbox{\Hypertarget{classVehicle_a87b8266cb3495e8444233a0724e1bf07_a87b8266cb3495e8444233a0724e1bf07}\label{classVehicle_a87b8266cb3495e8444233a0724e1bf07_a87b8266cb3495e8444233a0724e1bf07}} 
+\index{Predatore@{Predatore}!get\+Velocity@{get\+Velocity}}
+\index{get\+Velocity@{get\+Velocity}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{get\+Velocity()}{getVelocity()}}
+{\footnotesize\ttfamily const \hyperlink{classVect2D}{Vect2D} \& Vehicle\+::get\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classPredatore_a1df89e4272f6cae88ffb445d12112a09_a1df89e4272f6cae88ffb445d12112a09}\label{classPredatore_a1df89e4272f6cae88ffb445d12112a09_a1df89e4272f6cae88ffb445d12112a09}} 
+\index{Predatore@{Predatore}!get\+Visibility@{get\+Visibility}}
+\index{get\+Visibility@{get\+Visibility}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{get\+Visibility()}{getVisibility()}}
+{\footnotesize\ttfamily double Predatore\+::get\+Visibility (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{classFish_a6c20ea483d1f6237ebf01aee3f2b6e88_a6c20ea483d1f6237ebf01aee3f2b6e88}{Fish}.
+
+\mbox{\Hypertarget{classFish_a4772391eb9a92dca61b810b40705709b_a4772391eb9a92dca61b810b40705709b}\label{classFish_a4772391eb9a92dca61b810b40705709b_a4772391eb9a92dca61b810b40705709b}} 
+\index{Predatore@{Predatore}!is\+Asleep@{is\+Asleep}}
+\index{is\+Asleep@{is\+Asleep}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{is\+Asleep()}{isAsleep()}}
+{\footnotesize\ttfamily bool Fish\+::is\+Asleep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classFish_aea2a66c3cd46d3a672c82ca9e537b9ec_aea2a66c3cd46d3a672c82ca9e537b9ec}\label{classFish_aea2a66c3cd46d3a672c82ca9e537b9ec_aea2a66c3cd46d3a672c82ca9e537b9ec}} 
+\index{Predatore@{Predatore}!is\+Awake@{is\+Awake}}
+\index{is\+Awake@{is\+Awake}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{is\+Awake()}{isAwake()}}
+{\footnotesize\ttfamily bool Fish\+::is\+Awake (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classPredatore_a5fee9e39cc20b5f9fe79aee870af852c_a5fee9e39cc20b5f9fe79aee870af852c}\label{classPredatore_a5fee9e39cc20b5f9fe79aee870af852c_a5fee9e39cc20b5f9fe79aee870af852c}} 
+\index{Predatore@{Predatore}!is\+Hungry@{is\+Hungry}}
+\index{is\+Hungry@{is\+Hungry}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{is\+Hungry()}{isHungry()}}
+{\footnotesize\ttfamily bool Predatore\+::is\+Hungry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{classFish_a5fa8678bf28b723cfd2e225c217bb523_a5fa8678bf28b723cfd2e225c217bb523}{Fish}.
+
+\mbox{\Hypertarget{classPredatore_ab7cd03e843432d25ba88348a9733a186_ab7cd03e843432d25ba88348a9733a186}\label{classPredatore_ab7cd03e843432d25ba88348a9733a186_ab7cd03e843432d25ba88348a9733a186}} 
+\index{Predatore@{Predatore}!is\+In\+Range@{is\+In\+Range}}
+\index{is\+In\+Range@{is\+In\+Range}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{is\+In\+Range()}{isInRange()}}
+{\footnotesize\ttfamily bool Predatore\+::is\+In\+Range (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{classFish_a65e3b0bf5b211be6c4048aa5939331e1_a65e3b0bf5b211be6c4048aa5939331e1}{Fish}.
+
+\mbox{\Hypertarget{classPredatore_a26117f146fc2892877355788c5e5368e_a26117f146fc2892877355788c5e5368e}\label{classPredatore_a26117f146fc2892877355788c5e5368e_a26117f146fc2892877355788c5e5368e}} 
+\index{Predatore@{Predatore}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool Predatore\+::operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{classFish}{Fish} \&}]{f }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{classFish_aa739aa5c06ff6054b051047bccd3bf6f_aa739aa5c06ff6054b051047bccd3bf6f}{Fish}.
+
+\mbox{\Hypertarget{classPredatore_a5633b0cdab96d56d7d0aca7f7b046ac6_a5633b0cdab96d56d7d0aca7f7b046ac6}\label{classPredatore_a5633b0cdab96d56d7d0aca7f7b046ac6_a5633b0cdab96d56d7d0aca7f7b046ac6}} 
+\index{Predatore@{Predatore}!operator==@{operator==}}
+\index{operator==@{operator==}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Predatore\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{classFish}{Fish} \&}]{f }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{classFish_a3abf96fe9cda276a4b3827464e2b0519_a3abf96fe9cda276a4b3827464e2b0519}{Fish}.
+
+\mbox{\Hypertarget{classVehicle_a9dd4f4a06b4abd3324d317c27bb867d2_a9dd4f4a06b4abd3324d317c27bb867d2}\label{classVehicle_a9dd4f4a06b4abd3324d317c27bb867d2_a9dd4f4a06b4abd3324d317c27bb867d2}} 
+\index{Predatore@{Predatore}!pursuit@{pursuit}}
+\index{pursuit@{pursuit}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{pursuit()}{pursuit()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::pursuit (\begin{DoxyParamCaption}\item[{const \hyperlink{classVehicle}{Vehicle} \&}]{v }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classVehicle_a86c0b5ddcf64443bc090657cd29832bf_a86c0b5ddcf64443bc090657cd29832bf}\label{classVehicle_a86c0b5ddcf64443bc090657cd29832bf_a86c0b5ddcf64443bc090657cd29832bf}} 
+\index{Predatore@{Predatore}!seek@{seek}}
+\index{seek@{seek}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{seek()}{seek()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::seek (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{target }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classVehicle_a03e22c522e6f526f95428c81d0762833_a03e22c522e6f526f95428c81d0762833}\label{classVehicle_a03e22c522e6f526f95428c81d0762833_a03e22c522e6f526f95428c81d0762833}} 
+\index{Predatore@{Predatore}!set\+Force@{set\+Force}}
+\index{set\+Force@{set\+Force}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{set\+Force()}{setForce()}}
+{\footnotesize\ttfamily void Vehicle\+::set\+Force (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{acc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+Set the force of acceleration 
+\begin{DoxyParams}{Parameters}
+{\em acc} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classFish_ad7d3a39831fa4a170a63dde98474b728_ad7d3a39831fa4a170a63dde98474b728}\label{classFish_ad7d3a39831fa4a170a63dde98474b728_ad7d3a39831fa4a170a63dde98474b728}} 
+\index{Predatore@{Predatore}!set\+Is\+Gone@{set\+Is\+Gone}}
+\index{set\+Is\+Gone@{set\+Is\+Gone}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{set\+Is\+Gone()}{setIsGone()}}
+{\footnotesize\ttfamily void Fish\+::set\+Is\+Gone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classFish_a27a489adca6d1dc91b011ee97f36ae75_a27a489adca6d1dc91b011ee97f36ae75}\label{classFish_a27a489adca6d1dc91b011ee97f36ae75_a27a489adca6d1dc91b011ee97f36ae75}} 
+\index{Predatore@{Predatore}!set\+Name@{set\+Name}}
+\index{set\+Name@{set\+Name}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{set\+Name()}{setName()}}
+{\footnotesize\ttfamily void Fish\+::set\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classFish_acac2f4f6c31adfb0c8f4eb78853445bb_acac2f4f6c31adfb0c8f4eb78853445bb}\label{classFish_acac2f4f6c31adfb0c8f4eb78853445bb_acac2f4f6c31adfb0c8f4eb78853445bb}} 
+\index{Predatore@{Predatore}!sleep@{sleep}}
+\index{sleep@{sleep}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{sleep()}{sleep()}}
+{\footnotesize\ttfamily void Fish\+::sleep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classVehicle_a6149abf3e3f67df45d950562034d0fae_a6149abf3e3f67df45d950562034d0fae}\label{classVehicle_a6149abf3e3f67df45d950562034d0fae_a6149abf3e3f67df45d950562034d0fae}} 
+\index{Predatore@{Predatore}!stay\+Within\+Borders@{stay\+Within\+Borders}}
+\index{stay\+Within\+Borders@{stay\+Within\+Borders}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{stay\+Within\+Borders()}{stayWithinBorders()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::stay\+Within\+Borders (\begin{DoxyParamCaption}\item[{const \hyperlink{classVect2D}{Vect2D} \&}]{size,  }\item[{const unsigned int}]{distance }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classVehicle_a9a1cb1e5dab4a474fbe0c1c49482d0ee_a9a1cb1e5dab4a474fbe0c1c49482d0ee}\label{classVehicle_a9a1cb1e5dab4a474fbe0c1c49482d0ee_a9a1cb1e5dab4a474fbe0c1c49482d0ee}} 
+\index{Predatore@{Predatore}!stop@{stop}}
+\index{stop@{stop}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classFish_a8160593a43c6ce5263c6280e0cf0a7be_a8160593a43c6ce5263c6280e0cf0a7be}\label{classFish_a8160593a43c6ce5263c6280e0cf0a7be_a8160593a43c6ce5263c6280e0cf0a7be}} 
+\index{Predatore@{Predatore}!wakeup@{wakeup}}
+\index{wakeup@{wakeup}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{wakeup()}{wakeup()}}
+{\footnotesize\ttfamily void Fish\+::wakeup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classVehicle_af9da94116706c94e5f26df42c258dc6e_af9da94116706c94e5f26df42c258dc6e}\label{classVehicle_af9da94116706c94e5f26df42c258dc6e_af9da94116706c94e5f26df42c258dc6e}} 
+\index{Predatore@{Predatore}!wander@{wander}}
+\index{wander@{wander}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{wander()}{wander()}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Vehicle\+::wander (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classFish_a4b8a32e2a5165ddd1f8af27f4346b3eb_a4b8a32e2a5165ddd1f8af27f4346b3eb}\label{classFish_a4b8a32e2a5165ddd1f8af27f4346b3eb_a4b8a32e2a5165ddd1f8af27f4346b3eb}} 
+\index{Predatore@{Predatore}!\+\_\+daycycle@{\+\_\+daycycle}}
+\index{\+\_\+daycycle@{\+\_\+daycycle}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{\+\_\+daycycle}{\_daycycle}}
+{\footnotesize\ttfamily \hyperlink{classDayCycle}{Day\+Cycle} Fish\+::\+\_\+daycycle\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classFish_a4948331d0f556344bda8314828eec8dd_a4948331d0f556344bda8314828eec8dd}\label{classFish_a4948331d0f556344bda8314828eec8dd_a4948331d0f556344bda8314828eec8dd}} 
+\index{Predatore@{Predatore}!\+\_\+stamina@{\+\_\+stamina}}
+\index{\+\_\+stamina@{\+\_\+stamina}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{\+\_\+stamina}{\_stamina}}
+{\footnotesize\ttfamily \hyperlink{classStamina}{Stamina} Fish\+::\+\_\+stamina\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classVehicle_a95c56790e3dc52ab0fa54c279920be54_a95c56790e3dc52ab0fa54c279920be54}\label{classVehicle_a95c56790e3dc52ab0fa54c279920be54_a95c56790e3dc52ab0fa54c279920be54}} 
+\index{Predatore@{Predatore}!max\+Force@{max\+Force}}
+\index{max\+Force@{max\+Force}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{max\+Force}{maxForce}}
+{\footnotesize\ttfamily const double Vehicle\+::max\+Force = .\+15\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classVehicle_aab47c62e89baa5b7e52c2292451fbcb6_aab47c62e89baa5b7e52c2292451fbcb6}\label{classVehicle_aab47c62e89baa5b7e52c2292451fbcb6_aab47c62e89baa5b7e52c2292451fbcb6}} 
+\index{Predatore@{Predatore}!max\+Speed@{max\+Speed}}
+\index{max\+Speed@{max\+Speed}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{max\+Speed}{maxSpeed}}
+{\footnotesize\ttfamily const double Vehicle\+::max\+Speed = 5\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [inherited]}}
+
+\mbox{\Hypertarget{classCartesianObject2D_ae02ec6ed11f9bfc0c748da033d6a32f9_ae02ec6ed11f9bfc0c748da033d6a32f9}\label{classCartesianObject2D_ae02ec6ed11f9bfc0c748da033d6a32f9_ae02ec6ed11f9bfc0c748da033d6a32f9}} 
+\index{Predatore@{Predatore}!position@{position}}
+\index{position@{position}!Predatore@{Predatore}}
+\subsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily \hyperlink{classVect2D}{Vect2D} Cartesian\+Object2\+D\+::position\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{predatore_8hpp}{predatore.\+hpp}\item 
+src/\hyperlink{predatore_8cpp}{predatore.\+cpp}\end{DoxyCompactItemize}

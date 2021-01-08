@@ -123,7 +123,6 @@ class Vector {
     const T& back() const;
 
     void push_back(const T&);
-    void push_back(T&&);
     void pop_back();
     iterator erase(iterator);
     void clear();
@@ -134,7 +133,7 @@ class Vector {
     void swap(Vector&);
 
     void resize(unsigned int);
-    void resize(unsigned int, const T&);
+    void resize(unsigned int, const T&);  // rimuovere?
     void shrink_to_fit();
 
     // assign();  // assign vector content with many overloads if I remember correctly
@@ -210,13 +209,6 @@ void Vector<T>::push_back(const T& v) {
     if (_size >= _capacity)
         reserve(_capacity * 2);
     _buffer[_size++] = v;
-}
-
-template <class T>
-void Vector<T>::push_back(T&& v) {
-    if (_size >= _capacity)
-        reserve(_capacity * 2);
-    _buffer[_size++] = std::move(v);
 }
 
 template <class T>

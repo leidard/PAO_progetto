@@ -1,48 +1,34 @@
-#ifndef FISHINFO_HPP
-#define FISHINFO_HPP
-#include <QCloseEvent>
 #include <QDialog>
-#include <QGridLayout>
-#include <QLabel>
-#include <QLineEdit>
-#include <QMenuBar>
-#include <QPaintEvent>
-#include <QPainter>
-#include <QPixmap>
-#include <QPointer>
-#include <QProgressBar>
-#include <QPushButton>
-#include <QResizeEvent>
-#include <QSignalMapper>
-#include <QSlider>
-#include <QString>
-#include <QTimerEvent>
-#include <QToolBar>
-#include <QVBoxLayout>
-#include <QWidget>
-#include <iostream>
 
 #include "controller.hpp"
-#include "deepptr.hpp"
-#include "fish.hpp"
-#include "preda.hpp"
-#include "predatore.hpp"
-#include "vect2d.hpp"
-#include "vector.hpp"
+
+#ifndef FISHINFO_HPP
+#define FISHINFO_HPP
+
+class QWidget;
+class QLabel;
+class QLineEdit;
+class QGridLayout;
+class QProgressBar;
+class QPushButton;
+class QCloseEvent;
+class QTimerEvent;
 
 class FishInfoView : public QDialog {
     Q_OBJECT
    public:
     FishInfoView(QWidget* parent = nullptr);
     void show();
-    void setController(Controller* c);
+    void setController(Controller*);
 
    private:
+    void updateInfo();
+
     Controller* controller;
     Vector<DeepPtr<Fish>>::iterator pos;
-    void timerEvent(QTimerEvent* event);
-    void updateInfo();
-    void closeEvent(QCloseEvent* event);
+
+    void timerEvent(QTimerEvent*);
+    void closeEvent(QCloseEvent*);
 
     int timerID;
     QGridLayout* layout;  //Layout

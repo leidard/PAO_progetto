@@ -1,7 +1,6 @@
 #include "predatore.hpp"
 
 #include <iostream>
-#include <string>
 
 #include "aquarius.hpp"
 #include "daycycle.hpp"
@@ -12,57 +11,7 @@
 Predatore::Predatore(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 50 * 10, 150, 100) {}
 
 // overrides
-Predatore::~Predatore(){};
-
-// Vect2D Predatore::behaviour(Aquarius* a, Vect2D acc) {
-//     Vect2D alignement;
-//     Vect2D separation;
-//     Vect2D cohesion;
-//     int count = 0;
-//     for (auto& f : a->getAllFish()) {
-//         if (f && &(*f) != this && isInRange(f->getPosition())) {
-//             // alignment step
-//             alignement += f->getVelocity();
-
-//             // separation step
-//             Vect2D diff = position - f->getPosition();
-//             double d = diff.mag();
-//             if (d != 0)
-//                 diff.div(d * d);
-//             separation += diff;
-
-//             // cohesion step
-//             cohesion += f->getPosition();
-
-//             count++;
-//         }
-//     }
-//     if (count != 0) {
-//         alignement /= count;
-//         separation /= count;
-//         cohesion /= count;
-
-//         alignement.setMagnitude(Vehicle::maxSpeed);
-//         alignement.rem(getVelocity());
-//         alignement.limit(.8);
-
-//         separation.setMagnitude(Vehicle::maxSpeed);
-//         separation.rem(getVelocity());
-//         separation.limit(.8);
-
-//         cohesion.rem(position);
-//         cohesion.setMagnitude(Vehicle::maxSpeed);
-//         cohesion.rem(getVelocity());
-//         cohesion.limit(.8);
-
-//         acc += alignement;
-//         acc += separation * .3;
-//         acc += cohesion * .3;
-//         acc.setMagnitude(maxSpeed);
-//     }
-
-//     return Fish::behaviour(a, acc);
-// }
+Predatore::~Predatore() = default;
 
 void Predatore::behaviour(Aquarius* a) {
     Vect2D alignement;

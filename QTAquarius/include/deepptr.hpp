@@ -1,7 +1,6 @@
 
 #ifndef DEEPPTR_H
 #define DEEPPTR_H
-#include <iostream>
 
 template <class T>
 class DeepPtr {

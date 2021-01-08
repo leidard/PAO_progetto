@@ -2,31 +2,24 @@
 
 #include "deepptr.hpp"
 #include "vector.hpp"
-// #include <thread>
-// #include <future>
-#include <iostream>
-#include <utility>
 
 Aquarius::Aquarius(unsigned int width, unsigned int height) : _width(width), _height(height), fish() {}
 
 unsigned int Aquarius::getWidth() const { return _width; }
 unsigned int Aquarius::getHeight() const { return _height; }
-aq_size Aquarius::getSize() const { return aq_size(_width, _height); }
 
 void Aquarius::setWidth(unsigned int width) { _width = width; }
 void Aquarius::setHeight(unsigned int height) { _height = height; }
-void Aquarius::setSize(const aq_size& s) {
-    _width = s.first;
-    _height = s.second;
-}
-
-void Aquarius::addFish(Fish* v) {
-    fish.push_back(std::move(DeepPtr<Fish>(v)));
-}
-
 void Aquarius::setSize(unsigned int width, unsigned int height) {
     _width = width;
     _height = height;
+}
+
+void Aquarius::addFish(Fish* v) {
+    // if (fish.size() > FISH_LIMIT)
+    fish.push_back(DeepPtr<Fish>(v));
+    // else throw exception???
+    // TODO aggiungere eccezione sul limite di pesci raggiunto oppure ritornare un bool con il successo o meno
 }
 
 Vector<DeepPtr<Fish>>& Aquarius::getAllFish() {
@@ -41,7 +34,7 @@ void Aquarius::advance() {
     for (auto it = fish.begin(); it < fish.end();) {
         if ((*it)->getIsGone()) {
             it = fish.erase(it);
-            std::cout << "eliminato" <<std::endl;
+            std::cout << "eliminato" << std::endl;
         } else {
             (*it)->advance(this, 1);
             it++;

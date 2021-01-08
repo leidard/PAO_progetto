@@ -1,6 +1,4 @@
 #include <QObject>
-#include <QPointF>
-#include <QTimer>
 
 #include "deepptr.hpp"
 #include "vect2d.hpp"
@@ -10,6 +8,7 @@
 #define CONTROLLER_H
 
 class Fish;
+class QTimer;
 class Aquarius;
 class AcquarioView;
 
@@ -43,6 +42,7 @@ class Controller : public QObject {
     bool hasPrev();
     void next();
     void prev();
+    void reset();
     const Fish* getCurrent();
 
     void updateName(const std::string&);

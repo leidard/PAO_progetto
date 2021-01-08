@@ -1,7 +1,4 @@
-#include "daycycle.hpp"
 #include "fish.hpp"
-#include "stamina.hpp"
-#include "vect2d.hpp"
 
 #ifndef PREDATORE_H
 #define PREDATORE_H

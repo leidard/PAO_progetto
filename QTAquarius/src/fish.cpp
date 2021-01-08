@@ -1,10 +1,6 @@
 #include "fish.hpp"
 
 #include "aquarius.hpp"
-#include "daycycle.hpp"
-#include "deepptr.hpp"
-#include "stamina.hpp"
-#include "vector.hpp"
 
 Fish::Fish(const std::string& name, unsigned int a, unsigned int s, double stam) : _name(name), _awake(true), gone(false), _daycycle(a, s), _stamina(stam) {}
 

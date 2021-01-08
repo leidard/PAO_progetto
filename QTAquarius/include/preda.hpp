@@ -1,7 +1,4 @@
-#include <string>
-
 #include "fish.hpp"
-#include "vect2d.hpp"
 
 #ifndef PREDA_H
 #define PREDA_H

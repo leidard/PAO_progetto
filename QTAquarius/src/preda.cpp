@@ -1,9 +1,7 @@
 #include "preda.hpp"
 
 #include "aquarius.hpp"
-#include "cartesianobject2d.hpp"
 #include "deepptr.hpp"
-#include "fish.hpp"
 #include "vector.hpp"
 
 Preda::Preda(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 50 * 10, 25 * 5, 80) {}

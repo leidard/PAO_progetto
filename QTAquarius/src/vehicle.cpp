@@ -32,7 +32,7 @@ void Vehicle::applyForce(const Vect2D& acc, const double& weight) {
     _acc += (acc * weight);
 }
 
-Vect2D Vehicle::getVelocity() const { return _velocity; }
+const Vect2D& Vehicle::getVelocity() const { return _velocity; }
 
 Vect2D Vehicle::seek(const Vect2D& target) const {  // return steering from here to that target (target - location).normalize().mult(maxspeed);
     Vect2D diff = (target - position);
@@ -144,7 +144,7 @@ void Vehicle::advance(Aquarius* a, int phase) {  //divide the method with 2 phas
         _computedvelocity.limit(Vehicle::maxSpeed);
         _computedposition = position + _computedvelocity;
         _computedposition.bounds(bounds);  // mal che vada non farli scomparire del tutto
-        
+
     } else {
         _velocity = _computedvelocity;
         position = _computedposition;

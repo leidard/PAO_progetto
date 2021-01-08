@@ -1,6 +1,4 @@
 #include "cartesianobject2d.hpp"
-#include "vect2d.hpp"
-#include "vector.hpp"
 
 #ifndef VEHICLE_H
 #define VEHICLE_H
@@ -50,7 +48,7 @@ class Vehicle : virtual public CartesianObject2D {
     */
     void applyForce(const Vect2D&, const double& = 1);
 
-    Vect2D getVelocity() const;
+    const Vect2D& getVelocity() const;
 
     // utility functions to move around
     Vect2D seek(const Vect2D&) const;      // seek for that point

@@ -2,10 +2,7 @@
 
 // #include "cartesianobject2d.hpp"
 #include "daycycle.hpp"
-#include "deepptr.hpp"
 #include "stamina.hpp"
-#include "vect2d.hpp"
-#include "vector.hpp"
 #include "vehicle.hpp"
 
 #ifndef FISH_H

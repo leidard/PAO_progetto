@@ -1,26 +1,21 @@
+#include <QWidget>
+
 #include "controller.hpp"
 #include "fishinfoview.hpp"
 
 #ifndef ACQUARIOVIEW_H
 #define ACQUARIOVIEW_H
-#include <QBrush>
-#include <QCloseEvent>
-#include <QColor>
-#include <QDialog>
-#include <QLabel>
-#include <QLineEdit>
-#include <QMenuBar>
-#include <QPaintEvent>
-#include <QPainter>
-#include <QPixmap>
-#include <QPointF>
-#include <QPointer>
-#include <QPushButton>
-#include <QResizeEvent>
-#include <QString>
-#include <QWidget>
-#include <QMouseEvent>
-#include <iostream>
+
+class Controller;
+class FishInfoView;
+class QVBoxLayout;
+class QMenuBar;
+class QMenu;
+class QAction;
+class QActionGroup;
+class QResizeEvent;
+class QMouseEvent;
+class QPaintEvent;
 
 class AcquarioView : public QWidget {
     Q_OBJECT
@@ -45,18 +40,17 @@ class AcquarioView : public QWidget {
    public:
     explicit AcquarioView(QWidget* parent = nullptr);
     void setController(Controller* c);
-    void resizeEvent(QResizeEvent* event) override;
 
    protected:
-    void mouseReleaseEvent(QMouseEvent* event) override;
-    void paintEvent(QPaintEvent* event) override;
+    void resizeEvent(QResizeEvent*) override;
+    void mouseReleaseEvent(QMouseEvent*) override;
+    void paintEvent(QPaintEvent*) override;
 
    private slots:
     void openInfo();
     void drawPreda();
     void drawPredatore();
     void stopGo();
-
 };
 
-#endif  // ACQUARIOVIEW_H
+#endif

@@ -1,0 +1,4 @@
+<map id="Vegetale" name="Vegetale">
+<area shape="rect" id="node2" href="$classFood.html" title="{Food\n||+ Food()\l+ ~Food()\l+ getValoreNutrizionale()\l+ getVisibility()\l+ clone()\l+ operator\&gt;()\l+ operator\&gt;=()\l+ operator\&lt;()\l+ operator\&lt;=()\l+ operator==()\l+ operator!=()\l}" alt="" coords="5,175,172,399"/>
+<area shape="rect" id="node3" href="$classCartesianObject2D.html" title="{CartesianObject2D\n|# position\l|+ CartesianObject2D()\l+ ~CartesianObject2D()\l+ clone()\l+ getPosition()\l}" alt="" coords="8,5,169,127"/>
+</map>

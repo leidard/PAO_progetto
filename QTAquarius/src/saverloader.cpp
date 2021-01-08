@@ -36,7 +36,8 @@ void SaverLoader::load(Aquarius* a, const std::string& filename) const {
     if (!o.value("width").isDouble()) throw new ParseError("Can't find property: width");
     if (!o.value("height").isDouble()) throw new ParseError("Can't find property: height");
 
-    for (auto i : o.value("fish").toArray()) {
+    auto arr = o.value("fish").toArray();
+    for (auto i : arr) {
         try {
             a->addFish(parseFish(i));
         } catch (ParseError& err) {
@@ -53,7 +54,7 @@ void SaverLoader::save(Aquarius* a, const std::string& filename) const {
     o.insert("height", (int)a->getHeight());
     QJsonArray fish;
 
-    for (auto f : a->getAllFish()) {
+    for (auto& f : a->getAllFish()) {
         Predatore* predatore = dynamic_cast<Predatore*>(&*f);
         if (predatore != nullptr) {
             fish.push_back(SaverLoader::serialize(*predatore));
