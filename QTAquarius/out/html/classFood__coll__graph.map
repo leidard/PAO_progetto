@@ -1,4 +1,0 @@
-<map id="Food" name="Food">
-<area shape="rect" id="node2" href="$classCartesianObject2D.html" title="{CartesianObject2D\n||+ CartesianObject2D()\l+ ~CartesianObject2D()\l+ clone()\l+ getPosition()\l}" alt="" coords="8,468,169,589"/>
-<area shape="rect" id="node3" href="$classVect2D.html" title="{Vect2D\n|&#45; _x\l&#45; _y\l|+ Vect2D()\l+ Vect2D()\l+ Vect2D()\l+ operator=()\l+ x()\l+ y()\l+ rx()\l+ ry()\l+ getXVect()\l+ getYVect()\land 52 more...\l+ set()\l+ sum()\l+ sub()\l+ mult()\l+ div()\l+ min()\l+ max()\l+ normalize()\l+ setMagnitude()\l+ limit()\land 9 more...\l}" alt="" coords="29,5,149,405"/>
-</map>

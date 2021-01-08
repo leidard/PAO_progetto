@@ -1,7 +1,0 @@
-<map id="Food" name="Food">
-<area shape="rect" id="node3" href="$classFish.html" title="{Fish\n|&#45; _name\l&#45; _awake\l|+ Fish()\l+ setName()\l+ getName()\l+ sleep()\l+ wakeup()\l+ isAwake()\l+ isAsleep()\l+ ~Fish()\l+ behaviour()\l+ isHungry()\land 7 more...\l}" alt="" coords="134,447,233,685"/>
-<area shape="rect" id="node6" href="$classVegetale.html" title="{Vegetale\n|&#45; _visibility\l|+ Vegetale()\l+ ~Vegetale()\l+ clone()\l+ getValoreNutrizionale()\l+ getVisibility()\l}" alt="" coords="257,498,424,634"/>
-<area shape="rect" id="node2" href="$classCartesianObject2D.html" title="{CartesianObject2D\n|# position\l|+ CartesianObject2D()\l+ ~CartesianObject2D()\l+ clone()\l+ getPosition()\l}" alt="" coords="181,5,343,127"/>
-<area shape="rect" id="node4" href="$classPreda.html" title="{Preda\n||+ Preda()\l+ ~Preda()\l+ behaviour()\l+ isHungry()\l+ canSleep()\l+ canWakeup()\l+ eat()\l+ clone()\l+ getValoreNutrizionale()\l+ getVisibility()\l+ isInRange()\l}" alt="" coords="5,741,172,965"/>
-<area shape="rect" id="node5" href="$classPredatore.html" title="{Predatore\n|&#45; _daycycle\l&#45; _stamina\l|+ Predatore()\l+ ~Predatore()\l+ behaviour()\l+ isHungry()\l+ canSleep()\l+ canWakeup()\l+ eat()\l+ clone()\l+ getValoreNutrizionale()\l+ getVisibility()\l+ isInRange()\l}" alt="" coords="196,733,363,972"/>
-</map>
