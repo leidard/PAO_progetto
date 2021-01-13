@@ -17,13 +17,13 @@ SOURCES += \
     src/cartesianobject2d.cpp \
     src/controller.cpp \
     src/daycycle.cpp \
-    src/fish.cpp \
-    src/predatore.cpp \
+    src/organismo.cpp \
+    src/tonno.cpp \
     src/saverloader.cpp \
     src/stamina.cpp \
     src/vect2d.cpp \
     src/vehicle.cpp \
-    src/preda.cpp \
+    src/pescevolante.cpp \
     src/fishinfoview.cpp
 
 HEADERS += \
@@ -33,10 +33,10 @@ HEADERS += \
     include/controller.hpp \
     include/daycycle.hpp \
     include/deepptr.hpp \
-    include/fish.hpp \
+    include/organismo.hpp \
     include/saverloader.hpp \
-    include/preda.hpp \
-    include/predatore.hpp \
+    include/pescevolante.hpp \
+    include/tonno.hpp \
     include/stamina.hpp \
     include/vect2d.hpp \
     include/vector.hpp \

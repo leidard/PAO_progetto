@@ -5,13 +5,13 @@
 
 class CartesianObject2D {
    protected:
-    Vect2D position;
+    Vect2D _position;
 
    public:
     CartesianObject2D(const Vect2D& p = Vect2D(0, 0));
     virtual ~CartesianObject2D();
     virtual CartesianObject2D* clone() const = 0;
-    Vect2D getPosition() const;
+    const Vect2D& getPosition() const;
 };
 
 #endif

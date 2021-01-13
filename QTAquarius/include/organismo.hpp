@@ -10,11 +10,11 @@
 
 class Aquarius;
 
-class Fish : public Vehicle {
+class Organismo : public Vehicle {
    private:
     std::string _name;
     bool _awake;
-    bool gone;
+    bool _gone;
 
    protected:
     DayCycle _daycycle;
@@ -22,11 +22,11 @@ class Fish : public Vehicle {
     virtual void behaviour(Aquarius*) override;
 
    public:
-    Fish(const std::string&, unsigned int, unsigned int, double);
+    Organismo(const std::string&, unsigned int, unsigned int, double);
     // defined at this level
 
-    bool getIsGone() const;
-    void setIsGone();
+    bool isGone() const;
+    void setGone();
     void setName(const std::string&);
     const std::string& getName() const;
     void sleep();
@@ -35,24 +35,20 @@ class Fish : public Vehicle {
     bool isAsleep() const;
     const Stamina& getStamina() const;  // ritorna una percentuale
 
-    // overrides
-    virtual ~Fish();
-
     // new pure virtual
     virtual bool isHungry() const = 0;
     virtual bool canSleep() const;
     virtual bool canWakeup() const;
-    virtual void eat(Fish&) = 0;
+    virtual void eat(Organismo&) = 0;
     virtual std::string getType() const = 0;
     virtual int getValoreNutrizionale() const = 0;
     virtual double getVisibility() const = 0;
-    virtual bool operator==(const Fish&) const = 0;
-    virtual bool operator!=(const Fish&) const = 0;
+    virtual bool operator==(const Organismo&) const = 0;  // TODO this??
+    virtual bool operator!=(const Organismo&) const = 0;  // TODO this?
 
     // repeated pure virtual
 
-    virtual Fish* clone() const override = 0;         // from CartesianObject2D
-    virtual bool isInRange(const Vect2D&) const = 0;  // from vehicle
+    virtual Organismo* clone() const override = 0;    // from CartesianObject2D
 };
 
 #endif

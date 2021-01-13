@@ -1,13 +1,12 @@
-#include "predatore.hpp"
+#include "tonno.hpp"
 
 #include "aquarius.hpp"
 
-Predatore::Predatore(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Fish(name, 50 * 10, 150, 100) {}
+Tonno::Tonno(const Vect2D& position, const std::string& name) : CartesianObject2D(position), Organismo(name, 50 * 10, 150, 100) {}
 
 // overrides
-Predatore::~Predatore() = default;
 
-void Predatore::behaviour(Aquarius* a) {
+void Tonno::behaviour(Aquarius* a) {
     Vect2D alignement;
     Vect2D separation;
     Vect2D cohesion;
@@ -18,7 +17,7 @@ void Predatore::behaviour(Aquarius* a) {
             alignement += f->getVelocity();
 
             // separation step
-            Vect2D diff = position - f->getPosition();
+            Vect2D diff = _position - f->getPosition();
             double d = diff.mag();
             if (d != 0)
                 diff.div(d * d);
@@ -35,16 +34,16 @@ void Predatore::behaviour(Aquarius* a) {
         separation /= count;
         cohesion /= count;
 
-        alignement.setMagnitude(Vehicle::maxSpeed);
+        alignement.setMagnitude(maxSpeed);
         alignement.rem(getVelocity());
         alignement.limit(.8);
 
-        separation.setMagnitude(Vehicle::maxSpeed);
+        separation.setMagnitude(maxSpeed);
         separation.rem(getVelocity());
         separation.limit(.8);
 
-        cohesion.rem(position);
-        cohesion.setMagnitude(Vehicle::maxSpeed);
+        cohesion.rem(_position);
+        cohesion.setMagnitude(maxSpeed);
         cohesion.rem(getVelocity());
         cohesion.limit(.8);
 
@@ -52,27 +51,27 @@ void Predatore::behaviour(Aquarius* a) {
         applyForce(separation, .3);
         applyForce(cohesion, .3);
     }
-    Fish::behaviour(a);
+    Organismo::behaviour(a);
 }
 
-bool Predatore::operator==(const Fish& f) const {
-    auto d = dynamic_cast<const Predatore*>(&f);
+bool Tonno::operator==(const Organismo& f) const {
+    auto d = dynamic_cast<const Tonno*>(&f);
     return d != nullptr && d == this;
 }
 
-bool Predatore::operator!=(const Fish& f) const {
-    auto d = dynamic_cast<const Predatore*>(&f);
+bool Tonno::operator!=(const Organismo& f) const {
+    auto d = dynamic_cast<const Tonno*>(&f);
     return d == nullptr || d != this;
 }
 
 // defined of pure virtual
-bool Predatore::isHungry() const {
+bool Tonno::isHungry() const {
     return _stamina < 0.4;
 }
 
-void Predatore::eat(Fish& f) {
+void Tonno::eat(Organismo& f) {
     _daycycle += 20;
-    f.setIsGone();
+    f.setGone();
     /* if (_stamina.getVal() + f.getValoreNutrizionale() > _stamina.getMax())  //stamina cant exceed its maximum
         _stamina.setValToMax();
     else
@@ -80,18 +79,18 @@ void Predatore::eat(Fish& f) {
 }
 
 // repeated pure virtual
-Predatore* Predatore::clone() const { return new Predatore(*this); }  // from CartesianObject2D
+Tonno* Tonno::clone() const { return new Tonno(*this); }  // from CartesianObject2D
 
-int Predatore::getValoreNutrizionale() const { return 3; }  // from Fish
+int Tonno::getValoreNutrizionale() const { return 3; }  // from Fish
 
-double Predatore::getVisibility() const {
+double Tonno::getVisibility() const {
     return .2;
 }
 
-bool Predatore::isInRange(const Vect2D& p) const {
-    return position.distance(p) < 100;  //&& _velocity.angleBetweenRad(p) < M_PI;
+bool Tonno::isInRange(const Vect2D& p) const {
+    return _position.distance(p) < 100;  //&& _velocity.angleBetweenRad(p) < M_PI;
 }  // from Vehicle
 
-std::string Predatore::getType() const {
-    return "predatore";
+std::string Tonno::getType() const {
+    return "tonno";
 }  // from Fish

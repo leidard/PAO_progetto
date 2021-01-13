@@ -6,10 +6,22 @@
 class Aquarius;
 
 class Vehicle : virtual public CartesianObject2D {
+   protected:
+    /**
+    * maxSpeed is the maximum "pixel per tick"
+    */
+    const double maxSpeed;
+
+    /**
+    * maxForce is how fast the vehicle apply the calculated force to the current velocity each tick
+    */
+    const double maxForce;
+
    private:
     Vect2D _acc;
     Vect2D _computedvelocity;
     Vect2D _computedposition;
+    // Vect2D _position;
     Vect2D _velocity;
     Vect2D _wander;
 
@@ -30,14 +42,11 @@ class Vehicle : virtual public CartesianObject2D {
     virtual void behaviour(Aquarius*) = 0;
 
    public:
-    static const double maxSpeed;  // tipo 4
-    static const double maxForce;  // 0 <= x <= 1
-
-    Vehicle();
-    virtual ~Vehicle();
+    Vehicle(double maxSpeed = 5.0, double maxForce = .15);
 
     /**
      * Set the force of acceleration
+     * (this overwrite the force if already written)
      * @param acc
     */
     void setForce(const Vect2D&);
@@ -49,6 +58,7 @@ class Vehicle : virtual public CartesianObject2D {
     void applyForce(const Vect2D&, const double& = 1);
 
     const Vect2D& getVelocity() const;
+    const Vect2D& getPosition() const;
 
     // utility functions to move around
     Vect2D seek(const Vect2D&) const;      // seek for that point
@@ -60,11 +70,13 @@ class Vehicle : virtual public CartesianObject2D {
     Vect2D stop() const;                   // stop the vehicle
     Vect2D stayWithinBorders(const Vect2D&, const unsigned int distance) const;
 
-    // pure virtual
-    virtual Vehicle* clone() const = 0;
+    // new pure virtual
     virtual bool isInRange(const Vect2D& v) const = 0;
 
-    //
+    // redefined
+    virtual Vehicle* clone() const override = 0;
+
+    // final method doesn't need and won't need override
     virtual void advance(Aquarius* a, int phase) final;
 };
 

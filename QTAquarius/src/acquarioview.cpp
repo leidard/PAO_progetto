@@ -5,14 +5,11 @@
 #include <QPainter>
 #include <QVBoxLayout>
 
-#include "deepptr.hpp"
-#include "fish.hpp"
 #include "fishinfoview.hpp"
-#include "preda.hpp"
-#include "predatore.hpp"
-#include "vect2d.hpp"
+#include "pescevolante.hpp"
+#include "tonno.hpp"
 
-AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawingPreda(false), drawingPredatore(false), pausa(false) {
+AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIENTE), pausa(false) {
     layout = new QVBoxLayout(this);
     menuBar = new QMenuBar(this);
     // TO DO: Creare un .qss per lo stylesheet!
@@ -31,15 +28,15 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawingPreda(fals
 
     //STRUMENTI
     strumentiOptions = new QActionGroup(this);
-    aggiungiPreda = new QAction("Aggiungi preda", this);
-    aggiungiPreda->setCheckable(true);
-    connect(aggiungiPreda, &QAction::triggered, this, &AcquarioView::drawPreda);
-    aggiungiPredatore = new QAction("Aggiungi predatore", this);
-    aggiungiPredatore->setCheckable(true);
-    connect(aggiungiPredatore, &QAction::triggered, this, &AcquarioView::drawPredatore);
+    aggiungiPesceVolante = new QAction("Aggiungi pesce volante", this);
+    aggiungiPesceVolante->setCheckable(true);
+    connect(aggiungiPesceVolante, &QAction::triggered, this, &AcquarioView::drawPesceVolante);
+    aggiungiTonno = new QAction("Aggiungi tonno", this);
+    aggiungiTonno->setCheckable(true);
+    connect(aggiungiTonno, &QAction::triggered, this, &AcquarioView::drawTonno);
 
-    strumentiOptions->addAction(aggiungiPreda);
-    strumentiOptions->addAction(aggiungiPredatore);
+    strumentiOptions->addAction(aggiungiPesceVolante);
+    strumentiOptions->addAction(aggiungiTonno);
 
     connect(strumentiOptions, &QActionGroup::triggered, [](QAction* action) {
         static QAction* lastAction = nullptr;
@@ -54,8 +51,8 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawingPreda(fals
     infoPesci = new QAction("Info pesci", this);
     connect(infoPesci, &QAction::triggered, this, &AcquarioView::openInfo);
 
-    strumenti->addAction(aggiungiPreda);
-    strumenti->addAction(aggiungiPredatore);
+    strumenti->addAction(aggiungiPesceVolante);
+    strumenti->addAction(aggiungiTonno);
     strumenti->addAction(infoPesci);
 
     //PAUSA E RIPRENDI
@@ -78,14 +75,18 @@ void AcquarioView::openInfo() {
     // connect(this, &AcquarioView::update, infoView, &FishInfoView::updateInfo);
 }
 
-void AcquarioView::drawPreda() {
-    drawingPreda = drawingPreda ? false : true;
-    drawingPredatore = false;
+void AcquarioView::drawPesceVolante() {
+    if (drawing == Tool::PESCEVOLANTE)
+        drawing = Tool::NIENTE;
+    else
+        drawing = Tool::PESCEVOLANTE;
 }
 
-void AcquarioView::drawPredatore() {
-    drawingPredatore = drawingPredatore ? false : true;
-    drawingPreda = false;
+void AcquarioView::drawTonno() {
+    if (drawing == Tool::TONNO)
+        drawing = Tool::NIENTE;
+    else
+        drawing = Tool::TONNO;
 }
 
 void AcquarioView::stopGo() {
@@ -111,10 +112,10 @@ void AcquarioView::resizeEvent(QResizeEvent* event) {
 }
 
 void AcquarioView::mouseReleaseEvent(QMouseEvent* event) {
-    if (event->button() == Qt::LeftButton && drawingPredatore) {
-        controller->addPredatore(Vect2D(event->x(), event->y()));
-    } else if (event->button() == Qt::LeftButton && drawingPreda) {
-        controller->addPreda(Vect2D(event->x(), event->y()));
+    if (event->button() == Qt::LeftButton && drawing == Tool::TONNO) {
+        controller->addTonno(Vect2D(event->x(), event->y()));
+    } else if (event->button() == Qt::LeftButton && drawing == Tool::PESCEVOLANTE) {
+        controller->addPesceVolante(Vect2D(event->x(), event->y()));
     }
 }
 
@@ -128,7 +129,7 @@ void AcquarioView::paintEvent(QPaintEvent*) {
         Vect2D vel = f->getVelocity();
         Vect2D left = Vect2D::rotateDeg(vel, -145);
         Vect2D right = Vect2D::rotateDeg(vel, 145);
-        if (f->getType() == "predatore") {
+        if (f->getType() == "tonno") {
             vel.setMagnitude(15);
             left.setMagnitude(20);
             right.setMagnitude(20);
@@ -149,7 +150,7 @@ void AcquarioView::paintEvent(QPaintEvent*) {
             QPointF(futl.x(), futl.y()),
             QPointF(futr.x(), futr.y()),
             QPointF(fut.x(), fut.y())};
-        painter.setBrush(QBrush(QColor(f->getType() == "predatore" ? "red" : "green")));
+        painter.setBrush(QBrush(QColor(f->getType() == "tonno" ? "red" : "green")));
         //        QPixmap pix = QPixmap(":/images/punto.png");
         //        painter.drawPixmap(points, pix);
         painter.drawPolygon(points, 3);

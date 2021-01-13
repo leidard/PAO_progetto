@@ -1,7 +1,6 @@
 #include <QWidget>
 
 #include "controller.hpp"
-#include "fishinfoview.hpp"
 
 #ifndef ACQUARIOVIEW_H
 #define ACQUARIOVIEW_H
@@ -19,6 +18,13 @@ class QPaintEvent;
 
 class AcquarioView : public QWidget {
     Q_OBJECT
+   public:
+    enum Tool {
+        NIENTE,
+        TONNO,
+        PESCEVOLANTE,
+    };
+
    private:
     Controller* controller;
     FishInfoView* infoView;
@@ -28,13 +34,12 @@ class AcquarioView : public QWidget {
     QMenu* strumenti;
     QAction* pausariprendi;
     QActionGroup* strumentiOptions;
-    QAction* aggiungiPreda;
-    QAction* aggiungiPredatore;
+    QAction* aggiungiPesceVolante;
+    QAction* aggiungiTonno;
     QAction* infoPesci;
     QAction* fileSalva;
     QAction* fileCarica;
-    bool drawingPreda;
-    bool drawingPredatore;
+    Tool drawing;
     bool pausa;
 
    public:
@@ -48,8 +53,8 @@ class AcquarioView : public QWidget {
 
    private slots:
     void openInfo();
-    void drawPreda();
-    void drawPredatore();
+    void drawPesceVolante();
+    void drawTonno();
     void stopGo();
 };
 

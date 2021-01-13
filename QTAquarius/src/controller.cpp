@@ -1,12 +1,11 @@
 #include "controller.hpp"
 
-#include <QObject>
 #include <QTimer>
 
 #include "acquarioview.hpp"
 #include "aquarius.hpp"
-#include "preda.hpp"
-#include "predatore.hpp"
+#include "pescevolante.hpp"
+#include "tonno.hpp"
 
 Controller::Controller(QObject* parent) : QObject(parent), _timer(new QTimer()), _model(nullptr), _view(nullptr), infoviewpos(0) {
     connect(_timer, SIGNAL(timeout()), this, SLOT(advance()));
@@ -25,16 +24,16 @@ void Controller::setView(AcquarioView* view) {
     connect(_timer, SIGNAL(timeout()), _view, SLOT(update()));
 }
 
-Vector<DeepPtr<Fish>>& Controller::getAllFish() {
+Vector<DeepPtr<Organismo>>& Controller::getAllFish() {
     return _model->getAllFish();
 }
 
-void Controller::addPredatore(const Vect2D& position) {
-    _model->addFish(new Predatore(position, "paolo"));
+void Controller::addTonno(const Vect2D& position) {
+    _model->addFish(new Tonno(position, "paolo"));
 }
 
-void Controller::addPreda(const Vect2D& position) {
-    _model->addFish(new Preda(position, "paolo"));
+void Controller::addPesceVolante(const Vect2D& position) {
+    _model->addFish(new PesceVolante(position, "paolo"));
 }
 
 void Controller::resize(int width, int height) {
@@ -70,11 +69,11 @@ void Controller::prev() {
 }
 
 void Controller::reset() {
-    unsigned int last = _model->getAllFish().size() -1;
+    unsigned int last = _model->getAllFish().size() - 1;
     if (infoviewpos > last) infoviewpos = last;
 }
 
-const Fish* Controller::getCurrent() {
+const Organismo* Controller::getCurrent() {
     if (infoviewpos < _model->getAllFish().size())
         return _model->getAllFish()[infoviewpos].get();
     else

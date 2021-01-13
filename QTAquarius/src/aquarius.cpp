@@ -1,8 +1,5 @@
 #include "aquarius.hpp"
 
-#include "deepptr.hpp"
-#include "vector.hpp"
-
 Aquarius::Aquarius(unsigned int width, unsigned int height) : _width(width), _height(height), fish() {}
 
 unsigned int Aquarius::getWidth() const { return _width; }
@@ -15,14 +12,14 @@ void Aquarius::setSize(unsigned int width, unsigned int height) {
     _height = height;
 }
 
-void Aquarius::addFish(Fish* v) {
+void Aquarius::addFish(Organismo* v) {
     // if (fish.size() > FISH_LIMIT)
-    fish.push_back(DeepPtr<Fish>(v));
+    fish.push_back(DeepPtr<Organismo>(v));
     // else throw exception???
     // TODO aggiungere eccezione sul limite di pesci raggiunto oppure ritornare un bool con il successo o meno
 }
 
-Vector<DeepPtr<Fish>>& Aquarius::getAllFish() {
+Vector<DeepPtr<Organismo>>& Aquarius::getAllFish() {
     return fish;
 }
 
@@ -32,7 +29,7 @@ void Aquarius::advance() {
     }
 
     for (auto it = fish.begin(); it < fish.end();) {
-        if ((*it)->getIsGone()) {
+        if ((*it)->isGone()) {
             it = fish.erase(it);
             std::cout << "eliminato" << std::endl;
         } else {

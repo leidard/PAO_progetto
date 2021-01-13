@@ -10,9 +10,9 @@
 class Aquarius;
 
 class Vect2D;
-class Predatore;
-class Preda;
-class Fish;
+class Tonno;
+class PesceVolante;
+class Organismo;
 
 class SaverLoader {
    public:
@@ -30,12 +30,12 @@ class SaverLoader {
     void load(Aquarius* a, const std::string& filename = DEFAULT_FILENAME) const;
     void save(Aquarius* a, const std::string& filename = DEFAULT_FILENAME) const;
 
-    static QJsonObject serialize(const Predatore&);
-    static QJsonObject serialize(const Preda&);
+    static QJsonObject serialize(const Tonno&);
+    static QJsonObject serialize(const PesceVolante&);
     static QJsonObject serialize(const Vect2D&);
 
     static Vect2D parseVect2D(const QJsonValue&);
-    static Fish* parseFish(const QJsonValue&);
+    static Organismo* parseFish(const QJsonValue&);
 };
 
 #endif

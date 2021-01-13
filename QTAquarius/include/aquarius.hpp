@@ -1,5 +1,5 @@
 #include "deepptr.hpp"
-#include "fish.hpp"
+#include "organismo.hpp"
 #include "vector.hpp"
 
 #ifndef AQUARIUS_H
@@ -9,7 +9,7 @@ class Aquarius {
    private:
     unsigned int _width, _height;
 
-    Vector<DeepPtr<Fish>> fish;
+    Vector<DeepPtr<Organismo>> fish;
 
    public:
     Aquarius(unsigned int = 0, unsigned int = 0);
@@ -21,9 +21,9 @@ class Aquarius {
     void setHeight(unsigned int);
     void setSize(unsigned int, unsigned int);
 
-    void addFish(Fish*);
+    void addFish(Organismo*);
 
-    Vector<DeepPtr<Fish>>& getAllFish();  // TODO: non const version???
+    Vector<DeepPtr<Organismo>>& getAllFish();
 
     void advance();
 };

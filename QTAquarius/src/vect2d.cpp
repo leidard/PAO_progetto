@@ -6,15 +6,6 @@
 
 Vect2D::Vect2D() : _x(0), _y(0){};
 Vect2D::Vect2D(double x, double y) : _x(x), _y(y) {}
-Vect2D::Vect2D(const Vect2D& v) : _x(v._x), _y(v._y) {}
-
-Vect2D& Vect2D::operator=(const Vect2D& v) {
-    if (this != &v) {
-        _x = v._x;
-        _y = v._y;
-    }
-    return *this;
-}
 
 // getters
 
@@ -22,8 +13,6 @@ double Vect2D::x() const { return _x; }
 double Vect2D::y() const { return _y; }
 double& Vect2D::rx() { return _x; }
 double& Vect2D::ry() { return _y; }
-Vect2D Vect2D::getXVect() const { return Vect2D(_x, 0); }
-Vect2D Vect2D::getYVect() const { return Vect2D(0, _y); }
 std::pair<double, double> Vect2D::getPair() const { return std::pair<double, double>(_x, _y); }
 
 // non-const edit functions with chain return
@@ -79,7 +68,7 @@ Vect2D& Vect2D::bounds(const Vect2D& b) {
     return *this;
 }
 // this is rad
-Vect2D& Vect2D::rotate(double rad) {  // anti-clockwise
+Vect2D& Vect2D::rotateRad(double rad) {  // anti-clockwise
     double x2 = _x * std::cos(rad) - _y * std::sin(rad);
     _y = _x * std::sin(rad) + _y * std::cos(rad);
     _x = x2;
@@ -87,10 +76,7 @@ Vect2D& Vect2D::rotate(double rad) {  // anti-clockwise
 }
 Vect2D& Vect2D::rotateDeg(double deg) {  // anti-clockwise
     double rad = deg * M_PI / 180;
-    double x2 = _x * std::cos(rad) - _y * std::sin(rad);
-    _y = _x * std::sin(rad) + _y * std::cos(rad);
-    _x = x2;
-    return *this;
+    return rotateRad(rad);
 }
 
 // const edit functions with chain return
@@ -106,7 +92,7 @@ Vect2D Vect2D::normalize() const { return Vect2D(*this).normalize(); }
 Vect2D Vect2D::setMagnitude(double s) const { return Vect2D(*this).setMagnitude(s); }
 Vect2D Vect2D::limit(double s) const { return Vect2D(*this).limit(s); }
 Vect2D Vect2D::bounds(const Vect2D& b) const { return Vect2D(*this).bounds(b); }
-Vect2D Vect2D::rotate(double rad) const { return Vect2D(*this).rotate(rad); }
+Vect2D Vect2D::rotateRad(double rad) const { return Vect2D(*this).rotateRad(rad); }
 Vect2D Vect2D::rotateDeg(double deg) const { return Vect2D(*this).rotateDeg(deg); }
 double Vect2D::mag() const { return std::sqrt(_x * _x + _y * _y); }
 double Vect2D::dot(const Vect2D& v) const { return _x * v._x + _y * v._y; }
@@ -132,7 +118,7 @@ Vect2D Vect2D::max(Vect2D& v1, Vect2D& v2) { return v1.max(v2); }
 Vect2D Vect2D::normalize(const Vect2D& v1) { return v1.normalize(); }
 Vect2D Vect2D::setMagnitude(const Vect2D& v1, double s) { return v1.setMagnitude(s); }
 Vect2D Vect2D::limit(const Vect2D& v1, double s) { return v1.limit(s); }
-Vect2D Vect2D::rotate(const Vect2D& v1, double rad) { return v1.rotate(rad); }
+Vect2D Vect2D::rotateRad(const Vect2D& v1, double rad) { return v1.rotateRad(rad); }
 Vect2D Vect2D::rotateDeg(const Vect2D& v1, double deg) { return v1.rotateDeg(deg); }
 double Vect2D::mag(const Vect2D& v1) { return v1.mag(); }
 double Vect2D::dot(const Vect2D& v1, const Vect2D& v2) { return v1.dot(v2); }
@@ -184,3 +170,7 @@ Vect2D::operator std::pair<double, double>() const { return std::pair<double, do
 Vect2D operator*(double s, const Vect2D& v) { return v.mult(s); }
 
 Vect2D operator/(double s, const Vect2D& v) { return v.div(s); }
+
+std::ostream& operator<<(std::ostream& os, const Vect2D& v) {
+    return os << '(' << v.x() << ',' << v.y() << ')';
+}

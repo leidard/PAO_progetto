@@ -1,14 +1,13 @@
 #include "fishinfoview.hpp"
-#include "fish.hpp"
 
 #include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QProgressBar>
 #include <QPushButton>
-
-#include <controller.hpp>
 #include <sstream>
+
+#include "organismo.hpp"
 
 FishInfoView::FishInfoView(QWidget* parent) : QDialog(parent) {
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);  //disable "?" button
@@ -69,17 +68,17 @@ void FishInfoView::closeEvent(QCloseEvent*) {
 }
 
 void FishInfoView::updateInfo() {
-    const Fish* f = controller->getCurrent();
+    const Organismo* f = controller->getCurrent();
     if (f == nullptr) return;  // TODO call set default or something to reset all the values shown
     if (!(controller->hasNext() || controller->hasPrev())) {
         controller->reset();
     }
 
-    if (f->getType() == "predatore") {  //draw icon for Predatore
+    if (f->getType() == "tonno") {  //draw icon for Tonno
         QPixmap pix = QPixmap(":/images/punto.png");
         pix = pix.scaled(img->size(), Qt::KeepAspectRatio);
         img->setPixmap(pix);
-    } else if (f->getType() == "preda") {  //draw icon for Preda
+    } else if (f->getType() == "pesce volante") {  //draw icon for PesceVolante
         QPixmap pix = QPixmap(":/images/punto.png");
         pix = pix.scaled(img->size(), Qt::KeepAspectRatio);
         img->setPixmap(pix);

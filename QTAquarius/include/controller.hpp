@@ -7,7 +7,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-class Fish;
+class Organismo;
 class QTimer;
 class Aquarius;
 class AcquarioView;
@@ -28,12 +28,12 @@ class Controller : public QObject {
     void setModel(Aquarius*);
     void setView(AcquarioView*);
 
-    Vector<DeepPtr<Fish>>& getAllFish();
+    Vector<DeepPtr<Organismo>>& getAllFish();
 
     void resize(int width, int height);
 
-    void addPredatore(const Vect2D&);  // click
-    void addPreda(const Vect2D&);      // click
+    void addTonno(const Vect2D&);  // click
+    void addPesceVolante(const Vect2D&);      // click
 
     // infoview
     unsigned int getVectorSize();
@@ -43,7 +43,7 @@ class Controller : public QObject {
     void next();
     void prev();
     void reset();
-    const Fish* getCurrent();
+    const Organismo* getCurrent();
 
     void updateName(const std::string&);
 

@@ -25,7 +25,7 @@ class FishInfoView : public QDialog {
     void updateInfo();
 
     Controller* controller;
-    Vector<DeepPtr<Fish>>::iterator pos;
+    Vector<DeepPtr<Organismo>>::iterator pos;
 
     void timerEvent(QTimerEvent*);
     void closeEvent(QCloseEvent*);
@@ -33,7 +33,7 @@ class FishInfoView : public QDialog {
     int timerID;
     QGridLayout* layout;  //Layout
     QLabel* img;          //Icon
-    QLineEdit* nameLine;  //Fish's name
+    QLineEdit* nameLine;  //Organismo's name
     QLabel* tipologia;
     QLabel* nutVal;
     QProgressBar* bar;  //Stamina

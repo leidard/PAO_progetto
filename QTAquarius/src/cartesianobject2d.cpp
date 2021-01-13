@@ -1,5 +1,6 @@
 #include "cartesianobject2d.hpp"
 
-CartesianObject2D::CartesianObject2D(const Vect2D& p) : position(p) {}
-CartesianObject2D::~CartesianObject2D() {}
-Vect2D CartesianObject2D::getPosition() const { return position; }
+CartesianObject2D::CartesianObject2D(const Vect2D& p) : _position(p) {}
+CartesianObject2D::~CartesianObject2D() = default;
+
+const Vect2D& CartesianObject2D::getPosition() const { return _position; }

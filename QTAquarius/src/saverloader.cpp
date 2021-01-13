@@ -9,8 +9,8 @@
 #include <string>
 
 #include "aquarius.hpp"
-#include "preda.hpp"
-#include "predatore.hpp"
+#include "pescevolante.hpp"
+#include "tonno.hpp"
 
 SaverLoader::ParseError::ParseError(std::string _msg) : msg(std::string("[JSON ParseError]: " + _msg).c_str()) {}
 
@@ -54,17 +54,17 @@ void SaverLoader::save(Aquarius* a, const std::string& filename) const {
     QJsonArray fish;
 
     for (auto& f : a->getAllFish()) {
-        if (Predatore* predatore = dynamic_cast<Predatore*>(&*f)) {
-            fish.push_back(SaverLoader::serialize(*predatore));
-        } else if (Preda* preda = dynamic_cast<Preda*>(&*f)) {
-            fish.push_back(SaverLoader::serialize(*preda));
+        if (Tonno* tonno = dynamic_cast<Tonno*>(&*f)) {
+            fish.push_back(SaverLoader::serialize(*tonno));
+        } else if (PesceVolante* pescevolante = dynamic_cast<PesceVolante*>(&*f)) {
+            fish.push_back(SaverLoader::serialize(*pescevolante));
         }
     }
 
     o.insert("fish", fish);
 }
 
-QJsonObject SaverLoader::serialize(const Predatore& f) {
+QJsonObject SaverLoader::serialize(const Tonno& f) {
     QJsonObject o;
     o.insert("type", "PREDATORE");
     o.insert("position", SaverLoader::serialize(f.getPosition()));
@@ -73,7 +73,7 @@ QJsonObject SaverLoader::serialize(const Predatore& f) {
     return o;
 }
 
-QJsonObject SaverLoader::serialize(const Preda& f) {
+QJsonObject SaverLoader::serialize(const PesceVolante& f) {
     QJsonObject o;
     o.insert("type", "PREDA");
     o.insert("position", SaverLoader::serialize(f.getPosition()));
@@ -101,7 +101,7 @@ Vect2D SaverLoader::parseVect2D(const QJsonValue& v) {
     return Vect2D(x.toDouble(), y.toDouble());
 }
 
-Fish* SaverLoader::parseFish(const QJsonValue& v) {
+Organismo* SaverLoader::parseFish(const QJsonValue& v) {
     if (!v.isObject()) throw new ParseError("parsePredatore: not a JSON Object");
     QJsonObject o = v.toObject();
 
@@ -112,12 +112,12 @@ Fish* SaverLoader::parseFish(const QJsonValue& v) {
         QJsonValue name = o.value("name");
         if (!name.isString()) throw new ParseError("parsePredatore: can't read property \"name\"");
 
-        return new Predatore(parseVect2D(o.value("position")), name.toString().toStdString());
+        return new Tonno(parseVect2D(o.value("position")), name.toString().toStdString());
     } else if (t == "PREDA") {
         QJsonValue name = o.value("name");
         if (!name.isString()) throw new ParseError("parsePredatore: can't read property \"name\"");
 
-        return new Preda(parseVect2D(o.value("position")), name.toString().toStdString());
+        return new PesceVolante(parseVect2D(o.value("position")), name.toString().toStdString());
         return nullptr;
     } else
         throw new ParseError("parsePredatore: ");
