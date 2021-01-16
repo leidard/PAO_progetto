@@ -1,4 +1,4 @@
-#include "fishinfoview.hpp"
+#include "organismoinfoview.hpp"
 
 #include <QGridLayout>
 #include <QLabel>
@@ -9,7 +9,7 @@
 
 #include "organismo.hpp"
 
-FishInfoView::FishInfoView(QWidget* parent) : QDialog(parent) {
+OrganismoInfoView::OrganismoInfoView(QWidget* parent) : QDialog(parent) {
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);  //disable "?" button
     setMinimumSize(QSize(350, 250));
     setMaximumSize(QSize(350, 250));
@@ -63,31 +63,31 @@ FishInfoView::FishInfoView(QWidget* parent) : QDialog(parent) {
     setLayout(layout);
 }
 
-void FishInfoView::closeEvent(QCloseEvent*) {
+void OrganismoInfoView::closeEvent(QCloseEvent*) {
     killTimer(timerID);
 }
 
-void FishInfoView::updateInfo() {
-    const Organismo* f = controller->getCurrent();
-    if (f == nullptr) return;  // TODO call set default or something to reset all the values shown
+void OrganismoInfoView::updateInfo() {
+    const Organismo* o = controller->getCurrent();
+    if (o == nullptr) return;  // TODO call set default or something to reset all the values shown
     if (!(controller->hasNext() || controller->hasPrev())) {
         controller->reset();
     }
 
-    if (f->getType() == "tonno") {  //draw icon for Tonno
+    if (o->getType() == "tonno") {  //draw icon for Tonno
         QPixmap pix = QPixmap(":/images/punto.png");
         pix = pix.scaled(img->size(), Qt::KeepAspectRatio);
         img->setPixmap(pix);
-    } else if (f->getType() == "pesce volante") {  //draw icon for PesceVolante
+    } else if (o->getType() == "sardina") {  //draw icon for Sardina
         QPixmap pix = QPixmap(":/images/punto.png");
         pix = pix.scaled(img->size(), Qt::KeepAspectRatio);
         img->setPixmap(pix);
     }
 
-    nameLine->setText(f->getName().c_str());
-    tipologia->setText(f->getType().c_str());
-    nutVal->setNum(f->getValoreNutrizionale());
-    bar->setValue(f->getStamina().getVal());
+    nameLine->setText(o->getName().c_str());
+    tipologia->setText(o->getType().c_str());
+    nutVal->setNum(o->getValoreNutrizionale());
+    bar->setValue(o->getStamina().getVal());
     std::stringstream s;
     s << (controller->getPosition() + 1) << " di " << controller->getVectorSize();
     currentmax->setText(s.str().c_str());
@@ -96,17 +96,17 @@ void FishInfoView::updateInfo() {
     next->setDisabled(!controller->hasNext());
 }
 
-void FishInfoView::show() {  //aggiungere i parent ovunque
+void OrganismoInfoView::show() {  //aggiungere i parent ovunque
     updateInfo();
     startTimer(100);
     QDialog::show();
 }
 
-void FishInfoView::setController(Controller* c) {
+void OrganismoInfoView::setController(Controller* c) {
     controller = c;
 }
 
-void FishInfoView::timerEvent(QTimerEvent*) {  //aggiorna la progress bar con la stamina
+void OrganismoInfoView::timerEvent(QTimerEvent*) {  //aggiorna la progress bar con la stamina
     //std::cout << "updateInfo" << std::endl;
     updateInfo();
 }

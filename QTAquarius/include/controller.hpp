@@ -28,12 +28,12 @@ class Controller : public QObject {
     void setModel(Aquarius*);
     void setView(AcquarioView*);
 
-    Vector<DeepPtr<Organismo>>& getAllFish();
+    Vector<DeepPtr<Organismo>>& getAllOrganismi();
 
     void resize(int width, int height);
 
     void addTonno(const Vect2D&);  // click
-    void addPesceVolante(const Vect2D&);      // click
+    void addSardina(const Vect2D&);      // click
 
     // infoview
     unsigned int getVectorSize();

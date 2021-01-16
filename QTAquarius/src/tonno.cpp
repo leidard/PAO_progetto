@@ -11,20 +11,20 @@ void Tonno::behaviour(Aquarius* a) {
     Vect2D separation;
     Vect2D cohesion;
     int count = 0;
-    for (auto& f : a->getAllFish()) {
-        if (f && &(*f) != this && isInRange(f->getPosition())) {
+    for (auto& o : a->getAllOrganismi()) {
+        if (o && &(*o) != this && isInRange(o->getPosition())) {
             // alignment step
-            alignement += f->getVelocity();
+            alignement += o->getVelocity();
 
             // separation step
-            Vect2D diff = _position - f->getPosition();
+            Vect2D diff = _position - o->getPosition();
             double d = diff.mag();
             if (d != 0)
                 diff.div(d * d);
             separation += diff;
 
             // cohesion step
-            cohesion += f->getPosition();
+            cohesion += o->getPosition();
 
             count++;
         }
@@ -54,13 +54,13 @@ void Tonno::behaviour(Aquarius* a) {
     Organismo::behaviour(a);
 }
 
-bool Tonno::operator==(const Organismo& f) const {
-    auto d = dynamic_cast<const Tonno*>(&f);
+bool Tonno::operator==(const Organismo& o) const {
+    auto d = dynamic_cast<const Tonno*>(&o);
     return d != nullptr && d == this;
 }
 
-bool Tonno::operator!=(const Organismo& f) const {
-    auto d = dynamic_cast<const Tonno*>(&f);
+bool Tonno::operator!=(const Organismo& o) const {
+    auto d = dynamic_cast<const Tonno*>(&o);
     return d == nullptr || d != this;
 }
 
@@ -69,19 +69,19 @@ bool Tonno::isHungry() const {
     return _stamina < 0.4;
 }
 
-void Tonno::eat(Organismo& f) {
+void Tonno::eat(Organismo& o) {
     _daycycle += 20;
-    f.setGone();
-    /* if (_stamina.getVal() + f.getValoreNutrizionale() > _stamina.getMax())  //stamina cant exceed its maximum
+    o.setGone();
+    /* if (_stamina.getVal() + o.getValoreNutrizionale() > _stamina.getMax())  //stamina cant exceed its maximum
         _stamina.setValToMax();
     else
-        _stamina += f.getValoreNutrizionale();*/
+        _stamina += o.getValoreNutrizionale();*/
 }
 
 // repeated pure virtual
 Tonno* Tonno::clone() const { return new Tonno(*this); }  // from CartesianObject2D
 
-int Tonno::getValoreNutrizionale() const { return 3; }  // from Fish
+int Tonno::getValoreNutrizionale() const { return 3; }  // from Organismo
 
 double Tonno::getVisibility() const {
     return .2;
@@ -93,4 +93,4 @@ bool Tonno::isInRange(const Vect2D& p) const {
 
 std::string Tonno::getType() const {
     return "tonno";
-}  // from Fish
+}  // from Organismo

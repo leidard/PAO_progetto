@@ -1,6 +1,6 @@
 #include "aquarius.hpp"
 
-Aquarius::Aquarius(unsigned int width, unsigned int height) : _width(width), _height(height), fish() {}
+Aquarius::Aquarius(unsigned int width, unsigned int height) : _width(width), _height(height), organismi() {}
 
 unsigned int Aquarius::getWidth() const { return _width; }
 unsigned int Aquarius::getHeight() const { return _height; }
@@ -12,25 +12,25 @@ void Aquarius::setSize(unsigned int width, unsigned int height) {
     _height = height;
 }
 
-void Aquarius::addFish(Organismo* v) {
-    // if (fish.size() > FISH_LIMIT)
-    fish.push_back(DeepPtr<Organismo>(v));
+void Aquarius::addOrganismo(Organismo* v) {
+    // if (organismi.size() > ORGANISMI_LIMIT)
+    organismi.push_back(DeepPtr<Organismo>(v));
     // else throw exception???
-    // TODO aggiungere eccezione sul limite di pesci raggiunto oppure ritornare un bool con il successo o meno
+    // TODO aggiungere eccezione sul limite di organismi raggiunto oppure ritornare un bool con il successo o meno
 }
 
-Vector<DeepPtr<Organismo>>& Aquarius::getAllFish() {
-    return fish;
+Vector<DeepPtr<Organismo>>& Aquarius::getAllOrganismi() {
+    return organismi;
 }
 
 void Aquarius::advance() {
-    for (auto& i : fish) {
+    for (auto& i : organismi) {
         i->advance(this, 0);  // calcolate
     }
 
-    for (auto it = fish.begin(); it < fish.end();) {
+    for (auto it = organismi.begin(); it < organismi.end();) {
         if ((*it)->isGone()) {
-            it = fish.erase(it);
+            it = organismi.erase(it);
             std::cout << "eliminato" << std::endl;
         } else {
             (*it)->advance(this, 1);

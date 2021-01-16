@@ -4,14 +4,14 @@
 #include <iostream>
 #include <string>
 
-#ifndef JSONPARSER_H
-#define JSONPARSER_H
+#ifndef SAVERLOADER_H
+#define SAVERLOADER_H
 
 class Aquarius;
 
 class Vect2D;
 class Tonno;
-class PesceVolante;
+class Sardina;
 class Organismo;
 
 class SaverLoader {
@@ -31,11 +31,11 @@ class SaverLoader {
     void save(Aquarius* a, const std::string& filename = DEFAULT_FILENAME) const;
 
     static QJsonObject serialize(const Tonno&);
-    static QJsonObject serialize(const PesceVolante&);
+    static QJsonObject serialize(const Sardina&);
     static QJsonObject serialize(const Vect2D&);
 
     static Vect2D parseVect2D(const QJsonValue&);
-    static Organismo* parseFish(const QJsonValue&);
+    static Organismo* parseOrganismo(const QJsonValue&);
 };
 
 #endif

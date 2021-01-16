@@ -2,8 +2,8 @@
 
 #include "controller.hpp"
 
-#ifndef FISHINFO_HPP
-#define FISHINFO_HPP
+#ifndef ORGANISMOINFO_HPP
+#define ORGANISMOINFO_HPP
 
 class QWidget;
 class QLabel;
@@ -14,10 +14,10 @@ class QPushButton;
 class QCloseEvent;
 class QTimerEvent;
 
-class FishInfoView : public QDialog {
+class OrganismoInfoView : public QDialog {
     Q_OBJECT
    public:
-    FishInfoView(QWidget* parent = nullptr);
+    OrganismoInfoView(QWidget* parent = nullptr);
     void show();
     void setController(Controller*);
 
@@ -44,4 +44,4 @@ class FishInfoView : public QDialog {
     QPushButton* quitButton;
 };
 
-#endif  // FISHINFO_HPP
+#endif  // ORGANISMOINFO_HPP

@@ -9,7 +9,7 @@ class Aquarius {
    private:
     unsigned int _width, _height;
 
-    Vector<DeepPtr<Organismo>> fish;
+    Vector<DeepPtr<Organismo>> organismi;
 
    public:
     Aquarius(unsigned int = 0, unsigned int = 0);
@@ -21,9 +21,9 @@ class Aquarius {
     void setHeight(unsigned int);
     void setSize(unsigned int, unsigned int);
 
-    void addFish(Organismo*);
+    void addOrganismo(Organismo*);
 
-    Vector<DeepPtr<Organismo>>& getAllFish();
+    Vector<DeepPtr<Organismo>>& getAllOrganismi();
 
     void advance();
 };

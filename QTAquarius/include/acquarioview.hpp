@@ -6,7 +6,7 @@
 #define ACQUARIOVIEW_H
 
 class Controller;
-class FishInfoView;
+class OrganismoInfoView;
 class QVBoxLayout;
 class QMenuBar;
 class QMenu;
@@ -22,19 +22,19 @@ class AcquarioView : public QWidget {
     enum Tool {
         NIENTE,
         TONNO,
-        PESCEVOLANTE,
+        SARDINA,
     };
 
    private:
     Controller* controller;
-    FishInfoView* infoView;
+    OrganismoInfoView* infoView;
     QVBoxLayout* layout;
     QMenuBar* menuBar;
     QMenu* file;
     QMenu* strumenti;
     QAction* pausariprendi;
     QActionGroup* strumentiOptions;
-    QAction* aggiungiPesceVolante;
+    QAction* aggiungiSardina;
     QAction* aggiungiTonno;
     QAction* infoPesci;
     QAction* fileSalva;
@@ -53,7 +53,7 @@ class AcquarioView : public QWidget {
 
    private slots:
     void openInfo();
-    void drawPesceVolante();
+    void drawSardina();
     void drawTonno();
     void stopGo();
 };

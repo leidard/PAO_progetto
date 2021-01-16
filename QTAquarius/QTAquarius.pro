@@ -23,8 +23,8 @@ SOURCES += \
     src/stamina.cpp \
     src/vect2d.cpp \
     src/vehicle.cpp \
-    src/pescevolante.cpp \
-    src/fishinfoview.cpp
+    src/sardina.cpp \
+    src/organismoinfoview.cpp
 
 HEADERS += \
     include/acquarioview.hpp \
@@ -35,14 +35,13 @@ HEADERS += \
     include/deepptr.hpp \
     include/organismo.hpp \
     include/saverloader.hpp \
-    include/pescevolante.hpp \
+    include/sardina.hpp \
     include/tonno.hpp \
     include/stamina.hpp \
     include/vect2d.hpp \
     include/vector.hpp \
     include/vehicle.hpp \
-    include/fishview.hpp \
-    include/fishinfoview.hpp
+    include/organismoinfoview.hpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

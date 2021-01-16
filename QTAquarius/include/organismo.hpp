@@ -5,8 +5,8 @@
 #include "stamina.hpp"
 #include "vehicle.hpp"
 
-#ifndef FISH_H
-#define FISH_H
+#ifndef ORGANISMO_H
+#define ORGANISMO_H
 
 class Aquarius;
 

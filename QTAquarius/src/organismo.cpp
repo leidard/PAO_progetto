@@ -47,11 +47,11 @@ void Organismo::behaviour(Aquarius* a) {
     if (isHungry()) {  // ha fame? then cerca cibo, mira verso il cibo con nuova accelerazione != acc parametro
         Organismo* candidato = nullptr;
         double mindist = 0;
-        for (auto& f : a->getAllFish()) {
-            if (*this != *f && f->getValoreNutrizionale() < getValoreNutrizionale() && isInRange(f->getPosition())) {
-                if (!candidato || Vect2D::distance(_position, f->getPosition()) < mindist) {
-                    mindist = Vect2D::distance(_position, f->getPosition());
-                    candidato = &*f;
+        for (auto& o : a->getAllOrganismi()) {
+            if (*this != *o && o->getValoreNutrizionale() < getValoreNutrizionale() && isInRange(o->getPosition())) {
+                if (!candidato || Vect2D::distance(_position, o->getPosition()) < mindist) {
+                    mindist = Vect2D::distance(_position, o->getPosition());
+                    candidato = &*o;
                 }
             }
         }
