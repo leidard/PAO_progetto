@@ -18,10 +18,6 @@ class Tonno : public Organismo {
     virtual Tonno* clone() const override;                 // from CartesianObject2D
     virtual bool isInRange(const Vect2D&) const override;  // from Vehicle
     virtual int getValoreNutrizionale() const override;    // from Organismo
-    virtual double getVisibility() const override;         // from Organismo
-    virtual std::string getType() const override;          // from Organismo
-    virtual bool operator==(const Organismo&) const override;
-    virtual bool operator!=(const Organismo&) const override;
 };
 
 #endif

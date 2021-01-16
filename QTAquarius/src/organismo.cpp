@@ -2,11 +2,11 @@
 
 #include "aquarius.hpp"
 
-Organismo::Organismo(const std::string& name, unsigned int a, unsigned int s, double stam) : _name(name), _awake(true), _gone(false), _daycycle(a, s), _stamina(stam) {}
-
+Organismo::Organismo(const Vect2D& position, double maximumSpeed, double maximumForce, const std::string& name, unsigned int a, unsigned int s, double stam) : Vehicle(position, maximumSpeed, maximumForce), _name(name), _awake(true), _gone(false), _daycycle(a, s), _stamina(stam) {}
 
 bool Organismo::isGone() const { return _gone; }
 void Organismo::setGone() { _gone = true; }
+
 void Organismo::setName(const std::string& name) { _name = name; }
 const std::string& Organismo::getName() const { return _name; }
 const Stamina& Organismo::getStamina() const { return _stamina; }
@@ -16,6 +16,7 @@ bool Organismo::isAwake() const { return _awake; }
 bool Organismo::isAsleep() const { return !_awake; }
 
 bool Organismo::canSleep() const {
+    return false;
     return _daycycle.isNight();
 }
 
@@ -48,9 +49,9 @@ void Organismo::behaviour(Aquarius* a) {
         Organismo* candidato = nullptr;
         double mindist = 0;
         for (auto& o : a->getAllOrganismi()) {
-            if (*this != *o && o->getValoreNutrizionale() < getValoreNutrizionale() && isInRange(o->getPosition())) {
-                if (!candidato || Vect2D::distance(_position, o->getPosition()) < mindist) {
-                    mindist = Vect2D::distance(_position, o->getPosition());
+            if (this != &(*o) && o->getValoreNutrizionale() < getValoreNutrizionale() && isInRange(o->getPosition())) {
+                if (!candidato || Vect2D::distance(getPosition(), o->getPosition()) < mindist) {
+                    mindist = Vect2D::distance(getPosition(), o->getPosition());
                     candidato = &*o;
                 }
             }

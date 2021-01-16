@@ -4,18 +4,25 @@
 
 #include "aquarius.hpp"
 
-const double Vehicle::PURSUIT_forwardSteps = 5;  // look forward for 5 steps
+const double Vehicle::DEFAULT_MAXSPEED = 5;
+const double Vehicle::DEFAULT_MAXFORCE = .15;
+const unsigned int Vehicle::ARRIVE_RADIUS = 100U;
+const unsigned int Vehicle::FLEE_RADIUS = 100U;
+const unsigned int Vehicle::ESCAPE_STEPSAHEAD = 5U;
+const unsigned int Vehicle::PURSUIT_STEPSAHEAD = 5U;
+const unsigned int Vehicle::BORDER_DISTANCE = 100U;
 
 const double Vehicle::WANDER_MAX_STRENGTH = 5;
-const double Vehicle::WANDER_MAX_RATE = 20;
+const double Vehicle::WANDER_MAX_RATE = .5;
 const double Vehicle::WANDER_forwardSteps = 15;
 const double Vehicle::wander_strength = 1;  // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_STRENGTH)
 const double Vehicle::wander_rate = 1;      // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_RATE)
 
-Vehicle::Vehicle(double maximumSpeed, double maximumForce) : maxSpeed(maximumSpeed),
-                                                             maxForce(maximumForce),
-                                                             _velocity(1, 1),
-                                                             _wander(1, 1) {
+Vehicle::Vehicle(const Vect2D& position, double maximumSpeed, double maximumForce) : maxSpeed(maximumSpeed),
+                                                                                     maxForce(maximumForce),
+                                                                                     _position(position),
+                                                                                     _velocity(1, 1),
+                                                                                     _wander(1, 1) {
     _velocity.setMagnitude(maxSpeed);
     _velocity.rotateDeg(std::rand() % 360 - 180);
 }
@@ -32,45 +39,45 @@ const Vect2D& Vehicle::getVelocity() const { return _velocity; }
 
 const Vect2D& Vehicle::getPosition() const { return _position; }
 
-Vect2D Vehicle::seek(const Vect2D& target) const {  // return steering from here to that target (target - location).normalize().mult(maxspeed);
-    Vect2D diff = (target - _position);
-    diff.setMagnitude(maxSpeed);
-    return (diff - _velocity);  // .limit(maxForce);
+Vect2D Vehicle::seek(const Vect2D& target) const {
+    return (target - _position).setMagnitude(maxSpeed).rem(_velocity);
 }
 
-Vect2D Vehicle::arrive(const Vect2D& target) const {
+Vect2D Vehicle::arrive(const Vect2D& target, unsigned int radius) const {
     Vect2D desired = (target - _position);
     double distance = desired.mag();
-    if (distance < 100)
-        desired.setMagnitude(distance / 100 * maxSpeed);
+    if (distance < radius && distance > 0)
+        desired.setMagnitude(distance / radius * maxSpeed);
     else
         desired.setMagnitude(maxSpeed);
-    return (desired - _velocity);  // .limit(maxForce);
+    return (desired - _velocity);
 }
 
-Vect2D Vehicle::flee(const Vect2D& target) const {
+Vect2D Vehicle::flee(const Vect2D& target, unsigned int radius) const {
     Vect2D desired = (target - _position);
 
     double distance = desired.mag();
-    if (distance < 100 && distance > 0) {
-        desired.setMagnitude(distance / -100 * -maxSpeed + maxSpeed);
+    if (distance < radius && distance > 0) {
+        desired.setMagnitude(distance / -radius * -maxSpeed + maxSpeed);
         desired.mult(-1);
     } else
-        return Vect2D(0, 0);
+        return Vect2D::ZERO;
 
-    return (desired - _velocity);  //.limit(maxForce);
+    return (desired - _velocity);
 }
-Vect2D Vehicle::pursuit(const Vehicle& v) const {
-    return seek(v._position + (v._velocity * Vehicle::PURSUIT_forwardSteps));
+Vect2D Vehicle::pursuit(const Vehicle& v, unsigned int stepsAhead) const {
+    return seek(v._position + (v._velocity * stepsAhead));
 }
-Vect2D Vehicle::escape(const Vehicle& v) const {
-    return flee(v._position + (v._velocity * Vehicle::PURSUIT_forwardSteps));
+
+Vect2D Vehicle::escape(const Vehicle& v, unsigned int stepsAhead) const {
+    return flee(v._position + (v._velocity * stepsAhead));
 }
+
 Vect2D Vehicle::wander() {
     int sign = (std::rand() % 2) ? 1 : -1;  // test this
 
     _wander.setMagnitude(Vehicle::wander_strength * Vehicle::WANDER_MAX_STRENGTH);
-    _wander.rotateDeg(sign * Vehicle::wander_rate * Vehicle::WANDER_MAX_RATE);
+    _wander.rotateRad(sign * Vehicle::wander_rate * Vehicle::WANDER_MAX_RATE);
 
     return seek(_position + (_velocity * Vehicle::WANDER_forwardSteps) + _wander);
 }
@@ -79,43 +86,39 @@ Vect2D Vehicle::stop() const {
     return _velocity * (-maxForce);
 }
 
-Vect2D Vehicle::stayWithinBorders(const Vect2D& size, const unsigned int distance) const {
+Vect2D Vehicle::stayWithinBorders(const Vect2D& size, unsigned int distance) const {
     Vect2D avoid;
+    double d = 0.0;
 
-    const Vect2D dtop = Vect2D(_position.x(), 0);
-    const Vect2D dleft = Vect2D(0, _position.y());
-    const Vect2D dr = Vect2D(size.x(), _position.y());
-    const Vect2D db = Vect2D(_position.x(), size.y());
-
-    Vect2D diff = _position - dtop;
-    double d = diff.mag();
+    // top
+    d = _position.y();
     if (d < distance && d > 0) {
-        diff.div(d * d);
-        avoid += diff;
+        d /= d * d;
+        avoid += Vect2D(0, d);
     }
 
-    diff = _position - dleft;
-    d = diff.mag();
+    // left
+    d = _position.x();
     if (d < distance && d > 0) {
-        diff.div(d * d);
-        avoid += diff;
+        d /= d * d;
+        avoid += Vect2D(d, 0);
     }
 
-    diff = _position - dr;
-    d = diff.mag();
+    // right
+    d = size.x() - _position.x();
     if (d < distance && d > 0) {
-        diff.div(d * d);
-        avoid += diff;
+        d /= d * d;
+        avoid += Vect2D(-d, 0);
     }
 
-    diff = _position - db;
-    d = diff.mag();
+    // bottom
+    d = size.y() - _position.y();
     if (d < distance && d > 0) {
-        diff.div(d * d);
-        avoid += diff;
+        d /= d * d;
+        avoid += Vect2D(0, -d);
     }
 
-    if (avoid != Vect2D(0, 0))
+    if (avoid != Vect2D::ZERO)
         return avoid.div(4).setMagnitude(maxSpeed).rem(_velocity);
     else
         return avoid;
@@ -139,6 +142,6 @@ void Vehicle::advance(Aquarius* a, int phase) {  //divide the method with 2 phas
     } else {
         _velocity = _computedvelocity;
         _position = _computedposition;
-        _acc = Vect2D();
+        _acc = Vect2D::ZERO;
     }
 }

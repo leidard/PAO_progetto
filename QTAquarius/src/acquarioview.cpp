@@ -9,7 +9,17 @@
 #include "sardina.hpp"
 #include "tonno.hpp"
 
-AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIENTE), pausa(false) {
+const Vect2D AcquarioView::shape[3] = {
+    Vect2D(20.0, 0.0),
+    Vect2D(-9.0, -10.0),
+    Vect2D(-9.0, 10.0)};
+
+const unsigned int AcquarioView::minColor = 0xff00;
+const unsigned int AcquarioView::maxColor = 0xff0000;
+const double AcquarioView::minScale = .8;
+const double AcquarioView::maxScale = 1;
+
+AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIENTE), pausa(false), minVal(10000), maxVal(0) {
     layout = new QVBoxLayout(this);
     menuBar = new QMenuBar(this);
     // TO DO: Creare un .qss per lo stylesheet!
@@ -17,7 +27,7 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIE
     menuBar->setStyleSheet(QString("background-color: white; QMenu::item:selected { color: black}, QMenu::item::hover { color: black}"));
 
     file = new QMenu("File", menuBar);
-    strumenti = new QMenu("Strumenti", menuBar);
+    strumenti = new QMenu("Aggiungi Organismo", menuBar);
 
     //FILE
     fileSalva = new QAction("Salva", this);
@@ -119,41 +129,35 @@ void AcquarioView::mouseReleaseEvent(QMouseEvent* event) {
     }
 }
 
+#include <iostream>
+
 void AcquarioView::paintEvent(QPaintEvent*) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::RenderHint::Antialiasing);
-    int i = 0;
-    auto& organismi = controller->getAllOrganismi();
-    for (auto& o : organismi) {
-        Vect2D pos = o->getPosition();
-        Vect2D vel = o->getVelocity();
-        Vect2D left = Vect2D::rotateDeg(vel, -145);
-        Vect2D right = Vect2D::rotateDeg(vel, 145);
-        if (o->getType() == "tonno") {
-            vel.setMagnitude(15);
-            left.setMagnitude(20);
-            right.setMagnitude(20);
-        } else if (o->getType() == "sardina"){
-            vel.setMagnitude(10);
-            left.setMagnitude(15);
-            right.setMagnitude(15);
+
+    for (auto& o : controller->getAllOrganismi()) {
+        unsigned int val = o->getValoreNutrizionale();
+        if (val > maxVal) maxVal = val;
+        if (val < minVal) minVal = val;
+        double p = 1.0;
+        unsigned int color = 0x0;
+        if (minVal < maxVal) {
+            p = (val - minVal) / (double)(maxVal - minVal);
+            color = minColor + p * (maxColor - minColor);
         }
-        Vect2D fut = pos + vel;
-        Vect2D futl = pos + left;
-        Vect2D futr = pos + right;
-        // painter.drawRect(pos.x()-10, pos.y()-10, 20, 20);
-        // painter.drawLine(pos.x(), pos.y(), fut.x(), fut.y());
-        // painter.drawLine(futl.x(), futl.y(), pos.x(), pos.y());
-        // painter.drawLine(futr.x(), futr.y(), pos.x(), pos.y());
-        // painter.drawLine(futr.x(), futr.y(), fut.x(), fut.y());
+
+        const Vect2D& pos = o->getPosition();
+        double angle = o->getVelocity().angleRad();
+        double scale = minScale + p * (maxScale - minScale);
+        Vect2D s[3];
+        s[0] = shape[0].rotateRad(angle).mult(scale).add(pos);
+        s[1] = shape[1].rotateRad(angle).mult(scale).add(pos);
+        s[2] = shape[2].rotateRad(angle).mult(scale).add(pos);
         QPointF points[3] = {
-            QPointF(futl.x(), futl.y()),
-            QPointF(futr.x(), futr.y()),
-            QPointF(fut.x(), fut.y())};
-        painter.setBrush(QBrush(QColor(o->getType() == "tonno" ? "red" : "green")));
-        //        QPixmap pix = QPixmap(":/images/punto.png");
-        //        painter.drawPixmap(points, pix);
+            QPointF(s[0].x(), s[0].y()),
+            QPointF(s[1].x(), s[1].y()),
+            QPointF(s[2].x(), s[2].y())};
+        painter.setBrush(QBrush(QColor(QRgb(color))));
         painter.drawPolygon(points, 3);
-        i++;
     }
 }

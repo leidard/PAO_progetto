@@ -1,6 +1,7 @@
 #include <QWidget>
 
 #include "controller.hpp"
+#include "vect2d.hpp"
 
 #ifndef ACQUARIOVIEW_H
 #define ACQUARIOVIEW_H
@@ -24,6 +25,11 @@ class AcquarioView : public QWidget {
         TONNO,
         SARDINA,
     };
+    static const Vect2D shape[3];
+    static const double minScale;
+    static const double maxScale;
+    static const unsigned int minColor;
+    static const unsigned int maxColor;
 
    private:
     Controller* controller;
@@ -41,6 +47,9 @@ class AcquarioView : public QWidget {
     QAction* fileCarica;
     Tool drawing;
     bool pausa;
+
+    unsigned int minVal;
+    unsigned int maxVal;
 
    public:
     explicit AcquarioView(QWidget* parent = nullptr);

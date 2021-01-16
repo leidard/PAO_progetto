@@ -14,7 +14,6 @@ SOURCES += \
     main.cpp \
     src/acquarioview.cpp \
     src/aquarius.cpp \
-    src/cartesianobject2d.cpp \
     src/controller.cpp \
     src/daycycle.cpp \
     src/organismo.cpp \
@@ -29,7 +28,6 @@ SOURCES += \
 HEADERS += \
     include/acquarioview.hpp \
     include/aquarius.hpp \
-    include/cartesianobject2d.hpp \
     include/controller.hpp \
     include/daycycle.hpp \
     include/deepptr.hpp \

@@ -6,18 +6,17 @@
 
 class Food : virtual public CartesianObject2D {
    private:
-    bool gone;
+    bool _gone;
 
    public:
     Food();
     virtual ~Food();
-    virtual int getValoreNutrizionale() const = 0;
-    virtual double getVisibility() const = 0;
 
     virtual Food* clone() const = 0;
+    virtual int getValoreNutrizionale() const = 0;
 
-    bool getIsGone() const;
-    void setIsGone();
+    bool isGone() const;
+    void setGone();
 
     bool operator>(const Food&) const;
     bool operator>=(const Food&) const;

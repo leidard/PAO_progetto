@@ -14,6 +14,8 @@ class Vect2D {
     double _x, _y;
 
    public:
+    static const Vect2D ZERO;
+
     Vect2D();
     Vect2D(double x, double y);
 

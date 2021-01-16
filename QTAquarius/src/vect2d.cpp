@@ -4,8 +4,10 @@
 #include <cmath>
 #include <utility>
 
-Vect2D::Vect2D() : _x(0), _y(0){};
+Vect2D:: Vect2D(): _x(0), _y(0){};
 Vect2D::Vect2D(double x, double y) : _x(x), _y(y) {}
+
+const Vect2D Vect2D::ZERO = Vect2D(0, 0);
 
 // getters
 

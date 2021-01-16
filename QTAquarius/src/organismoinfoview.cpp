@@ -74,18 +74,12 @@ void OrganismoInfoView::updateInfo() {
         controller->reset();
     }
 
-    if (o->getType() == "tonno") {  //draw icon for Tonno
-        QPixmap pix = QPixmap(":/images/punto.png");
-        pix = pix.scaled(img->size(), Qt::KeepAspectRatio);
-        img->setPixmap(pix);
-    } else if (o->getType() == "sardina") {  //draw icon for Sardina
-        QPixmap pix = QPixmap(":/images/punto.png");
-        pix = pix.scaled(img->size(), Qt::KeepAspectRatio);
-        img->setPixmap(pix);
-    }
+    QPixmap pix = QPixmap(":/images/punto.png");
+    pix = pix.scaled(img->size(), Qt::KeepAspectRatio);
+    img->setPixmap(pix);
 
     nameLine->setText(o->getName().c_str());
-    tipologia->setText(o->getType().c_str());
+    tipologia->setText("tipo eliminato");
     nutVal->setNum(o->getValoreNutrizionale());
     bar->setValue(o->getStamina().getVal());
     std::stringstream s;

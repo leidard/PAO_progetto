@@ -1,11 +1,11 @@
-#include "cartesianobject2d.hpp"
+#include "vect2d.hpp"
 
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
 class Aquarius;
 
-class Vehicle : virtual public CartesianObject2D {
+class Vehicle {
    protected:
     /**
     * maxSpeed is the maximum "pixel per tick"
@@ -18,14 +18,20 @@ class Vehicle : virtual public CartesianObject2D {
     const double maxForce;
 
    private:
+    Vect2D _position;
     Vect2D _acc;
     Vect2D _computedvelocity;
     Vect2D _computedposition;
-    // Vect2D _position;
     Vect2D _velocity;
     Vect2D _wander;
 
-    static const double PURSUIT_forwardSteps;
+    static const double DEFAULT_MAXSPEED;
+    static const double DEFAULT_MAXFORCE;
+    static const unsigned int ARRIVE_RADIUS;
+    static const unsigned int FLEE_RADIUS;
+    static const unsigned int ESCAPE_STEPSAHEAD;
+    static const unsigned int PURSUIT_STEPSAHEAD;
+    static const unsigned int BORDER_DISTANCE;
 
     static const double WANDER_MAX_STRENGTH;
     static const double WANDER_MAX_RATE;
@@ -42,7 +48,10 @@ class Vehicle : virtual public CartesianObject2D {
     virtual void behaviour(Aquarius*) = 0;
 
    public:
-    Vehicle(double maxSpeed = 5.0, double maxForce = .15);
+    Vehicle(const Vect2D& position, double maxSpeed, double maxForce);
+
+    virtual ~Vehicle() = default;
+    virtual Vehicle* clone() const = 0;
 
     /**
      * Set the force of acceleration
@@ -61,20 +70,17 @@ class Vehicle : virtual public CartesianObject2D {
     const Vect2D& getPosition() const;
 
     // utility functions to move around
-    Vect2D seek(const Vect2D&) const;      // seek for that point
-    Vect2D arrive(const Vect2D&) const;    // arrive at that point
-    Vect2D flee(const Vect2D&) const;      // run from that point
-    Vect2D pursuit(const Vehicle&) const;  // follow a vehicle
-    Vect2D escape(const Vehicle&) const;   // run from a vehicle
-    Vect2D wander();                       // wander around
-    Vect2D stop() const;                   // stop the vehicle
-    Vect2D stayWithinBorders(const Vect2D&, const unsigned int distance) const;
+    Vect2D seek(const Vect2D&) const;                                                  // seek for that point
+    Vect2D arrive(const Vect2D&, unsigned int = Vehicle::ARRIVE_RADIUS) const;         // arrive at that point slowing down while approaching
+    Vect2D flee(const Vect2D&, unsigned int = Vehicle::FLEE_RADIUS) const;             // run from that point
+    Vect2D pursuit(const Vehicle&, unsigned int = Vehicle::PURSUIT_STEPSAHEAD) const;  // follow a vehicle
+    Vect2D escape(const Vehicle&, unsigned int = Vehicle::ESCAPE_STEPSAHEAD) const;    // run from a vehicle
+    Vect2D wander();                                                                   // wander around
+    Vect2D stop() const;                                                               // stop the vehicle
+    Vect2D stayWithinBorders(const Vect2D&, unsigned int = Vehicle::BORDER_DISTANCE) const;
 
     // new pure virtual
     virtual bool isInRange(const Vect2D& v) const = 0;
-
-    // redefined
-    virtual Vehicle* clone() const override = 0;
 
     // final method doesn't need and won't need override
     virtual void advance(Aquarius* a, int phase) final;
