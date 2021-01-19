@@ -16,6 +16,7 @@ class Aquarius {
 
     unsigned int getWidth() const;
     unsigned int getHeight() const;
+    Vect2D getBounds() const;
 
     void setSize(unsigned int, unsigned int);
 

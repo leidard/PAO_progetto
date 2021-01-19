@@ -23,7 +23,7 @@ void Sardina::behaviour(Aquarius* a) {
 }
 
 bool Sardina::isHungry() const {
-    return _stamina < 2;
+    return _stamina.getPercentage() < .2;
 }
 
 void Sardina::eat(Organismo&) {

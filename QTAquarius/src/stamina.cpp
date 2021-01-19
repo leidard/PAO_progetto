@@ -13,6 +13,7 @@ Stamina& Stamina::add(double v) {
     _val += v;
     return *this;
 }
+
 Stamina& Stamina::rem(double v) {
     _val -= v;
     return *this;

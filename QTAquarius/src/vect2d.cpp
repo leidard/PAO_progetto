@@ -4,7 +4,7 @@
 #include <cmath>
 #include <utility>
 
-Vect2D:: Vect2D(): _x(0), _y(0){};
+Vect2D::Vect2D() : _x(0), _y(0){};
 Vect2D::Vect2D(double x, double y) : _x(x), _y(y) {}
 
 const Vect2D Vect2D::ZERO = Vect2D(0, 0);
@@ -80,6 +80,11 @@ Vect2D& Vect2D::rotateDeg(double deg) {  // anti-clockwise
     double rad = deg * M_PI / 180;
     return rotateRad(rad);
 }
+Vect2D& Vect2D::reset() {
+    _x = 0;
+    _y = 0;
+    return *this;
+}
 
 // const edit functions with chain return
 
@@ -96,6 +101,7 @@ Vect2D Vect2D::limit(double s) const { return Vect2D(*this).limit(s); }
 Vect2D Vect2D::bounds(const Vect2D& b) const { return Vect2D(*this).bounds(b); }
 Vect2D Vect2D::rotateRad(double rad) const { return Vect2D(*this).rotateRad(rad); }
 Vect2D Vect2D::rotateDeg(double deg) const { return Vect2D(*this).rotateDeg(deg); }
+Vect2D Vect2D::reset() const { return Vect2D(*this).reset(); }
 double Vect2D::mag() const { return std::sqrt(_x * _x + _y * _y); }
 double Vect2D::dot(const Vect2D& v) const { return _x * v._x + _y * v._y; }
 double Vect2D::distance(const Vect2D& v) const { return (*this - v).mag(); }
@@ -122,6 +128,7 @@ Vect2D Vect2D::setMagnitude(const Vect2D& v1, double s) { return v1.setMagnitude
 Vect2D Vect2D::limit(const Vect2D& v1, double s) { return v1.limit(s); }
 Vect2D Vect2D::rotateRad(const Vect2D& v1, double rad) { return v1.rotateRad(rad); }
 Vect2D Vect2D::rotateDeg(const Vect2D& v1, double deg) { return v1.rotateDeg(deg); }
+Vect2D Vect2D::reset(const Vect2D& v1) { return v1.reset(); }
 double Vect2D::mag(const Vect2D& v1) { return v1.mag(); }
 double Vect2D::dot(const Vect2D& v1, const Vect2D& v2) { return v1.dot(v2); }
 double Vect2D::distance(const Vect2D& v1, const Vect2D& v2) { return v1.distance(v2); }

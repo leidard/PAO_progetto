@@ -9,7 +9,7 @@
 #include "sardina.hpp"
 #include "tonno.hpp"
 
-const Vect2D AcquarioView::shape[3] = {
+const Vect2D AcquarioView::vertex[3] = {
     Vect2D(20.0, 0.0),
     Vect2D(-9.0, -10.0),
     Vect2D(-9.0, 10.0)};
@@ -80,6 +80,8 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIE
     resize(QSize(1024, 720));  //starting window size
 }
 
+bool AcquarioView::isInfoViewVisible() const { return infoView->isVisible(); }
+
 void AcquarioView::openInfo() {
     infoView->show();
     // connect(this, &AcquarioView::update, infoView, &FishInfoView::updateInfo);
@@ -129,7 +131,14 @@ void AcquarioView::mouseReleaseEvent(QMouseEvent* event) {
     }
 }
 
-#include <iostream>
+void AcquarioView::shader(const Vect2D* v, unsigned int s, const Vect2D& position, double angle, QPointF* dest, double scale) {
+    for (unsigned int i = 0; i < s; ++i) {
+        std::pair<double, double> p = v[i].rotateRad(angle).mult(scale).add(position).getPair();
+        dest[i] = QPointF(p.first, p.second);
+    }
+}
+
+#include <QPen>
 
 void AcquarioView::paintEvent(QPaintEvent*) {
     QPainter painter(this);
@@ -140,23 +149,26 @@ void AcquarioView::paintEvent(QPaintEvent*) {
         if (val > maxVal) maxVal = val;
         if (val < minVal) minVal = val;
         double p = 1.0;
-        unsigned int color = 0x0;
+        unsigned int color = minColor;
         if (minVal < maxVal) {
             p = (val - minVal) / (double)(maxVal - minVal);
             color = minColor + p * (maxColor - minColor);
         }
 
-        const Vect2D& pos = o->getPosition();
-        double angle = o->getVelocity().angleRad();
+        QPointF points[3];
+
         double scale = minScale + p * (maxScale - minScale);
-        Vect2D s[3];
-        s[0] = shape[0].rotateRad(angle).mult(scale).add(pos);
-        s[1] = shape[1].rotateRad(angle).mult(scale).add(pos);
-        s[2] = shape[2].rotateRad(angle).mult(scale).add(pos);
-        QPointF points[3] = {
-            QPointF(s[0].x(), s[0].y()),
-            QPointF(s[1].x(), s[1].y()),
-            QPointF(s[2].x(), s[2].y())};
+        shader(vertex, 3, o->getPosition(), o->getVelocity().angleRad(), points, scale);
+
+        if (infoView->isVisible() && &(*o) == controller->getCurrent()) {
+            painter.save();
+            Vect2D center = o->getPosition();
+            painter.setPen(QPen(Qt::black, 1, Qt::SolidLine));
+            painter.setBrush(Qt::NoBrush);
+            painter.drawEllipse(QPointF(center.x(), center.y()), 100, 100);
+            painter.restore();
+        }
+
         painter.setBrush(QBrush(QColor(QRgb(color))));
         painter.drawPolygon(points, 3);
     }

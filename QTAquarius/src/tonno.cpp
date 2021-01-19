@@ -56,7 +56,7 @@ void Tonno::behaviour(Aquarius* a) {
 
 // defined of pure virtual
 bool Tonno::isHungry() const {
-    return _stamina.getPercentage() < 0.4;
+    return _stamina.getPercentage() < .4;
 }
 
 void Tonno::eat(Organismo& o) {

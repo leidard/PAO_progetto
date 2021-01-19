@@ -19,6 +19,7 @@ class Controller : public QObject {
     QTimer* _timer;
     Aquarius* _model;
     AcquarioView* _view;
+
     unsigned int infoviewpos;
 
    public:
@@ -28,14 +29,15 @@ class Controller : public QObject {
     void setModel(Aquarius*);
     void setView(AcquarioView*);
 
-    Vector<DeepPtr<Organismo>>& getAllOrganismi();
+    const Vector<DeepPtr<Organismo>>& getAllOrganismi();
 
     void resize(int width, int height);
 
-    void addTonno(const Vect2D&);  // click
-    void addSardina(const Vect2D&);      // click
+    void addTonno(const Vect2D&);    // click
+    void addSardina(const Vect2D&);  // click
 
     // infoview
+    bool isInfoViewVisible();
     unsigned int getVectorSize();
     unsigned int getPosition();
     bool hasNext();
@@ -45,14 +47,12 @@ class Controller : public QObject {
     void reset();
     const Organismo* getCurrent();
 
-    void updateName(const std::string&);
+    void updateNameOfCurrent(const std::string&);
 
    public slots:
     void advance();
     void start();
     void stop();
-
-    // void clickView(QPointF);
 };
 
 #endif

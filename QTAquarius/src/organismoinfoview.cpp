@@ -26,7 +26,7 @@ OrganismoInfoView::OrganismoInfoView(QWidget* parent) : QDialog(parent) {
     // NAME
     nameLine = new QLineEdit(this);
     nameLine->setMaxLength(30);
-    connect(nameLine, &QLineEdit::textEdited, this, [this]() { controller->updateName(nameLine->text().toStdString()); });
+    connect(nameLine, &QLineEdit::textEdited, this, [this]() { controller->updateNameOfCurrent(nameLine->text().toStdString()); });
     layout->addWidget(new QLabel("Nome:", this), 0, 1, 1, 1);
     layout->addWidget(nameLine, 0, 2, 1, 1);
 
@@ -69,25 +69,31 @@ void OrganismoInfoView::closeEvent(QCloseEvent*) {
 
 void OrganismoInfoView::updateInfo() {
     const Organismo* o = controller->getCurrent();
-    if (o == nullptr) return;  // TODO call set default or something to reset all the values shown
-    if (!(controller->hasNext() || controller->hasPrev())) {
-        controller->reset();
+    if (o == nullptr || (!controller->hasNext() && !controller->hasPrev())) controller->reset();
+    if (o == nullptr) {
+        nameLine->setText("");
+        nutVal->setNum(0);
+        bar->setValue(0);
+        currentmax->setText("0 di 0");
+        previous->setDisabled(true);
+        next->setDisabled(true);
+        return;
+    } else {
+        QPixmap pix = QPixmap(":/images/punto.png");
+        pix = pix.scaled(img->size(), Qt::KeepAspectRatio);
+        img->setPixmap(pix);
+
+        nameLine->setText(o->getName().c_str());
+        tipologia->setText("tipo eliminato");
+        nutVal->setNum(o->getValoreNutrizionale());
+        bar->setValue(o->getStamina().getVal());
+        std::stringstream s;
+        s << (controller->getPosition() + 1) << " di " << controller->getVectorSize();
+        currentmax->setText(s.str().c_str());
+
+        previous->setDisabled(!controller->hasPrev());
+        next->setDisabled(!controller->hasNext());
     }
-
-    QPixmap pix = QPixmap(":/images/punto.png");
-    pix = pix.scaled(img->size(), Qt::KeepAspectRatio);
-    img->setPixmap(pix);
-
-    nameLine->setText(o->getName().c_str());
-    tipologia->setText("tipo eliminato");
-    nutVal->setNum(o->getValoreNutrizionale());
-    bar->setValue(o->getStamina().getVal());
-    std::stringstream s;
-    s << (controller->getPosition() + 1) << " di " << controller->getVectorSize();
-    currentmax->setText(s.str().c_str());
-
-    previous->setDisabled(!controller->hasPrev());
-    next->setDisabled(!controller->hasNext());
 }
 
 void OrganismoInfoView::show() {  //aggiungere i parent ovunque

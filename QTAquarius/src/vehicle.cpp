@@ -14,7 +14,7 @@ const unsigned int Vehicle::BORDER_DISTANCE = 100U;
 
 const double Vehicle::WANDER_MAX_STRENGTH = 5;
 const double Vehicle::WANDER_MAX_RATE = .5;
-const double Vehicle::WANDER_forwardSteps = 15;
+const double Vehicle::WANDER_STEPSAHEAD = 15;
 const double Vehicle::wander_strength = 1;  // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_STRENGTH)
 const double Vehicle::wander_rate = 1;      // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_RATE)
 
@@ -79,7 +79,7 @@ Vect2D Vehicle::wander() {
     _wander.setMagnitude(Vehicle::wander_strength * Vehicle::WANDER_MAX_STRENGTH);
     _wander.rotateRad(sign * Vehicle::wander_rate * Vehicle::WANDER_MAX_RATE);
 
-    return seek(_position + (_velocity * Vehicle::WANDER_forwardSteps) + _wander);
+    return seek(_position + (_velocity * Vehicle::WANDER_STEPSAHEAD) + _wander);
 }
 
 Vect2D Vehicle::stop() const {
@@ -126,22 +126,14 @@ Vect2D Vehicle::stayWithinBorders(const Vect2D& size, unsigned int distance) con
 
 void Vehicle::advance(Aquarius* a, int phase) {  //divide the method with 2 phase triggere within the aquarius
     if (!phase) {
-        auto w = a->getWidth();
-        auto h = a->getHeight();
-        Vect2D bounds = Vect2D(w, h);
         this->behaviour(a);
-        applyForce(stayWithinBorders(bounds, 100));
-
+        applyForce(stayWithinBorders(a->getBounds()));
         _acc.limit(maxForce);
-
-        _computedvelocity = _velocity + _acc;
-        _computedvelocity.limit(maxSpeed);
-        _computedposition = _position + _computedvelocity;
-        _computedposition.bounds(bounds);  // mal che vada non farli scomparire del tutto
-
     } else {
-        _velocity = _computedvelocity;
-        _position = _computedposition;
-        _acc = Vect2D::ZERO;
+        _velocity += _acc;
+        _velocity.limit(maxSpeed);
+        _position += _velocity;
+        _position.bounds(a->getBounds());
+        _acc.reset();
     }
 }

@@ -24,7 +24,7 @@ void Controller::setView(AcquarioView* view) {
     connect(_timer, SIGNAL(timeout()), _view, SLOT(update()));
 }
 
-Vector<DeepPtr<Organismo>>& Controller::getAllOrganismi() {
+const Vector<DeepPtr<Organismo>>& Controller::getAllOrganismi() {
     return _model->getAllOrganismi();
 }
 
@@ -80,7 +80,7 @@ const Organismo* Controller::getCurrent() {
         return nullptr;
 }
 
-void Controller::updateName(const std::string& name) {
+void Controller::updateNameOfCurrent(const std::string& name) {
     if (infoviewpos < _model->getAllOrganismi().size())
         _model->getAllOrganismi()[infoviewpos]->setName(name);
 }

@@ -6,6 +6,7 @@ Aquarius::Aquarius(unsigned int width, unsigned int height) : _width(width), _he
 
 unsigned int Aquarius::getWidth() const { return _width; }
 unsigned int Aquarius::getHeight() const { return _height; }
+Vect2D Aquarius::getBounds() const { return Vect2D(_width, _height); }
 
 void Aquarius::setSize(unsigned int width, unsigned int height) {
     _width = width;
@@ -27,11 +28,10 @@ void Aquarius::advance() {
     for (auto& i : organismi) {
         i->advance(this, 0);  // calcolate
     }
-
-    for (auto it = organismi.begin(); it < organismi.end();) {
+    auto it = organismi.begin();
+    while (it != organismi.end()) {
         if ((*it)->isGone()) {
             it = organismi.erase(it);
-            std::cout << "eliminato" << std::endl;
         } else {
             (*it)->advance(this, 1);
             it++;

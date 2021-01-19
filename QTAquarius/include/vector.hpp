@@ -11,14 +11,6 @@ class Vector {
     unsigned int _capacity;
 
    public:
-    Vector(unsigned int = 0);
-    Vector(const Vector&);
-    ~Vector();
-    Vector& operator=(const Vector&);
-
-    class iterator;
-    class const_iterator;
-
     class iterator {
        protected:
         T* _current;
@@ -56,7 +48,6 @@ class Vector {
             _current -= n;
             return *this;
         }
-        operator const_iterator() { return const_iterator(_current); }
         bool operator==(const iterator& i) const { return _current == i._current; }
         bool operator!=(const iterator& i) const { return _current != i._current; }
         bool operator<(const iterator& i) const { return _current < i._current; }
@@ -103,6 +94,11 @@ class Vector {
         bool operator<=(const const_iterator& i) const { return _current <= i._current; }
         bool operator>=(const const_iterator& i) const { return _current >= i._current; }
     };
+
+    Vector(unsigned int = 0);
+    Vector(const Vector&);
+    ~Vector();
+    Vector& operator=(const Vector&);
 
     unsigned int size() const;
     unsigned int capacity() const;

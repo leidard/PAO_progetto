@@ -17,12 +17,17 @@ class Vehicle {
     */
     const double maxForce;
 
+    /** 
+     * Calculates the behaviour of the vehicle
+     * @param Aquarius* aquarius pointer
+    */
+    virtual void behaviour(Aquarius*) = 0;
+
    private:
     Vect2D _position;
     Vect2D _acc;
-    Vect2D _computedvelocity;
-    Vect2D _computedposition;
     Vect2D _velocity;
+
     Vect2D _wander;
 
     static const double DEFAULT_MAXSPEED;
@@ -35,20 +40,12 @@ class Vehicle {
 
     static const double WANDER_MAX_STRENGTH;
     static const double WANDER_MAX_RATE;
-    static const double WANDER_forwardSteps;
+    static const double WANDER_STEPSAHEAD;
     static const double wander_strength;  // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_STRENGTH)
     static const double wander_rate;      // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_RATE)
 
-   protected:
-    /** 
-     * Calculates the behaviour of the vehicle
-     * @param Aquarius* aquarius pointer
-     * @return Vect2D the acceleration
-    */
-    virtual void behaviour(Aquarius*) = 0;
-
    public:
-    Vehicle(const Vect2D& position, double maxSpeed, double maxForce);
+    Vehicle(const Vect2D& position, double maxSpeed = Vehicle::DEFAULT_MAXSPEED, double maxForce = Vehicle::DEFAULT_MAXFORCE);
 
     virtual ~Vehicle() = default;
     virtual Vehicle* clone() const = 0;
