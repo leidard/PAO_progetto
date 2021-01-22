@@ -24,7 +24,7 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIE
     menuBar = new QMenuBar(this);
     // TO DO: Creare un .qss per lo stylesheet!
     setStyleSheet("background-color: #70dbe9;");
-    menuBar->setStyleSheet(QString("background-color: white; QMenu::item:selected { color: black}, QMenu::item::hover { color: black}"));
+    menuBar->setStyleSheet(QString("color:black; background-color: white; QMenu::item:selected { color: black}, QMenu::item::hover { color: black}"));
 
     file = new QMenu("File", menuBar);
     strumenti = new QMenu("Aggiungi Organismo", menuBar);
@@ -143,7 +143,7 @@ void AcquarioView::shader(const Vect2D* v, unsigned int s, const Vect2D& positio
 void AcquarioView::paintEvent(QPaintEvent*) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::RenderHint::Antialiasing);
-
+painter.setPen(QPen(Qt::black, 1, Qt::SolidLine));
     for (auto& o : controller->getAllOrganismi()) {
         unsigned int val = o->getValoreNutrizionale();
         if (val > maxVal) maxVal = val;
@@ -163,13 +163,12 @@ void AcquarioView::paintEvent(QPaintEvent*) {
         if (infoView->isVisible() && &(*o) == controller->getCurrent()) {
             painter.save();
             Vect2D center = o->getPosition();
-            painter.setPen(QPen(Qt::black, 1, Qt::SolidLine));
             painter.setBrush(Qt::NoBrush);
             painter.drawEllipse(QPointF(center.x(), center.y()), 100, 100);
             painter.restore();
         }
 
-        painter.setBrush(QBrush(QColor(QRgb(color))));
+        painter.setBrush(QColor(QRgb(color)));
         painter.drawPolygon(points, 3);
     }
 }
