@@ -2,7 +2,7 @@
 
 const int Aquarius::ORGANISM_LIMIT = 100;
 
-Aquarius::Aquarius(unsigned int width, unsigned int height) : _width(width), _height(height), organismi() {}
+Aquarius::Aquarius(const std::string& name, unsigned int width, unsigned int height) : _name(name), _width(width), _height(height), organismi(), _autorespawn(false) {}
 
 unsigned int Aquarius::getWidth() const { return _width; }
 unsigned int Aquarius::getHeight() const { return _height; }
@@ -31,7 +31,13 @@ void Aquarius::advance() {
     auto it = organismi.begin();
     while (it != organismi.end()) {
         if ((*it)->isGone()) {
-            it = organismi.erase(it);
+            if (_autorespawn) {
+                auto a = (*it)->clone();
+                a->move(Vect2D(_width/2, _height/2));
+                *it = a; // it is a new object
+            } else {
+                it = organismi.erase(it);
+            }
         } else {
             (*it)->advance(this, 1);
             it++;

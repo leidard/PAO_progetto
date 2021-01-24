@@ -10,6 +10,7 @@ class DayCycle {
 
    public:
     explicit DayCycle(unsigned int = 0, unsigned int = 0);
+    DayCycle(const DayCycle&);
 
     // getters
     int getDayTime() const;

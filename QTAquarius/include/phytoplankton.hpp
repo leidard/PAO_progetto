@@ -1,22 +1,24 @@
-#include "aquarius.hpp"
-#include "organismo.hpp"
+#include "plankton.hpp"
 
-#ifndef PESCEVOLANTE_H
-#define PESCEVOLANTE_H
+#ifndef PHYTOPLANKTON_H
+#define PHYTOPLANKTON_H
 
-class Sardina : public Organismo {
+// stamina incrementa mentre son svegli e decremena nel sonno!!!
+// fanno la fotosintesi
+
+class PhytoPlankton : public Plankton {
    protected:
     virtual void behaviour(Aquarius*) override;
 
    public:
-    Sardina(const Vect2D&, const std::string& = "");
+    PhytoPlankton(const Vect2D&, const std::string& = "");
 
     // new pure virtual
     virtual bool isHungry() const override;
     virtual void eat(Organismo&) override;
 
     // repeated pure virtual
-    virtual Sardina* clone() const override;               // from CartesianObject2D
+    virtual PhytoPlankton* clone() const override;         // from Vehicle
     virtual bool isInRange(const Vect2D&) const override;  // from Vehicle
     virtual int getValoreNutrizionale() const override;    // from Organismo
 };

@@ -8,7 +8,7 @@ class Tonno : public Organismo {
     virtual void behaviour(Aquarius*) override;
 
    public:
-    Tonno(const Vect2D&, const std::string&);
+    Tonno(const Vect2D&, const std::string& = "");
 
     // definition of pure virtual
     virtual bool isHungry() const override;

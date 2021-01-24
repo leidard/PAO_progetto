@@ -36,12 +36,21 @@ class Controller : public QObject {
     void addTonno(const Vect2D&);    // click
     void addSardina(const Vect2D&);  // click
 
+    //
+    const std::string& getAquariusName() const;
+
+    // simulation
+
+    bool isRunning() const;
+    bool isAutoRespawnEnabled() const;
+    void toggleAutoRespawn() const;
+
     // infoview
-    bool isInfoViewVisible();
-    unsigned int getVectorSize();
-    unsigned int getPosition();
-    bool hasNext();
-    bool hasPrev();
+    bool isInfoViewVisible() const;
+    unsigned int getVectorSize() const;
+    unsigned int getPosition() const;
+    bool hasNext() const;
+    bool hasPrev() const;
     void next();
     void prev();
     void reset();

@@ -1,6 +1,7 @@
 #include "stamina.hpp"
 
 Stamina::Stamina(double maxval) : _maxval(maxval), _val(maxval) {}
+Stamina::Stamina(const Stamina& o) : _maxval(o._maxval), _val(o._maxval) {} // special beahviour different from standard
 
 double Stamina::getMax() const { return _maxval; }
 double Stamina::getVal() const { return _val; }

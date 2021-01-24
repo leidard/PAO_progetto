@@ -27,6 +27,10 @@ Vehicle::Vehicle(const Vect2D& position, double maximumSpeed, double maximumForc
     _velocity.rotateDeg(std::rand() % 360 - 180);
 }
 
+void Vehicle::move(const Vect2D & position){
+    _position = position;
+}
+
 void Vehicle::setForce(const Vect2D& acc) {
     _acc = acc;
 }

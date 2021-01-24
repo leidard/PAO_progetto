@@ -10,6 +10,8 @@
 class Aquarius;
 
 class Organismo : public Vehicle {
+   public:
+    static const char ** COOL_NAMES;
    private:
     std::string _name;
     bool _awake;
@@ -22,6 +24,7 @@ class Organismo : public Vehicle {
 
    public:
     Organismo(const Vect2D&, double, double, const std::string&, unsigned int, unsigned int, double);
+    Organismo(const Organismo&);
     virtual ~Organismo() = default;
     // defined at this level
 
@@ -44,7 +47,7 @@ class Organismo : public Vehicle {
     // repeated pure virtual
 
     virtual int getValoreNutrizionale() const = 0;
-    virtual Organismo* clone() const override = 0;  // from CartesianObject2D
+    virtual Organismo* clone() const  override = 0;  // from CartesianObject2D
 };
 
 #endif

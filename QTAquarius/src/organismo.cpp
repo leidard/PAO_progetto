@@ -2,7 +2,38 @@
 
 #include "aquarius.hpp"
 
-Organismo::Organismo(const Vect2D& position, double maximumSpeed, double maximumForce, const std::string& name, unsigned int a, unsigned int s, double stam) : Vehicle(position, maximumSpeed, maximumForce), _name(name), _awake(true), _gone(false), _daycycle(a, s), _stamina(stam) {}
+const char ** Organismo::COOL_NAMES = new const char*[26]{
+    "Bowie",
+    "Cardi",
+    "Elvis",
+    "Freddie", 
+    "Lennon", 
+    "Prince",  
+    "Brie", 
+    "Apache", 
+    "Kong", 
+    "Atari", 
+    "Elite", 
+    "Voxel", 
+    "Boomer",
+    "Kobe",
+    "Jordan", 
+    "Shaq",
+    "Sydney",
+    "Pretender",
+    "Buzz",
+    "Rocky",
+    "Rocky II",
+    "Rocky III",
+    "Rocky IV",
+    "Rocky V",
+    "Thor",
+    "Neo",
+};
+
+
+Organismo::Organismo(const Vect2D& position, double maximumSpeed, double maximumForce, const std::string& name, unsigned int a, unsigned int s, double stam) : Vehicle(position, maximumSpeed, maximumForce), _name(name == ""? COOL_NAMES[std::rand()%26]: name), _awake(true), _gone(false), _daycycle(a, s), _stamina(stam) {}
+Organismo::Organismo(const Organismo& o): Vehicle(o), _name(o._name), _awake(o._awake), _gone(false), _daycycle(o._daycycle), _stamina(o._stamina) {}
 
 bool Organismo::isGone() const { return _gone; }
 void Organismo::setGone() { _gone = true; }

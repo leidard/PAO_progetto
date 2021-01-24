@@ -1,6 +1,7 @@
 #include "daycycle.hpp"
 
 DayCycle::DayCycle(unsigned int day, unsigned int night) : awakeTime(day), asleepTime(night), progress(0) {}
+DayCycle::DayCycle(const DayCycle& o) : awakeTime(o.awakeTime), asleepTime(o.asleepTime), progress(0) {}
 
 int DayCycle::getDayTime() const { return awakeTime; }
 int DayCycle::getNightTime() const { return asleepTime; }

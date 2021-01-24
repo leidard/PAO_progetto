@@ -36,8 +36,10 @@ class AcquarioView : public QWidget {
     QVBoxLayout* layout;
     QMenuBar* menuBar;
     QMenu* file;
-    QMenu* strumenti;
+    QMenu* aggOrg;
+    QMenu* simulazione;
     QAction* pausariprendi;
+    QAction* autorespawn;
     QActionGroup* strumentiOptions;
     QAction* aggiungiSardina;
     QAction* aggiungiTonno;
@@ -66,6 +68,7 @@ class AcquarioView : public QWidget {
     void drawSardina();
     void drawTonno();
     void stopGo();
+    void toggleRespawn();
 };
 
 #endif

@@ -71,6 +71,7 @@ void OrganismoInfoView::updateInfo() {
     const Organismo* o = controller->getCurrent();
     if (o == nullptr || (!controller->hasNext() && !controller->hasPrev())) controller->reset();
     if (o == nullptr) {
+        setWindowTitle("Info Oganismo");
         nameLine->setText("");
         nutVal->setNum(0);
         bar->setValue(0);
@@ -79,6 +80,7 @@ void OrganismoInfoView::updateInfo() {
         next->setDisabled(true);
         return;
     } else {
+        setWindowTitle(("Info Oganismo: "+ o->getName()).c_str());
         QPixmap pix = QPixmap(":/images/punto.png");
         pix = pix.scaled(img->size(), Qt::KeepAspectRatio);
         img->setPixmap(pix);

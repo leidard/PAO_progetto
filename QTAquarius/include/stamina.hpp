@@ -9,6 +9,7 @@ class Stamina {
 
    public:
     explicit Stamina(double);
+    Stamina(const Stamina&);
 
     double getMax() const;
     double getVal() const;

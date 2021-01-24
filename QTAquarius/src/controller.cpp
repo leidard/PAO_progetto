@@ -29,32 +29,44 @@ const Vector<DeepPtr<Organismo>>& Controller::getAllOrganismi() {
 }
 
 void Controller::addTonno(const Vect2D& position) {
-    _model->addOrganismo(new Tonno(position, "paolo"));
+    _model->addOrganismo(new Tonno(position));
 }
 
 void Controller::addSardina(const Vect2D& position) {
-    _model->addOrganismo(new Sardina(position, "paolo"));
+    _model->addOrganismo(new Sardina(position));
 }
 
 void Controller::resize(int width, int height) {
     _model->setSize(width, height);
 }
 
+
+const std::string& Controller::getAquariusName() const {
+    return _model->getName();
+};
+
+// simulazione
+
+bool Controller::isRunning() const { return _timer->isActive(); }
+bool Controller::isAutoRespawnEnabled() const { return _model->isAutoRespawnEnabled(); }
+void Controller::toggleAutoRespawn() const { if (_model->isAutoRespawnEnabled()) _model->disableAutoRespawn(); else _model->enableAutoRespawn();}
+
+
 // InfoView part
 
-unsigned int Controller::getVectorSize() {
+unsigned int Controller::getVectorSize()const {
     return _model->getAllOrganismi().size();
 }
 
-unsigned int Controller::getPosition() {
+unsigned int Controller::getPosition()const {
     return infoviewpos;
 }
 
-bool Controller::hasNext() {
+bool Controller::hasNext() const {
     return infoviewpos < _model->getAllOrganismi().size() - 1;
 }
 
-bool Controller::hasPrev() {
+bool Controller::hasPrev() const  {
     return infoviewpos > 0;
 }
 

@@ -5,6 +5,8 @@
 
 class Aquarius;
 
+//TODO  it could have a friend declaration to the acquarius to access some private methods
+
 class Vehicle {
    protected:
     /**
@@ -22,6 +24,19 @@ class Vehicle {
      * @param Aquarius* aquarius pointer
     */
     virtual void behaviour(Aquarius*) = 0;
+
+    /**
+     * Set the force of acceleration
+     * (this overwrite the force if already written)
+     * @param acc
+    */
+    void setForce(const Vect2D&);
+    /**
+     * Add the force of acceleration, to the already calculated one 
+     * @param acc
+     * @param weight
+    */
+    void applyForce(const Vect2D&, const double& = 1);
 
    private:
     Vect2D _position;
@@ -50,18 +65,7 @@ class Vehicle {
     virtual ~Vehicle() = default;
     virtual Vehicle* clone() const = 0;
 
-    /**
-     * Set the force of acceleration
-     * (this overwrite the force if already written)
-     * @param acc
-    */
-    void setForce(const Vect2D&);
-    /**
-     * Add the force of acceleration, to the already calculated one 
-     * @param acc
-     * @param weight
-    */
-    void applyForce(const Vect2D&, const double& = 1);
+    void move(const Vect2D&);
 
     const Vect2D& getVelocity() const;
     const Vect2D& getPosition() const;

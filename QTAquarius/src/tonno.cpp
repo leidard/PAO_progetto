@@ -62,10 +62,6 @@ bool Tonno::isHungry() const {
 void Tonno::eat(Organismo& o) {
     _daycycle += 20;
     o.setGone();
-    /* if (_stamina.getVal() + o.getValoreNutrizionale() > _stamina.getMax())  //stamina cant exceed its maximum
-        _stamina.setValToMax();
-    else
-        _stamina += o.getValoreNutrizionale();*/
 }
 
 // repeated pure virtual

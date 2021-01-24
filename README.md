@@ -49,6 +49,10 @@ Per maggiori dettagli riguardo al funzionamento dei veicoli all'interno della si
 
 [Boids.md](./BOIDS.md)
 
+## Todo
+
+- [] Mantenere la popolazione costante tramite una impostazione grafica, questo significa che ogni volta che un pesce viene eliminato, esso ricompare al centro dell'acquario.
+
 ## Requisiti
 
 -   [ ] almeno 3 tipi diversi istanziabili

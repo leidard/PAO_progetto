@@ -4,10 +4,12 @@
 #include <QPaintEvent>
 #include <QPainter>
 #include <QVBoxLayout>
+#include <QPen>
 
 #include "organismoinfoview.hpp"
 #include "sardina.hpp"
 #include "tonno.hpp"
+
 
 const Vect2D AcquarioView::vertex[3] = {
     Vect2D(20.0, 0.0),
@@ -23,25 +25,26 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIE
     layout = new QVBoxLayout(this);
     menuBar = new QMenuBar(this);
     // TO DO: Creare un .qss per lo stylesheet!
-    setStyleSheet("background-color: #70dbe9;");
-    menuBar->setStyleSheet(QString("color:black; background-color: white; QMenu::item:selected { color: black}, QMenu::item::hover { color: black}"));
+    setStyleSheet("background-color: #e0e0ff; color:black;");
+    menuBar->setStyleSheet(QString("color:black; background-color: white; QMenu::item:selected { background-color: black; color: white; }, QMenu::item::hover { background-color: black; }"));
 
     file = new QMenu("File", menuBar);
-    strumenti = new QMenu("Aggiungi Organismo", menuBar);
+    aggOrg = new QMenu("Aggiungi Organismi", menuBar);
+    simulazione = new QMenu("Simulazione", menuBar);
 
-    //FILE
+    // FILE
     fileSalva = new QAction("Salva", this);
     fileCarica = new QAction("Carica", this);
 
     file->addAction(fileSalva);
     file->addAction(fileCarica);
 
-    //STRUMENTI
+    // AGGIUNGI ORGANISMO
     strumentiOptions = new QActionGroup(this);
-    aggiungiSardina = new QAction("Aggiungi sardina", this);
+    aggiungiSardina = new QAction("Aggiungi sardina", strumentiOptions);
     aggiungiSardina->setCheckable(true);
     connect(aggiungiSardina, &QAction::triggered, this, &AcquarioView::drawSardina);
-    aggiungiTonno = new QAction("Aggiungi tonno", this);
+    aggiungiTonno = new QAction("Aggiungi tonno", strumentiOptions);
     aggiungiTonno->setCheckable(true);
     connect(aggiungiTonno, &QAction::triggered, this, &AcquarioView::drawTonno);
 
@@ -58,26 +61,39 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIE
             lastAction = action;
     });
 
-    infoPesci = new QAction("Info organismi", this);
+    aggOrg->addAction(aggiungiSardina);
+    aggOrg->addAction(aggiungiTonno);
+
+    // INFO ORGANISMI
+
+    infoPesci = new QAction("Info organismi", menuBar);
     connect(infoPesci, &QAction::triggered, this, &AcquarioView::openInfo);
 
-    strumenti->addAction(aggiungiSardina);
-    strumenti->addAction(aggiungiTonno);
-    strumenti->addAction(infoPesci);
-
-    //PAUSA E RIPRENDI
-    pausariprendi = new QAction("Pausa", menuBar);
+    // SIMULAZIONE
+    pausariprendi = new QAction("Pausa", simulazione);
     connect(pausariprendi, &QAction::triggered, this, &AcquarioView::stopGo);
+    autorespawn = new QAction("Respawn Automatico", simulazione);
+    autorespawn->setCheckable(true);
+    autorespawn->setChecked(false);
+    connect(autorespawn, &QAction::triggered, this, &AcquarioView::toggleRespawn);
+    
+    simulazione->addAction(pausariprendi);
+    simulazione->addAction(autorespawn);
+
+    // MENUBAR
 
     menuBar->addMenu(file);
-    menuBar->addMenu(strumenti);
-    menuBar->addAction(pausariprendi);
-    //    menuBar->addAction("Riprendi");
+    menuBar->addMenu(aggOrg);
+    menuBar->addAction(infoPesci);
+    menuBar->addMenu(simulazione);
+
     layout->setMenuBar(menuBar);
 
     infoView = new OrganismoInfoView(this);
 
     resize(QSize(1024, 720));  //starting window size
+    setMinimumWidth(1024);
+    setMinimumHeight(720);
 }
 
 bool AcquarioView::isInfoViewVisible() const { return infoView->isVisible(); }
@@ -102,20 +118,24 @@ void AcquarioView::drawTonno() {
 }
 
 void AcquarioView::stopGo() {
-    if (!pausa) {
+    if (controller->isRunning()) {
         controller->stop();
-        pausariprendi->setText("Pausa");
-        pausa = true;
+        pausariprendi->setText("Riprendi");
     } else {
         controller->start();
-        pausariprendi->setText("Riprendi");
-        pausa = false;
+        pausariprendi->setText("Pausa");
     }
+}
+
+void AcquarioView::toggleRespawn() {
+    controller->toggleAutoRespawn();
+    autorespawn->setChecked(controller->isAutoRespawnEnabled());
 }
 
 void AcquarioView::setController(Controller* c) {
     controller = c;
     infoView->setController(controller);
+    setWindowTitle(controller->getAquariusName().c_str());
 }
 
 void AcquarioView::resizeEvent(QResizeEvent* event) {
@@ -138,7 +158,7 @@ void AcquarioView::shader(const Vect2D* v, unsigned int s, const Vect2D& positio
     }
 }
 
-#include <QPen>
+
 
 void AcquarioView::paintEvent(QPaintEvent*) {
     QPainter painter(this);
