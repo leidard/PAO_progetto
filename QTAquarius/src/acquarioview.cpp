@@ -24,7 +24,6 @@ const double AcquarioView::maxScale = 1;
 AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIENTE), pausa(false), minVal(10000), maxVal(0) {
     layout = new QVBoxLayout(this);
     menuBar = new QMenuBar(this);
-    // TO DO: Creare un .qss per lo stylesheet!
     setStyleSheet("background-color: #e0e0ff; color:black;");
     menuBar->setStyleSheet(QString("color:black; background-color: white; QMenu::item:selected { background-color: black; color: white; }, QMenu::item::hover { background-color: black; }"));
 
@@ -53,8 +52,7 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIE
 
     connect(strumentiOptions, &QActionGroup::triggered, [](QAction* action) {
         static QAction* lastAction = nullptr;
-        if (action == lastAction) {  // entro qua se lastAction == nullptr == action ??
-            // se dovessi entrare qua sarebbe un Undefined Behaviour!!!!!
+        if (action && action == lastAction) {
             action->setChecked(false);
             lastAction = nullptr;
         } else
@@ -65,7 +63,6 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIE
     aggOrg->addAction(aggiungiTonno);
 
     // INFO ORGANISMI
-
     infoPesci = new QAction("Info organismi", menuBar);
     connect(infoPesci, &QAction::triggered, this, &AcquarioView::openInfo);
 

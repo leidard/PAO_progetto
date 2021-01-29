@@ -37,17 +37,17 @@ class Organismo : public Vehicle {
     bool isAwake() const;
     bool isAsleep() const;
     const Stamina& getStamina() const;  // ritorna una percentuale
-
-    // new pure virtual
     virtual bool canSleep() const;
     virtual bool canWakeup() const;
+
+    // new pure virtual
     virtual bool isHungry() const = 0;
     virtual void eat(Organismo&) = 0;
+    virtual int getValoreNutrizionale() const = 0;
 
     // repeated pure virtual
+    virtual Organismo* clone() const override = 0;
 
-    virtual int getValoreNutrizionale() const = 0;
-    virtual Organismo* clone() const  override = 0;  // from CartesianObject2D
 };
 
 #endif

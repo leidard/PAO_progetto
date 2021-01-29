@@ -23,6 +23,7 @@ SOURCES += \
     src/vect2d.cpp \
     src/vehicle.cpp \
     src/sardina.cpp \
+    src/plankton.cpp \
     src/organismoinfoview.cpp
 
 HEADERS += \
@@ -39,6 +40,9 @@ HEADERS += \
     include/vect2d.hpp \
     include/vector.hpp \
     include/vehicle.hpp \
+    include/plankton.hpp \
+    include/phytoplankton.hpp \
+    include/zooplankton.hpp \
     include/organismoinfoview.hpp
 
 # Default rules for deployment.

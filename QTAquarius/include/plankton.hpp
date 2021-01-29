@@ -6,10 +6,11 @@
 
 class Plankton : virtual public Organismo {
    protected:
-    void behaviour(Aquarius*) = 0;
+    virtual void behaviour(Aquarius*) = 0;
 
    public:
     Plankton(const Vect2D&, const std::string& = "");
+    virtual ~Plankton() = default;
 
     // new pure virtual
     virtual bool isHungry() const override;
