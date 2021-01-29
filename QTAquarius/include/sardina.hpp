@@ -13,7 +13,6 @@ class Sardina : public Organismo {
 
     // new pure virtual
     virtual bool isHungry() const override;
-    virtual void eat(Organismo&) override;
 
     // repeated pure virtual
     virtual Sardina* clone() const override;               // from CartesianObject2D

@@ -12,7 +12,6 @@ class Tonno : public Organismo {
 
     // definition of pure virtual
     virtual bool isHungry() const override;
-    virtual void eat(Organismo&) override;
 
     // repeated pure virtual
     virtual Tonno* clone() const override;                 // from CartesianObject2D

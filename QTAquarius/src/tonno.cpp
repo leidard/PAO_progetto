@@ -59,11 +59,6 @@ bool Tonno::isHungry() const {
     return _stamina.getPercentage() < .4;
 }
 
-void Tonno::eat(Organismo& o) {
-    _daycycle += 20;
-    o.setGone();
-}
-
 // repeated pure virtual
 Tonno* Tonno::clone() const { return new Tonno(*this); }  // from CartesianObject2D
 

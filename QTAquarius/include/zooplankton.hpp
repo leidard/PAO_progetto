@@ -14,7 +14,6 @@ class ZooPlankton : public Plankton {
 
     // new pure virtual
     virtual bool isHungry() const override;
-    virtual void eat(Organismo&) override;
 
     // repeated pure virtual
     virtual ZooPlankton* clone() const override;         // from Vehicle

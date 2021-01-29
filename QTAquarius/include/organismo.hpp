@@ -21,6 +21,9 @@ class Organismo : public Vehicle {
     DayCycle _daycycle;
     Stamina _stamina;
     virtual void behaviour(Aquarius*) override;
+    virtual void onEatBehaviour();
+    //virtual void onAwakeBehaviour();
+    //virtual void onSleepBehaviour();
 
    public:
     Organismo(const Vect2D&, double, double, const std::string&, unsigned int, unsigned int, double);
@@ -42,8 +45,7 @@ class Organismo : public Vehicle {
     virtual bool canSleep() const;
     virtual bool canWakeup() const;
     virtual bool isHungry() const = 0;
-    virtual void eat(Organismo&) = 0;
-
+    virtual void eat();
     // repeated pure virtual
 
     virtual int getValoreNutrizionale() const = 0;

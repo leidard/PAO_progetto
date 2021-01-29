@@ -47,7 +47,6 @@ bool Organismo::isAwake() const { return _awake; }
 bool Organismo::isAsleep() const { return !_awake; }
 
 bool Organismo::canSleep() const {
-    return false;
     return _daycycle.isNight();
 }
 
@@ -88,7 +87,12 @@ void Organismo::behaviour(Aquarius* a) {
             }
         }
         if (candidato != nullptr) {
-            if (mindist < getVelocity().mag()) eat(*candidato);
+            if (mindist < getVelocity().mag()) {
+                _stamina.add(candidato->getValoreNutrizionale());
+                candidato->setGone();
+                eat();
+                // TODO call eat function that someone can define a special behaviour when it eats something
+            }
             setForce(pursuit(*candidato));
             return;
         }
@@ -97,3 +101,5 @@ void Organismo::behaviour(Aquarius* a) {
     // quindi vaga a caso
     applyForce(wander(), .2);
 }
+
+void Organismo::eat() {}
