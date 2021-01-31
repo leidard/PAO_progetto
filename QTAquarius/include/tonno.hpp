@@ -1,7 +1,7 @@
 #include "organismo.hpp"
 
-#ifndef Tonno_H
-#define Tonno_H
+#ifndef TONNO_H
+#define TONNO_H
 
 class Tonno : public Organismo {
    protected:
@@ -17,6 +17,7 @@ class Tonno : public Organismo {
     virtual Tonno* clone() const override;                 // from CartesianObject2D
     virtual bool isInRange(const Vect2D&) const override;  // from Vehicle
     virtual int getValoreNutrizionale() const override;    // from Organismo
+    virtual std::string getSpecie() const override;       // from Organismo
 };
 
 #endif

@@ -26,9 +26,15 @@ bool Sardina::isHungry() const {
     return _stamina.getPercentage() < .2;
 }
 
-Sardina* Sardina::clone() const { return new Sardina(*this); }
+Sardina* Sardina::clone() const {
+    return new Sardina(*this);
+}
 
-int Sardina::getValoreNutrizionale() const { return 2; }
+int Sardina::getValoreNutrizionale() const { return 3; }
+
+std::string Sardina::getSpecie() const{
+    return "Sardina";
+}
 
 bool Sardina::isInRange(const Vect2D& p) const {
     return getPosition().distance(p) < 80;

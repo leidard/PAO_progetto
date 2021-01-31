@@ -36,6 +36,10 @@ void Controller::addSardina(const Vect2D& position) {
     _model->addOrganismo(new Sardina(position));
 }
 
+void Controller::addPhytoplankton(const Vect2D& position){
+    _model->addOrganismo(new Phytoplankton(position));
+}
+
 void Controller::resize(int width, int height) {
     _model->setSize(width, height);
 }
@@ -95,6 +99,14 @@ const Organismo* Controller::getCurrent() {
 void Controller::updateNameOfCurrent(const std::string& name) {
     if (infoviewpos < _model->getAllOrganismi().size())
         _model->getAllOrganismi()[infoviewpos]->setName(name);
+}
+
+void Controller::loadData(const std::string& filename) {
+    (new SaverLoader())->load(_model, filename);
+}
+
+void Controller::saveData(const std::string& filename) const {
+    (new SaverLoader())->save(_model, filename);
 }
 
 // slots

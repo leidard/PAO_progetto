@@ -3,6 +3,7 @@
 #include "deepptr.hpp"
 #include "vect2d.hpp"
 #include "vector.hpp"
+#include "saverloader.hpp"
 
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
@@ -19,6 +20,7 @@ class Controller : public QObject {
     QTimer* _timer;
     Aquarius* _model;
     AcquarioView* _view;
+    SaverLoader* _saver;
 
     unsigned int infoviewpos;
 
@@ -35,6 +37,7 @@ class Controller : public QObject {
 
     void addTonno(const Vect2D&);    // click
     void addSardina(const Vect2D&);  // click
+    void addPhytoplankton(const Vect2D&);  // click
 
     //
     const std::string& getAquariusName() const;
@@ -57,6 +60,9 @@ class Controller : public QObject {
     const Organismo* getCurrent();
 
     void updateNameOfCurrent(const std::string&);
+
+    void loadData(const std::string&);
+    void saveData(const std::string&) const;
 
    public slots:
     void advance();

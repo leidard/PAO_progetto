@@ -40,7 +40,7 @@ void Organismo::setGone() { _gone = true; }
 
 void Organismo::setName(const std::string& name) { _name = name; }
 const std::string& Organismo::getName() const { return _name; }
-const Stamina& Organismo::getStamina() const { return _stamina; }
+double Organismo::getStamina() const { return _stamina.getPercentage(); }
 void Organismo::sleep() { _awake = false; }
 void Organismo::wakeup() { _awake = true; }
 bool Organismo::isAwake() const { return _awake; }
@@ -87,11 +87,9 @@ void Organismo::behaviour(Aquarius* a) {
             }
         }
         if (candidato != nullptr) {
-            if (mindist < getVelocity().mag()) {
-                _stamina.add(candidato->getValoreNutrizionale());
+            if (mindist < getVelocity().mag()){
+                _stamina+=candidato->getValoreNutrizionale();
                 candidato->setGone();
-                eat();
-                // TODO call eat function that someone can define a special behaviour when it eats something
             }
             setForce(pursuit(*candidato));
             return;
@@ -101,5 +99,3 @@ void Organismo::behaviour(Aquarius* a) {
     // quindi vaga a caso
     applyForce(wander(), .2);
 }
-
-void Organismo::eat() {}

@@ -5,30 +5,35 @@
 #include <QLineEdit>
 #include <QProgressBar>
 #include <QPushButton>
+#include <QFile>
 #include <sstream>
 
-#include "organismo.hpp"
+
 
 OrganismoInfoView::OrganismoInfoView(QWidget* parent) : QDialog(parent) {
+    QFile styleSheetFile(":/style/stylesheetinfo.qss");
+    styleSheetFile.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(styleSheetFile.readAll());
+    setStyleSheet(styleSheet);
+
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);  //disable "?" button
-    setMinimumSize(QSize(350, 250));
-    setMaximumSize(QSize(350, 250));
-    QPoint dialogCenter = mapToGlobal(rect().center());
-    QPoint parentWindowCenter = parent->window()->mapToGlobal(parent->window()->rect().center());
-    move(parentWindowCenter - dialogCenter);  //mette la dialog al centro della main window
+    setMinimumSize(QSize(280, 180));
+    setMaximumSize(QSize(280, 180));
+    move(parent->geometry().center());
 
     layout = new QGridLayout(this);
-
+    /*
     // IMAGE
     img = new QLabel(this);
     layout->addWidget(img, 0, 0, 1, 1);
-
+    */
     // NAME
     nameLine = new QLineEdit(this);
-    nameLine->setMaxLength(30);
+    nameLine->setMaxLength(60);
+    nameLine->setReadOnly(true);
     connect(nameLine, &QLineEdit::textEdited, this, [this]() { controller->updateNameOfCurrent(nameLine->text().toStdString()); });
-    layout->addWidget(new QLabel("Nome:", this), 0, 1, 1, 1);
-    layout->addWidget(nameLine, 0, 2, 1, 1);
+    layout->addWidget(new QLabel("Nome:", this), 0, 0, 1, 1);
+    layout->addWidget(nameLine, 0, 1, 1, 2);
 
     // TYPE
     tipologia = new QLabel("", this);
@@ -53,7 +58,7 @@ OrganismoInfoView::OrganismoInfoView(QWidget* parent) : QDialog(parent) {
     connect(previous, &QPushButton::released, this, [this]() { controller->prev(); updateInfo(); });
     connect(next, &QPushButton::released, this, [this]() { controller->next(); updateInfo(); });
     layout->addWidget(previous, 5, 0, 1, 1);
-    layout->addWidget(currentmax, 5, 1, 1, 1);
+    layout->addWidget(currentmax, 5, 1, 1, 1, Qt::AlignCenter);
     layout->addWidget(next, 5, 2, 1, 1);
 
     quitButton = new QPushButton("Chiudi", this);
@@ -73,6 +78,7 @@ void OrganismoInfoView::updateInfo() {
     if (o == nullptr) {
         setWindowTitle("Info Oganismo");
         nameLine->setText("");
+        nameLine->setReadOnly(true);
         nutVal->setNum(0);
         bar->setValue(0);
         currentmax->setText("0 di 0");
@@ -80,15 +86,17 @@ void OrganismoInfoView::updateInfo() {
         next->setDisabled(true);
         return;
     } else {
-        setWindowTitle(("Info Oganismo: "+ o->getName()).c_str());
+        setWindowTitle(("Info oganismo: "+ o->getName()).c_str());
+        /*
         QPixmap pix = QPixmap(":/images/punto.png");
         pix = pix.scaled(img->size(), Qt::KeepAspectRatio);
         img->setPixmap(pix);
-
+        */
         nameLine->setText(o->getName().c_str());
-        tipologia->setText("tipo eliminato");
+        nameLine->setReadOnly(false);
+        tipologia->setText(QString::fromStdString(o->getSpecie()));
         nutVal->setNum(o->getValoreNutrizionale());
-        bar->setValue(o->getStamina().getVal());
+        bar->setValue(o->getStamina()*100);
         std::stringstream s;
         s << (controller->getPosition() + 1) << " di " << controller->getVectorSize();
         currentmax->setText(s.str().c_str());
@@ -98,7 +106,7 @@ void OrganismoInfoView::updateInfo() {
     }
 }
 
-void OrganismoInfoView::show() {  //aggiungere i parent ovunque
+void OrganismoInfoView::show() {
     updateInfo();
     startTimer(100);
     QDialog::show();
@@ -109,6 +117,5 @@ void OrganismoInfoView::setController(Controller* c) {
 }
 
 void OrganismoInfoView::timerEvent(QTimerEvent*) {  //aggiorna la progress bar con la stamina
-    //std::cout << "updateInfo" << std::endl;
     updateInfo();
 }

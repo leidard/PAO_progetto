@@ -23,8 +23,9 @@ SOURCES += \
     src/vect2d.cpp \
     src/vehicle.cpp \
     src/sardina.cpp \
+    src/organismoinfoview.cpp \
     src/plankton.cpp \
-    src/organismoinfoview.cpp
+    src/phytoplankton.cpp
 
 HEADERS += \
     include/acquarioview.hpp \
@@ -42,7 +43,6 @@ HEADERS += \
     include/vehicle.hpp \
     include/plankton.hpp \
     include/phytoplankton.hpp \
-    include/zooplankton.hpp \
     include/organismoinfoview.hpp
 
 # Default rules for deployment.
@@ -51,4 +51,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    img.qrc
+    style.qrc
+
+DISTFILES +=

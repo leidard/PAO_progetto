@@ -1,6 +1,10 @@
 #include <QDialog>
 
 #include "controller.hpp"
+#include "organismo.hpp"
+#include "sardina.hpp"
+#include "tonno.hpp"
+#include "phytoplankton.hpp"
 
 #ifndef ORGANISMOINFO_HPP
 #define ORGANISMOINFO_HPP

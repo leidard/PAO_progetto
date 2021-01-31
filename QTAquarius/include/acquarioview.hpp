@@ -1,10 +1,22 @@
 #include <QWidget>
+#include <QCloseEvent>
+#include <QMessageBox>
+#include <QMenuBar>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QVBoxLayout>
+#include <QPen>
+#include <QFileDialog>
 
 #include "controller.hpp"
+#include "organismoinfoview.hpp"
+#include "sardina.hpp"
+#include "tonno.hpp"
 
 #ifndef ACQUARIOVIEW_H
 #define ACQUARIOVIEW_H
 
+//Che senso hanno se tanto c'è l'include?
 class Controller;
 class OrganismoInfoView;
 class QVBoxLayout;
@@ -23,6 +35,7 @@ class AcquarioView : public QWidget {
         NIENTE,
         TONNO,
         SARDINA,
+        PHYTOPLANKTON
     };
     static const Vect2D vertex[3];
     static const double minScale;
@@ -43,11 +56,13 @@ class AcquarioView : public QWidget {
     QActionGroup* strumentiOptions;
     QAction* aggiungiSardina;
     QAction* aggiungiTonno;
+    QAction* aggiungiPhytoplankton;
     QAction* infoPesci;
     QAction* fileSalva;
     QAction* fileCarica;
     Tool drawing;
     bool pausa;
+    bool saved;
 
     unsigned int minVal;
     unsigned int maxVal;
@@ -67,8 +82,12 @@ class AcquarioView : public QWidget {
     void openInfo();
     void drawSardina();
     void drawTonno();
+    void drawPhytoplankton();
     void stopGo();
     void toggleRespawn();
+    void save();
+    void load();
+    void closeEvent(QCloseEvent *event);
 };
 
 #endif

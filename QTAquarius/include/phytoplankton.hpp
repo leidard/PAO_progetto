@@ -6,19 +6,19 @@
 // stamina incrementa mentre son svegli e decremena nel sonno!!!
 // fanno la fotosintesi
 
-class PhytoPlankton : public Plankton {
+class Phytoplankton : public Plankton {
    protected:
     virtual void behaviour(Aquarius*) override;
 
    public:
-    PhytoPlankton(const Vect2D&, const std::string& = "");
+    Phytoplankton(const Vect2D&, const std::string& = "");
 
     // new pure virtual
     virtual bool isHungry() const override;
+    virtual std::string getSpecie() const override;
 
     // repeated pure virtual
-    virtual PhytoPlankton* clone() const override;         // from Vehicle
-    virtual bool isInRange(const Vect2D&) const override;  // from Vehicle
+    virtual Phytoplankton* clone() const override;         // from Vehicle
     virtual int getValoreNutrizionale() const override;    // from Organismo
 };
 

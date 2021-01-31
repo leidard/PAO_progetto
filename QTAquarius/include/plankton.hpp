@@ -4,21 +4,20 @@
 #ifndef PLANKTON_H
 #define PLANKTON_H
 
-class Plankton : virtual public Organismo {
+class Plankton : public Organismo {
    protected:
-    virtual void behaviour(Aquarius*) = 0;
+    virtual void behaviour(Aquarius*) override;
 
    public:
     Plankton(const Vect2D&, const std::string& = "");
     virtual ~Plankton() = default;
-
-    // new pure virtual
-    virtual bool isHungry() const override;
+    virtual std::string getSpecie() const override;
+    virtual bool isInRange(const Vect2D&) const override;        // from Vehicle
 
     // repeated pure virtual
-    virtual Plankton* clone() const = 0;               // from Vehicle
-    virtual bool isInRange(const Vect2D&) const override;  // from Vehicle
-    virtual int getValoreNutrizionale() const = 0;    // from Organismo
+    virtual Plankton* clone() const override = 0;                // from Vehicle
+    virtual int getValoreNutrizionale() const override = 0;      // from Organismo
+    virtual bool isHungry() const override = 0;                  // from Organismo
 };
 
 #endif

@@ -54,7 +54,6 @@ void Tonno::behaviour(Aquarius* a) {
     Organismo::behaviour(a);
 }
 
-// defined of pure virtual
 bool Tonno::isHungry() const {
     return _stamina.getPercentage() < .4;
 }
@@ -62,7 +61,11 @@ bool Tonno::isHungry() const {
 // repeated pure virtual
 Tonno* Tonno::clone() const { return new Tonno(*this); }  // from CartesianObject2D
 
-int Tonno::getValoreNutrizionale() const { return 3; }  // from Organismo
+int Tonno::getValoreNutrizionale() const { return 4; }
+
+std::string Tonno::getSpecie() const {
+    return "Tonno";
+}  // from Organismo
 
 bool Tonno::isInRange(const Vect2D& p) const {
     return getPosition().distance(p) < 100 && getVelocity().angleBetweenDeg(p) < 150;
