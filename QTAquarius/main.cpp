@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QFile>
 
 #include "acquarioview.hpp"
 #include "aquarius.hpp"

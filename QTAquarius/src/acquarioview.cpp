@@ -1,16 +1,5 @@
 #include "acquarioview.hpp"
 
-#include <QMenuBar>
-#include <QPaintEvent>
-#include <QPainter>
-#include <QVBoxLayout>
-#include <QPen>
-
-#include "organismoinfoview.hpp"
-#include "sardina.hpp"
-#include "tonno.hpp"
-
-
 const Vect2D AcquarioView::vertex[3] = {
     Vect2D(20.0, 0.0),
     Vect2D(-9.0, -10.0),
@@ -21,19 +10,23 @@ const unsigned int AcquarioView::maxColor = 0xff0000;
 const double AcquarioView::minScale = .8;
 const double AcquarioView::maxScale = 1;
 
-AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIENTE), pausa(false), minVal(10000), maxVal(0) {
+AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIENTE), pausa(false), saved(false), minVal(10000), maxVal(0) {
+    QFile styleSheetFile(":/style/stylesheet.qss");
+    styleSheetFile.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(styleSheetFile.readAll());
+    setStyleSheet(styleSheet);
+
     layout = new QVBoxLayout(this);
     menuBar = new QMenuBar(this);
-    setStyleSheet("background-color: #e0e0ff; color:black;");
-    menuBar->setStyleSheet(QString("color:black; background-color: white; QMenu::item:selected { background-color: black; color: white; }, QMenu::item::hover { background-color: black; }"));
-
     file = new QMenu("File", menuBar);
-    aggOrg = new QMenu("Aggiungi Organismi", menuBar);
+    aggOrg = new QMenu("Aggiungi organismi", menuBar);
     simulazione = new QMenu("Simulazione", menuBar);
 
     // FILE
     fileSalva = new QAction("Salva", this);
+    connect(fileSalva, &QAction::triggered, this, &AcquarioView::save);
     fileCarica = new QAction("Carica", this);
+    connect(fileCarica, &QAction::triggered, this, &AcquarioView::load);
 
     file->addAction(fileSalva);
     file->addAction(fileCarica);
@@ -46,9 +39,13 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIE
     aggiungiTonno = new QAction("Aggiungi tonno", strumentiOptions);
     aggiungiTonno->setCheckable(true);
     connect(aggiungiTonno, &QAction::triggered, this, &AcquarioView::drawTonno);
+    aggiungiPhytoplankton = new QAction("Aggiungi phytoplankton", strumentiOptions);
+    aggiungiPhytoplankton->setCheckable(true);
+    connect(aggiungiPhytoplankton, &QAction::triggered, this, &AcquarioView::drawPhytoplankton);
 
     strumentiOptions->addAction(aggiungiSardina);
     strumentiOptions->addAction(aggiungiTonno);
+    strumentiOptions->addAction(aggiungiPhytoplankton);
 
     connect(strumentiOptions, &QActionGroup::triggered, [](QAction* action) {
         static QAction* lastAction = nullptr;
@@ -61,6 +58,7 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIE
 
     aggOrg->addAction(aggiungiSardina);
     aggOrg->addAction(aggiungiTonno);
+    aggOrg->addAction(aggiungiPhytoplankton);
 
     // INFO ORGANISMI
     infoPesci = new QAction("Info organismi", menuBar);
@@ -69,7 +67,7 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), drawing(Tool::NIE
     // SIMULAZIONE
     pausariprendi = new QAction("Pausa", simulazione);
     connect(pausariprendi, &QAction::triggered, this, &AcquarioView::stopGo);
-    autorespawn = new QAction("Respawn Automatico", simulazione);
+    autorespawn = new QAction("Respawn automatico", simulazione);
     autorespawn->setCheckable(true);
     autorespawn->setChecked(false);
     connect(autorespawn, &QAction::triggered, this, &AcquarioView::toggleRespawn);
@@ -114,6 +112,14 @@ void AcquarioView::drawTonno() {
         drawing = Tool::TONNO;
 }
 
+void AcquarioView::drawPhytoplankton(){
+    if (drawing == Tool::PHYTOPLANKTON)
+        drawing = Tool::NIENTE;
+    else
+        drawing = Tool::PHYTOPLANKTON;
+}
+
+
 void AcquarioView::stopGo() {
     if (controller->isRunning()) {
         controller->stop();
@@ -127,6 +133,18 @@ void AcquarioView::stopGo() {
 void AcquarioView::toggleRespawn() {
     controller->toggleAutoRespawn();
     autorespawn->setChecked(controller->isAutoRespawnEnabled());
+}
+
+void AcquarioView::save(){
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), QDir::currentPath(), tr("JSON (*.json)"));
+        //cambiare il path
+    saved=true;
+    //controller->saveData(fileName);
+}
+
+void AcquarioView::load(){
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Load file"), QDir::currentPath(), tr("JSON (*.json)"));
+    //cambiare il path
 }
 
 void AcquarioView::setController(Controller* c) {
@@ -143,8 +161,10 @@ void AcquarioView::resizeEvent(QResizeEvent* event) {
 void AcquarioView::mouseReleaseEvent(QMouseEvent* event) {
     if (event->button() == Qt::LeftButton && drawing == Tool::TONNO) {
         controller->addTonno(Vect2D(event->x(), event->y()));
-    } else if (event->button() == Qt::LeftButton && drawing == Tool::SARDINA) {
+    } if (event->button() == Qt::LeftButton && drawing == Tool::SARDINA) {
         controller->addSardina(Vect2D(event->x(), event->y()));
+    } else if (event->button() == Qt::LeftButton && drawing == Tool::PHYTOPLANKTON) {
+        controller->addPhytoplankton(Vect2D(event->x(), event->y()));
     }
 }
 
@@ -160,7 +180,7 @@ void AcquarioView::shader(const Vect2D* v, unsigned int s, const Vect2D& positio
 void AcquarioView::paintEvent(QPaintEvent*) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::RenderHint::Antialiasing);
-painter.setPen(QPen(Qt::black, 1, Qt::SolidLine));
+    painter.setPen(QPen(Qt::black, 1, Qt::SolidLine));
     for (auto& o : controller->getAllOrganismi()) {
         unsigned int val = o->getValoreNutrizionale();
         if (val > maxVal) maxVal = val;
@@ -189,3 +209,12 @@ painter.setPen(QPen(Qt::black, 1, Qt::SolidLine));
         painter.drawPolygon(points, 3);
     }
 }
+
+void AcquarioView::closeEvent(QCloseEvent *event){
+    if(!saved){
+        event->ignore();
+        if (QMessageBox::Yes == QMessageBox::question(this, "Conferma chiusura", "Sei sicuro di voler uscire senza salvare?", QMessageBox::Yes | QMessageBox::No))
+            event->accept();
+    }
+}
+

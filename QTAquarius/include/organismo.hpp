@@ -26,8 +26,8 @@ class Organismo : public Vehicle {
     Organismo(const Vect2D&, double, double, const std::string&, unsigned int, unsigned int, double);
     Organismo(const Organismo&);
     virtual ~Organismo() = default;
-    // defined at this level
 
+    // defined at this level
     bool isGone() const;
     void setGone();
     void setName(const std::string&);
@@ -42,8 +42,8 @@ class Organismo : public Vehicle {
 
     // new pure virtual
     virtual bool isHungry() const = 0;
-    virtual void eat(Organismo&) = 0;
     virtual int getValoreNutrizionale() const = 0;
+    virtual std::string getSpecie() const = 0;
 
     // repeated pure virtual
     virtual Organismo* clone() const override = 0;

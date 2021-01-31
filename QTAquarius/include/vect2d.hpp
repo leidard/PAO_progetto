@@ -20,7 +20,6 @@ class Vect2D {
     Vect2D(double x, double y);
 
     // getters
-
     double x() const;
     double y() const;
     double& rx();

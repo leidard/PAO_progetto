@@ -88,7 +88,10 @@ void Organismo::behaviour(Aquarius* a) {
             }
         }
         if (candidato != nullptr) {
-            if (mindist < getVelocity().mag()) eat(*candidato);
+            if (mindist < getVelocity().mag()){
+                _stamina+=candidato->getValoreNutrizionale();
+                candidato->setGone();
+            }
             setForce(pursuit(*candidato));
             return;
         }

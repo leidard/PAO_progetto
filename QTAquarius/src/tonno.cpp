@@ -59,15 +59,14 @@ bool Tonno::isHungry() const {
     return _stamina.getPercentage() < .4;
 }
 
-void Tonno::eat(Organismo& o) {
-    _daycycle += 20;
-    o.setGone();
-}
-
 // repeated pure virtual
 Tonno* Tonno::clone() const { return new Tonno(*this); }  // from CartesianObject2D
 
-int Tonno::getValoreNutrizionale() const { return 3; }  // from Organismo
+int Tonno::getValoreNutrizionale() const { return 3; }
+
+std::string Tonno::getSpecie() const {
+    return "Tonno";
+}  // from Organismo
 
 bool Tonno::isInRange(const Vect2D& p) const {
     return getPosition().distance(p) < 100 && getVelocity().angleBetweenDeg(p) < 150;
