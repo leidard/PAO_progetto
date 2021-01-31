@@ -39,7 +39,6 @@ virtual bool isInRange(const Vect2D& v) const ;
 virtual bool canSleep() const;
 virtual bool canWakeup() const;
 virtual bool isHungry() const = 0;
-virtual void eat(Organismo&) = 0;
 virtual int getValoreNutrizionale() const = 0;
 ```
 

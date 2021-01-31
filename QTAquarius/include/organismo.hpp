@@ -21,7 +21,7 @@ class Organismo : public Vehicle {
     DayCycle _daycycle;
     Stamina _stamina;
     virtual void behaviour(Aquarius*) override;
-    virtual void onEatBehaviour();
+    //virtual void onEatBehaviour();
     //virtual void onAwakeBehaviour();
     //virtual void onSleepBehaviour();
 
@@ -40,16 +40,17 @@ class Organismo : public Vehicle {
     bool isAwake() const;
     bool isAsleep() const;
     const Stamina& getStamina() const;  // ritorna una percentuale
-
-    // new pure virtual
     virtual bool canSleep() const;
     virtual bool canWakeup() const;
+
+    // new pure virtual
     virtual bool isHungry() const = 0;
     virtual void eat();
-    // repeated pure virtual
-
     virtual int getValoreNutrizionale() const = 0;
-    virtual Organismo* clone() const  override = 0;  // from CartesianObject2D
+
+    // repeated pure virtual
+    virtual Organismo* clone() const override = 0;
+
 };
 
 #endif
