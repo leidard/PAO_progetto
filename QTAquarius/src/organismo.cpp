@@ -28,7 +28,7 @@ const char ** Organismo::COOL_NAMES = new const char*[26]{
     "Rocky IV",
     "Rocky V",
     "Thor",
-    "Neo",
+    "Nemo",
 };
 
 

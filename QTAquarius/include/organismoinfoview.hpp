@@ -35,12 +35,13 @@ class OrganismoInfoView : public QDialog {
     void closeEvent(QCloseEvent*);
 
     int timerID;
-    QGridLayout* layout;  //Layout
-    QLabel* img;          //Icon
-    QLineEdit* nameLine;  //Organismo's name
-    QLabel* tipologia;
-    QLabel* nutVal;
-    QProgressBar* bar;  //Stamina
+    QGridLayout* layout;        //Layout
+    QLineEdit* nameLine;        //Organismo's name
+    QLabel* tipologia;          //Species
+    QLabel* nutVal;             //Nutritional value
+    QLabel* hungry;             //Hungry or not
+    QLabel* status;             //Awake/asleep
+    QProgressBar* staminaBar;   //Stamina
     QLabel* currentmax;
     QPushButton* previous;
     QPushButton* next;

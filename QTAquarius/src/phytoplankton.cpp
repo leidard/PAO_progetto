@@ -19,7 +19,7 @@ bool Phytoplankton::isHungry() const{
 }
 
 std::string Phytoplankton::getSpecie() const{
-    return "Phyto - " + Plankton::getSpecie();
+    return "Phyto" + Plankton::getSpecie();
 }
 
 Phytoplankton* Phytoplankton::clone() const{
