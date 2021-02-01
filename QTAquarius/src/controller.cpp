@@ -102,11 +102,11 @@ void Controller::updateNameOfCurrent(const std::string& name) {
 }
 
 void Controller::loadData(const std::string& filename) {
-    (new SaverLoader())->load(_model, filename);
+    (new IO())->load(_model, filename);
 }
 
 void Controller::saveData(const std::string& filename) const {
-    (new SaverLoader())->save(_model, filename);
+    (new IO())->save(_model, filename);
 }
 
 // slots

@@ -7,7 +7,7 @@
 
 class Aquarius {
    private:
-    const std::string _name;
+    std::string _name;
     unsigned int _width, _height;
     Vector<DeepPtr<Organismo>> organismi;
     bool _autorespawn;
@@ -16,7 +16,8 @@ class Aquarius {
     static const int ORGANISM_LIMIT;
     Aquarius(const std::string& = "Unnamed Aquarius", unsigned int = 0, unsigned int = 0);
 
-    const std::string& getName() const { return _name; }
+    void setName(const std::string& name) ;
+    const std::string& getName() const ;
 
     unsigned int getWidth() const;
     unsigned int getHeight() const;
@@ -24,9 +25,10 @@ class Aquarius {
 
     void setSize(unsigned int, unsigned int);
 
-    bool isAutoRespawnEnabled() const { return _autorespawn; } 
-    void enableAutoRespawn() { _autorespawn = true; }
-    void disableAutoRespawn() { _autorespawn = false; }
+
+    bool isAutoRespawnEnabled() const;
+    void enableAutoRespawn() ;
+    void disableAutoRespawn() ;
 
     void addOrganismo(Organismo*);
     bool canAddOrganismo() const;

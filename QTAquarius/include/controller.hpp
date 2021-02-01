@@ -3,7 +3,7 @@
 #include "deepptr.hpp"
 #include "vect2d.hpp"
 #include "vector.hpp"
-#include "saverloader.hpp"
+#include "io.hpp"
 
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
@@ -20,7 +20,7 @@ class Controller : public QObject {
     QTimer* _timer;
     Aquarius* _model;
     AcquarioView* _view;
-    SaverLoader* _saver;
+    IO* _saver;
 
     unsigned int infoviewpos;
 

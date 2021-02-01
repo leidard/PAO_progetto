@@ -4,6 +4,10 @@ const int Aquarius::ORGANISM_LIMIT = 100;
 
 Aquarius::Aquarius(const std::string& name, unsigned int width, unsigned int height) : _name(name), _width(width), _height(height), organismi(), _autorespawn(false) {}
 
+void Aquarius::setName(const std::string& name) { _name = name; } 
+
+const std::string& Aquarius::getName() const { return _name; }
+
 unsigned int Aquarius::getWidth() const { return _width; }
 unsigned int Aquarius::getHeight() const { return _height; }
 Vect2D Aquarius::getBounds() const { return Vect2D(_width, _height); }
@@ -12,6 +16,11 @@ void Aquarius::setSize(unsigned int width, unsigned int height) {
     _width = width;
     _height = height;
 }
+
+bool Aquarius::isAutoRespawnEnabled() const { return _autorespawn; }
+
+void Aquarius::enableAutoRespawn() { _autorespawn = true; }
+void Aquarius::disableAutoRespawn() { _autorespawn = false; }
 
 void Aquarius::addOrganismo(Organismo* v) {
     if (organismi.size() < ORGANISM_LIMIT)

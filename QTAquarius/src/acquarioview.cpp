@@ -138,14 +138,15 @@ void AcquarioView::toggleRespawn() {
 
 void AcquarioView::save(){
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), QDir::currentPath(), tr("JSON (*.json)"));
-        //cambiare il path
+    //cambiare il path
     saved=true;
-    //controller->saveData(fileName);
+    controller->saveData(fileName.toStdString());
 }
 
 void AcquarioView::load(){
     QString fileName = QFileDialog::getOpenFileName(this, tr("Load file"), QDir::currentPath(), tr("JSON (*.json)"));
     //cambiare il path
+    controller->loadData(fileName.toStdString());
 }
 
 void AcquarioView::setController(Controller* c) {
@@ -177,11 +178,11 @@ void AcquarioView::shader(const Vect2D* v, unsigned int s, const Vect2D& positio
 }
 
 unsigned int colorBetween(const unsigned int& first, const unsigned int& last, double scale) {
-    unsigned int r1 = ((first >>16) & 0xffu);
+    unsigned int r1 = ((first >> 16) & 0xffu);
     unsigned int g1 = ((first >> 8) & 0xffu);
     unsigned int b1 = (first & 0xff);
 
-    unsigned int r2 = ((last >>16) & 0xffu);
+    unsigned int r2 = ((last >> 16) & 0xffu);
     unsigned int g2 = ((last >> 8) & 0xffu);
     unsigned int b2 = (last & 0xff);
 
@@ -216,7 +217,7 @@ void AcquarioView::paintEvent(QPaintEvent*) {
 
         double scale = minScale + p * (maxScale - minScale);
         
-        std::cout << "scale: " << scale << ", color: " << std::hex << color << std::endl;
+        // std::cout << "scale: " << scale << ", color: " << std::hex << color << std::endl;
         
         shader(vertex, 3, o->getPosition(), o->getVelocity().angleRad(), points, scale);
 

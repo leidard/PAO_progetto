@@ -18,7 +18,7 @@ SOURCES += \
     src/daycycle.cpp \
     src/organismo.cpp \
     src/tonno.cpp \
-    src/saverloader.cpp \
+    src/io.cpp \
     src/stamina.cpp \
     src/vect2d.cpp \
     src/vehicle.cpp \
@@ -34,7 +34,7 @@ HEADERS += \
     include/daycycle.hpp \
     include/deepptr.hpp \
     include/organismo.hpp \
-    include/saverloader.hpp \
+    include/io.hpp \
     include/sardina.hpp \
     include/tonno.hpp \
     include/stamina.hpp \

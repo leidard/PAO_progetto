@@ -14,15 +14,20 @@ class Tonno;
 class Sardina;
 class Organismo;
 
-class SaverLoader {
+class IO {
    public:
+    
     class ParseError : public std::exception {
-        const char* msg;
+        std::string msg;
 
        public:
-        ParseError(std::string _msg = "General Parse Error");
-        ~ParseError() { delete msg; }
+        ParseError(const std::string& _msg = "General Parse Error");
         const char* what() const throw();
+    };
+
+    class MissingProperty : public ParseError {
+        public:
+            MissingProperty(const std::string& propertyname);
     };
 
     static const std::string DEFAULT_FILENAME;

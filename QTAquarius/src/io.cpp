@@ -1,4 +1,4 @@
-#include "saverloader.hpp"
+#include "io.hpp"
 
 #include <QFile>
 #include <QJsonArray>
@@ -7,31 +7,35 @@
 #include <QString>
 #include <QtGlobal>
 #include <string>
+#include <QTextStream>
 
 #include "aquarius.hpp"
 #include "sardina.hpp"
 #include "tonno.hpp"
 
-SaverLoader::ParseError::ParseError(std::string _msg) : msg(std::string("[JSON ParseError]: " + _msg).c_str()) {}
+IO::ParseError::ParseError(const std::string& _msg) : msg(_msg) {}
 
-const char* SaverLoader::ParseError::what() const throw() { return msg; }
+const char* IO::ParseError::what() const throw() { return ("[JSON ParseError]: " + msg).c_str(); }
 
-const std::string SaverLoader::DEFAULT_FILENAME = "aquarius.json";
+IO::MissingProperty::MissingProperty(const std::string& propertyname) : ParseError("Missing Property: "+ propertyname) {}
 
-void SaverLoader::load(Aquarius* a, const std::string& filename) const {
-    QFile file;
-    file.setFileName(filename.c_str());
+const std::string IO::DEFAULT_FILENAME = "aquarius.json";
+
+void IO::load(Aquarius* a, const std::string& filename) const {
+    QFile file(filename.c_str());
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QString val = file.readAll();
     file.close();
     QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
-    if (!d.isObject()) throw new ParseError("Root must be an Object");
+    if (!d.isObject()) throw ParseError("Root must be an Object");
     QJsonObject obj = d.object();
 
-    if (!obj.value("organismi").isArray()) throw new ParseError("Can't find property: organismi");
-    if (!obj.value("width").isDouble()) throw new ParseError("Can't find property: width");
-    if (!obj.value("height").isDouble()) throw new ParseError("Can't find property: height");
+    if (!obj.value("name").isString()) throw MissingProperty("name");
+    if (!obj.value("organismi").isArray()) throw MissingProperty("organismi");
+    if (!obj.value("width").isDouble()) throw MissingProperty("width");
+    if (!obj.value("height").isDouble()) throw MissingProperty("height");
 
+    a->setName(obj.value("name").toString().toStdString());
     a->setSize(obj.value("width").toDouble(), obj.value("height").toDouble());
 
     auto arr = obj.value("organismi").toArray();
@@ -45,51 +49,61 @@ void SaverLoader::load(Aquarius* a, const std::string& filename) const {
     }
 }
 
-void SaverLoader::save(Aquarius* a, const std::string& filename) const {
+void IO::save(Aquarius* a, const std::string& filename) const {
     auto asda = filename;
 
     QJsonObject obj;
+    obj.insert("name", a->getName().c_str());
     obj.insert("width", (int)a->getWidth());
     obj.insert("height", (int)a->getHeight());
     QJsonArray organismi;
 
     for (auto& o : a->getAllOrganismi()) {
         if (Tonno* tonno = dynamic_cast<Tonno*>(&*o)) {
-            organismi.push_back(SaverLoader::serialize(*tonno));
+            organismi.push_back(IO::serialize(*tonno));
         } else if (Sardina* sardina = dynamic_cast<Sardina*>(&*o)) {
-            organismi.push_back(SaverLoader::serialize(*sardina));
+            organismi.push_back(IO::serialize(*sardina));
         }
     }
 
     obj.insert("organismi", organismi);
+
+    QJsonDocument doc(obj);
+
+    QFile file(filename.c_str());
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << doc.toJson().data();
+    }
+    file.close();
 }
 
-QJsonObject SaverLoader::serialize(const Tonno& t) {
+QJsonObject IO::serialize(const Tonno& t) {
     QJsonObject obj;
     obj.insert("type", "TONNO");
-    obj.insert("position", SaverLoader::serialize(t.getPosition()));
+    obj.insert("position", IO::serialize(t.getPosition()));
     obj.insert("name", t.getName().c_str());
 
     return obj;
 }
 
-QJsonObject SaverLoader::serialize(const Sardina& s) {
+QJsonObject IO::serialize(const Sardina& s) {
     QJsonObject obj;
     obj.insert("type", "SARDINA");
-    obj.insert("position", SaverLoader::serialize(s.getPosition()));
+    obj.insert("position", IO::serialize(s.getPosition()));
     obj.insert("name", s.getName().c_str());
 
     return obj;
 }
 
-QJsonObject SaverLoader::serialize(const Vect2D& v) {
+QJsonObject IO::serialize(const Vect2D& v) {
     QJsonObject obj;
     obj.insert("x", v.x());
     obj.insert("y", v.y());
     return obj;
 }
 
-Vect2D SaverLoader::parseVect2D(const QJsonValue& v) {
+Vect2D IO::parseVect2D(const QJsonValue& v) {
     if (!v.isObject()) throw new ParseError("parseVect2D: not a JSON Object");
     QJsonObject obj = v.toObject();
 
@@ -101,7 +115,7 @@ Vect2D SaverLoader::parseVect2D(const QJsonValue& v) {
     return Vect2D(x.toDouble(), y.toDouble());
 }
 
-Organismo* SaverLoader::parseOrganismo(const QJsonValue& v) {
+Organismo* IO::parseOrganismo(const QJsonValue& v) {
     if (!v.isObject()) throw new ParseError("parseTonno: not a JSON Object");
     QJsonObject obj = v.toObject();
 
