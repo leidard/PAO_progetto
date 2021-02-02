@@ -12,12 +12,13 @@
 #include "aquarius.hpp"
 #include "sardina.hpp"
 #include "tonno.hpp"
+#include "phytoplankton.hpp"
 
-IO::ParseError::ParseError(const std::string& _msg) : msg(_msg) {}
+IO::FileStructureError::FileStructureError(const std::string& _msg) : msg(_msg) {}
 
-const char* IO::ParseError::what() const throw() { return ("[JSON ParseError]: " + msg).c_str(); }
+std::string IO::FileStructureError::getMsg() const { return "[JSON IOError]: " + msg; }
 
-IO::MissingProperty::MissingProperty(const std::string& propertyname) : ParseError("Missing Property: "+ propertyname) {}
+IO::MissingProperty::MissingProperty( std::string propertyname,  std::string object) : FileStructureError("Missing Property: ["+ propertyname + "] " + ((object!="")?"in object: "+object:"")) {}
 
 const std::string IO::DEFAULT_FILENAME = "aquarius.json";
 
@@ -27,7 +28,7 @@ void IO::load(Aquarius* a, const std::string& filename) const {
     QString val = file.readAll();
     file.close();
     QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
-    if (!d.isObject()) throw ParseError("Root must be an Object");
+    if (!d.isObject()) throw FileStructureError("Root must be an Object");
     QJsonObject obj = d.object();
 
     if (!obj.value("name").isString()) throw MissingProperty("name");
@@ -43,8 +44,8 @@ void IO::load(Aquarius* a, const std::string& filename) const {
         auto i = *it;
         try {
             a->addOrganismo(parseOrganismo(i));
-        } catch (ParseError& err) {
-            std::cerr << err.what();  // show but keep going
+        } catch (FileStructureError& err) {
+            std::cerr << err.getMsg();
         }
     }
 }
@@ -63,6 +64,8 @@ void IO::save(Aquarius* a, const std::string& filename) const {
             organismi.push_back(IO::serialize(*tonno));
         } else if (Sardina* sardina = dynamic_cast<Sardina*>(&*o)) {
             organismi.push_back(IO::serialize(*sardina));
+        } else if (Phytoplankton* phyto = dynamic_cast<Phytoplankton*>(&*o)) {
+            organismi.push_back(IO::serialize(*phyto));
         }
     }
 
@@ -96,6 +99,15 @@ QJsonObject IO::serialize(const Sardina& s) {
     return obj;
 }
 
+QJsonObject IO::serialize(const Phytoplankton& s) {
+    QJsonObject obj;
+    obj.insert("type", "PHYTOPLANKTON");
+    obj.insert("position", IO::serialize(s.getPosition()));
+    obj.insert("name", s.getName().c_str());
+
+    return obj;
+}
+
 QJsonObject IO::serialize(const Vect2D& v) {
     QJsonObject obj;
     obj.insert("x", v.x());
@@ -104,35 +116,33 @@ QJsonObject IO::serialize(const Vect2D& v) {
 }
 
 Vect2D IO::parseVect2D(const QJsonValue& v) {
-    if (!v.isObject()) throw new ParseError("parseVect2D: not a JSON Object");
+    if (!v.isObject()) throw new FileStructureError("Expected JSON Object while parsing Organismo");
     QJsonObject obj = v.toObject();
 
     QJsonValue x = obj.value("x");
-    if (!x.isDouble()) throw new ParseError("parseVect2D: can't read property \"x\"");
+    if (!x.isDouble()) throw new MissingProperty("y", "Vect2D");
     QJsonValue y = obj.value("y");
-    if (!y.isDouble()) throw new ParseError("parseVect2D: can't read property \"y\"");
+    if (!y.isDouble()) throw new MissingProperty("y", "Vect2D");
 
     return Vect2D(x.toDouble(), y.toDouble());
 }
 
 Organismo* IO::parseOrganismo(const QJsonValue& v) {
-    if (!v.isObject()) throw new ParseError("parseTonno: not a JSON Object");
+    if (!v.isObject()) throw new FileStructureError("Expected JSON Object while parsing Organismo");
     QJsonObject obj = v.toObject();
 
     QJsonValue type = obj.value("type");
-    if (type.isString()) throw new ParseError("parseTonno: missing type");
-    QString t = type.toString();
+    if (!type.isString()) throw new MissingProperty("type", "Organismo");
+    std::string t = type.toString().toStdString();
+
+    QJsonValue nameV = obj.value("name");
+    if (!nameV.isString()) throw new MissingProperty("name", "Organismo");
+
     if (t == "TONNO") {
-        QJsonValue name = obj.value("name");
-        if (!name.isString()) throw new ParseError("parseTonno: can't read property \"name\"");
-
-        return new Tonno(parseVect2D(obj.value("position")), name.toString().toStdString());
+        return new Tonno(parseVect2D(obj.value("position")), nameV.toString().toStdString());
     } else if (t == "SARDINA") {
-        QJsonValue name = obj.value("name");
-        if (!name.isString()) throw new ParseError("parseSardina: can't read property \"name\"");
-
-        return new Sardina(parseVect2D(obj.value("position")), name.toString().toStdString());
-        return nullptr;
-    } else
-        throw new ParseError("parseSardina: ");
+        return new Sardina(parseVect2D(obj.value("position")), nameV.toString().toStdString());
+    } else if (t == "PHYTOPLANKTON") {
+        return new Phytoplankton(parseVect2D(obj.value("position")), nameV.toString().toStdString());
+    } else throw new FileStructureError("Unknown Type: "+ t);
 }

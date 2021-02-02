@@ -147,6 +147,7 @@ void AcquarioView::load(){
     QString fileName = QFileDialog::getOpenFileName(this, tr("Load file"), QDir::currentPath(), tr("JSON (*.json)"));
     //cambiare il path
     controller->loadData(fileName.toStdString());
+    setWindowTitle(controller->getAquariusName().c_str());
 }
 
 void AcquarioView::setController(Controller* c) {

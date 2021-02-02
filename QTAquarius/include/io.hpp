@@ -13,21 +13,22 @@ class Vect2D;
 class Tonno;
 class Sardina;
 class Organismo;
+class Phytoplankton;
 
 class IO {
    public:
     
-    class ParseError : public std::exception {
+    class FileStructureError : public std::exception {
         std::string msg;
 
        public:
-        ParseError(const std::string& _msg = "General Parse Error");
-        const char* what() const throw();
+        FileStructureError(const std::string& _msg = "General Parse Error");
+        std::string getMsg() const;
     };
 
-    class MissingProperty : public ParseError {
+    class MissingProperty : public IO::FileStructureError {
         public:
-            MissingProperty(const std::string& propertyname);
+            MissingProperty( std::string propertyname, std::string object = "");
     };
 
     static const std::string DEFAULT_FILENAME;
@@ -37,6 +38,7 @@ class IO {
 
     static QJsonObject serialize(const Tonno&);
     static QJsonObject serialize(const Sardina&);
+    static QJsonObject serialize(const Phytoplankton&);
     static QJsonObject serialize(const Vect2D&);
 
     static Vect2D parseVect2D(const QJsonValue&);
