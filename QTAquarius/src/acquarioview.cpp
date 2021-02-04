@@ -238,7 +238,7 @@ void AcquarioView::paintEvent(QPaintEvent*) {
 void AcquarioView::closeEvent(QCloseEvent *event){
     if(!saved){
         event->ignore();
-        if (QMessageBox::Yes == QMessageBox::question(this, "Conferma chiusura", "Sei sicuro di voler uscire senza salvare?", QMessageBox::Yes | QMessageBox::No))
+        if (QMessageBox::Yes == QMessageBox::question(this, "Conferma chiusura", "Le modifiche non salvate andranno perse. Sicuro di volere uscire?", QMessageBox::Yes | QMessageBox::No))
             event->accept();
     }
 }

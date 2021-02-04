@@ -50,8 +50,10 @@ Per maggiori dettagli riguardo al funzionamento dei veicoli all'interno della si
 
 ## Todo
 
-- [] Mantenere la popolazione costante tramite una impostazione grafica, questo significa che ogni volta che un pesce viene eliminato, esso ricompare al centro dell'acquario.
-
+- [x] Mantenere la popolazione costante tramite una impostazione grafica, questo significa che ogni volta che un pesce viene eliminato, esso ricompare al centro dell'acquario.
+- [ ] Spostare tutti i connect nel controller
+- [x] Le modifiche non salvate andranno perse. Sicuro di volere uscire? yes, no 
+- [ ]  QInputDialog::getInt(this, tr("Componi slides"), "Indice della prima slide:", 1, 1, 2147483647, 1, &ok1); https://doc.qt.io/qt-5/qinputdialog.html#getText
 ## Requisiti
 
 -   [ ] almeno 3 tipi diversi istanziabili

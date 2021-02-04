@@ -69,6 +69,7 @@ Vect2D Vehicle::flee(const Vect2D& target, unsigned int radius) const {
 
     return (desired - _velocity);
 }
+
 Vect2D Vehicle::pursuit(const Vehicle& v, unsigned int stepsAhead) const {
     return seek(v._position + (v._velocity * stepsAhead));
 }
