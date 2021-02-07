@@ -1,22 +1,10 @@
 #include <QWidget>
-#include <QCloseEvent>
-#include <QMessageBox>
-#include <QMenuBar>
-#include <QPaintEvent>
-#include <QPainter>
-#include <QVBoxLayout>
-#include <QPen>
-#include <QFileDialog>
-
-#include "controller.hpp"
 #include "organismoinfoview.hpp"
-#include "sardina.hpp"
-#include "tonno.hpp"
+#include "controller.hpp"
 
 #ifndef ACQUARIOVIEW_H
 #define ACQUARIOVIEW_H
 
-//Che senso hanno se tanto c'è l'include?
 class Controller;
 class OrganismoInfoView;
 class QVBoxLayout;
@@ -31,12 +19,6 @@ class QPaintEvent;
 class AcquarioView : public QWidget {
     Q_OBJECT
    public:
-    enum Tool {
-        NIENTE,
-        TONNO,
-        SARDINA,
-        PHYTOPLANKTON
-    };
     static const Vect2D vertex[3];
     static const double minScale;
     static const double maxScale;
@@ -60,9 +42,7 @@ class AcquarioView : public QWidget {
     QAction* infoPesci;
     QAction* fileSalva;
     QAction* fileCarica;
-    Tool drawing;
     bool pausa;
-    bool saved;
 
     unsigned int minVal;
     unsigned int maxVal;
@@ -80,9 +60,6 @@ class AcquarioView : public QWidget {
 
    private slots:
     void openInfo();
-    void drawSardina();
-    void drawTonno();
-    void drawPhytoplankton();
     void stopGo();
     void toggleRespawn();
     void save();

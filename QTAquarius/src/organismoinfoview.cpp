@@ -8,17 +8,12 @@
 #include <QFile>
 #include <sstream>
 
-
-
 OrganismoInfoView::OrganismoInfoView(QWidget* parent) : QDialog(parent) {
     QFile styleSheetFile(":/style/stylesheetinfo.qss");
     styleSheetFile.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(styleSheetFile.readAll());
     setStyleSheet(styleSheet);
-
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);  //disable "?" button
-    setMinimumSize(QSize(280, 210));
-    setMaximumSize(QSize(280, 210));
     move(parent->geometry().center());
 
     layout = new QGridLayout(this);
@@ -72,6 +67,7 @@ OrganismoInfoView::OrganismoInfoView(QWidget* parent) : QDialog(parent) {
     connect(quitButton, &QPushButton::released, this, [this]() { killTimer(timerID); QDialog::close(); });
     layout->addWidget(quitButton, 7, 2, 1, 1);
 
+    layout->setSizeConstraint(QLayout::SetFixedSize);
     setLayout(layout);
 }
 
@@ -108,6 +104,7 @@ void OrganismoInfoView::updateInfo() {
             status->setText(QString("Sveglio"));
         else
             status->setText(QString("Addormentato"));
+
         staminaBar->setValue(o->getStamina()*100);
         std::stringstream s;
         s << (controller->getPosition() + 1) << " di " << controller->getVectorSize();

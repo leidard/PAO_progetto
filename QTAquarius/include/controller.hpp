@@ -12,19 +12,18 @@ class Organismo;
 class QTimer;
 class Aquarius;
 class AcquarioView;
+class QMouseEvent;
 
 class Controller : public QObject {
     Q_OBJECT
 
-   private:
-    QTimer* _timer;
-    Aquarius* _model;
-    AcquarioView* _view;
-    IO* _saver;
-
-    unsigned int infoviewpos;
-
    public:
+    enum Tool {
+        NIENTE,
+        TONNO,
+        SARDINA,
+        PHYTOPLANKTON
+    };
     explicit Controller(QObject* parent = nullptr);
     ~Controller();
 
@@ -39,11 +38,9 @@ class Controller : public QObject {
     void addSardina(const Vect2D&);  // click
     void addPhytoplankton(const Vect2D&);  // click
 
-    //
     const std::string& getAquariusName() const;
 
     // simulation
-
     bool isRunning() const;
     bool isAutoRespawnEnabled() const;
     void toggleAutoRespawn() const;
@@ -64,10 +61,24 @@ class Controller : public QObject {
     void loadData(const std::string&);
     void saveData(const std::string&) const;
 
+    void mouseReleaseEvent(QMouseEvent*);
+
+    private:
+     QTimer* _timer;
+     Aquarius* _model;
+     AcquarioView* _view;
+     IO* _saver;
+     Tool drawing;
+     unsigned int infoviewpos;
+
+
    public slots:
     void advance();
     void start();
     void stop();
+    void drawSardina();
+    void drawTonno();
+    void drawPhytoplankton();
 };
 
 #endif

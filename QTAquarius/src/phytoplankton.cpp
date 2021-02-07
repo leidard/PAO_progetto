@@ -5,7 +5,7 @@ Phytoplankton::Phytoplankton(const Vect2D& position, const std::string& name) : 
 void Phytoplankton::behaviour(Aquarius * a){
     _daycycle++;  //increase progress
     if (isAwake()) {
-        _stamina += 1/25.0; // fotosintesi
+        _stamina += 1/10.0; // fotosintesi
     } else {
         _stamina -= 1/50.0;
     }

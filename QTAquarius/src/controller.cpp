@@ -1,6 +1,7 @@
 #include "controller.hpp"
 
 #include <QTimer>
+#include <QMouseEvent>
 
 #include "acquarioview.hpp"
 #include "aquarius.hpp"
@@ -50,14 +51,12 @@ const std::string& Controller::getAquariusName() const {
 };
 
 // simulazione
-
 bool Controller::isRunning() const { return _timer->isActive(); }
 bool Controller::isAutoRespawnEnabled() const { return _model->isAutoRespawnEnabled(); }
 void Controller::toggleAutoRespawn() const { if (_model->isAutoRespawnEnabled()) _model->disableAutoRespawn(); else _model->enableAutoRespawn();}
 
 
 // InfoView part
-
 unsigned int Controller::getVectorSize()const {
     return _model->getAllOrganismi().size();
 }
@@ -101,6 +100,8 @@ void Controller::updateNameOfCurrent(const std::string& name) {
         _model->getAllOrganismi()[infoviewpos]->setName(name);
 }
 
+
+
 void Controller::loadData(const std::string& filename) {
     (new IO())->load(_model, filename);
 }
@@ -108,6 +109,15 @@ void Controller::loadData(const std::string& filename) {
 void Controller::saveData(const std::string& filename) const {
     (new IO())->save(_model, filename);
 }
+
+void Controller::mouseReleaseEvent(QMouseEvent* event) {
+    if (event->button() == Qt::LeftButton){
+        if (drawing == Tool::TONNO) addTonno(Vect2D(event->x(), event->y()));
+        else if (drawing == Tool::SARDINA) addSardina(Vect2D(event->x(), event->y()));
+        else if (drawing == Tool::PHYTOPLANKTON) addPhytoplankton(Vect2D(event->x(), event->y()));
+    }
+}
+
 
 // slots
 void Controller::advance() {
@@ -120,4 +130,26 @@ void Controller::start() {
 
 void Controller::stop() {
     _timer->stop();
+}
+
+void Controller::drawSardina() {
+    if (drawing == Tool::SARDINA)
+        drawing = Tool::NIENTE;
+    else
+        drawing = Tool::SARDINA;
+
+}
+
+void Controller::drawTonno() {
+    if (drawing == Tool::TONNO)
+        drawing = Tool::NIENTE;
+    else
+        drawing = Tool::TONNO;
+}
+
+void Controller::drawPhytoplankton() {
+    if (drawing == Tool::PHYTOPLANKTON)
+        drawing = Tool::NIENTE;
+    else
+        drawing = Tool::PHYTOPLANKTON;
 }
