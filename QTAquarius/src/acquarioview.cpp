@@ -196,7 +196,6 @@ void AcquarioView::paintEvent(QPaintEvent*) {
         double scale = minScale + p * (maxScale - minScale);
         
         // std::cout << "scale: " << scale << ", color: " << std::hex << color << std::endl;
-        
         shader(vertex, 3, o->getPosition(), o->getVelocity().angleRad(), points, scale);
 
         if (infoView->isVisible() && &(*o) == controller->getCurrent()) {

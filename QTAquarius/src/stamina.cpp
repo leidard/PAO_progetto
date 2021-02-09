@@ -6,17 +6,18 @@ Stamina::Stamina(const Stamina& o) : _maxval(o._maxval), _val(o._maxval) {} // s
 double Stamina::getMax() const { return _maxval; }
 double Stamina::getVal() const { return _val; }
 
-void Stamina::setValToMax() { _val = _maxval; }
-
 double Stamina::getPercentage() const { return _val / _maxval; }
 
 Stamina& Stamina::add(double v) {
-    _val += v;
+    if (_val+v > _maxval) _val = _maxval;
+    else _val += v;
+
     return *this;
 }
 
 Stamina& Stamina::rem(double v) {
-    _val -= v;
+    if (_val-v < 0) _val = 0;
+    else _val -= v;
     return *this;
 }
 

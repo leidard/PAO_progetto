@@ -16,8 +16,6 @@ class Stamina {
 
     double getPercentage() const;
 
-    void setValToMax();
-
     Stamina& add(double);
     Stamina& rem(double);
 
