@@ -106,7 +106,8 @@ void Controller::loadData(const std::string& filename) {
     (new IO())->load(_model, filename);
 }
 
-void Controller::saveData(const std::string& filename) const {
+void Controller::saveData(const std::string& filename, const std::string& windowname) const {
+    _model->setName(windowname);
     (new IO())->save(_model, filename);
 }
 

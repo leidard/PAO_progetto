@@ -42,6 +42,7 @@ class AcquarioView : public QWidget {
     QAction* infoPesci;
     QAction* fileSalva;
     QAction* fileCarica;
+    QAction* fileRinomina;
     bool pausa;
 
     unsigned int minVal;
@@ -64,6 +65,7 @@ class AcquarioView : public QWidget {
     void toggleRespawn();
     void save();
     void load();
+    void rename();
     void closeEvent(QCloseEvent *event);
 };
 

@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 #include <QPen>
 #include <QFileDialog>
+#include <QInputDialog>
 
 #include "acquarioview.hpp"
 
@@ -38,9 +39,12 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), pausa(false), min
     connect(fileSalva, &QAction::triggered, this, &AcquarioView::save);
     fileCarica = new QAction("Carica", this);
     connect(fileCarica, &QAction::triggered, this, &AcquarioView::load);
+    fileRinomina = new QAction("Rinomina acquario", this);
+    connect(fileRinomina, &QAction::triggered, this, &AcquarioView::rename);
 
     file->addAction(fileSalva);
     file->addAction(fileCarica);
+    file->addAction(fileRinomina);
 
     // AGGIUNGI ORGANISMO
     strumentiOptions = new QActionGroup(this);
@@ -122,13 +126,20 @@ void AcquarioView::toggleRespawn() {
 
 void AcquarioView::save(){
     QString fileName = QFileDialog::getSaveFileName(this, tr("Salva file"), QDir::currentPath(), tr("JSON (*.json)"));
-    controller->saveData(fileName.toStdString());
+    controller->saveData(fileName.toStdString(), windowTitle().toStdString());
+
 }
 
 void AcquarioView::load(){
     QString fileName = QFileDialog::getOpenFileName(this, tr("Carica file"), QDir::currentPath(), tr("JSON (*.json)"));
     controller->loadData(fileName.toStdString());
     setWindowTitle(controller->getAquariusName().c_str());
+}
+
+void AcquarioView::rename(){
+    bool ok;
+    QString text = QInputDialog::getText(this, tr("Rinomina"), tr("Rinomina l'acquario:"), QLineEdit::Normal, windowTitle(), &ok);
+   if (ok && !text.isEmpty()) setWindowTitle(text);
 }
 
 void AcquarioView::setController(Controller* c) {

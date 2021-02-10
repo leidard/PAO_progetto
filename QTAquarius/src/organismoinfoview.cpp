@@ -79,7 +79,7 @@ void OrganismoInfoView::updateInfo() {
     const Organismo* o = controller->getCurrent();
     if (o == nullptr || (!controller->hasNext() && !controller->hasPrev())) controller->reset();
     if (o == nullptr) {
-        setWindowTitle("Info Oganismo");
+        setWindowTitle("Info organismo");
         nameLine->setText("");
         nameLine->setReadOnly(true);
         tipologia->setText("");

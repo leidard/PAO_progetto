@@ -59,7 +59,7 @@ class Controller : public QObject {
     void updateNameOfCurrent(const std::string&);
 
     void loadData(const std::string&);
-    void saveData(const std::string&) const;
+    void saveData(const std::string&, const std::string&) const;
 
     void mouseReleaseEvent(QMouseEvent*);
 
