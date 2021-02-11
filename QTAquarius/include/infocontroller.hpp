@@ -8,7 +8,7 @@ class QTimer;
 class Aquarius;
 class AcquarioView;
 class QMouseEvent;
-class OrganismoInfoView;
+class InfoView;
 class QString;
 
 class InfoController: public QObject {
@@ -16,7 +16,7 @@ class InfoController: public QObject {
 
     private:
         Aquarius* _model;
-        OrganismoInfoView* _view;
+        InfoView* _view;
         QTimer* _timer;
 
         unsigned int pos;
@@ -26,7 +26,7 @@ class InfoController: public QObject {
         ~InfoController();
 
         void setModel(Aquarius*);
-        void setView(OrganismoInfoView*);
+        void setView(InfoView*);
 
         bool isVisible() const;
         

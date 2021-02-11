@@ -14,7 +14,7 @@ class QTimer;
 class Aquarius;
 class AcquarioView;
 class QMouseEvent;
-class OrganismoInfoView;
+class InfoView;
 
 class Controller : public QObject {
     Q_OBJECT
@@ -43,7 +43,7 @@ class Controller : public QObject {
 
     void setModel(Aquarius*);
     void setView(AcquarioView*);
-    void setInfoView(OrganismoInfoView*);
+    void setInfoView(InfoView*);
     void setInfoController(InfoController*);
 
     const Vector<DeepPtr<Organismo>>& getAllOrganismi();

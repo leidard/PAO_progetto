@@ -1,12 +1,12 @@
 #include <QWidget>
-#include "organismoinfoview.hpp"
+#include "infoview.hpp"
 #include "controller.hpp"
 
 #ifndef ACQUARIOVIEW_H
 #define ACQUARIOVIEW_H
 
 class Controller;
-class OrganismoInfoView;
+class InfoView;
 class QVBoxLayout;
 class QMenuBar;
 class QMenu;

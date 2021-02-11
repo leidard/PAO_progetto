@@ -1,5 +1,5 @@
 #include "infocontroller.hpp"
-#include "organismoinfoview.hpp"
+#include "infoview.hpp"
 
 #include <QTimer>
 #include <QString>
@@ -18,7 +18,7 @@ void InfoController::setModel(Aquarius* model) {
     _model = model;
 }
 
-void InfoController::setView(OrganismoInfoView* view) {
+void InfoController::setView(InfoView* view) {
     _view = view;
 }
 

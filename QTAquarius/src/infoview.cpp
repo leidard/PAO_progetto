@@ -1,4 +1,4 @@
-#include "organismoinfoview.hpp"
+#include "infoview.hpp"
 
 #include <QGridLayout>
 #include <QLabel>
@@ -8,7 +8,7 @@
 #include <QFile>
 #include <sstream>
 
-OrganismoInfoView::OrganismoInfoView(QWidget* parent) : QDialog(parent) {
+InfoView::InfoView(QWidget* parent) : QDialog(parent) {
     QFile styleSheetFile(":/style/stylesheetinfo.qss");
     styleSheetFile.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(styleSheetFile.readAll());
@@ -70,7 +70,7 @@ OrganismoInfoView::OrganismoInfoView(QWidget* parent) : QDialog(parent) {
 }
 
 
-void OrganismoInfoView::setData(Organismo* o) {
+void InfoView::setData(Organismo* o) {
     if (o == nullptr) {
         setWindowTitle("Info organismo");
         nameLine->setText("");
@@ -108,7 +108,7 @@ void OrganismoInfoView::setData(Organismo* o) {
     }
 }
 
-void OrganismoInfoView::setController(InfoController* c) {
+void InfoView::setController(InfoController* c) {
     controller = c;
     connect(nameLine, &QLineEdit::textEdited, controller, &InfoController::updateNameOfCurrent);
     connect(previous, &QPushButton::released, controller, &InfoController::prev);

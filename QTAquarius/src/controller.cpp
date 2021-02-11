@@ -31,7 +31,7 @@ void Controller::setInfoController(InfoController* ic) {
     _infocontroller = ic;
 }
 
-void Controller::setInfoView(OrganismoInfoView* view) {
+void Controller::setInfoView(InfoView* view) {
     _infocontroller->setView(view);
 }
 

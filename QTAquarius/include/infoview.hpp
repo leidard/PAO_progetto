@@ -6,8 +6,8 @@
 #include "tonno.hpp"
 #include "phytoplankton.hpp"
 
-#ifndef ORGANISMOINFO_HPP
-#define ORGANISMOINFO_HPP
+#ifndef INFOVIEW_HPP
+#define INFOVIEW_HPP
 
 class QWidget;
 class QLabel;
@@ -18,10 +18,10 @@ class QPushButton;
 class QCloseEvent;
 class QTimerEvent;
 
-class OrganismoInfoView : public QDialog {
+class InfoView : public QDialog {
     Q_OBJECT
    public:
-    OrganismoInfoView(QWidget* parent = nullptr);
+    InfoView(QWidget* parent = nullptr);
     void setController(InfoController*);
     void setData(Organismo* = nullptr);
 
@@ -43,4 +43,4 @@ class OrganismoInfoView : public QDialog {
     QPushButton* quitButton;
 };
 
-#endif  // ORGANISMOINFO_HPP
+#endif

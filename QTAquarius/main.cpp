@@ -2,14 +2,14 @@
 #include <QFile>
 
 #include "acquarioview.hpp"
-#include "organismoinfoview.hpp"
+#include "infoview.hpp"
 #include "aquarius.hpp"
 #include "controller.hpp"
 
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
     AcquarioView view;
-    OrganismoInfoView infoview(&view);
+    InfoView infoview(&view);
     Aquarius model;
     Controller c;
     InfoController ic;
