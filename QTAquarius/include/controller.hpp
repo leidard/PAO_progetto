@@ -4,6 +4,7 @@
 #include "vect2d.hpp"
 #include "vector.hpp"
 #include "io.hpp"
+#include "infocontroller.hpp"
 
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
@@ -13,6 +14,7 @@ class QTimer;
 class Aquarius;
 class AcquarioView;
 class QMouseEvent;
+class OrganismoInfoView;
 
 class Controller : public QObject {
     Q_OBJECT
@@ -24,16 +26,33 @@ class Controller : public QObject {
         SARDINA,
         PHYTOPLANKTON
     };
+
+    private:
+
+    QTimer* _timer;
+     Aquarius* _model;
+     AcquarioView* _view;
+     InfoController* _infocontroller;
+     Tool _tool;
+     unsigned int infoviewpos;
+    
+    public:
+
     explicit Controller(QObject* parent = nullptr);
     ~Controller();
 
     void setModel(Aquarius*);
     void setView(AcquarioView*);
+    void setInfoView(OrganismoInfoView*);
+    void setInfoController(InfoController*);
 
     const Vector<DeepPtr<Organismo>>& getAllOrganismi();
 
     void resize(int width, int height);
 
+    // drawing
+    void setTool(Controller::Tool);
+    void useTool(const Vect2D&);
     void addTonno(const Vect2D&);    // click
     void addSardina(const Vect2D&);  // click
     void addPhytoplankton(const Vect2D&);  // click
@@ -43,33 +62,18 @@ class Controller : public QObject {
     // simulation
     bool isRunning() const;
     bool isAutoRespawnEnabled() const;
-    void toggleAutoRespawn() const;
 
     // infoview
-    bool isInfoViewVisible() const;
-    unsigned int getVectorSize() const;
-    unsigned int getPosition() const;
-    bool hasNext() const;
-    bool hasPrev() const;
-    void next();
-    void prev();
-    void reset();
-    const Organismo* getCurrent();
 
-    void updateNameOfCurrent(const std::string&);
+    void openInfo();
+    bool isInfoViewVisible() const;
+    Organismo* getInfoCurrent() const;
+
+    // load/save
 
     void loadData(const std::string&);
     void saveData(const std::string&, const std::string&) const;
-
-    void mouseReleaseEvent(QMouseEvent*);
-
-    private:
-     QTimer* _timer;
-     Aquarius* _model;
-     AcquarioView* _view;
-     IO* _saver;
-     Tool drawing;
-     unsigned int infoviewpos;
+     
 
 
    public slots:
@@ -79,6 +83,8 @@ class Controller : public QObject {
     void drawSardina();
     void drawTonno();
     void drawPhytoplankton();
+    void toggleRunning();
+    void toggleAutoRespawn();
 };
 
 #endif

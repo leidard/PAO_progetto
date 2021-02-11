@@ -3,12 +3,13 @@
 #include <QTimer>
 #include <QMouseEvent>
 
+#include "infocontroller.hpp"
 #include "acquarioview.hpp"
 #include "aquarius.hpp"
 #include "sardina.hpp"
 #include "tonno.hpp"
 
-Controller::Controller(QObject* parent) : QObject(parent), _timer(new QTimer()), _model(nullptr), _view(nullptr), infoviewpos(0) {
+Controller::Controller(QObject* parent) : QObject(parent), _timer(new QTimer()), _model(nullptr), _view(nullptr) {
     connect(_timer, SIGNAL(timeout()), this, SLOT(advance()));
 }
 
@@ -18,11 +19,20 @@ Controller::~Controller() {
 
 void Controller::setModel(Aquarius* model) {
     _model = model;
+    _infocontroller->setModel(model);
 }
 
 void Controller::setView(AcquarioView* view) {
     _view = view;
     connect(_timer, SIGNAL(timeout()), _view, SLOT(update()));
+}
+
+void Controller::setInfoController(InfoController* ic) {
+    _infocontroller = ic;
+}
+
+void Controller::setInfoView(OrganismoInfoView* view) {
+    _infocontroller->setView(view);
 }
 
 const Vector<DeepPtr<Organismo>>& Controller::getAllOrganismi() {
@@ -53,54 +63,21 @@ const std::string& Controller::getAquariusName() const {
 // simulazione
 bool Controller::isRunning() const { return _timer->isActive(); }
 bool Controller::isAutoRespawnEnabled() const { return _model->isAutoRespawnEnabled(); }
-void Controller::toggleAutoRespawn() const { if (_model->isAutoRespawnEnabled()) _model->disableAutoRespawn(); else _model->enableAutoRespawn();}
+void Controller::toggleAutoRespawn() { if (_model->isAutoRespawnEnabled()) _model->disableAutoRespawn(); else _model->enableAutoRespawn();}
+void Controller::toggleRunning() {if (isRunning()) stop(); else start(); }
 
 
-// InfoView part
-unsigned int Controller::getVectorSize()const {
-    return _model->getAllOrganismi().size();
+// infoview
+
+void Controller::openInfo() {
+    _infocontroller->show();
 }
 
-unsigned int Controller::getPosition()const {
-    return infoviewpos;
-}
+bool Controller::isInfoViewVisible() const { return _infocontroller->isVisible(); }
 
-bool Controller::hasNext() const {
-    return infoviewpos < _model->getAllOrganismi().size() - 1;
-}
+Organismo* Controller::getInfoCurrent() const { return _infocontroller->getCurrent(); }
 
-bool Controller::hasPrev() const  {
-    return infoviewpos > 0;
-}
-
-void Controller::next() {
-    if (hasNext())
-        infoviewpos++;
-}
-
-void Controller::prev() {
-    if (hasPrev())
-        infoviewpos--;
-}
-
-void Controller::reset() {
-    unsigned int last = _model->getAllOrganismi().size() - 1;
-    if (infoviewpos > last) infoviewpos = last;
-}
-
-const Organismo* Controller::getCurrent() {
-    if (infoviewpos < _model->getAllOrganismi().size())
-        return _model->getAllOrganismi()[infoviewpos].get();
-    else
-        return nullptr;
-}
-
-void Controller::updateNameOfCurrent(const std::string& name) {
-    if (infoviewpos < _model->getAllOrganismi().size())
-        _model->getAllOrganismi()[infoviewpos]->setName(name);
-}
-
-
+//// ------------
 
 void Controller::loadData(const std::string& filename) {
     (new IO())->load(_model, filename);
@@ -111,14 +88,6 @@ void Controller::saveData(const std::string& filename, const std::string& window
     (new IO())->save(_model, filename);
 }
 
-void Controller::mouseReleaseEvent(QMouseEvent* event) {
-    if (event->button() == Qt::LeftButton){
-        if (drawing == Tool::TONNO) addTonno(Vect2D(event->x(), event->y()));
-        else if (drawing == Tool::SARDINA) addSardina(Vect2D(event->x(), event->y()));
-        else if (drawing == Tool::PHYTOPLANKTON) addPhytoplankton(Vect2D(event->x(), event->y()));
-    }
-}
-
 
 // slots
 void Controller::advance() {
@@ -126,31 +95,50 @@ void Controller::advance() {
 }
 
 void Controller::start() {
-    _timer->start(20);
+    if (!_timer->isActive())
+        _timer->start(20);
 }
 
 void Controller::stop() {
-    _timer->stop();
+    if (_timer->isActive())
+        _timer->stop();
+}
+
+// drawing 
+void Controller::useTool(const Vect2D& pos) {
+    switch (_tool) {
+        case Tool::TONNO:
+            addTonno(pos);
+            break;
+        case Tool::SARDINA:
+            addSardina(pos);
+            break;
+        case Tool::PHYTOPLANKTON:
+            addPhytoplankton(pos);
+            break;
+        default:
+            break;
+    }
 }
 
 void Controller::drawSardina() {
-    if (drawing == Tool::SARDINA)
-        drawing = Tool::NIENTE;
+    if (_tool == Tool::SARDINA)
+        _tool = Tool::NIENTE;
     else
-        drawing = Tool::SARDINA;
+        _tool = Tool::SARDINA;
 
 }
 
 void Controller::drawTonno() {
-    if (drawing == Tool::TONNO)
-        drawing = Tool::NIENTE;
+    if (_tool == Tool::TONNO)
+        _tool = Tool::NIENTE;
     else
-        drawing = Tool::TONNO;
+        _tool = Tool::TONNO;
 }
 
 void Controller::drawPhytoplankton() {
-    if (drawing == Tool::PHYTOPLANKTON)
-        drawing = Tool::NIENTE;
+    if (_tool == Tool::PHYTOPLANKTON)
+        _tool = Tool::NIENTE;
     else
-        drawing = Tool::PHYTOPLANKTON;
+        _tool = Tool::PHYTOPLANKTON;
 }

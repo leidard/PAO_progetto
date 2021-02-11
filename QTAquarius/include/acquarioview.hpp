@@ -27,7 +27,6 @@ class AcquarioView : public QWidget {
 
    private:
     Controller* controller;
-    OrganismoInfoView* infoView;
     QVBoxLayout* layout;
     QMenuBar* menuBar;
     QMenu* file;
@@ -50,7 +49,6 @@ class AcquarioView : public QWidget {
 
    public:
     explicit AcquarioView(QWidget* parent = nullptr);
-    bool isInfoViewVisible() const;
     void setController(Controller* c);
 
    protected:
@@ -60,9 +58,7 @@ class AcquarioView : public QWidget {
     static void shader(const Vect2D* v, unsigned int s, const Vect2D& position, double angle, QPointF* dest, double scale);
 
    private slots:
-    void openInfo();
     void stopGo();
-    void toggleRespawn();
     void save();
     void load();
     void rename();

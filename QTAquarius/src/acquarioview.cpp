@@ -74,15 +74,14 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), pausa(false), min
 
     // INFO ORGANISMI
     infoPesci = new QAction("Info organismi", menuBar);
-    connect(infoPesci, &QAction::triggered, this, &AcquarioView::openInfo);
 
     // SIMULAZIONE
-    pausariprendi = new QAction("Pausa", simulazione);
-    connect(pausariprendi, &QAction::triggered, this, &AcquarioView::stopGo);
+    pausariprendi = new QAction("Pausa/Riprendi", simulazione);
+
     autorespawn = new QAction("Respawn automatico", simulazione);
     autorespawn->setCheckable(true);
     autorespawn->setChecked(false);
-    connect(autorespawn, &QAction::triggered, this, &AcquarioView::toggleRespawn);
+    
     
     simulazione->addAction(pausariprendi);
     simulazione->addAction(autorespawn);
@@ -95,18 +94,9 @@ AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), pausa(false), min
 
     layout->setMenuBar(menuBar);
 
-    infoView = new OrganismoInfoView(this);
-
     resize(QSize(1024, 720));  //starting window size
     setMinimumWidth(1024);
     setMinimumHeight(720);
-}
-
-bool AcquarioView::isInfoViewVisible() const { return infoView->isVisible(); }
-
-void AcquarioView::openInfo() {
-    infoView->show();
-    // connect(this, &AcquarioView::update, infoView, &FishInfoView::updateInfo);
 }
 
 void AcquarioView::stopGo() {
@@ -117,11 +107,6 @@ void AcquarioView::stopGo() {
         controller->start();
         pausariprendi->setText("Pausa");
     }
-}
-
-void AcquarioView::toggleRespawn() {
-    controller->toggleAutoRespawn();
-    autorespawn->setChecked(controller->isAutoRespawnEnabled());
 }
 
 void AcquarioView::save(){
@@ -144,9 +129,11 @@ void AcquarioView::rename(){
 
 void AcquarioView::setController(Controller* c) {
     controller = c;
-    infoView->setController(controller);
     setWindowTitle(controller->getAquariusName().c_str());
 
+    connect(infoPesci, &QAction::triggered, controller, &Controller::openInfo);
+    connect(autorespawn, &QAction::triggered, controller, &Controller::toggleAutoRespawn);
+    connect(pausariprendi, &QAction::triggered, controller, &Controller::toggleRunning);
     connect(aggiungiSardina, &QAction::triggered, controller, &Controller::drawSardina);
     connect(aggiungiTonno, &QAction::triggered, controller, &Controller::drawTonno);
     connect(aggiungiPhytoplankton, &QAction::triggered, controller, &Controller::drawPhytoplankton);
@@ -155,10 +142,6 @@ void AcquarioView::setController(Controller* c) {
 void AcquarioView::resizeEvent(QResizeEvent* event) {
     QSize s = event->size();
     controller->resize(s.width(), s.height());
-}
-
-void AcquarioView::mouseReleaseEvent(QMouseEvent* event) {
-    controller->mouseReleaseEvent(event);
 }
 
 void AcquarioView::shader(const Vect2D* v, unsigned int s, const Vect2D& position, double angle, QPointF* dest, double scale) {
@@ -184,6 +167,11 @@ unsigned int colorBetween(const unsigned int& first, const unsigned int& last, d
     return ((r & 0xffu) << 16) | ((g & 0xffu) << 8) | (b & 0xffu);
 }
 
+void AcquarioView::mouseReleaseEvent(QMouseEvent* event) {
+    if (event->button() == Qt::LeftButton){
+       controller->useTool(Vect2D(event->x(), event->y()));
+    }
+}
 
 
 void AcquarioView::paintEvent(QPaintEvent*) {
@@ -209,7 +197,7 @@ void AcquarioView::paintEvent(QPaintEvent*) {
         // std::cout << "scale: " << scale << ", color: " << std::hex << color << std::endl;
         shader(vertex, 3, o->getPosition(), o->getVelocity().angleRad(), points, scale);
 
-        if (infoView->isVisible() && &(*o) == controller->getCurrent()) {
+        if (controller->isInfoViewVisible() && &(*o) == controller->getInfoCurrent()) {
             painter.save();
             Vect2D center = o->getPosition();
             painter.setBrush(Qt::NoBrush);

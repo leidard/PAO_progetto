@@ -22,7 +22,7 @@ OrganismoInfoView::OrganismoInfoView(QWidget* parent) : QDialog(parent) {
     nameLine = new QLineEdit(this);
     nameLine->setMaxLength(60);
     nameLine->setReadOnly(true);
-    connect(nameLine, &QLineEdit::textEdited, this, [this]() { controller->updateNameOfCurrent(nameLine->text().toStdString()); });
+    
     layout->addWidget(new QLabel("Nome:", this), 0, 0, 1, 1);
     layout->addWidget(nameLine, 0, 1, 1, 2);
 
@@ -56,28 +56,21 @@ OrganismoInfoView::OrganismoInfoView(QWidget* parent) : QDialog(parent) {
     previous = new QPushButton("Precedente", this);
     currentmax = new QLabel("0 di 0", this);
     next = new QPushButton("Successivo", this);
-    connect(previous, &QPushButton::released, this, [this]() { controller->prev(); updateInfo(); });
-    connect(next, &QPushButton::released, this, [this]() { controller->next(); updateInfo(); });
+    
     layout->addWidget(previous, 6, 0, 1, 1);
     layout->addWidget(currentmax, 6, 1, 1, 1, Qt::AlignCenter);
     layout->addWidget(next, 6, 2, 1, 1);
 
     // QUIT
     quitButton = new QPushButton("Chiudi", this);
-    connect(quitButton, &QPushButton::released, this, [this]() { killTimer(timerID); QDialog::close(); });
     layout->addWidget(quitButton, 7, 2, 1, 1);
 
     layout->setSizeConstraint(QLayout::SetFixedSize);
     setLayout(layout);
 }
 
-void OrganismoInfoView::closeEvent(QCloseEvent*) {
-    killTimer(timerID);
-}
 
-void OrganismoInfoView::updateInfo() {
-    const Organismo* o = controller->getCurrent();
-    if (o == nullptr || (!controller->hasNext() && !controller->hasPrev())) controller->reset();
+void OrganismoInfoView::setData(Organismo* o) {
     if (o == nullptr) {
         setWindowTitle("Info organismo");
         nameLine->setText("");
@@ -107,7 +100,7 @@ void OrganismoInfoView::updateInfo() {
 
         staminaBar->setValue(o->getStamina()*100);
         std::stringstream s;
-        s << (controller->getPosition() + 1) << " di " << controller->getVectorSize();
+        s << (controller->getPosition() + 1) << " di " << controller->getSize();
         currentmax->setText(s.str().c_str());
 
         previous->setDisabled(!controller->hasPrev());
@@ -115,16 +108,10 @@ void OrganismoInfoView::updateInfo() {
     }
 }
 
-void OrganismoInfoView::show() {
-    updateInfo();
-    startTimer(100);
-    QDialog::show();
-}
-
-void OrganismoInfoView::setController(Controller* c) {
+void OrganismoInfoView::setController(InfoController* c) {
     controller = c;
-}
-
-void OrganismoInfoView::timerEvent(QTimerEvent*) {  //per aggiornare progress bar
-    updateInfo();
+    connect(nameLine, &QLineEdit::textEdited, controller, &InfoController::updateNameOfCurrent);
+    connect(previous, &QPushButton::released, controller, &InfoController::prev);
+    connect(next, &QPushButton::released, controller, &InfoController::next);
+    connect(quitButton, &QPushButton::released, controller, &InfoController::close);
 }

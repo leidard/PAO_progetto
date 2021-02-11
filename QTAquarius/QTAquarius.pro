@@ -25,7 +25,8 @@ SOURCES += \
     src/sardina.cpp \
     src/organismoinfoview.cpp \
     src/plankton.cpp \
-    src/phytoplankton.cpp
+    src/phytoplankton.cpp \
+    src/infocontroller.cpp
 
 HEADERS += \
     include/acquarioview.hpp \
@@ -43,7 +44,8 @@ HEADERS += \
     include/vehicle.hpp \
     include/plankton.hpp \
     include/phytoplankton.hpp \
-    include/organismoinfoview.hpp
+    include/organismoinfoview.hpp \
+    include/infocontroller.hpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

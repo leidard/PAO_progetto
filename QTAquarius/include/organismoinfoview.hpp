@@ -1,6 +1,6 @@
 #include <QDialog>
 
-#include "controller.hpp"
+#include "infocontroller.hpp"
 #include "organismo.hpp"
 #include "sardina.hpp"
 #include "tonno.hpp"
@@ -22,17 +22,11 @@ class OrganismoInfoView : public QDialog {
     Q_OBJECT
    public:
     OrganismoInfoView(QWidget* parent = nullptr);
-    void show();
-    void setController(Controller*);
+    void setController(InfoController*);
+    void setData(Organismo* = nullptr);
 
    private:
-    void updateInfo();
-
-    Controller* controller;
-    Vector<DeepPtr<Organismo>>::iterator pos;
-
-    void timerEvent(QTimerEvent*);
-    void closeEvent(QCloseEvent*);
+    InfoController* controller;
 
     int timerID;
     QGridLayout* layout;        //Layout
