@@ -3,12 +3,12 @@
 #define DAYCYCLE_H
 
 class DayCycle {
-   private:
+private:
     unsigned int awakeTime;
     unsigned int asleepTime;
     unsigned int progress;
 
-   public:
+public:
     explicit DayCycle(unsigned int = 0, unsigned int = 0);
     DayCycle(const DayCycle&);
 

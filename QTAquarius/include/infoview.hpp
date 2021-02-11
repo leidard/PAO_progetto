@@ -1,11 +1,5 @@
 #include <QDialog>
 
-#include "infocontroller.hpp"
-#include "organismo.hpp"
-#include "sardina.hpp"
-#include "tonno.hpp"
-#include "phytoplankton.hpp"
-
 #ifndef INFOVIEW_HPP
 #define INFOVIEW_HPP
 
@@ -15,17 +9,17 @@ class QLineEdit;
 class QGridLayout;
 class QProgressBar;
 class QPushButton;
-class QCloseEvent;
-class QTimerEvent;
+class InfoController;
+class Organismo;
 
 class InfoView : public QDialog {
     Q_OBJECT
-   public:
+public:
     InfoView(QWidget* parent = nullptr);
     void setController(InfoController*);
     void setData(Organismo* = nullptr);
 
-   private:
+private:
     InfoController* controller;
 
     int timerID;

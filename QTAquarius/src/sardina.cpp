@@ -1,4 +1,5 @@
 #include "sardina.hpp"
+#include "aquarius.hpp"
 
 Sardina::Sardina(const Vect2D& position, const std::string& name) : Organismo(position, 4, .12, name, 50 * 10, 25 * 5, 80) {}
 
@@ -32,7 +33,7 @@ Sardina* Sardina::clone() const {
 
 int Sardina::getValoreNutrizionale() const { return 3; }
 
-std::string Sardina::getSpecie() const{
+std::string Sardina::getSpecie() const {
     return "Sardina";
 }
 

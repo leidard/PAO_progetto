@@ -10,22 +10,19 @@
 class Aquarius;
 
 class Organismo : public Vehicle {
-   public:
-    static const char ** COOL_NAMES;
-   private:
+public:
+    static const char** COOL_NAMES;
+private:
     std::string _name;
     bool _awake;
     bool _gone;
 
-   protected:
+protected:
     DayCycle _daycycle;
     Stamina _stamina;
     virtual void behaviour(Aquarius*) override;
-    //virtual void onEatBehaviour();
-    //virtual void onAwakeBehaviour();
-    //virtual void onSleepBehaviour();
 
-   public:
+public:
     Organismo(const Vect2D&, double, double, const std::string&, unsigned int, unsigned int, double);
     Organismo(const Organismo&);
     virtual ~Organismo() = default;
@@ -39,7 +36,7 @@ class Organismo : public Vehicle {
     void wakeup();
     bool isAwake() const;
     bool isAsleep() const;
-    double getStamina() const;  // ritorna una percentuale
+    double getStamina() const;
     virtual bool canSleep() const;
     virtual bool canWakeup() const;
 

@@ -3,17 +3,17 @@
 #define VECT_H
 
 /**
- * Two Dimensional Vector 
+ * Two Dimensional Vector
 */
 class Vect2D {
     friend Vect2D operator*(double, const Vect2D&);
     friend Vect2D operator/(double, const Vect2D&);
     friend std::ostream& operator<<(std::ostream& os, const Vect2D&);
 
-   private:
+private:
     double _x, _y;
 
-   public:
+public:
     static const Vect2D ZERO;
 
     Vect2D();
@@ -99,7 +99,7 @@ class Vect2D {
     Vect2D& limit(double);
 
     /**
-     * Keep the vector x and y within some range 
+     * Keep the vector x and y within some range
      * @param Vect2D
      * @return reference to *this
     */
@@ -143,7 +143,7 @@ class Vect2D {
     double angleDeg() const;
     double angleBetweenRad(const Vect2D&) const;
     double angleBetweenDeg(const Vect2D&) const;
-    /** 
+    /**
      * Projects this vector on the vector passed as parameter
     */
     Vect2D scalarProjection(const Vect2D&) const;
@@ -190,7 +190,7 @@ class Vect2D {
     bool operator<(const Vect2D&) const;
     bool operator<=(const Vect2D&) const;
     bool operator==(const Vect2D&) const;
-    bool operator!=(const Vect2D&) const;  // controllo riferimento
+    bool operator!=(const Vect2D&) const;
 
     // converters
     operator std::pair<double, double>() const;

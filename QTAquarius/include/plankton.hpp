@@ -1,15 +1,14 @@
-#include "aquarius.hpp"
 #include "organismo.hpp"
 
 #ifndef PLANKTON_H
 #define PLANKTON_H
 
 class Plankton : public Organismo {
-   protected:
+protected:
     virtual void behaviour(Aquarius*) override;
 
-   public:
-    Plankton(const Vect2D&, const std::string& = "");
+public:
+    Plankton(const Vect2D&, const std::string & = "");
     virtual ~Plankton() = default;
     virtual std::string getSpecie() const override;
     virtual bool isInRange(const Vect2D&) const override;        // from Vehicle

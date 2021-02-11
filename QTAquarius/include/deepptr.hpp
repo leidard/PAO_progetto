@@ -1,13 +1,12 @@
-
 #ifndef DEEPPTR_H
 #define DEEPPTR_H
 
 template <class T>
 class DeepPtr {
-   private:
+private:
     T* ptr;
 
-   public:
+public:
     DeepPtr(T* = nullptr);
     DeepPtr(const DeepPtr& d);
     ~DeepPtr();

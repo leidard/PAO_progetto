@@ -1,8 +1,9 @@
 #include "plankton.hpp"
+#include "aquarius.hpp"
 
 Plankton::Plankton(const Vect2D& position, const std::string& name) : Organismo(position, 1, .12, name, 50 * 60, 50 * 10, 100) {}
 
-void Plankton::behaviour(Aquarius * a) {
+void Plankton::behaviour(Aquarius* a) {
     Vect2D avgloc;
     int count = 0;
     for (auto& o : a->getAllOrganismi()) {
@@ -26,6 +27,6 @@ std::string Plankton::getSpecie() const {
     return "plankton";
 }
 
-bool Plankton::isInRange(const Vect2D & p) const {
+bool Plankton::isInRange(const Vect2D& p) const {
     return getPosition().distance(p) < 50;
 }

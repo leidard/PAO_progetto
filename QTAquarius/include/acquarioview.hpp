@@ -1,5 +1,4 @@
 #include <QWidget>
-#include "infoview.hpp"
 #include "controller.hpp"
 
 #ifndef ACQUARIOVIEW_H
@@ -18,14 +17,14 @@ class QPaintEvent;
 
 class AcquarioView : public QWidget {
     Q_OBJECT
-   public:
+public:
     static const Vect2D vertex[3];
     static const double minScale;
     static const double maxScale;
     static const unsigned int minColor;
     static const unsigned int maxColor;
 
-   private:
+private:
     Controller* controller;
     QVBoxLayout* layout;
     QMenuBar* menuBar;
@@ -47,22 +46,21 @@ class AcquarioView : public QWidget {
     unsigned int minVal;
     unsigned int maxVal;
 
-   public:
+public:
     explicit AcquarioView(QWidget* parent = nullptr);
     void setController(Controller* c);
 
-   protected:
+protected:
     void resizeEvent(QResizeEvent*) override;
     void mouseReleaseEvent(QMouseEvent*) override;
     void paintEvent(QPaintEvent*) override;
     static void shader(const Vect2D* v, unsigned int s, const Vect2D& position, double angle, QPointF* dest, double scale);
 
-   private slots:
-    void stopGo();
+private slots:
     void save();
     void load();
     void rename();
-    void closeEvent(QCloseEvent *event);
+    void closeEvent(QCloseEvent* event) override;
 };
 
 #endif

@@ -8,6 +8,9 @@
 #include <QFile>
 #include <sstream>
 
+#include "organismo.hpp"
+#include "infocontroller.hpp"
+
 InfoView::InfoView(QWidget* parent) : QDialog(parent) {
     QFile styleSheetFile(":/style/stylesheetinfo.qss");
     styleSheetFile.open(QFile::ReadOnly);
@@ -22,7 +25,7 @@ InfoView::InfoView(QWidget* parent) : QDialog(parent) {
     nameLine = new QLineEdit(this);
     nameLine->setMaxLength(60);
     nameLine->setReadOnly(true);
-    
+
     layout->addWidget(new QLabel("Nome:", this), 0, 0, 1, 1);
     layout->addWidget(nameLine, 0, 1, 1, 2);
 
@@ -56,7 +59,7 @@ InfoView::InfoView(QWidget* parent) : QDialog(parent) {
     previous = new QPushButton("Precedente", this);
     currentmax = new QLabel("0 di 0", this);
     next = new QPushButton("Successivo", this);
-    
+
     layout->addWidget(previous, 6, 0, 1, 1);
     layout->addWidget(currentmax, 6, 1, 1, 1, Qt::AlignCenter);
     layout->addWidget(next, 6, 2, 1, 1);
@@ -83,22 +86,23 @@ void InfoView::setData(Organismo* o) {
         currentmax->setText("0 di 0");
         previous->setDisabled(true);
         next->setDisabled(true);
-    } else {
-        setWindowTitle(("Info oganismo: "+ o->getName()).c_str());
+    }
+    else {
+        setWindowTitle(("Info oganismo: " + o->getName()).c_str());
         nameLine->setText(o->getName().c_str());
         nameLine->setReadOnly(false);
         tipologia->setText(QString::fromStdString(o->getSpecie()));
         nutVal->setNum(o->getValoreNutrizionale());
-        if(o->isHungry())
+        if (o->isHungry())
             hungry->setText(QString("Sì"));
         else
             hungry->setText(QString("No"));
-        if(o->isAwake())
+        if (o->isAwake())
             status->setText(QString("Sveglio"));
         else
             status->setText(QString("Addormentato"));
 
-        staminaBar->setValue(o->getStamina()*100);
+        staminaBar->setValue(o->getStamina() * 100);
         std::stringstream s;
         s << (controller->getPosition() + 1) << " di " << controller->getSize();
         currentmax->setText(s.str().c_str());

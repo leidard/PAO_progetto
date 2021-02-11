@@ -1,10 +1,10 @@
 #include <QObject>
 
 #include "deepptr.hpp"
+#include "infocontroller.hpp"
+#include "io.hpp"
 #include "vect2d.hpp"
 #include "vector.hpp"
-#include "io.hpp"
-#include "infocontroller.hpp"
 
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
@@ -19,25 +19,18 @@ class InfoView;
 class Controller : public QObject {
     Q_OBJECT
 
-   public:
-    enum Tool {
-        NIENTE,
-        TONNO,
-        SARDINA,
-        PHYTOPLANKTON
-    };
+public:
+    enum Tool { NIENTE, TONNO, SARDINA, PHYTOPLANKTON };
 
-    private:
-
+private:
     QTimer* _timer;
-     Aquarius* _model;
-     AcquarioView* _view;
-     InfoController* _infocontroller;
-     Tool _tool;
-     unsigned int infoviewpos;
-    
-    public:
+    Aquarius* _model;
+    AcquarioView* _view;
+    InfoController* _infocontroller;
+    Tool _tool;
+    unsigned int infoviewpos;
 
+public:
     explicit Controller(QObject* parent = nullptr);
     ~Controller();
 
@@ -53,11 +46,12 @@ class Controller : public QObject {
     // drawing
     void setTool(Controller::Tool);
     void useTool(const Vect2D&);
-    void addTonno(const Vect2D&);    // click
-    void addSardina(const Vect2D&);  // click
-    void addPhytoplankton(const Vect2D&);  // click
+    void addTonno(const Vect2D&);
+    void addSardina(const Vect2D&);
+    void addPhytoplankton(const Vect2D&);
 
     const std::string& getAquariusName() const;
+    void setAquariusName(const std::string&);
 
     // simulation
     bool isRunning() const;
@@ -71,12 +65,10 @@ class Controller : public QObject {
 
     // load/save
 
-    void loadData(const std::string&);
-    void saveData(const std::string&, const std::string&) const;
-     
+    void loadAquarius(const std::string&);
+    void saveAquarius(const std::string&) const;
 
-
-   public slots:
+public slots:
     void advance();
     void start();
     void stop();

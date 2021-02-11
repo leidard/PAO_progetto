@@ -1,10 +1,12 @@
 #include "infocontroller.hpp"
-#include "infoview.hpp"
 
 #include <QTimer>
 #include <QString>
 
-InfoController::InfoController(): QObject(), _model(nullptr), _view(nullptr), _timer(new QTimer()), pos(0)  {
+#include "infoview.hpp"
+#include "aquarius.hpp"
+
+InfoController::InfoController() : QObject(), _model(nullptr), _view(nullptr), _timer(new QTimer()), pos(0) {
     connect(_timer, &QTimer::timeout, this, &InfoController::tick);
 }
 
@@ -36,16 +38,17 @@ unsigned int InfoController::getPosition()const {
 
 Organismo* InfoController::getCurrent() const {
     if (getSize() > 0 && pos < getSize()) {
-            return _model->getAllOrganismi()[pos].get();
-        } else 
-            return nullptr;
+        return _model->getAllOrganismi()[pos].get();
+    }
+    else
+        return nullptr;
 }
 
 bool InfoController::hasNext() const {
     return pos < _model->getAllOrganismi().size() - 1;
 }
 
-bool InfoController::hasPrev() const  {
+bool InfoController::hasPrev() const {
     return pos > 0;
 }
 
@@ -60,16 +63,18 @@ void InfoController::close() {
     _timer->stop();
     _view->close();
     std::cout << "closed" << std::endl;
-} 
+}
 
 void InfoController::tick() {
     if (_view->isVisible()) {
         if (getSize() > 0) {
             if (pos >= getSize()) pos = getSize() - 1;
             _view->setData(_model->getAllOrganismi()[pos].get());
-        } else 
+        }
+        else
             _view->setData();
-    } else {
+    }
+    else {
         _timer->stop();
     }
 }

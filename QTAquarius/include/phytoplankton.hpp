@@ -7,11 +7,11 @@
 // fanno la fotosintesi
 
 class Phytoplankton : public Plankton {
-   protected:
+protected:
     virtual void behaviour(Aquarius*) override;
 
-   public:
-    Phytoplankton(const Vect2D&, const std::string& = "");
+public:
+    Phytoplankton(const Vect2D&, const std::string & = "");
 
     // new pure virtual
     virtual bool isHungry() const override;

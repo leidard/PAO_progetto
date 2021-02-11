@@ -16,19 +16,19 @@ class Organismo;
 class Phytoplankton;
 
 class IO {
-   public:
-    
+public:
+
     class FileStructureError : public std::exception {
         std::string msg;
 
-       public:
+    public:
         FileStructureError(const std::string& _msg = "General Parse Error");
         std::string getMsg() const;
     };
 
     class MissingProperty : public IO::FileStructureError {
-        public:
-            MissingProperty( std::string propertyname, std::string object = "");
+    public:
+        MissingProperty(std::string propertyname, std::string object = "");
     };
 
     static const std::string DEFAULT_FILENAME;

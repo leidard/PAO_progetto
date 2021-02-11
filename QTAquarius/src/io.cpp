@@ -18,7 +18,7 @@ IO::FileStructureError::FileStructureError(const std::string& _msg) : msg(_msg) 
 
 std::string IO::FileStructureError::getMsg() const { return "[JSON IOError]: " + msg; }
 
-IO::MissingProperty::MissingProperty( std::string propertyname,  std::string object) : FileStructureError("Missing Property: ["+ propertyname + "] " + ((object!="")?"in object: "+object:"")) {}
+IO::MissingProperty::MissingProperty(std::string propertyname, std::string object) : FileStructureError("Missing Property: [" + propertyname + "] " + ((object != "") ? "in object: " + object : "")) {}
 
 const std::string IO::DEFAULT_FILENAME = "aquarius.json";
 
@@ -44,7 +44,8 @@ void IO::load(Aquarius* a, const std::string& filename) const {
         auto i = *it;
         try {
             a->addOrganismo(parseOrganismo(i));
-        } catch (FileStructureError& err) {
+        }
+        catch (FileStructureError& err) {
             std::cerr << err.getMsg();
         }
     }
@@ -62,9 +63,11 @@ void IO::save(Aquarius* a, const std::string& filename) const {
     for (auto& o : a->getAllOrganismi()) {
         if (Tonno* tonno = dynamic_cast<Tonno*>(&*o)) {
             organismi.push_back(IO::serialize(*tonno));
-        } else if (Sardina* sardina = dynamic_cast<Sardina*>(&*o)) {
+        }
+        else if (Sardina* sardina = dynamic_cast<Sardina*>(&*o)) {
             organismi.push_back(IO::serialize(*sardina));
-        } else if (Phytoplankton* phyto = dynamic_cast<Phytoplankton*>(&*o)) {
+        }
+        else if (Phytoplankton* phyto = dynamic_cast<Phytoplankton*>(&*o)) {
             organismi.push_back(IO::serialize(*phyto));
         }
     }
@@ -140,9 +143,12 @@ Organismo* IO::parseOrganismo(const QJsonValue& v) {
 
     if (t == "TONNO") {
         return new Tonno(parseVect2D(obj.value("position")), nameV.toString().toStdString());
-    } else if (t == "SARDINA") {
+    }
+    else if (t == "SARDINA") {
         return new Sardina(parseVect2D(obj.value("position")), nameV.toString().toStdString());
-    } else if (t == "PHYTOPLANKTON") {
+    }
+    else if (t == "PHYTOPLANKTON") {
         return new Phytoplankton(parseVect2D(obj.value("position")), nameV.toString().toStdString());
-    } else throw new FileStructureError("Unknown Type: "+ t);
+    }
+    else throw new FileStructureError("Unknown Type: " + t);
 }

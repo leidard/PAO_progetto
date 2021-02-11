@@ -9,14 +9,14 @@ double Stamina::getVal() const { return _val; }
 double Stamina::getPercentage() const { return _val / _maxval; }
 
 Stamina& Stamina::add(double v) {
-    if (_val+v > _maxval) _val = _maxval;
+    if (_val + v > _maxval) _val = _maxval;
     else _val += v;
 
     return *this;
 }
 
 Stamina& Stamina::rem(double v) {
-    if (_val-v < 0) _val = 0;
+    if (_val - v < 0) _val = 0;
     else _val -= v;
     return *this;
 }

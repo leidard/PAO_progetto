@@ -5,21 +5,21 @@
 
 template <class T>
 class Vector {
-   private:
+private:
     T* _buffer;
     unsigned int _size;
     unsigned int _capacity;
 
-   public:
+public:
     class iterator {
         friend class Vector<T>;
 
-       private:
+    private:
         T* _current;
         iterator(T* i) : _current(i) {}
 
-       public:
-        iterator(): _current(nullptr) {}
+    public:
+        iterator() : _current(nullptr) {}
         T& operator*() const { return *_current; }
         T* operator->() const { return _current; }
         T& operator[](int n) const { return _current[n]; }
@@ -53,14 +53,14 @@ class Vector {
     };
 
     class const_iterator {
-    friend class Vector<T>;
+        friend class Vector<T>;
 
-       private:
+    private:
         T* _current;
         const_iterator(T* i) : _current(i) {}
-       public:
-       const_iterator(): _current(nullptr) {}
-        
+    public:
+        const_iterator() : _current(nullptr) {}
+
         const T& operator*() const { return *_current; }
         const T* operator->() const { return _current; }
         const T& operator[](int n) const { return _current[n]; }
@@ -127,10 +127,8 @@ class Vector {
     void swap(Vector&);
 
     void resize(unsigned int);
-    void resize(unsigned int, const T&);  // rimuovere?
+    void resize(unsigned int, const T&);
     void shrink_to_fit();
-
-    // assign();  // assign vector content with many overloads if I remember correctly
 };
 
 template <class T>
@@ -189,12 +187,12 @@ template <class T>
 const T& Vector<T>::operator[](unsigned int index) const { return _buffer[index]; }
 
 template <class T>
-T& Vector<T>::front() { return _buffer[0]; }  // access element at the front
+T& Vector<T>::front() { return _buffer[0]; }
 template <class T>
 const T& Vector<T>::front() const { return _buffer[0]; }
 
 template <class T>
-T& Vector<T>::back() { return _buffer[_size - 1]; }  // access element at the back
+T& Vector<T>::back() { return _buffer[_size - 1]; }
 template <class T>
 const T& Vector<T>::back() const { return _buffer[_size - 1]; }
 
@@ -211,7 +209,7 @@ void Vector<T>::pop_back() { --_size; }
 template <class T>
 typename Vector<T>::iterator Vector<T>::erase(Vector<T>::iterator pos) {
     Vector<T>::iterator aux = pos;
-    while (pos < end()-1) {
+    while (pos < end() - 1) {
         *pos = std::move(pos[1]);
         pos++;
     }
@@ -232,12 +230,13 @@ void Vector<T>::reserve(unsigned int n) {
     if (n > _capacity) {
         T* newbuff = new T[n];
         for (unsigned int i = 0; i < _size; i++)
-            newbuff[i] = std::move(_buffer[i]);  // if _capacity == 0 => _size == 0 never reached
+            newbuff[i] = std::move(_buffer[i]);
 
         _capacity = n;
-        delete[] _buffer;  // if _buffer == nullptr => no delete
+        delete[] _buffer;
         _buffer = newbuff;
-    } else if (_capacity == 0) {  // n <= _capacity && _capacity == 0 =>  n == 0
+    }
+    else if (_capacity == 0) {  // n <= _capacity && _capacity == 0 =>  n == 0
         _buffer = new T[1];
         _capacity = 1;
     }
@@ -290,7 +289,7 @@ void Vector<T>::shrink_to_fit() {
     for (unsigned int i = 0; i < _size; i++) newbuff[i] = std::move(_buffer[i]);
 
     delete[] _buffer;
-    _buffer = newbuff;    
+    _buffer = newbuff;
     _capacity = _size;
 }
 

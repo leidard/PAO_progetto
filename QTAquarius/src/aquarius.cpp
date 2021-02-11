@@ -4,7 +4,7 @@ const int Aquarius::ORGANISM_LIMIT = 100;
 
 Aquarius::Aquarius(const std::string& name, unsigned int width, unsigned int height) : _name(name), _width(width), _height(height), organismi(), _autorespawn(false) {}
 
-void Aquarius::setName(const std::string& name) { _name = name; } 
+void Aquarius::setName(const std::string& name) { _name = name; }
 
 const std::string& Aquarius::getName() const { return _name; }
 
@@ -35,19 +35,21 @@ Vector<DeepPtr<Organismo>>& Aquarius::getAllOrganismi() {
 
 void Aquarius::advance() {
     for (auto& i : organismi) {
-        i->advance(this, 0);  // calcolate
+        i->advance(this, 0);
     }
     auto it = organismi.begin();
     while (it != organismi.end()) {
         if ((*it)->isGone()) {
             if (_autorespawn) {
-                auto a = (*it)->clone();
-                a->move(Vect2D(_width/2, _height/2));
-                *it = a; // it is a new object
-            } else {
+                Organismo* a = (*it)->clone();
+                a->move(Vect2D(_width / 2, _height / 2));
+                *it = a;
+            }
+            else {
                 it = organismi.erase(it);
             }
-        } else {
+        }
+        else {
             (*it)->advance(this, 1);
             it++;
         }

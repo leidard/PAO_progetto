@@ -19,15 +19,15 @@ const double Vehicle::wander_strength = 1;  // 0 <= x <= 1 (where 0 is 0 and 1 i
 const double Vehicle::wander_rate = 1;      // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_RATE)
 
 Vehicle::Vehicle(const Vect2D& position, double maximumSpeed, double maximumForce) : maxSpeed(maximumSpeed),
-                                                                                     maxForce(maximumForce),
-                                                                                     _position(position),
-                                                                                     _velocity(1, 1),
-                                                                                     _wander(1, 1) {
+maxForce(maximumForce),
+_position(position),
+_velocity(1, 1),
+_wander(1, 1) {
     _velocity.setMagnitude(maxSpeed);
     _velocity.rotateDeg(std::rand() % 360 - 180);
 }
 
-void Vehicle::move(const Vect2D & position){
+void Vehicle::move(const Vect2D& position) {
     _position = position;
 }
 
@@ -64,7 +64,8 @@ Vect2D Vehicle::flee(const Vect2D& target, unsigned int radius) const {
     if (distance < radius && distance > 0) {
         desired.setMagnitude(distance / -radius * -maxSpeed + maxSpeed);
         desired.mult(-1);
-    } else
+    }
+    else
         return Vect2D::ZERO;
 
     return (desired - _velocity);
@@ -129,12 +130,13 @@ Vect2D Vehicle::stayWithinBorders(const Vect2D& size, unsigned int distance) con
         return avoid;
 }
 
-void Vehicle::advance(Aquarius* a, int phase) {  //divide the method with 2 phase triggere within the aquarius
+void Vehicle::advance(Aquarius* a, int phase) {
     if (!phase) {
         this->behaviour(a);
         applyForce(stayWithinBorders(a->getBounds()));
         _acc.limit(maxForce);
-    } else {
+    }
+    else {
         _velocity += _acc;
         _velocity.limit(maxSpeed);
         _position += _velocity;

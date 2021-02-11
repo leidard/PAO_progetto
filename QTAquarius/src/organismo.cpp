@@ -2,22 +2,22 @@
 
 #include "aquarius.hpp"
 
-const char ** Organismo::COOL_NAMES = new const char*[26]{
+const char** Organismo::COOL_NAMES = new const char* [26]{
     "Bowie",
     "Cardi",
     "Elvis",
-    "Freddie", 
-    "Lennon", 
-    "Prince",  
-    "Brie", 
-    "Apache", 
-    "Kong", 
-    "Atari", 
-    "Elite", 
-    "Voxel", 
+    "Freddie",
+    "Lennon",
+    "Prince",
+    "Brie",
+    "Apache",
+    "Kong",
+    "Atari",
+    "Elite",
+    "Voxel",
     "Boomer",
     "Kobe",
-    "Jordan", 
+    "Jordan",
     "Shaq",
     "Sydney",
     "Pretender",
@@ -32,8 +32,8 @@ const char ** Organismo::COOL_NAMES = new const char*[26]{
 };
 
 
-Organismo::Organismo(const Vect2D& position, double maximumSpeed, double maximumForce, const std::string& name, unsigned int a, unsigned int s, double stam) : Vehicle(position, maximumSpeed, maximumForce), _name(name == ""? COOL_NAMES[std::rand()%26]: name), _awake(true), _gone(false), _daycycle(a, s), _stamina(stam) {}
-Organismo::Organismo(const Organismo& o): Vehicle(o), _name(o._name), _awake(o._awake), _gone(false), _daycycle(o._daycycle), _stamina(o._stamina) {}
+Organismo::Organismo(const Vect2D& position, double maximumSpeed, double maximumForce, const std::string& name, unsigned int a, unsigned int s, double stam) : Vehicle(position, maximumSpeed, maximumForce), _name(name == "" ? COOL_NAMES[std::rand() % 26] : name), _awake(true), _gone(false), _daycycle(a, s), _stamina(stam) {}
+Organismo::Organismo(const Organismo& o) : Vehicle(o), _name(o._name), _awake(o._awake), _gone(false), _daycycle(o._daycycle), _stamina(o._stamina) {}
 
 bool Organismo::isGone() const { return _gone; }
 void Organismo::setGone() { _gone = true; }
@@ -87,8 +87,8 @@ void Organismo::behaviour(Aquarius* a) {
             }
         }
         if (candidato != nullptr) {
-            if (mindist < getVelocity().mag()){
-                _stamina+=candidato->getValoreNutrizionale();
+            if (mindist < getVelocity().mag()) {
+                _stamina += candidato->getValoreNutrizionale();
                 candidato->setGone();
             }
             setForce(pursuit(*candidato));

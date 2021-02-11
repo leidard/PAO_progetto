@@ -6,11 +6,11 @@
 // mangiano i phytoplankton
 
 class ZooPlankton : public Plankton {
-   protected:
+protected:
     virtual void behaviour(Aquarius*) override;
 
-   public:
-    ZooPlankton(const Vect2D&, const std::string& = "");
+public:
+    ZooPlankton(const Vect2D&, const std::string & = "");
 
     // new pure virtual
     virtual bool isHungry() const override;

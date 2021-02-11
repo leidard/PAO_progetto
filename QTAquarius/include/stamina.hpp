@@ -3,11 +3,11 @@
 #define STAMINA_H
 
 class Stamina {
-   private:
+private:
     double _maxval;
     double _val;
 
-   public:
+public:
     explicit Stamina(double);
     Stamina(const Stamina&);
 

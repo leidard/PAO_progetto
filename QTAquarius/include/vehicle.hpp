@@ -5,10 +5,8 @@
 
 class Aquarius;
 
-//TODO  it could have a friend declaration to the acquarius to access some private methods
-
 class Vehicle {
-   protected:
+protected:
     /**
     * maxSpeed is the maximum "pixel per tick"
     */
@@ -19,7 +17,7 @@ class Vehicle {
     */
     const double maxForce;
 
-    /** 
+    /**
      * Calculates the behaviour of the vehicle
      * @param Aquarius* aquarius pointer
     */
@@ -32,13 +30,13 @@ class Vehicle {
     */
     void setForce(const Vect2D&);
     /**
-     * Add the force of acceleration, to the already calculated one 
+     * Add the force of acceleration, to the already calculated one
      * @param acc
      * @param weight
     */
     void applyForce(const Vect2D&, const double& = 1);
 
-   private:
+private:
     Vect2D _position;
     Vect2D _acc;
     Vect2D _velocity;
@@ -59,9 +57,10 @@ class Vehicle {
     static const double wander_strength;  // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_STRENGTH)
     static const double wander_rate;      // 0 <= x <= 1 (where 0 is 0 and 1 is WANDER_MAX_RATE)
 
-   public:
+public:
     Vehicle(const Vect2D& position, double maxSpeed = Vehicle::DEFAULT_MAXSPEED, double maxForce = Vehicle::DEFAULT_MAXFORCE);
 
+    // base della gerarchia
     virtual ~Vehicle() = default;
     virtual Vehicle* clone() const = 0;
 

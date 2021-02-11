@@ -4,7 +4,7 @@
 #include <cmath>
 #include <utility>
 
-Vect2D::Vect2D() : _x(0), _y(0){};
+Vect2D::Vect2D() : _x(0), _y(0) {};
 Vect2D::Vect2D(double x, double y) : _x(x), _y(y) {}
 
 const Vect2D Vect2D::ZERO = Vect2D(0, 0);
@@ -158,7 +158,7 @@ bool Vect2D::operator>=(const Vect2D& v2) const {
     return _x >= v2._x && _y >= v2._y;
 }
 bool Vect2D::operator<(const Vect2D& v2) const {
-    return _x < v2._x && _y < v2._y;
+    return _x < v2._x&& _y < v2._y;
 }
 bool Vect2D::operator<=(const Vect2D& v2) const {
     return _x <= v2._x && _y <= v2._y;
