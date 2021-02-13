@@ -1,4 +1,3 @@
-
 #ifndef DAYCYCLE_H
 #define DAYCYCLE_H
 

@@ -1,9 +1,6 @@
 #include <QObject>
 
 #include "deepptr.hpp"
-#include "infocontroller.hpp"
-#include "io.hpp"
-#include "vect2d.hpp"
 #include "vector.hpp"
 
 #ifndef CONTROLLER_H
@@ -13,8 +10,9 @@ class Organismo;
 class QTimer;
 class Aquarius;
 class AcquarioView;
-class QMouseEvent;
 class InfoView;
+class Vect2D;
+class InfoController;
 
 class Controller : public QObject {
     Q_OBJECT
@@ -44,7 +42,6 @@ public:
     void resize(int width, int height);
 
     // drawing
-    void setTool(Controller::Tool);
     void useTool(const Vect2D&);
     void addTonno(const Vect2D&);
     void addSardina(const Vect2D&);

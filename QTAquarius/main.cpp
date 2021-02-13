@@ -5,6 +5,7 @@
 #include "infoview.hpp"
 #include "aquarius.hpp"
 #include "controller.hpp"
+#include "infocontroller.hpp"
 
 int main(int argc, char* argv[]) {
     QApplication a(argc, argv);

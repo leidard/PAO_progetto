@@ -1,13 +1,15 @@
 #include "controller.hpp"
 
-#include <QMouseEvent>
 #include <QTimer>
 
 #include "acquarioview.hpp"
 #include "aquarius.hpp"
 #include "sardina.hpp"
+#include "io.hpp"
 #include "phytoplankton.hpp"
 #include "tonno.hpp"
+#include "vect2d.hpp"
+#include "infocontroller.hpp"
 
 Controller::Controller(QObject* parent) : QObject(parent), _timer(new QTimer()), _model(nullptr), _view(nullptr) {
     connect(_timer, SIGNAL(timeout()), this, SLOT(advance()));
