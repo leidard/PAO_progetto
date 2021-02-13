@@ -1,7 +1,7 @@
 #include "sardina.hpp"
 #include "aquarius.hpp"
 
-Sardina::Sardina(const Vect2D& position, const std::string& name) : Organismo(position, 4, .12, name, 50 * 10, 25 * 5, 80) {}
+Sardina::Sardina(const Vect2D& position, const std::string& name) : Organismo(position, 4, .13, name, 500, 100, 30) {}
 
 void Sardina::behaviour(Aquarius* a) {
     Vect2D avgloc;

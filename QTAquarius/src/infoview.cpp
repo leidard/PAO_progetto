@@ -31,7 +31,7 @@ InfoView::InfoView(QWidget* parent) : QDialog(parent) {
 
     // TYPE
     tipologia = new QLabel("", this);
-    layout->addWidget(new QLabel("Tipologia:", this), 1, 0, 1, 1);
+    layout->addWidget(new QLabel("Specie:", this), 1, 0, 1, 1);
     layout->addWidget(tipologia, 1, 1, 1, 1);
 
     // NUTRITIONAL VALUE

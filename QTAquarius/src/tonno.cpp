@@ -2,7 +2,7 @@
 
 #include "aquarius.hpp"
 
-Tonno::Tonno(const Vect2D& position, const std::string& name) : Organismo(position, 5, .15, name, 50 * 10, 150, 100) {}
+Tonno::Tonno(const Vect2D& position, const std::string& name) : Organismo(position, 5, .15, name, 1000, 200, 100) {}
 
 // overrides
 

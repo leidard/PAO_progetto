@@ -1,7 +1,7 @@
 #include "plankton.hpp"
 #include "aquarius.hpp"
 
-Plankton::Plankton(const Vect2D& position, const std::string& name) : Organismo(position, 1, .12, name, 50 * 60, 50 * 10, 100) {}
+Plankton::Plankton(const Vect2D& position, const std::string& name) : Organismo(position, 1, .10, name, 50 * 60, 50 * 10, 20) {}
 
 void Plankton::behaviour(Aquarius* a) {
     Vect2D avgloc;

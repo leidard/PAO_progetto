@@ -42,7 +42,7 @@ void Aquarius::advance() {
         if ((*it)->isGone()) {
             if (_autorespawn) {
                 Organismo* a = (*it)->clone();
-                a->move(Vect2D(_width / 2, _height / 2));
+                a->move(Vect2D(std::rand()%_width, std::rand()%_height));
                 *it = a;
             }
             else {

@@ -91,6 +91,8 @@ Organismo* Controller::getInfoCurrent() const {
 
 void Controller::loadAquarius(const std::string& filename) {
     (new IO())->load(_model, filename);
+    _view->setWindowTitle(_model->getName().c_str());
+    _view->resize(_model->getWidth(), _model->getHeight());
 }
 
 void Controller::saveAquarius(const std::string& filename) const {
