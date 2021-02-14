@@ -8,8 +8,6 @@ void Plankton::behaviour(Aquarius* a) {
     int count = 0;
     for (auto& o : a->getAllOrganismi()) {
         if (o && &(*o) != this && isInRange(o->getPosition()) && o->getValoreNutrizionale() > getValoreNutrizionale()) {
-            // alignment step
-
             avgloc += o->getPosition();
 
             count++;
