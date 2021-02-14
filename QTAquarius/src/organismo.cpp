@@ -63,7 +63,7 @@ void Organismo::behaviour(Aquarius* a) {
         return;
     }
     // é sveglio
-    _stamina -= 1 / 50.0;
+    _stamina -= 0.02 * _stamina.getMax();
     if (_stamina <= 0) {
         setGone();
         setForce(stop());
