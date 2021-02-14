@@ -62,7 +62,7 @@ void InfoController::show() {
 void InfoController::close() {
     _timer->stop();
     _view->close();
-    std::cout << "closed" << std::endl;
+    //std::cout << "closed" << std::endl;
 }
 
 void InfoController::tick() {

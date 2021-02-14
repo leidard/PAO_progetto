@@ -20,13 +20,9 @@ const unsigned int AcquarioView::maxColor = 0xff0000;
 const double AcquarioView::minScale = .6;
 const double AcquarioView::maxScale = 1;
 
-AcquarioView::AcquarioView(QWidget* parent)
-    : QWidget(parent), pausa(false), minVal(10000), maxVal(0) {
-    QFile styleSheetFile(":/style/stylesheet.qss");
-    styleSheetFile.open(QFile::ReadOnly);
-    QString styleSheet = QLatin1String(styleSheetFile.readAll());
-    setStyleSheet(styleSheet);
+AcquarioView::AcquarioView(QWidget* parent) : QWidget(parent), pausa(false), minVal(10000), maxVal(0) {
     setObjectName("main");
+    setStyleSheet("QWidget { background-color: white; color:black; } #main { background-color:#b3ccff; color: black; } QMessageBox { background-color: white; color: black; } QMenuBar { background-color: white; } QMenuBar::item { color: black; spacing: 2px; padding: 1px 5px; background-color: white; } QMenuBar::item:selected { background-color: qlineargradient(spread:pad, x1:0.5, y1:1, x2:0.5, y2:0, stop:0 rgba(0, 113, 255, 255), stop:1 rgba(91, 171, 252, 255)); color: white; } QMenu{ border-top-color: transparent; border-right-color: transparent; border-left-color: transparent; border-bottom-color: transparent; } QMenu::item:selected { border-style: solid; border-top-color: transparent; border-right-color: transparent; border-left-color: rgba(0, 113, 255, 255); border-bottom-color: transparent; border-left-width: 2px; color: black; padding-left:15px; padding-top:4px; padding-bottom:4px; padding-right:7px; } QMenu::item { border-style: solid; border-top-color: transparent; border-right-color: transparent; border-left-color: transparent; border-bottom-color: transparent; border-bottom-width: 1px; color: black; padding-left:14px; padding-top:4px; padding-bottom:4px; padding-right:7px; background-color:white; } QMenu::icon:checked { border: 1px inset gray; position: absolute; top: 1px; right: 1px; bottom: 1px; left: 1px; }");
 
     layout = new QVBoxLayout(this);
     menuBar = new QMenuBar(this);

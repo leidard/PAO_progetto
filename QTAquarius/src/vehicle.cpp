@@ -80,7 +80,7 @@ Vect2D Vehicle::escape(const Vehicle& v, unsigned int stepsAhead) const {
 }
 
 Vect2D Vehicle::wander() {
-    int sign = (std::rand() % 2) ? 1 : -1;  // test this
+    int sign = (std::rand() % 2) ? 1 : -1;
 
     _wander.setMagnitude(Vehicle::wander_strength * Vehicle::WANDER_MAX_STRENGTH);
     _wander.rotateRad(sign * Vehicle::wander_rate * Vehicle::WANDER_MAX_RATE);

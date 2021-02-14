@@ -89,7 +89,7 @@ Organismo* Controller::getInfoCurrent() const {
     return _infocontroller->getCurrent();
 }
 
-//// ------------
+// ------------
 
 void Controller::loadAquarius(const std::string& filename) {
     (new IO())->load(_model, filename);

@@ -3,9 +3,6 @@
 #ifndef PHYTOPLANKTON_H
 #define PHYTOPLANKTON_H
 
-// stamina incrementa mentre son svegli e decremena nel sonno!!!
-// fanno la fotosintesi
-
 class Phytoplankton : public Plankton {
 protected:
     virtual void behaviour(Aquarius*) override;

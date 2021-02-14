@@ -62,19 +62,19 @@ void Organismo::behaviour(Aquarius* a) {
         setForce(stop());
         return;
     }
-    // é sveglio
+    // è sveglio
     _stamina -= 0.0005 * _stamina.getMax();
     if (_stamina <= 0) {
         setGone();
         setForce(stop());
         return;
     }                  //starved to death
-    if (canSleep()) {  // puó dormire?
+    if (canSleep()) {  // può dormire?
         sleep();       // dorme
         setForce(stop());
         return;  // turno finito
     }
-    // é sveglio e non puó dormire
+    // è sveglio e non può dormire
     if (isHungry()) {  // ha fame? then cerca cibo, mira verso il cibo con nuova accelerazione != acc parametro
         Organismo* candidato = nullptr;
         double mindist = 0;
@@ -95,7 +95,7 @@ void Organismo::behaviour(Aquarius* a) {
             return;
         }
     }
-    // é sveglio, non puó dormire, non ha fame || non ha trovato cibo
+    // è sveglio, non può dormire, non ha fame || non ha trovato cibo
     // quindi vaga a caso
     applyForce(wander(), .2);
 }
