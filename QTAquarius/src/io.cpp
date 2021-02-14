@@ -23,6 +23,7 @@ IO::MissingProperty::MissingProperty(std::string propertyname, std::string objec
 const std::string IO::DEFAULT_FILENAME = "aquarius.json";
 
 void IO::load(Aquarius* a, const std::string& filename) const {
+    if (filename == "") return;
     QFile file(filename.c_str());
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QString val = file.readAll();
