@@ -1,0 +1,13 @@
+var searchData=
+[
+  ['rem',['rem',['../classStamina_a54413ab56d9d0782b588eac64ee0bbe0.html#a54413ab56d9d0782b588eac64ee0bbe0',1,'Stamina::rem()'],['../classVect2D_a14a3e3096417062b3a6e30d2a49e5500.html#a14a3e3096417062b3a6e30d2a49e5500',1,'Vect2D::rem(const Vect2D &amp;)'],['../classVect2D_a7986c5c040e6ba8ad2e44bdbdd6177b6.html#a7986c5c040e6ba8ad2e44bdbdd6177b6',1,'Vect2D::rem(const Vect2D &amp;) const']]],
+  ['rename',['rename',['../classAcquarioView_ade057a0fd2c4944706a54155e76c30e2.html#ade057a0fd2c4944706a54155e76c30e2',1,'AcquarioView']]],
+  ['reserve',['reserve',['../classVector_af3615fa3557b68d0e65f8c5519d51a8d.html#af3615fa3557b68d0e65f8c5519d51a8d',1,'Vector']]],
+  ['reset',['reset',['../classVect2D_a19a5d13de7819fdbf9b16892686f3edf.html#a19a5d13de7819fdbf9b16892686f3edf',1,'Vect2D::reset()'],['../classVect2D_aa0aa91a12fdff1174f19975c4c54f2a3.html#aa0aa91a12fdff1174f19975c4c54f2a3',1,'Vect2D::reset() const'],['../classVect2D_a2802fb6aa9c1178ffaa7e88f59a6215c.html#a2802fb6aa9c1178ffaa7e88f59a6215c',1,'Vect2D::reset(const Vect2D &amp;)']]],
+  ['resize',['resize',['../classController_a9c71f8356f16cafffe3a878a58bd43e8.html#a9c71f8356f16cafffe3a878a58bd43e8',1,'Controller::resize()'],['../classVector_a2a6df7ae78537f9b0fe01ab7fc7cf442.html#a2a6df7ae78537f9b0fe01ab7fc7cf442',1,'Vector::resize(unsigned int)'],['../classVector_a76d7357d2ea8d1efc8de81b5e9efb95b.html#a76d7357d2ea8d1efc8de81b5e9efb95b',1,'Vector::resize(unsigned int, const T &amp;)']]],
+  ['resizeevent',['resizeEvent',['../classAcquarioView_a0e079aa6c82990024c12b64933c3f1a9.html#a0e079aa6c82990024c12b64933c3f1a9',1,'AcquarioView']]],
+  ['rotatedeg',['rotateDeg',['../classVect2D_af5b0305051ba2c3f97cfb2d49035ba97.html#af5b0305051ba2c3f97cfb2d49035ba97',1,'Vect2D::rotateDeg(double)'],['../classVect2D_ab02782179e127d49dc292504b498b6b6.html#ab02782179e127d49dc292504b498b6b6',1,'Vect2D::rotateDeg(double) const'],['../classVect2D_a9b5ef5a8c654231b3c481f715d4210d5.html#a9b5ef5a8c654231b3c481f715d4210d5',1,'Vect2D::rotateDeg(const Vect2D &amp;, double)']]],
+  ['rotaterad',['rotateRad',['../classVect2D_ade80b8b6d7ce3dcd44018d0f7eca5a09.html#ade80b8b6d7ce3dcd44018d0f7eca5a09',1,'Vect2D::rotateRad(double)'],['../classVect2D_a1af21db2dcea691ceed40edd5d4d9bec.html#a1af21db2dcea691ceed40edd5d4d9bec',1,'Vect2D::rotateRad(double) const'],['../classVect2D_af38e878218e7bbf603368c29bc03230b.html#af38e878218e7bbf603368c29bc03230b',1,'Vect2D::rotateRad(const Vect2D &amp;, double)']]],
+  ['rx',['rx',['../classVect2D_a157a80045188c626d2a582aa5b42ea09.html#a157a80045188c626d2a582aa5b42ea09',1,'Vect2D']]],
+  ['ry',['ry',['../classVect2D_ab29c733af56363e7b640d53114fdb797.html#ab29c733af56363e7b640d53114fdb797',1,'Vect2D']]]
+];
