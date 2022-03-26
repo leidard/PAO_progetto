@@ -44,9 +44,7 @@ virtual int getValoreNutrizionale() const = 0;
 
 ## Note
 
-Per maggiori dettagli riguardo al funzionamento dei veicoli all'interno della simulazione:
-
-[Boids.md](./BOIDS.md)
+Per maggiori dettagli riguardo al funzionamento dei veicoli all'interno della simulazione: [Boids.md](./BOIDS.md)
 
 ## Requisiti di progetto
 
@@ -56,4 +54,4 @@ Per maggiori dettagli riguardo al funzionamento dei veicoli all'interno della si
 -   container C a scelta (list, dlist, dqueue, queue, vector, ecc.);
 -   puntatore smart (deep copy, assignemnt, deconstructor) puntatori polimorfi a T che suppportano clonazione e distruzione profonda;
 -   utilizzo del contenitore C per uno dei tipi della gerarchia incapsulati dentro al puntatore smart;
--   funzionalità di input/output;
+-   funzionalità di input/output.
