@@ -55,3 +55,7 @@ Per maggiori dettagli riguardo al funzionamento dei veicoli all'interno della si
 -   puntatore smart (deep copy, assignemnt, deconstructor) puntatori polimorfi a T che suppportano clonazione e distruzione profonda;
 -   utilizzo del contenitore C per uno dei tipi della gerarchia incapsulati dentro al puntatore smart;
 -   funzionalità di input/output.
+
+## Tecnologie
+C++, Qt.
+
