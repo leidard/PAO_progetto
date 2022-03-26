@@ -117,4 +117,4 @@ Un esempio di steering behaviour tra i più noti e affascinanti è il "Flock Beh
 -   [Craig Reynolds](https://www.red3d.com/cwr/)
 -   [Craig Reynolds's Steering Behaviour](https://www.red3d.com/cwr/steer/)
 -   [Craig Reynolds's Boids And Flocking Behaviour](https://www.red3d.com/cwr/boids/)
--   [Nature Of Code](https://natureofcode.com/book/chapter-6-autonomous-agents/): guida piú aggiornata e dettagliata per implementare questi comportamenti.
+-   [Nature Of Code](https://natureofcode.com/book/chapter-6-autonomous-agents/): guida più aggiornata e dettagliata per implementare questi comportamenti.
