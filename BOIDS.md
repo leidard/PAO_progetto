@@ -30,7 +30,7 @@ Una volta definito un target dobbiamo definire un comportamento per curvare lent
 Craig Reynolds definisce questo come "Steering Behaviour".
 È importante introdurre inoltre quindi il concetto:
 
-> "Conosco lo stato attuale del veicolo (posizione, velocitá) e voglio andare verso il target **a massima velocitá**."
+> "Conosco lo stato attuale del veicolo (posizione, velocità) e voglio andare verso il target **a massima velocità**."
 
 ### Step By Step
 
